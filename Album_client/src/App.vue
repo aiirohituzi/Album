@@ -9,6 +9,7 @@
             <li><a>5</a></li>
         </ul>
         <div class="navBtn" @click="navOpen()"></div>
+        <div class="navBtnAni"></div>
         <div class="main">
             <router-view/>
         </div>
@@ -23,17 +24,21 @@ export default {
             var side = document.querySelector('.side')
             var navBtn = document.querySelector('.navBtn')
             var main = document.querySelector('.main')
+            var navBtnAni = document.querySelector('.navBtnAni')
             side.classList.toggle('move')
             navBtn.classList.toggle('hidden')
             main.classList.toggle('move')
+            navBtnAni.classList.toggle('click')
         },
         navClose: function () {
             var side = document.querySelector('.side')
             var navBtn = document.querySelector('.navBtn')
             var main = document.querySelector('.main')
+            var navBtnAni = document.querySelector('.navBtnAni')
             side.classList.toggle('move')
             navBtn.classList.toggle('hidden')
             main.classList.toggle('move')
+            navBtnAni.classList.toggle('click')
         }
     }
 }
@@ -54,7 +59,7 @@ ul#navigation {
     width: 300px;
     height: 100%;
     list-style: none;
-    z-index:9999;
+    z-index:100;
     
     background-color:#CFCFCF;
     -moz-box-shadow: 0px 4px 6px #333;
@@ -101,9 +106,45 @@ ul#navigation li a {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(assets/menu.png);
+    z-index: 99;
 }
 .navBtn.hidden {
     visibility: hidden;
+}
+@keyframes circle {
+    0% {
+        visibility: hidden;
+    }
+    1% {
+        visibility: visible;
+        background:#15c; 
+    }
+    100% {
+        /* width: 1000%;
+        height: 1000%; */
+        background:#ffffff;
+    }
+}
+.navBtnAni {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 50px;
+    height: 50px;
+    background: #15c;
+    border-radius: 25px;
+
+    -webkit-transform: translate(0, 0);
+    -webkit-transition: -webkit-transform 500ms;
+    transform: translate(0, 0);
+    transition: transform 500ms;
+    z-index: 97;
+}
+.navBtnAni.click {
+    visibility: hidden;
+    -webkit-transform: scale(100);
+    transform: scale(100);
+    animation: circle 500ms;
 }
 .closeBtn {
     display: inline-block;
@@ -115,6 +156,11 @@ ul#navigation li a {
     border:1px solid #AFAFAF;
     background-repeat:no-repeat;
     background-position:center center;
+}
+
+.main {
+    position: relative;
+    z-index: 98;
 }
 .main.move {
     margin-left: 300px;
