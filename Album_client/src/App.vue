@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <ul id="navigation" class="side">
-            <li><a @click="navClose()"><div class="closeBtn">X</div></a></li>
+            <li><a @click="navClose()"><div class="closeBtn"></div></a></li>
             <router-link tag="li" to="/" exact><a>Home(임시)</a></router-link>
             <router-link tag="li" to="/Photo" exact><a>Photo(임시)</a></router-link>
             <li><a>3</a></li>
@@ -61,7 +61,7 @@ ul#navigation {
     list-style: none;
     z-index:100;
     
-    background-color:#CFCFCF;
+    background-color:#1185cc;
     -moz-box-shadow: 0px 4px 6px #333;
     -webkit-box-shadow: 0px 4px 6px #333;
     box-shadow: 0px 4px 6px #333;
@@ -76,9 +76,13 @@ ul#navigation li a {
     text-align: center;
     width: 99%;
     height: 99%;
-    border:1px solid #AFAFAF;
+    background-color:#1175cc;
+    border:1px solid #1185cc;
     background-repeat:no-repeat;
     background-position:center center;
+}
+ul#navigation li a:hover {
+    background-color: #1165cc;
 }
 
 .side {
@@ -153,9 +157,13 @@ ul#navigation li a {
     text-align: center;
     width: 50px;
     height: 95%;
-    border:1px solid #AFAFAF;
     background-repeat:no-repeat;
     background-position:center center;
+    background-image: url(assets/close.png);
+}
+.closeBtn:hover {
+    background-color: #1165cc;
+    background-image: url(assets/close_hover.png);
 }
 
 .main {
