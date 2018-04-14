@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'Photo',
     data () {
@@ -18,9 +20,9 @@ export default {
     },
     methods: {
         fetchPhotos: function () {
-            axios.get('http://localhost:8000/.../').then((response) => {
+            axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
-                // console.log(response)
+                console.log(response)
             }, (error) => {
                 console.log(error)
             })
