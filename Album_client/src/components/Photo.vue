@@ -1,6 +1,6 @@
 <template>
 <div>
-    
+    <div class="thumbnail"></div>
 </div>
 </template>
 
@@ -35,5 +35,18 @@ export default {
 </script>
 
 <style>
+.thumbnail {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #dddddd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 
+    background-image: url(../assets/Test1.png);
+}
+.thumbnail:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
 </style>
