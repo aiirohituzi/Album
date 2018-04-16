@@ -1,6 +1,9 @@
 <template>
 <div>
-    <div class="thumbnail"></div>
+    <div class="thumbnail" v-for="item in photos" :key="item.id" :style="{ 'background-image': 'url(' + item.path + ')' }">{{item.id}}</div>
+
+    
+    <div class="thumbnail" :style="{ 'background-image': 'url(../assets/Test1.png)' }"></div>
 </div>
 </template>
 
@@ -13,7 +16,12 @@ export default {
         return {
             photos: [
                 {
-                    'temp': 'temp',
+                    'id': '1',
+                    'path': '../assets/Test1.png',
+                },
+                {
+                    'id': '2',
+                    'path': '../assets/Test2.png',
                 }
             ],
         }
@@ -36,6 +44,7 @@ export default {
 
 <style>
 .thumbnail {
+    display: inline-block;
     width: 200px;
     height: 200px;
     margin: 10px;
@@ -44,7 +53,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center center;
 
-    background-image: url(../assets/Test1.png);
+    /* background-image: url(../assets/Test2.png); */
 }
 .thumbnail:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
