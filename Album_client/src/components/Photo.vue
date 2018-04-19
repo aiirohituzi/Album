@@ -1,9 +1,9 @@
 <template>
 <div>
-    <div class="thumbnail" v-for="item in photos" :key="item.id" :style="{ 'background-image': 'url(' + item.path + ')' }">{{item.id}}</div>
+    <div class="thumbnail" v-for="item in photos" :key="item.id" :style="{ 'background-image': 'url(' + imagePath(item.path) + ')' }">{{item.id}}</div>
 
     
-    <div class="thumbnail" :style="{ 'background-image': 'url(../assets/Test1.png)' }"></div>
+    <div class="thumbnail" :style="{ 'background-image': 'url(' + imagePath('Test1') + ')' }"></div>
 </div>
 </template>
 
@@ -17,11 +17,11 @@ export default {
             photos: [
                 {
                     'id': '1',
-                    'path': '../assets/Test1.png',
+                    'path': 'Test1',
                 },
                 {
                     'id': '2',
-                    'path': '../assets/Test2.png',
+                    'path': 'Test2',
                 }
             ],
         }
@@ -35,6 +35,9 @@ export default {
                 console.log(error)
             })
         },
+        imagePath: function (path) {
+            return require('../assets/image/' + path + '.png')
+        }
     },
     mounted: function () {
         this.fetchPhotos()
