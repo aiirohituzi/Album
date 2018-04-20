@@ -23,3 +23,35 @@ def getPhoto(request):
     print(data)
     
     return HttpResponse(data, content_type = "application/json")
+
+@csrf_exempt
+def uploadImage(request):
+    result = False
+
+    # print(request.FILES)
+    # print(request.POST)
+
+    photoId = request.POST.get('photoId', False)
+    fileCheck = request.FILES.get('image', False)
+
+    if fileCheck:
+        if photoId:      # update
+            dict = {'photoId': photoId}
+        else:           # new upload
+            recentUpload = Posting.objects.all().last()
+            dict = {'photoId': recentUpload.id,}
+            
+        qdict = QueryDict('', mutable=True)
+        qdict.update(dict)
+
+        imageForm = ImageForm(qdict, request.FILES)
+
+        img_obj = imageForm.save(commit=False)
+        img_obj.save()
+
+        print("Image Upload Request : Upload success")
+        result = True
+    else:
+        print("Image Upload Request : Upload error")
+
+    return HttpResponse(result)
