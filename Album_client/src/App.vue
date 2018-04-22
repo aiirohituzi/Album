@@ -124,9 +124,8 @@ ul#navigation li a:hover {
         background:#15c; 
     }
     100% {
-        /* width: 1000%;
-        height: 1000%; */
-        background:#ffffff;
+        visibility: hidden;
+        opacity: .0;
     }
 }
 .navBtnAni {
@@ -142,7 +141,7 @@ ul#navigation li a:hover {
     -webkit-transition: -webkit-transform 500ms;
     transform: translate(0, 0);
     transition: transform 500ms;
-    z-index: 97;
+    z-index: 98;
 }
 .navBtnAni.click {
     visibility: hidden;
@@ -168,7 +167,7 @@ ul#navigation li a:hover {
 
 .main {
     position: relative;
-    z-index: 98;
+    z-index: 97;
 }
 .main.move {
     margin-left: 300px;
