@@ -1,10 +1,9 @@
 <template>
-<div>
+<div class="wrapper">
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
             <img class="item" :src="imagePath(item.path)" />
         </div>
-        <!-- <div class="item" :style="{ 'background-image': 'url(' + imagePath(item.path) + ')' }"></div> -->
     </div>
 </div>
 </template>
@@ -69,15 +68,20 @@ export default {
 
 <style>
 img {
+    margin-top: 3px;
     max-width: 100%;
     vertical-align: bottom;
     border: 1px solid #dddddd;
 }
 
 .masonry {
-    -moz-transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 
     -moz-column-gap: 30px;
     -webkit-column-gap: 30px;
@@ -91,9 +95,9 @@ img {
     margin-bottom: 30px;
 }
 .masonry .brick img {
-    -moz-transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 .masonry .brick:hover img {
     opacity: .75;
@@ -112,26 +116,12 @@ img {
         -moz-column-count: 2;
         -webkit-column-count: 2;
         column-count: 2;
+        width: 80%;
     }
 }
-
-
-
-
-
-.thumbnail {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    border: 1px solid #dddddd;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-
-    /* background-image: url(../assets/Test2.png); */
-}
-.thumbnail:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+@media only screen and (max-width: 767px) {
+    .masonry {
+        width: 95%;
+    }
 }
 </style>
