@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <ul id="navigation" class="side">
-            <li><a @click="navClose()"><div class="closeBtn"></div></a></li>
+            <li><a @click="navToggle()"><div class="closeBtn"></div></a></li>
             <router-link tag="li" to="/" exact><a>Home(임시)</a></router-link>
             <router-link tag="li" to="/Photo" exact><a>Photo(임시)</a></router-link>
             <li><a>3</a></li>
             <li><a>4</a></li>
             <li><a>5</a></li>
         </ul>
-        <div class="navBtn" @click="navOpen()"></div>
+        <div class="navBtn" @click="navToggle()"></div>
         <div class="navBtnAni"></div>
         <div class="main">
             <router-view/>
@@ -20,7 +20,7 @@
 export default {
     name: 'App',
     methods: {
-        navOpen: function () {
+        navToggle: function () {
             var side = document.querySelector('.side')
             var navBtn = document.querySelector('.navBtn')
             var main = document.querySelector('.main')
@@ -30,16 +30,6 @@ export default {
             main.classList.toggle('move')
             navBtnAni.classList.toggle('click')
         },
-        navClose: function () {
-            var side = document.querySelector('.side')
-            var navBtn = document.querySelector('.navBtn')
-            var main = document.querySelector('.main')
-            var navBtnAni = document.querySelector('.navBtnAni')
-            side.classList.toggle('move')
-            navBtn.classList.toggle('hidden')
-            main.classList.toggle('move')
-            navBtnAni.classList.toggle('click')
-        }
     }
 }
 </script>
