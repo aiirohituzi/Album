@@ -18,8 +18,12 @@ from django.urls import path
 from django.conf.urls import url
 
 from photo.views import getPhoto
+from photo.views import uploadPhoto
+from photo.views import uploadImage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^photos/$', getPhoto, name='getPhoto'),
+    url(r'^upPhoto/$', uploadPhoto, name='uploadPhoto'),
+    url(r'^upImage/$', uploadImage, name='uploadImage'),
 ]

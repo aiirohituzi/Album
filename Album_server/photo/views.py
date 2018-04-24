@@ -29,6 +29,27 @@ def getPhoto(request):
     return HttpResponse(data, content_type = "application/json")
 
 @csrf_exempt
+def uploadPhoto(request):
+    result = False
+
+    title = request.POST['title']
+    content = request.POST['content']
+
+    photoForm = PhotoForm(request.POST)
+
+    if photoForm.is_valid():
+        photo_obj = photoForm.save(commit=False)
+        photo_obj.save()
+
+        print("Photo upload request : Upload success")
+        result = True
+        
+    else:
+        print("Photo upload request : Upload error")
+
+    return HttpResponse(result)
+
+@csrf_exempt
 def uploadImage(request):
     result = False
 

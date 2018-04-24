@@ -68,7 +68,8 @@ export default {
 
 <style>
 img {
-    margin-top: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
     max-width: 100%;
     vertical-align: bottom;
     border: 1px solid #dddddd;
