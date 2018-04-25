@@ -1,8 +1,13 @@
 <template>
-<div class="wrapper">
+<div class="container">
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
             <img class="item" :src="imagePath(item.path)" />
+        </div>
+    </div>
+    <div class="modal-background">
+        <div class="modal">
+            asdfsadfdasf
         </div>
     </div>
 </div>
@@ -67,12 +72,17 @@ export default {
 </script>
 
 <style>
+.container {
+    margin-top: 20px;
+}
+
 img {
     margin-top: 2px;
     margin-bottom: 2px;
     max-width: 100%;
     vertical-align: bottom;
     border: 1px solid #dddddd;
+    border-radius: 10px;
 }
 
 .masonry {
@@ -104,6 +114,31 @@ img {
     opacity: .75;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
+
+.modal-background {
+    position: fixed;
+    background-color: black;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+.modal-background .modal {
+    /* display: hidden; */
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    right: 30%;
+    width: 40%;
+    height: 300px;
+    background-color: white;
+    z-index: 100;
+}
+
+.modal
+
 
 @media only screen and (min-width: 1024px) {
     .masonry {
