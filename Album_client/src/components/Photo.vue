@@ -2,12 +2,14 @@
 <div class="container">
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
-            <img class="item" :src="imagePath(item.path)" />
+            <img class="item" :src="imagePath(item.path)" @click="modalToggle(imagePath(item.path))" />
         </div>
     </div>
-    <div class="modal-background">
-        <div class="modal">
-            asdfsadfdasf
+    <div class="modal">
+        <div class="modal-background" @click="modalToggle()">
+        </div>
+        <div class="modal-content">
+            <img :src="this.modal_src" />
         </div>
     </div>
 </div>
@@ -50,6 +52,7 @@ export default {
                     'path': 'Test1',
                 },
             ],
+            modal_src: '',
         }
     },
     methods: {
@@ -63,6 +66,12 @@ export default {
         },
         imagePath: function (path) {
             return require('../assets/image/' + path + '.png')
+        },
+        modalToggle: function (path) {
+            var modal = document.querySelector('.modal')
+            modal.classList.toggle('toggle')
+
+            this.modal_src = path
         }
     },
     mounted: function () {
@@ -74,15 +83,6 @@ export default {
 <style>
 .container {
     margin-top: 20px;
-}
-
-img {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    max-width: 100%;
-    vertical-align: bottom;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
 }
 
 .masonry {
@@ -109,13 +109,26 @@ img {
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+    
+    margin-top: 2px;
+    margin-bottom: 2px;
+    max-width: 100%;
+    vertical-align: bottom;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
 }
 .masonry .brick:hover img {
     opacity: .75;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-.modal-background {
+.modal {
+    visibility: hidden;
+}
+.modal.toggle {
+    visibility: visible;
+}
+.modal .modal-background {
     position: fixed;
     background-color: black;
     opacity: 0.5;
@@ -125,19 +138,24 @@ img {
     height: 100%;
     z-index: 99;
 }
-.modal-background .modal {
-    /* display: hidden; */
+.modal .modal-content {
     position: fixed;
-    top: 20%;
+    padding: 10px;
+    top: 10%;
     left: 30%;
     right: 30%;
-    width: 40%;
-    height: 300px;
+    width: 40vw;
+    max-height: 80vh;
+    border-radius: 10px;
     background-color: white;
     z-index: 100;
+    text-align: center;
 }
-
-.modal
+.modal .modal-content img{
+    max-width: 36vw;
+    max-height: 72vh;
+    border: 1px solid #dddddd;
+}
 
 
 @media only screen and (min-width: 1024px) {
