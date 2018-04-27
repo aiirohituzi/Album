@@ -8,8 +8,17 @@
     <div class="modal">
         <div class="modal-background" @click="modalToggle()">
         </div>
-        <div class="modal-content">
-            <img :src="this.modal_src" />
+        <div class="modal-box">
+            <div class="modal-title">
+                title
+            </div>
+            <div class="modal-content">
+                <img :src="this.modal_src" /><br>
+                content
+            </div>
+            <div class="modal-bottom">
+
+            </div>
         </div>
     </div>
 </div>
@@ -138,7 +147,7 @@ export default {
     height: 100%;
     z-index: 99;
 }
-.modal .modal-content {
+.modal .modal-box {
     position: fixed;
     padding: 10px;
     top: 10%;
@@ -149,14 +158,24 @@ export default {
     border-radius: 10px;
     background-color: white;
     z-index: 100;
-    text-align: center;
 }
-.modal .modal-content img{
+.modal .modal-box img{
     max-width: 36vw;
     max-height: 72vh;
     border: 1px solid #dddddd;
 }
-
+.modal .modal-box .modal-title {
+    height: 25px;
+    border-bottom: 1px solid #ccc;
+}
+.modal .modal-box .modal-content {
+    text-align: center;
+    padding: 1vh;
+}
+.modal .modal-box .modal-bottom {
+    height: 25px;
+    border-top: 1px solid #ccc;
+}
 
 @media only screen and (min-width: 1024px) {
     .masonry {
