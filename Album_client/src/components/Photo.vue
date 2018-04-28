@@ -17,7 +17,7 @@
                 content
             </div>
             <div class="modal-bottom">
-
+                <input type="button" class="btn" value="닫기" @click="modalToggle()" />
             </div>
         </div>
     </div>
@@ -79,8 +79,10 @@ export default {
         modalToggle: function (path) {
             var modal = document.querySelector('.modal')
             modal.classList.toggle('toggle')
-
-            this.modal_src = path
+            if(path){
+                this.modal_src = path
+                console.log('asdf')
+            }
         }
     },
     mounted: function () {
@@ -161,7 +163,7 @@ export default {
 }
 .modal .modal-box img{
     max-width: 36vw;
-    max-height: 72vh;
+    max-height: 60vh;
     border: 1px solid #dddddd;
 }
 .modal .modal-box .modal-title {
@@ -171,10 +173,20 @@ export default {
 .modal .modal-box .modal-content {
     text-align: center;
     padding: 1vh;
+    /* overflow-y: scroll; */
 }
 .modal .modal-box .modal-bottom {
+    text-align: right;
+    padding: auto;
     height: 25px;
     border-top: 1px solid #ccc;
+}
+.modal .modal-box .modal-bottom .btn {
+    border-radius: 3px;
+    margin-top: 5px;
+    background-color: #c5e5ee;
+    border-color: #cae6ee;
+    width: 60px;
 }
 
 @media only screen and (min-width: 1024px) {
