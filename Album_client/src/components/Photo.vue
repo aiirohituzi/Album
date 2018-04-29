@@ -81,7 +81,7 @@ export default {
             modal.classList.toggle('toggle')
             if(path){
                 this.modal_src = path
-                console.log('asdf')
+                console.log('path input')
             }
         }
     },
@@ -133,11 +133,21 @@ export default {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .modal {
     visibility: hidden;
 }
 .modal.toggle {
     visibility: visible;
+    animation: fade 300ms;
 }
 .modal .modal-background {
     position: fixed;
