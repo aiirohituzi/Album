@@ -2,7 +2,7 @@
 <div class="container">
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
-            <img class="item" :src="imagePath(item.path)" @click="modalToggle(imagePath(item.path))" />
+            <img class="item" :src="imagePath(item.path)" @click="modalToggle(item.id)" />
         </div>
     </div>
     <div class="modal">
@@ -10,11 +10,11 @@
         </div>
         <div class="modal-box">
             <div class="modal-title">
-                title
+                {{ this.modal.title }}}
             </div>
             <div class="modal-content">
-                <img :src="this.modal_src" /><br>
-                content
+                <img :src="this.modal.path" /><br>
+                {{ this.modal.content }}
             </div>
             <div class="modal-bottom">
                 <input type="button" class="btn" value="닫기" @click="modalToggle()" />
@@ -35,33 +35,51 @@ export default {
                 {
                     'id': '1',
                     'path': 'Test1',
+                    'title': 'Title1',
+                    'content': 'Content1',
                 },
                 {
                     'id': '2',
                     'path': 'Test2',
+                    'title': 'Title2',
+                    'content': 'Content2',
                 },
                 {
                     'id': '3',
                     'path': 'Test1',
+                    'title': 'Title3',
+                    'content': 'Content3',
                 },
                 {
                     'id': '4',
                     'path': 'Test1',
+                    'title': 'Title4',
+                    'content': 'Content4',
                 },
                 {
                     'id': '5',
                     'path': 'Test2',
+                    'title': 'Title5',
+                    'content': 'Content5',
                 },
                 {
                     'id': '6',
                     'path': 'Test2',
+                    'title': 'Title6',
+                    'content': 'Content6',
                 },
                 {
                     'id': '7',
                     'path': 'Test1',
+                    'title': 'Title7',
+                    'content': 'Content7',
                 },
             ],
-            modal_src: '',
+            modal: {
+                'title': '',
+                'content': '',
+                'path': '',
+            }
         }
     },
     methods: {
@@ -76,12 +94,15 @@ export default {
         imagePath: function (path) {
             return require('../assets/image/' + path + '.png')
         },
-        modalToggle: function (path) {
+        modalToggle: function (id) {
             var modal = document.querySelector('.modal')
             modal.classList.toggle('toggle')
-            if(path){
-                this.modal_src = path
-                console.log('path input')
+
+            if(id){
+                var path = this.photos[id].path
+                this.modal.title = this.photos[id].title
+                this.modal.content = this.photos[id].content
+                this.modal.path = this.imagePath(path)
             }
         }
     },
@@ -161,39 +182,45 @@ export default {
 }
 .modal .modal-box {
     position: fixed;
-    padding: 10px;
-    top: 10%;
-    left: 30%;
-    right: 30%;
-    width: 40vw;
-    max-height: 80vh;
+    /* padding: 10px; */
+    top: 0px;
+    left: 20vw;
+    right: 20vw;
+    width: 60vw;
+    height: 100vh;
     border-radius: 10px;
     background-color: white;
     z-index: 100;
 }
 .modal .modal-box img{
-    max-width: 36vw;
-    max-height: 60vh;
+    max-width: 55vw;
+    max-height: 80vh;
     border: 1px solid #dddddd;
 }
 .modal .modal-box .modal-title {
-    height: 25px;
+    line-height: 5vh;
+    padding-left: 1vw;
+    vertical-align: middle;
     border-bottom: 1px solid #ccc;
 }
 .modal .modal-box .modal-content {
     text-align: center;
+    height: 88vh;
     padding: 1vh;
     /* overflow-y: scroll; */
 }
 .modal .modal-box .modal-bottom {
+    bottom: 0;
     text-align: right;
-    padding: auto;
-    height: 25px;
+    vertical-align: -webkit-baseline-middle;
+    line-height: 5vh;
     border-top: 1px solid #ccc;
+    /* background-color: blue; */
 }
 .modal .modal-box .modal-bottom .btn {
+    margin-right: 1vw;
+    vertical-align: middle;
     border-radius: 3px;
-    margin-top: 5px;
     background-color: #c5e5ee;
     border-color: #cae6ee;
     width: 60px;
