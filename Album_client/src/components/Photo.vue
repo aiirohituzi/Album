@@ -10,7 +10,7 @@
         </div>
         <div class="modal-box">
             <div class="modal-title">
-                {{ this.modal.title }}}
+                {{ this.modal.title }}
             </div>
             <div class="modal-content">
                 <img :src="this.modal.path" /><br>
