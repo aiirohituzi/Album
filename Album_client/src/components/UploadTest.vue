@@ -31,8 +31,8 @@ export default {
         uploadPhoto: function () {
             var data = new FormData()
             
-            var title = this.title
-            var content = this.content
+            var title = this.uploadData.title
+            var content = this.uploadData.content
             var image = document.getElementById('image').files
 
             var uploadResult = false
@@ -82,8 +82,7 @@ export default {
 
                     data.append('image', image[i])
 
-                    axios.post('http://127.0.0.1:8000/upImage/', data, config)
-                    .then(function (response) {
+                    axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
                         // console.log(response.data)
                         if(response.data == 'True'){
                             // console.log(response.data)
