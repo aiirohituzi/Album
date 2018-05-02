@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from photo.models import Photo
 import json
 from django.db.models import Q
+from django.http import QueryDict
 
 from photo.forms import PhotoForm
 from photo.forms import ImageForm
@@ -63,7 +64,7 @@ def uploadImage(request):
         if photoId:      # update
             dict = {'photoId': photoId}
         else:           # new upload
-            recentUpload = photo.objects.all().last()
+            recentUpload = Photo.objects.all().last()
             dict = {'photoId': recentUpload.id,}
             
         qdict = QueryDict('', mutable=True)

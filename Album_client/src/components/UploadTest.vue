@@ -28,7 +28,7 @@ export default {
             console.log(image)
         }
         ,
-        uploadPhoto: function () {
+        uploadPhoto: async function () {
             var data = new FormData()
             
             var title = this.uploadData.title
@@ -62,7 +62,7 @@ export default {
                 headers: { 'content-type': 'multipart/form-data' }
             }
 
-            axios.post('http://localhost:8000/upPhoto/', data, config).then((response) => {
+            await axios.post('http://localhost:8000/upPhoto/', data, config).then((response) => {
                 console.log(response)
                 if(response.data == 'True'){
                     alert('Upload success')
@@ -76,7 +76,7 @@ export default {
             })
 
             if(uploadResult){
-                // console.log(image.length)
+                console.log(image.length)
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 
