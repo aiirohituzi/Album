@@ -1,5 +1,9 @@
 <template>
 <div class="container">
+    <div class="top-menu">
+        <div class="add"></div>
+        <div class="search"></div>
+    </div>
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
             <img class="item" :src="imagePath(item.path)" @click="modalToggle(item.id)" />
@@ -115,6 +119,39 @@ export default {
 <style>
 .container {
     margin-top: 20px;
+}
+
+.top-menu {
+    width: 70%;
+    height: 30px;
+    margin: auto;
+
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.top-menu .search {
+    float: right;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/search.png);
+}
+.top-menu .add {
+    float: right;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/add.png);
+}
+.top-menu div:hover {
+    box-shadow: 0 0 0px 2px rgba(17, 133, 204, 0.5);
 }
 
 .masonry {
@@ -240,9 +277,15 @@ export default {
         column-count: 2;
         width: 80%;
     }
+    .top-menu {
+        width: 80%;
+    }
 }
 @media only screen and (max-width: 767px) {
     .masonry {
+        width: 95%;
+    }
+    .top-menu {
         width: 95%;
     }
 }

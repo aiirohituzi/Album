@@ -156,8 +156,13 @@ ul#navigation li a:hover {
 }
 
 .main {
+    margin-top: 30px;
     position: relative;
     z-index: 97;
+
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 .main.move {
     margin-left: 300px;
