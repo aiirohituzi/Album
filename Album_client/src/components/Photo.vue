@@ -1,16 +1,16 @@
 <template>
 <div class="container">
     <div class="top-menu">
-        <div class="add"></div>
+        <div class="add" @click="modalToggle('write')"></div>
         <div class="search"></div>
     </div>
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
-            <img class="item" :src="imagePath(item.path)" @click="modalToggle(item.id)" />
+            <img class="item" :src="imagePath(item.path)" @click="modalToggle('photo', item.id)" />
         </div>
     </div>
-    <div class="modal">
-        <div class="modal-background" @click="modalToggle()">
+    <div class="modal modal-photo">
+        <div class="modal-background" @click="modalToggle('photo')">
         </div>
         <div class="modal-box">
             <div class="modal-title">
@@ -21,7 +21,22 @@
                 {{ this.modal.content }}
             </div>
             <div class="modal-bottom">
-                <input type="button" class="btn" value="닫기" @click="modalToggle()" />
+                <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-write">
+        <div class="modal-background" @click="modalToggle('write')">
+        </div>
+        <div class="modal-box">
+            <div class="modal-title">
+                <input type="text" class="title"/>
+            </div>
+            <div class="modal-content">
+                <textarea />
+            </div>
+            <div class="modal-bottom">
+                <input type="button" class="btn" value="닫기" @click="modalToggle('write')" />
             </div>
         </div>
     </div>
@@ -98,8 +113,8 @@ export default {
         imagePath: function (path) {
             return require('../assets/image/' + path + '.png')
         },
-        modalToggle: function (id) {
-            var modal = document.querySelector('.modal')
+        modalToggle: function (modalName, id) {
+            var modal = document.querySelector('.modal-' + modalName)
             modal.classList.toggle('toggle')
 
             if(id){
@@ -108,7 +123,7 @@ export default {
                 this.modal.content = this.photos[id].content
                 this.modal.path = this.imagePath(path)
             }
-        }
+        },
     },
     mounted: function () {
         this.fetchPhotos()
@@ -203,10 +218,15 @@ export default {
 .modal {
     visibility: hidden;
 }
-.modal.toggle {
+.modal-photo.toggle {
     visibility: visible;
     animation: fade 300ms;
 }
+.modal-write.toggle {
+    visibility: visible;
+    animation: fade 300ms;
+}
+
 .modal .modal-background {
     position: fixed;
     background-color: black;
@@ -261,6 +281,16 @@ export default {
     background-color: #c5e5ee;
     border-color: #cae6ee;
     width: 60px;
+}
+
+.modal .modal-box .modal-title .title {
+    width: 57vw;
+}
+.modal .modal-box .modal-content textarea {
+    width: 55vw;
+    height: 87vh;
+    resize: none;
+    overflow-y: scroll;
 }
 
 @media only screen and (min-width: 1024px) {

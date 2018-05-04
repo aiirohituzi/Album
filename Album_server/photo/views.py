@@ -14,7 +14,7 @@ from photo.forms import ImageForm
 def getPhoto(request):
     data = []
     
-    for item in photo.objects.all():
+    for item in Photo.objects.all():
         data.append({
             'id': item.id,
             'title': item.title,
