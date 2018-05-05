@@ -26,8 +26,7 @@ export default {
             console.log(this.uploadData.content)
             var image = document.getElementById('image').files
             console.log(image)
-        }
-        ,
+        },
         uploadPhoto: async function () {
             var data = new FormData()
             

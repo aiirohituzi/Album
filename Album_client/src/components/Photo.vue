@@ -30,12 +30,14 @@
         </div>
         <div class="modal-box">
             <div class="modal-title">
-                <input type="text" class="title"/>
+                <input type="text" class="title" v-model="uploadData.title" />
             </div>
             <div class="modal-content">
-                <textarea />
+                <input type="file" id="image" />
+                <textarea v-model="uploadData.content" />
             </div>
             <div class="modal-bottom">
+                <input type="button" class="btn" value="작성" @click="uploadPhoto()" />
                 <input type="button" class="btn" value="닫기" @click="modalToggle('write')" />
             </div>
         </div>
@@ -98,6 +100,10 @@ export default {
                 'title': '',
                 'content': '',
                 'path': '',
+            },
+            uploadData: {
+                title: null,
+                content: null,
             }
         }
     },
@@ -122,6 +128,76 @@ export default {
                 this.modal.title = this.photos[id].title
                 this.modal.content = this.photos[id].content
                 this.modal.path = this.imagePath(path)
+            }
+        },
+        uploadPhoto: async function () {
+            var data = new FormData()
+            
+            var title = this.uploadData.title
+            var content = this.uploadData.content
+            var image = document.getElementById('image').files
+
+            var uploadResult = false
+
+            if(image == undefined){
+                image = null
+                console.log('Not selected')
+            } else {
+                if(image.length > 4){
+                    alert("최대 4개의 이미지까지만 선택해 주세요")
+                    document.getElementById('formControlsImage').value = null
+                }
+                
+                var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp']
+                for(var i=0; i<image.length; i++){
+                    if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
+                        alert("'.jpeg', '.jpg', '.png', '.gif', '.bmp' 형식의 파일만 업로드 가능합니다.")
+                        return
+                    }
+                }
+            }
+
+            data.append('title', title)
+            data.append('content', content)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            await axios.post('http://localhost:8000/upPhoto/', data, config).then((response) => {
+                console.log(response)
+                if(response.data == 'True'){
+                    alert('Upload success')
+                    uploadResult = true
+                } else {
+                    console.log('Error')
+                    alert('Error')
+                }
+            }, (error) => {
+                console.log(error)
+            })
+
+            if(uploadResult){
+                console.log(image.length)
+                for(var i=0; i<image.length; i++){
+                    data = new FormData()
+
+                    data.append('image', image[i])
+
+                    axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
+                        // console.log(response.data)
+                        if(response.data == 'True'){
+                            // console.log(response.data)
+                            console.log('Image Upload success')
+                        } else {
+                            console.log('Error')
+                            alert('Error')
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+                }
             }
         },
     },
@@ -286,9 +362,14 @@ export default {
 .modal .modal-box .modal-title .title {
     width: 57vw;
 }
+.modal .modal-box .modal-content input {
+    float: left;
+    padding-left: 2vw;
+    padding-bottom: 1vh;
+}
 .modal .modal-box .modal-content textarea {
     width: 55vw;
-    height: 87vh;
+    height: 80vh;
     resize: none;
     overflow-y: scroll;
 }
