@@ -10,7 +10,6 @@ from django.http import QueryDict
 from photo.forms import PhotoForm
 from photo.forms import ImageForm
 
-# Create your views here.
 def getPhoto(request):
     data = []
     
@@ -19,11 +18,27 @@ def getPhoto(request):
             'id': item.id,
             'title': item.title,
             'content': item.content,
-            'path': item.path,
-            'created_at': item.created_at,
+            'created': item.created,
         })
 
     print("Get - Photo")
+    data = json.dumps(data, indent=4)
+    print(data)
+    
+    return HttpResponse(data, content_type = "application/json")
+
+def getImage(request):
+    data = []
+    
+    for item in Photo.objects.all():
+        data.append({
+            'id': item.id,
+            'photoId': item.photoId,
+            'image': item.image,
+            'created': item.created,
+        })
+
+    print("Get - Image")
     data = json.dumps(data, indent=4)
     print(data)
     

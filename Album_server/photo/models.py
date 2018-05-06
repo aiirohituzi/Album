@@ -15,7 +15,6 @@ class Images(models.Model):
     image = fields.ImageField(upload_to='%Y/%m/%d/orig', storage=fs)
     created = models.DateTimeField(auto_now_add=True)
     photoId = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='imageRelate', default='0')
-    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('-created', '-pk', )
