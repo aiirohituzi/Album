@@ -1,14 +1,17 @@
 <template>
 <div class="container">
+
     <div class="top-menu">
         <div class="add" @click="modalToggle('write')"></div>
         <div class="search"></div>
     </div>
+
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
-            <img class="item" :src="imagePath(item.path)" @click="modalToggle('photo', item.id)" />
+            <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" />
         </div>
     </div>
+
     <div class="modal modal-photo">
         <div class="modal-background" @click="modalToggle('photo')">
         </div>
@@ -17,7 +20,7 @@
                 {{ this.modal.title }}
             </div>
             <div class="modal-content">
-                <img :src="this.modal.path" /><br>
+                <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" /><br>
                 {{ this.modal.content }}
             </div>
             <div class="modal-bottom">
@@ -25,6 +28,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal modal-write">
         <div class="modal-background" @click="modalToggle('write')">
         </div>
@@ -33,7 +37,8 @@
                 <input type="text" class="title" v-model="uploadData.title" />
             </div>
             <div class="modal-content">
-                <input type="file" id="image" />
+                <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" />
+                <font size="1">최대 4개까지 업로드 가능</font>
                 <textarea v-model="uploadData.content" />
             </div>
             <div class="modal-bottom">
@@ -42,6 +47,7 @@
             </div>
         </div>
     </div>
+
 </div>
 </template>
 
@@ -96,10 +102,11 @@ export default {
                     'content': 'Content7',
                 },
             ],
+            images: [],
             modal: {
+                'photoId': '',
                 'title': '',
                 'content': '',
-                'path': '',
             },
             uploadData: {
                 title: null,
@@ -110,24 +117,34 @@ export default {
     methods: {
         fetchPhotos: function () {
             axios.get('http://localhost:8000/photos/').then((response) => {
-                // this.photos = response.data
+                this.photos = response.data
+                console.log(response)
+            }, (error) => {
+                console.log(error)
+            })
+            axios.get('http://localhost:8000/images/').then((response) => {
+                this.images = response.data
                 console.log(response)
             }, (error) => {
                 console.log(error)
             })
         },
         imagePath: function (path) {
-            return require('../assets/image/' + path + '.png')
+            return require('../assets/image/' + path)
         },
         modalToggle: function (modalName, id) {
             var modal = document.querySelector('.modal-' + modalName)
             modal.classList.toggle('toggle')
 
             if(id){
-                var path = this.photos[id].path
-                this.modal.title = this.photos[id].title
-                this.modal.content = this.photos[id].content
-                this.modal.path = this.imagePath(path)
+                this.modal.photoId = id
+                for(var i=0; i<this.photos.length; i++){
+                    if(this.photos[i].id == id) {
+                        this.modal.title = this.photos[i].title
+                        this.modal.content = this.photos[i].content
+                        return
+                    }
+                }
             }
         },
         uploadPhoto: async function () {
@@ -148,10 +165,10 @@ export default {
                     document.getElementById('formControlsImage').value = null
                 }
                 
-                var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp']
+                var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
                 for(var i=0; i<image.length; i++){
                     if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
-                        alert("'.jpeg', '.jpg', '.png', '.gif', '.bmp' 형식의 파일만 업로드 가능합니다.")
+                        alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
                         return
                     }
                 }

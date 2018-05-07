@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from photo.models import Photo
+from photo.models import Images
 import json
 from django.db.models import Q
 from django.http import QueryDict
@@ -18,7 +19,7 @@ def getPhoto(request):
             'id': item.id,
             'title': item.title,
             'content': item.content,
-            'created': item.created,
+            'created': str(item.created),
         })
 
     print("Get - Photo")
@@ -30,14 +31,15 @@ def getPhoto(request):
 def getImage(request):
     data = []
     
-    for item in Photo.objects.all():
+    for item in Images.objects.all():
         data.append({
             'id': item.id,
-            'photoId': item.photoId,
-            'image': item.image,
-            'created': item.created,
+            'photoId': item.photoId.id,
+            'image': str(item.image),
+            'created': str(item.created),
         })
 
+    print(data)
     print("Get - Image")
     data = json.dumps(data, indent=4)
     print(data)
