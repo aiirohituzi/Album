@@ -3,7 +3,8 @@
 
     <div class="top-menu">
         <div class="add" @click="modalToggle('write')"></div>
-        <div class="search"></div>
+        <div class="search" @click="searchBarToggle()"></div>
+        <input type="text" class="searchBar" />
     </div>
 
     <div class="masonry">
@@ -37,7 +38,7 @@
                 <input type="text" class="title" v-model="uploadData.title" />
             </div>
             <div class="modal-content">
-                <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" />
+                <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
                 <font size="1">최대 4개까지 업로드 가능</font>
                 <textarea v-model="uploadData.content" />
             </div>
@@ -146,6 +147,14 @@ export default {
                     }
                 }
             }
+            
+            this.uploadData.title = null;
+            this.uploadData.content = null;
+            document.getElementById('image').value = null;
+        },
+        searchBarToggle: function () {
+            var searchBar = document.querySelector('.searchBar')
+            searchBar.classList.toggle('toggle')
         },
         uploadPhoto: async function () {
             var data = new FormData()
@@ -237,6 +246,20 @@ export default {
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+}
+.top-menu .searchBar {
+    visibility: hidden;
+    float: right;
+    margin-right: 10px;
+    border-radius: 3px;
+    width: 200px;
+    height: 24px;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.top-menu .searchBar.toggle {
+    visibility: visible;
 }
 .top-menu .search {
     float: right;
