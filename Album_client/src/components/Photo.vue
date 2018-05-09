@@ -242,10 +242,6 @@ export default {
     width: 70%;
     height: 30px;
     margin: auto;
-
-    -moz-transition: all .2s ease-in-out;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
 }
 .top-menu .searchBar {
     visibility: hidden;
@@ -254,12 +250,18 @@ export default {
     border-radius: 3px;
     width: 200px;
     height: 24px;
-    -moz-transition: all .2s ease-in-out;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+}
+@keyframes bar {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 200px;
+    }
 }
 .top-menu .searchBar.toggle {
     visibility: visible;
+    animation: bar 100ms;
 }
 .top-menu .search {
     float: right;

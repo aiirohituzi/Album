@@ -59,11 +59,11 @@ def uploadPhoto(request):
         photo_obj = photoForm.save(commit=False)
         photo_obj.save()
 
-        print("Photo upload request : Upload success")
+        print("Post - Photo upload request : Upload success")
         result = True
         
     else:
-        print("Photo upload request : Upload error")
+        print("Post - Photo upload request : Upload error")
 
     return HttpResponse(result)
 
@@ -92,9 +92,30 @@ def uploadImage(request):
         img_obj = imageForm.save(commit=False)
         img_obj.save()
 
-        print("Image Upload Request : Upload success")
+        print("Post - Image Upload Request : Upload success")
         result = True
     else:
-        print("Image Upload Request : Upload error")
+        print("Post - Image Upload Request : Upload error")
 
     return HttpResponse(result)
+
+
+@csrf_exempt
+def searchPhoto(request):
+    data = []
+    keyword = request.GET.get('keyword', False)
+
+    if keyword:
+        queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
+    else:
+        queryset = Posting.objects.all()
+
+    if queryset.exists():
+        for row in queryset:
+            data.append({'id': row.id, 'title': row.title, 'content': row.content, 'created': str(row.created)})
+
+        data = json.dumps(data)
+    else:
+        data = False
+    print("Get - Search Photo")
+    return HttpResponse(data, content_type = "application/json")
