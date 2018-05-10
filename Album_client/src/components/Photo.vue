@@ -4,7 +4,7 @@
     <div class="top-menu">
         <div class="add" @click="modalToggle('write')"></div>
         <div class="search" @click="searchBarToggle()"></div>
-        <input type="text" class="searchBar" />
+        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
     </div>
 
     <div class="masonry">
@@ -104,6 +104,7 @@ export default {
                 },
             ],
             images: [],
+            keyword: null,
             modal: {
                 'photoId': '',
                 'title': '',
@@ -119,13 +120,13 @@ export default {
         fetchPhotos: function () {
             axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
-                console.log(response)
+                // console.log(response)
             }, (error) => {
                 console.log(error)
             })
             axios.get('http://localhost:8000/images/').then((response) => {
                 this.images = response.data
-                console.log(response)
+                // console.log(response)
             }, (error) => {
                 console.log(error)
             })
@@ -155,6 +156,14 @@ export default {
         searchBarToggle: function () {
             var searchBar = document.querySelector('.searchBar')
             searchBar.classList.toggle('toggle')
+        },
+        search: function (keyword) {
+            axios.get('http://localhost:8000/search/?keyword=' + keyword).then((response) => {
+                this.photos = response.data
+                // console.log(response)
+            }, (error) => {
+                console.log(error)
+            })
         },
         uploadPhoto: async function () {
             var data = new FormData()
@@ -191,7 +200,7 @@ export default {
             }
 
             await axios.post('http://localhost:8000/upPhoto/', data, config).then((response) => {
-                console.log(response)
+                // console.log(response)
                 if(response.data == 'True'){
                     alert('Upload success')
                     uploadResult = true

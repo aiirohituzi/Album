@@ -21,6 +21,7 @@ from photo.views import getPhoto
 from photo.views import getImage
 from photo.views import uploadPhoto
 from photo.views import uploadImage
+from photo.views import searchPhoto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +29,5 @@ urlpatterns = [
     url(r'^images/$', getImage, name='getImage'),
     url(r'^upPhoto/$', uploadPhoto, name='uploadPhoto'),
     url(r'^upImage/$', uploadImage, name='uploadImage'),
+    url(r'^search/$', searchPhoto, name='searchPhoto'),
 ]

@@ -108,14 +108,15 @@ def searchPhoto(request):
     if keyword:
         queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
     else:
-        queryset = Posting.objects.all()
+        queryset = Photo.objects.all()
 
     if queryset.exists():
         for row in queryset:
             data.append({'id': row.id, 'title': row.title, 'content': row.content, 'created': str(row.created)})
 
-        data = json.dumps(data)
+        data = json.dumps(data, indent=4)
     else:
         data = False
+    print(data)
     print("Get - Search Photo")
     return HttpResponse(data, content_type = "application/json")
