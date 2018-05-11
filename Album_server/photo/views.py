@@ -14,7 +14,7 @@ from photo.forms import ImageForm
 def getPhoto(request):
     data = []
     
-    for item in Photo.objects.all():
+    for item in Photo.objects.all().order_by('-created'):
         data.append({
             'id': item.id,
             'title': item.title,
@@ -101,6 +101,52 @@ def uploadImage(request):
 
 
 @csrf_exempt
+def deletePost(request):
+
+    photoId = request.POST['photoId']
+
+    result = False
+    log = ''
+
+    try:
+        row = Photo.objects.get(id=photoId)
+    except Photo.DoesNotExist:
+        print("Post - Delete Post Request : [Failed]No Photo matches the given query.")
+        return HttpResponse(result)
+    
+    if row != None:
+        log += 'Post - Delete Photo Request : photo ' + str(row.id) + ' delete success'
+
+        isEmpty = False
+        try:
+            img_obj = Images.objects.filter(photoId=row.id)
+        except Images.DoesNotExist:
+            isEmpty = True
+
+        if(not isEmpty):        # have image
+            for img_row in img_obj:
+                file_path = os.path.join(settings.FILES_DIR, str(img_row.image))
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+                    print(str(img_row.image) + "image delete")
+                else:
+                    print("image delete error")
+                    return HttpResponse(result)
+        else:
+            print("not image")
+
+
+        row.delete()
+        print(log)
+        result = True
+    else:
+        print("Post - Delete Post Request : Delete error")
+
+    return HttpResponse(result)
+
+
+
+@csrf_exempt
 def searchPhoto(request):
     data = []
     keyword = request.GET.get('keyword', False)
@@ -108,7 +154,7 @@ def searchPhoto(request):
     if keyword:
         queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
     else:
-        queryset = Photo.objects.all()
+        queryset = Photo.objects.all().order_by('-created')
 
     if queryset.exists():
         for row in queryset:
