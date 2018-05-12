@@ -25,6 +25,7 @@
                 {{ this.modal.content }}
             </div>
             <div class="modal-bottom">
+                <input type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
                 <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
             </div>
         </div>
@@ -61,46 +62,10 @@ export default {
         return {
             photos: [
                 {
-                    'id': '1',
-                    'path': 'Test1',
-                    'title': 'Title1',
-                    'content': 'Content1',
-                },
-                {
-                    'id': '2',
-                    'path': 'Test2',
-                    'title': 'Title2',
-                    'content': 'Content2',
-                },
-                {
-                    'id': '3',
-                    'path': 'Test1',
-                    'title': 'Title3',
-                    'content': 'Content3',
-                },
-                {
-                    'id': '4',
-                    'path': 'Test1',
-                    'title': 'Title4',
-                    'content': 'Content4',
-                },
-                {
-                    'id': '5',
-                    'path': 'Test2',
-                    'title': 'Title5',
-                    'content': 'Content5',
-                },
-                {
-                    'id': '6',
-                    'path': 'Test2',
-                    'title': 'Title6',
-                    'content': 'Content6',
-                },
-                {
-                    'id': '7',
-                    'path': 'Test1',
-                    'title': 'Title7',
-                    'content': 'Content7',
+                    'id': '',
+                    'title': '',
+                    'content': '',
+                    'created': '',
                 },
             ],
             images: [],
@@ -234,6 +199,28 @@ export default {
                     })
                 }
             }
+        },
+        deletePhoto: function (photoId) {
+            console.log(photoId)
+            var data = new FormData()
+            
+            data.append('photoId', photoId)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            axios.post('http://localhost:8000/delPhoto/', data, config).then((response) => {
+                console.log(response)
+                if(response.data == 'True'){
+                    alert('Delete success')
+                } else {
+                    console.log('Error')
+                    alert('Error')
+                }
+            }, (error) => {
+                console.log(error)
+            })
         },
     },
     mounted: function () {
@@ -408,6 +395,10 @@ export default {
     background-color: #c5e5ee;
     border-color: #cae6ee;
     width: 60px;
+}
+.modal .modal-box .modal-bottom .btn-delete {
+    background-color: #ff6a6a;
+    border-color: #ff5656;
 }
 
 .modal .modal-box .modal-title .title {

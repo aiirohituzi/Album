@@ -5,6 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from photo.models import Photo
 from photo.models import Images
 import json
+import os
+from django.conf import settings
 from django.db.models import Q
 from django.http import QueryDict
 
@@ -101,7 +103,7 @@ def uploadImage(request):
 
 
 @csrf_exempt
-def deletePost(request):
+def deletePhoto(request):
 
     photoId = request.POST['photoId']
 
@@ -111,7 +113,7 @@ def deletePost(request):
     try:
         row = Photo.objects.get(id=photoId)
     except Photo.DoesNotExist:
-        print("Post - Delete Post Request : [Failed]No Photo matches the given query.")
+        print("Post - Delete Photo Request : [Failed]No Photo matches the given query.")
         return HttpResponse(result)
     
     if row != None:
@@ -140,7 +142,7 @@ def deletePost(request):
         print(log)
         result = True
     else:
-        print("Post - Delete Post Request : Delete error")
+        print("Post - Delete Photo Request : Delete error")
 
     return HttpResponse(result)
 
