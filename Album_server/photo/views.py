@@ -168,3 +168,76 @@ def searchPhoto(request):
     print(data)
     print("Get - Search Photo")
     return HttpResponse(data, content_type = "application/json")
+
+
+
+@csrf_exempt
+def updatePhoto(request):
+    photoId = request.POST['photoId']
+    title = request.POST['title']
+    content = request.POST['content']
+    fileCheck = request.FILES.get('image', False)
+    if(not fileCheck):      # not file
+        fileCheck = request.POST.get('image', False)    # None : image delete request / False : Do not anything
+
+    result = False
+    log = ''
+
+    try:
+        row = Photo.objects.get(id=photoId)
+    except Photo.DoesNotExist:
+        print("Post - Update Photo Request : [Failed]No Photo matches the given query.")
+        return HttpResponse(result)
+
+    if row != None:
+        row.title = title
+        row.content = content
+
+        if(fileCheck):      # update image or delete image
+            if(fileCheck == "None"):    # delete image
+                print('Post - Update Photo Request : Image delete request')
+                isEmpty = False
+                try:
+                    img_obj = Images.objects.filter(photoId_id=photoId)
+                except Images.DoesNotExist:
+                    isEmpty = True
+                    print(" - This photo have not image.")
+
+                if(not isEmpty):    # have image
+                    for img_row in img_obj:
+                        file_path = os.path.join(settings.FILES_DIR, str(img_row.image))
+                        if os.path.isfile(file_path):
+                            os.remove(file_path)
+                            # print("image delete")
+                        else:
+                            print("image delete error")
+                            return HttpResponse(result)
+                        img_row.delete()
+                        print(" - Image deleted")
+            else:                       # update image
+                isEmpty = False
+                try:
+                    img_obj = Images.objects.filter(photoId_id=photoId)
+                except Images.DoesNotExist:
+                    isEmpty = True
+                    print(" - This photo have not image.")
+
+                if(not isEmpty):
+                    for img_row in img_obj:
+                        file_path = os.path.join(settings.FILES_DIR, str(img_row.image))
+                        if os.path.isfile(file_path):
+                            os.remove(file_path)
+                        else:
+                            print(" - image update error")
+                            return HttpResponse(result)
+                        img_row.delete()
+
+
+        row.save()
+        log += 'Post - Update Photo Request : photo ' + str(row.id) + ' Update success'
+        print(log)
+        result = True
+    else:
+        print("Post - Update Photo Request : Update error")
+
+    return HttpResponse(result)
