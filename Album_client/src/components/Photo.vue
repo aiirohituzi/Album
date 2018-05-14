@@ -18,14 +18,24 @@
         </div>
         <div class="modal-box">
             <div class="modal-title">
-                {{ this.modal.title }}
+                <div v-if="!updateData.state_update">{{ this.modal.title }}</div>
+                <input v-else type="text" class="title" v-model="updateData.title" />
             </div>
             <div class="modal-content">
-                <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" /><br>
-                {{ this.modal.content }}
+                <div v-if="!updateData.state_update">
+                    <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" /><br>
+                    {{ this.modal.content }}
+                </div>
+
+                <div v-else>
+                    <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
+                    <font size="1">최대 4개까지 업로드 가능</font>
+                    <textarea v-model="updateData.content" />
+                </div>
             </div>
             <div class="modal-bottom">
                 <input type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
+                <input type="button" class="btn" value="수정" @click="updatePhoto()" />
                 <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
             </div>
         </div>
@@ -76,6 +86,11 @@ export default {
                 'content': '',
             },
             uploadData: {
+                title: null,
+                content: null,
+            },
+            updateData: {
+                state_update: false,
                 title: null,
                 content: null,
             }
@@ -222,6 +237,13 @@ export default {
                 console.log(error)
             })
         },
+        updatePhoto: function () {
+            this.updateData.state_update = !this.updateData.state_update;
+            if(this.updateData.state_update){
+                this.updateData.title = this.modal.title
+                this.updateData.content = this.modal.content
+            }
+        }
     },
     mounted: function () {
         this.fetchPhotos()
