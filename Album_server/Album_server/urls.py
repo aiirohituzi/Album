@@ -23,6 +23,7 @@ from photo.views import uploadPhoto
 from photo.views import uploadImage
 from photo.views import searchPhoto
 from photo.views import deletePhoto
+from photo.views import updatePhoto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +33,5 @@ urlpatterns = [
     url(r'^upImage/$', uploadImage, name='uploadImage'),
     url(r'^search/$', searchPhoto, name='searchPhoto'),
     url(r'^delPhoto/$', deletePhoto, name='deletePhoto'),
+    url(r'^updatePhoto/$', updatePhoto, name='updatePhoto'),
 ]

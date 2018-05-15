@@ -111,9 +111,11 @@ export default {
                 console.log(error)
             })
         },
+    
         imagePath: function (path) {
             return require('../assets/image/' + path)
         },
+
         modalToggle: function (modalName, id) {
             var modal = document.querySelector('.modal-' + modalName)
             modal.classList.toggle('toggle')
@@ -133,10 +135,12 @@ export default {
             this.uploadData.content = null;
             document.getElementById('image').value = null;
         },
+
         searchBarToggle: function () {
             var searchBar = document.querySelector('.searchBar')
             searchBar.classList.toggle('toggle')
         },
+
         search: function (keyword) {
             axios.get('http://localhost:8000/search/?keyword=' + keyword).then((response) => {
                 this.photos = response.data
@@ -145,6 +149,7 @@ export default {
                 console.log(error)
             })
         },
+
         uploadPhoto: async function () {
             var data = new FormData()
             
@@ -155,7 +160,6 @@ export default {
             var uploadResult = false
 
             if(image == undefined){
-                image = null
                 console.log('Not selected')
             } else {
                 if(image.length > 4){
@@ -215,6 +219,7 @@ export default {
                 }
             }
         },
+
         deletePhoto: function (photoId) {
             console.log(photoId)
             var data = new FormData()
@@ -237,11 +242,87 @@ export default {
                 console.log(error)
             })
         },
-        updatePhoto: function () {
+
+        updatePhoto: async function () {
             this.updateData.state_update = !this.updateData.state_update;
             if(this.updateData.state_update){
                 this.updateData.title = this.modal.title
                 this.updateData.content = this.modal.content
+                return
+            }
+
+            var data = new FormData()
+            
+            var photoId = this.modal.photoId
+            var title = this.updateData.title
+            var content = this.updateData.content
+            var image = document.getElementById('image').files
+
+            var updateResult = false
+
+            if(image.length == 0){
+                image = false
+                console.log('Not selected')
+            } else {
+                if(image.length > 4){
+                    alert("최대 4개의 이미지까지만 선택해 주세요")
+                    document.getElementById('formControlsImage').value = null
+                }
+                
+                var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
+                for(var i=0; i<image.length; i++){
+                    if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
+                        alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                        return
+                    }
+                }
+            }
+
+            data.append('photoId', photoId)
+            data.append('title', title)
+            data.append('content', content)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            await axios.post('http://localhost:8000/updatePhoto/', data, config).then((response) => {
+                // console.log(response)
+                if(response.data == 'True'){
+                    alert('Update success')
+                    updateResult = true
+                } else {
+                    console.log('Error')
+                    alert('Error')
+                }
+            }, (error) => {
+                console.log(error)
+            })
+
+
+            console.log(updateResult && image)
+            if(updateResult && image){
+                console.log(image.length)
+                for(var i=0; i<image.length; i++){
+                    data = new FormData()
+
+                    data.append('photoId', photoId)
+                    data.append('image', image[i])
+
+                    axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
+                        // console.log(response.data)
+                        if(response.data == 'True'){
+                            // console.log(response.data)
+                            console.log(i + ' : Image Update success')
+                        } else {
+                            console.log('Error')
+                            alert('Error')
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+                }
             }
         }
     },
