@@ -91,6 +91,7 @@ export default {
             },
             updateData: {
                 state_update: false,
+                imageUpdate: false,
                 title: null,
                 content: null,
             }
@@ -161,6 +162,8 @@ export default {
 
             if(image == undefined){
                 console.log('Not selected')
+                alert('최소 한 개의 이미지를 선택해 주세요')
+                return
             } else {
                 if(image.length > 4){
                     alert("최대 4개의 이미지까지만 선택해 주세요")
@@ -257,12 +260,17 @@ export default {
             var title = this.updateData.title
             var content = this.updateData.content
             var image = document.getElementById('image').files
+            var imageUpdate = this.updateData.imageUpdate
 
             var updateResult = false
 
-            if(image.length == 0){
-                image = false
+            if(!imageUpdate) {
+                console.log('Not update a image')
+            }
+            else if(image.length == 0){
                 console.log('Not selected')
+                alert('최소 한 개의 이미지를 선택해 주세요')
+                return
             } else {
                 if(image.length > 4){
                     alert("최대 4개의 이미지까지만 선택해 주세요")
@@ -300,8 +308,7 @@ export default {
             })
 
 
-            console.log(updateResult && image)
-            if(updateResult && image){
+            if(updateResult && imageUpdate){
                 console.log(image.length)
                 for(var i=0; i<image.length; i++){
                     data = new FormData()

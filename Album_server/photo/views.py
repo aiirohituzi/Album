@@ -173,6 +173,7 @@ def updatePhoto(request):
     photoId = request.POST['photoId']
     title = request.POST['title']
     content = request.POST['content']
+    fileCheck = request.FILES.get('image', False)
 
     result = False
     log = ''
@@ -187,15 +188,13 @@ def updatePhoto(request):
         row.title = title
         row.content = content
 
-        print('asfdasdfas')
-        isEmpty = False
         try:
             img_obj = Images.objects.filter(photoId=photoId)
         except Images.DoesNotExist:
-            isEmpty = True
-            print(" - This photo have not image.")
+            print(" - [ERROR] This photo have not image.")
+            return HttpResponse(result)
 
-        if(not isEmpty):    # have image
+        if(fileCheck):    # image re-upload
             for img_row in img_obj:
                 file_path = os.path.join(settings.FILES_DIR, str(img_row.image))
                 if os.path.isfile(file_path):
@@ -204,7 +203,6 @@ def updatePhoto(request):
                     print("image delete error")
                     return HttpResponse(result)
                 img_row.delete()
-
 
         row.save()
         log += 'Post - Update Photo Request : photo ' + str(row.id) + ' Update success'
