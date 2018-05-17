@@ -139,7 +139,9 @@ export default {
 
         searchBarToggle: function () {
             var searchBar = document.querySelector('.searchBar')
+            var search = document.querySelector('.search')
             searchBar.classList.toggle('toggle')
+            search.classList.toggle('toggle')
         },
 
         search: function (keyword) {
@@ -378,6 +380,9 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/search.png);
+}
+.top-menu .search.toggle {
+    background-image: url(../assets/search_close.png);
 }
 .top-menu .add {
     float: right;
