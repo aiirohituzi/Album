@@ -22,14 +22,20 @@
                 <input v-else type="text" class="title" v-model="updateData.title" />
             </div>
             <div class="modal-content">
-                <div v-if="!updateData.state_update">
+                <div class="img-wrapper" v-if="!updateData.state_update">
                     <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" /><br>
                     {{ this.modal.content }}
                 </div>
 
                 <div v-else>
-                    <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
-                    <font size="1">최대 4개까지 업로드 가능</font>
+                    <div class="img-select-unchecked">
+                        <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
+                        <label for="checkbox">이미지 수정</label>
+                    </div>
+                    <div class="img-select-checked" v-if="updateData.imageUpdate">
+                        <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
+                        <font size="1">최대 4개까지 업로드 가능</font>
+                    </div>
                     <textarea v-model="updateData.content" />
                 </div>
             </div>
@@ -49,6 +55,8 @@
                 <input type="text" class="title" v-model="uploadData.title" />
             </div>
             <div class="modal-content">
+                <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
+                <label for="checkbox">이미지 수정</label>
                 <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
                 <font size="1">최대 4개까지 업로드 가능</font>
                 <textarea v-model="uploadData.content" />
@@ -286,6 +294,7 @@ export default {
                         return
                     }
                 }
+                data.append('image', image[0])
             }
 
             data.append('photoId', photoId)
@@ -478,11 +487,6 @@ export default {
     background-color: white;
     z-index: 100;
 }
-.modal .modal-box img{
-    max-width: 55vw;
-    max-height: 80vh;
-    border: 1px solid #dddddd;
-}
 .modal .modal-box .modal-title {
     line-height: 5vh;
     padding-left: 1vw;
@@ -494,6 +498,15 @@ export default {
     height: 88vh;
     padding: 1vh;
     /* overflow-y: scroll; */
+}
+.modal .modal-box .modal-content .img-wrapper {
+    max-width: 55vw;
+    max-height: 80vh;
+}
+.modal .modal-box .modal-content .img-wrapper img {
+    max-width: 55vw;
+    max-height: 80vh;
+    border: 1px solid #dddddd;
 }
 .modal .modal-box .modal-bottom {
     bottom: 0;
@@ -519,7 +532,12 @@ export default {
 .modal .modal-box .modal-title .title {
     width: 57vw;
 }
-.modal .modal-box .modal-content input {
+.modal .modal-box .modal-content .img-select-unchecked{
+    float: left;
+    padding-left: 2vw;
+    padding-bottom: 1vh;
+}
+.modal .modal-box .modal-content .img-select-checked{
     float: left;
     padding-left: 2vw;
     padding-bottom: 1vh;
