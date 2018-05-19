@@ -9,7 +9,8 @@
 
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
-            <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" />
+            <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
+            <img class="item" v-if="item.thumbnail != undefined" :src="imagePath(item.thumbnail)" @click="modalToggle('photo', item.id)" />
         </div>
     </div>
 
@@ -84,6 +85,7 @@ export default {
                     'title': '',
                     'content': '',
                     'created': '',
+                    'thumbnail': undefined,
                 },
             ],
             images: [],
@@ -106,8 +108,8 @@ export default {
         }
     },
     methods: {
-        fetchPhotos: function () {
-            axios.get('http://localhost:8000/photos/').then((response) => {
+        fetchPhotos: async function () {
+            await axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
                 // console.log(response)
             }, (error) => {
@@ -116,6 +118,14 @@ export default {
             axios.get('http://localhost:8000/images/').then((response) => {
                 this.images = response.data
                 // console.log(response)
+                for(var i=0; i<this.photos.length; i++){
+                    for(var j=0; j<this.images.length; j++){
+                        if(this.photos[i].id == this.images[j].photoId){
+                            this.photos[i].thumbnail = this.images[j].image
+                            break
+                        }
+                    }
+                }
             }, (error) => {
                 console.log(error)
             })
