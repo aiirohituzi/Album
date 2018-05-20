@@ -510,12 +510,14 @@ export default {
     /* overflow-y: scroll; */
 }
 .modal .modal-box .modal-content .img-wrapper {
+    margin-left: auto;
+    margin-right: auto;
     max-width: 55vw;
     max-height: 80vh;
 }
 .modal .modal-box .modal-content .img-wrapper img {
-    max-width: 55vw;
-    max-height: 80vh;
+    max-width: 22vw;
+    max-height: 40vh;
     border: 1px solid #dddddd;
 }
 .modal .modal-box .modal-bottom {
