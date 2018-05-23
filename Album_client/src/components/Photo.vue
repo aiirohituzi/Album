@@ -24,7 +24,7 @@
             </div>
             <div class="modal-content">
                 <div class="img-wrapper" v-if="!updateData.state_update">
-                    <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" />
+                    <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" @click="detailImage(image.image)" />
                     <br>{{ this.modal.content }}
                 </div>
 
@@ -69,11 +69,12 @@
         </div>
     </div>
 
-    <div class="modal modal-detailImg">
-        <div class="modal-background" @click="modalToggle('')">
+    <div class="modal modal-detailImage">
+        <div class="modal-background" @click="modalToggle('detailImage')">
         </div>
         <div class="modal-box">
-            <div class="modal-content">
+            <div class="detailImage">
+                <img v-if="clickedImage != undefined" :src="imagePath(clickedImage)">
             </div>
         </div>
     </div>
@@ -103,6 +104,7 @@ export default {
                 'title': '',
                 'content': '',
             },
+            clickedImage: undefined,
             uploadData: {
                 title: null,
                 content: null,
@@ -161,6 +163,11 @@ export default {
             this.uploadData.title = null;
             this.uploadData.content = null;
             document.getElementById('image').value = null;
+        },
+
+        detailImage: function (path) {
+            this.clickedImage = path
+            this.modalToggle('detailImage')
         },
 
         searchBarToggle: function () {
@@ -482,6 +489,10 @@ export default {
     visibility: visible;
     animation: fade 300ms;
 }
+.modal-detailImage.toggle {
+    visibility: visible;
+    animation: fade 300ms;
+}
 
 .modal .modal-background {
     position: fixed;
@@ -516,6 +527,18 @@ export default {
     height: 88vh;
     padding: 1vh;
     /* overflow-y: scroll; */
+}
+.modal .modal-box .detailImage{
+    text-align: center;
+    vertical-align: -webkit-baseline-middle;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    line-height: 90vh;
+}
+.modal .modal-box .detailImage img{
+    max-width: 60vw;
+    max-height: 90vh;
+    border: 1px solid #dddddd;
 }
 .modal .modal-box .modal-content .img-wrapper {
     margin-left: auto;
