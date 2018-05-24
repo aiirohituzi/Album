@@ -23,8 +23,10 @@
                 <input v-else type="text" class="title" v-model="updateData.title" />
             </div>
             <div class="modal-content">
-                <div class="img-wrapper" v-if="!updateData.state_update">
-                    <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" @click="detailImage(image.image)" />
+                <div v-if="!updateData.state_update">
+                    <div class="img-wrapper">
+                        <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" @click="detailImage(image.image)" />
+                    </div>
                     <br>{{ this.modal.content }}
                 </div>
 
@@ -530,27 +532,27 @@ export default {
 }
 .modal .modal-box .detailImage{
     text-align: center;
-    vertical-align: -webkit-baseline-middle;
     margin-top: 5vh;
     margin-bottom: 5vh;
     line-height: 90vh;
 }
 .modal .modal-box .detailImage img{
+    vertical-align: -webkit-baseline-middle;
     max-width: 60vw;
     max-height: 90vh;
-    border: 1px solid #dddddd;
 }
 .modal .modal-box .modal-content .img-wrapper {
     margin-left: auto;
     margin-right: auto;
-    width: 56vw;
-    height: 80vh;
+    width: 30vw;
+    height: 41vh;
     overflow: hidden;
 }
 .modal .modal-box .modal-content .img-wrapper img {
-    max-width: 27vw;
-    max-height: 38vh;
-    border: 1px solid #dddddd;
+    width: 14.8vw;
+    height: 20vh;
+    border: 1px solid #ddd;
+    object-fit: cover;
 }
 .modal .modal-box .modal-bottom {
     bottom: 0;
@@ -558,7 +560,6 @@ export default {
     vertical-align: -webkit-baseline-middle;
     line-height: 5vh;
     border-top: 1px solid #ccc;
-    /* background-color: blue; */
 }
 .modal .modal-box .modal-bottom .btn {
     margin-right: 1vw;
