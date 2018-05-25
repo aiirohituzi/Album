@@ -58,8 +58,6 @@
                 <input type="text" class="title" v-model="uploadData.title" />
             </div>
             <div class="modal-content">
-                <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
-                <label for="checkbox">이미지 수정</label>
                 <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
                 <font size="1">최대 4개까지 업로드 가능</font>
                 <textarea v-model="uploadData.content" />
@@ -544,12 +542,13 @@ export default {
 .modal .modal-box .modal-content .img-wrapper {
     margin-left: auto;
     margin-right: auto;
-    width: 30vw;
-    height: 41vh;
+    width: 42vh;
+    min-height: 21vh;
+    max-height: 42vh;
     overflow: hidden;
 }
 .modal .modal-box .modal-content .img-wrapper img {
-    width: 14.8vw;
+    width: 20vh;
     height: 20vh;
     border: 1px solid #ddd;
     object-fit: cover;
@@ -618,6 +617,20 @@ export default {
     }
     .top-menu {
         width: 95%;
+    }
+    .modal .modal-box {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+    .modal .modal-box .modal-title .title {
+        width: 98%;
+    }
+    .modal .modal-box .modal-content textarea {
+        width: 98%;
+        height: 80vh;
+        resize: none;
+        overflow-y: scroll;
     }
 }
 </style>
