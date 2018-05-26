@@ -43,7 +43,8 @@
                 </div>
             </div>
             <div class="modal-bottom">
-                <input type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
+                <input v-if="!updateData.state_update" type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
+                <input v-else type="button" class="btn" value="취소" @click="updateCancel()" />
                 <input type="button" class="btn" value="수정" @click="updatePhoto()" />
                 <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
             </div>
@@ -159,10 +160,11 @@ export default {
                     }
                 }
             }
-            
-            this.uploadData.title = null;
-            this.uploadData.content = null;
-            document.getElementById('image').value = null;
+
+            this.uploadData.title = null
+            this.uploadData.content = null
+            document.getElementById('image').value = null
+            this.updateCancel()
         },
 
         detailImage: function (path) {
@@ -368,6 +370,10 @@ export default {
                 }
             }
         },
+        updateCancel: function () {
+            this.updateData.state_update = false
+            this.updateData.imageUpdate = false
+        }
     },
     mounted: function () {
         this.fetchPhotos()
