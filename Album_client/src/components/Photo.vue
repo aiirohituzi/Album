@@ -74,6 +74,7 @@
         <div class="modal-background" @click="modalToggle('detailImage')">
         </div>
         <div class="modal-box">
+            <div class="closeImage" @click="modalToggle('detailImage')"></div>
             <div class="detailImage">
                 <img v-if="clickedImage != undefined" :src="imagePath(clickedImage)">
             </div>
@@ -533,6 +534,20 @@ export default {
     height: 88vh;
     padding: 1vh;
     /* overflow-y: scroll; */
+}
+.modal .modal-box .closeImage {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/close_img.png);
+}
+.modal .modal-box .closeImage:hover {
+    background-image: url(../assets/close_img_hover.png);
 }
 .modal .modal-box .detailImage{
     text-align: center;
