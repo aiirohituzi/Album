@@ -18,6 +18,7 @@
         <div class="modal-background" @click="modalToggle('photo')">
         </div>
         <div class="modal-box">
+            <div class="close-modal" @click="modalToggle('photo')"></div>
             <div class="modal-title">
                 <div v-if="!updateData.state_update">{{ this.modal.title }}</div>
                 <input v-else type="text" class="title" v-model="updateData.title" />
@@ -55,6 +56,7 @@
         <div class="modal-background" @click="modalToggle('write')">
         </div>
         <div class="modal-box">
+            <div class="close-modal" @click="modalToggle('write')"></div>
             <div class="modal-title">
                 <input type="text" class="title" v-model="uploadData.title" />
             </div>
@@ -74,7 +76,7 @@
         <div class="modal-background" @click="modalToggle('detailImage')">
         </div>
         <div class="modal-box">
-            <div class="closeImage" @click="modalToggle('detailImage')"></div>
+            <div class="close-modal" @click="modalToggle('detailImage')"></div>
             <div class="detailImage">
                 <img v-if="clickedImage != undefined" :src="imagePath(clickedImage)">
             </div>
@@ -525,7 +527,7 @@ export default {
 }
 .modal .modal-box .modal-title {
     line-height: 5vh;
-    padding-left: 1vw;
+    padding-left: 2.2vw;
     vertical-align: middle;
     border-bottom: 1px solid #ccc;
 }
@@ -535,7 +537,7 @@ export default {
     padding: 1vh;
     /* overflow-y: scroll; */
 }
-.modal .modal-box .closeImage {
+.modal .modal-box .close-modal {
     float: right;
     width: 20px;
     height: 20px;
@@ -546,7 +548,7 @@ export default {
     background-position:center center;
     background-image: url(../assets/close_img.png);
 }
-.modal .modal-box .closeImage:hover {
+.modal .modal-box .close-modal:hover {
     background-image: url(../assets/close_img_hover.png);
 }
 .modal .modal-box .detailImage{
@@ -595,7 +597,7 @@ export default {
 }
 
 .modal .modal-box .modal-title .title {
-    width: 57vw;
+    width: 53vw;
 }
 .modal .modal-box .modal-content .img-select-unchecked{
     float: left;
@@ -643,6 +645,10 @@ export default {
         width: 100%;
         left: 0;
         right: 0;
+    }
+    .modal .modal-box .close-modal {
+        visibility: hidden;
+        position: fixed;
     }
     .modal .modal-box .modal-title .title {
         width: 98%;
