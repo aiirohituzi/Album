@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container_main">
 
     <div class="top-menu">
         <div class="add" @click="modalToggle('write')"></div>
@@ -10,7 +10,10 @@
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
             <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
-            <img class="item" v-if="item.thumbnail != undefined" :src="imagePath(item.thumbnail)" @click="modalToggle('photo', item.id)" />
+            <div class="item">
+                <img v-if="item.thumbnail != undefined" :src="imagePath(item.thumbnail)" @click="modalToggle('photo', item.id)" />
+                <br>{{ item.title }}
+            </div>
         </div>
     </div>
 
@@ -385,8 +388,9 @@ export default {
 </script>
 
 <style>
-.container {
+.container_main {
     margin-top: 20px;
+    margin-right: 10px;
 }
 
 .top-menu {
@@ -460,20 +464,25 @@ export default {
 }
 .masonry .brick {
     margin-bottom: 30px;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.masonry .brick .item {
+    text-align: center;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
 }
 .masonry .brick img {
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-    
-    margin-top: 2px;
-    margin-bottom: 2px;
+
     max-width: 100%;
     vertical-align: bottom;
-    border: 1px solid #dddddd;
     border-radius: 10px;
 }
-.masonry .brick:hover img {
+.masonry .brick:hover .item{
     opacity: .75;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
