@@ -28,6 +28,7 @@
             </div>
             <div class="modal-content">
                 <div v-if="!updateData.state_update">
+                    <div class="created">{{ this.modal.created }}</div>
                     <div class="img-wrapper">
                         <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" @click="detailImage(image.image)" />
                     </div>
@@ -110,6 +111,7 @@ export default {
                 'photoId': '',
                 'title': '',
                 'content': '',
+                'created': '',
             },
             clickedImage: undefined,
             uploadData: {
@@ -162,6 +164,7 @@ export default {
                     if(this.photos[i].id == id) {
                         this.modal.title = this.photos[i].title
                         this.modal.content = this.photos[i].content
+                        this.modal.created = this.photos[i].created.split('.')[0]
                         return
                     }
                 }
@@ -570,6 +573,10 @@ export default {
     vertical-align: -webkit-baseline-middle;
     max-width: 60vw;
     max-height: 90vh;
+}
+.modal .modal-box .modal-content .created {
+    font-size: 8pt;
+    text-align: right;
 }
 .modal .modal-box .modal-content .img-wrapper {
     margin-left: auto;
