@@ -547,7 +547,8 @@ export default {
     text-align: center;
     height: 88vh;
     padding: 1vh;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
+    white-space: pre-line;
 }
 .modal .modal-box .close-modal {
     float: right;
