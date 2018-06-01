@@ -36,11 +36,11 @@
                 </div>
 
                 <div v-else>
-                    <div class="img-select-unchecked">
+                    <div class="img-select-group">
                         <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
                         <label for="checkbox">이미지 수정</label>
                     </div>
-                    <div class="img-select-checked" v-if="updateData.imageUpdate">
+                    <div class="img-select-group" v-if="updateData.imageUpdate">
                         <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
                         <font size="1">최대 4개까지 업로드 가능</font>
                     </div>
@@ -65,8 +65,10 @@
                 <input type="text" class="title" v-model="uploadData.title" />
             </div>
             <div class="modal-content">
-                <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
-                <font size="1">최대 4개까지 업로드 가능</font>
+                <div class="img-select-group">
+                    <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
+                    <font size="1">최대 4개까지 업로드 가능</font>
+                </div>
                 <textarea v-model="uploadData.content" />
             </div>
             <div class="modal-bottom">
@@ -575,6 +577,17 @@ export default {
     max-width: 60vw;
     max-height: 90vh;
 }
+.modal .modal-box .modal-content .img-select-group {
+    float: left;
+    padding-left: 1vh;
+    padding-bottom: 1vh;
+}
+.modal .modal-box .modal-content textarea {
+    width: 55vw;
+    height: 80vh;
+    resize: none;
+    overflow-y: scroll;
+}
 .modal .modal-box .modal-content .created {
     font-size: 8pt;
     text-align: right;
@@ -615,22 +628,6 @@ export default {
 
 .modal .modal-box .modal-title .title {
     width: 53vw;
-}
-.modal .modal-box .modal-content .img-select-unchecked{
-    float: left;
-    padding-left: 2vw;
-    padding-bottom: 1vh;
-}
-.modal .modal-box .modal-content .img-select-checked{
-    float: left;
-    padding-left: 2vw;
-    padding-bottom: 1vh;
-}
-.modal .modal-box .modal-content textarea {
-    width: 55vw;
-    height: 80vh;
-    resize: none;
-    overflow-y: scroll;
 }
 
 @media only screen and (min-width: 1024px) {
