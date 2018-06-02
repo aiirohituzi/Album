@@ -606,6 +606,9 @@ export default {
     border: 1px solid #ddd;
     object-fit: cover;
 }
+.modal .modal-box .modal-content .img-wrapper img:hover {
+    opacity: .75;
+}
 .modal .modal-box .modal-bottom {
     bottom: 0;
     text-align: right;
