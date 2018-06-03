@@ -10,11 +10,17 @@
     <div class="masonry">
         <div class="brick" v-for="item in photos" :key="item.id">
             <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
-            <div class="item">
-                <img v-if="item.thumbnail != undefined" :src="imagePath(item.thumbnail)" @click="modalToggle('photo', item.id)" />
+            <div class="item" @click="modalToggle('photo', item.id)">
+                <img v-if="item.thumbnail != undefined" :src="imagePath(item.thumbnail)" />
                 <br>{{ item.title }}
             </div>
         </div>
+    </div>
+
+    <div>
+        <ul class="list">
+            <li v-for="item in photos">{{ item.title }}</li>
+        </ul>
     </div>
 
     <div class="modal modal-photo">
@@ -490,6 +496,19 @@ export default {
 .masonry .brick:hover .item{
     opacity: .75;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.list {
+    visibility: hidden;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.list li {
+    border-radius: 3px;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
 }
 
 
