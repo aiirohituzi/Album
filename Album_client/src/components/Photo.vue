@@ -6,8 +6,13 @@
         <div class="search" @click="searchBarToggle()"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
     </div>
+    
+    <div class="layout-menu">
+        <div class="layout-masonry" @click="changeLayout('masonry')" v-if="layout != 'masonry'"></div>
+        <div class="layout-list" @click="changeLayout('list')" v-if="layout != 'list'"></div>
+    </div>
 
-    <div class="masonry">
+    <div class="masonry" v-if="layout == 'masonry'">
         <div class="brick" v-for="item in photos" :key="item.id">
             <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
             <div class="item" @click="modalToggle('photo', item.id)">
@@ -17,8 +22,8 @@
         </div>
     </div>
 
-    <div>
-        <ul class="list">
+    <div class="list">
+        <ul v-if="layout == 'list'">
             <li v-for="item in photos">{{ item.title }}</li>
         </ul>
     </div>
@@ -131,7 +136,8 @@ export default {
                 imageUpdate: false,
                 title: null,
                 content: null,
-            }
+            },
+            layout: 'masonry',
         }
     },
     methods: {
@@ -203,6 +209,10 @@ export default {
             }, (error) => {
                 console.log(error)
             })
+        },
+
+        changeLayout: function (layout) {
+            this.layout = layout
         },
 
         uploadPhoto: async function () {
@@ -406,7 +416,7 @@ export default {
 
 .top-menu {
     width: 70%;
-    height: 30px;
+    height: 60px;
     margin: auto;
 }
 .top-menu .searchBar {
@@ -456,6 +466,35 @@ export default {
     box-shadow: 0 0 0px 2px rgba(17, 133, 204, 0.5);
 }
 
+.layout-menu {
+    width: 70%;
+    margin: auto;
+}
+.layout-masonry {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/layout_masonry.png);
+}
+.layout-masonry:hover {
+    background-image: url(../assets/layout_masonry_hover.png);
+}
+.layout-list {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/layout_list.png);
+}
+.layout-list:hover {
+    background-image: url(../assets/layout_list_hover.png);
+}
+
 .masonry {
     margin: auto;
     width: 70%;
@@ -499,14 +538,18 @@ export default {
 }
 
 .list {
-    visibility: hidden;
+    width: 70%;
+    margin: auto;
+}
+.list ul {
     list-style-type: none;
     margin: 0px;
     padding: 0px;
 }
 .list li {
     border-radius: 3px;
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 10px;
     border: 1px solid #ddd;
 }
