@@ -24,7 +24,10 @@
 
     <div class="list">
         <ul v-if="layout == 'list'">
-            <li v-for="item in photos" @click="modalToggle('photo', item.id)">{{ item.title }}</li>
+            <li v-for="item in photos" @click="modalToggle('photo', item.id)">
+                {{ item.title }}
+                <font size="1">{{ item.created.split('.')[0] }}</font>
+            </li>
         </ul>
     </div>
 
@@ -552,6 +555,10 @@ export default {
     margin-bottom: 5px;
     padding: 10px;
     border: 1px solid #ddd;
+}
+.list li font {
+    float: right;
+    margin-top: 6px;
 }
 .list li:hover{
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
