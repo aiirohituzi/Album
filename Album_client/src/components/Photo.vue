@@ -22,13 +22,23 @@
         </div>
     </div>
 
-    <div class="list">
-        <ul v-if="layout == 'list'">
-            <li v-for="item in photos" @click="modalToggle('photo', item.id)">
-                {{ item.title }}
-                <font size="1">{{ item.created.split('.')[0] }}</font>
+    <div class="list" v-if="layout == 'list'">
+        <ul v-if="length==1">
+            <!-- <li v-for="item in photos" @click="modalToggle('photo', item.id)"> -->
+            <li v-for="n in max" @click="modalToggle('photo', photos[0].id)">
+                {{ photos[0].title }}
+                <font size="1">{{ photos[0].created.split('.')[0] }}</font>
             </li>
         </ul>
+        <ul v-else>
+            <!-- <li v-for="item in photos" @click="modalToggle('photo', item.id)"> -->
+            <li v-for="n in max" @click="modalToggle('photo', photos[n-1].id)">
+                {{ photos[n-1].title }}
+                <font size="1">{{ photos[n-1].created.split('.')[0] }}</font>
+            </li>
+        </ul>
+        <button v-if="more" class="btn-more" @click="moreData()">More</button>
+        <button v-else class="btn-more" disabled="disabled">No more data...</button>
     </div>
 
     <div class="modal modal-photo">
@@ -141,13 +151,24 @@ export default {
                 content: null,
             },
             layout: 'masonry',
+            length: 1,
+            max: 10,
+            more: true,
         }
     },
     methods: {
         fetchPhotos: async function () {
             await axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
+                this.length = response.data.length
+
+                if(this.length < this.max){
+                    this.max = this.length
+                }
                 // console.log(response)
+                for(var i=0; i<this.count_list; i++){
+
+                }
             }, (error) => {
                 console.log(error)
             })
@@ -165,6 +186,21 @@ export default {
             }, (error) => {
                 console.log(error)
             })
+        },
+
+        moreData: function () {
+            if(this.max+10 <= this.length) {
+                this.max+=10
+            } else {
+                this.max = this.length
+            }
+
+            if(this.photos[this.max] == undefined) {
+                this.more = false
+            }
+
+            // console.log(this.max)
+            // console.log(this.more)
         },
     
         imagePath: function (path) {
@@ -560,8 +596,13 @@ export default {
     float: right;
     margin-top: 6px;
 }
-.list li:hover{
+.list li:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+.list .btn-more {
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px;
 }
 
 @keyframes fade {
