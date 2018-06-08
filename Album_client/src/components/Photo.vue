@@ -12,14 +12,30 @@
         <div class="layout-list" @click="changeLayout('list')" v-if="layout != 'list'"></div>
     </div>
 
-    <div class="masonry" v-if="layout == 'masonry'">
-        <div class="brick" v-for="item in photos" :key="item.id">
-            <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
-            <div class="item" @click="modalToggle('photo', item.id)">
-                <img v-if="item.thumbnail != undefined" :src="imagePath(item.thumbnail)" />
-                <br>{{ item.title }}
+    <div class="wrapper-masonry" v-if="layout == 'masonry'">
+        <div class="masonry">
+            <!-- <div class="brick" v-for="item in photos" :key="item.id"> -->
+            <div v-if="length==1">
+                <div class="brick" v-for="n in max">
+                    <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
+                    <div class="item" @click="modalToggle('photo', photos[0].id)">
+                        <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
+                        <br>{{ photos[0].title }}
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="brick" v-for="n in max">
+                    <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
+                    <div class="item" @click="modalToggle('photo', photos[n-1].id)">
+                        <img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
+                        <br>{{ photos[n-1].title }}
+                    </div>
+                </div>
             </div>
         </div>
+        <button v-if="more" class="btn-more" @click="moreData()">More</button>
+        <button v-else class="btn-more" disabled="disabled">No more data...</button>
     </div>
 
     <div class="list" v-if="layout == 'list'">
@@ -534,11 +550,12 @@ export default {
     background-image: url(../assets/layout_list_hover.png);
 }
 
-.masonry {
+.wrapper-masonry {
     margin: auto;
     width: 70%;
     padding: 10px;
-
+}
+.wrapper-masonry .masonry {
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -550,19 +567,20 @@ export default {
     -moz-column-fill: initial;
     -webkit-column-fill: initial;
     column-fill: initial;
+    margin-bottom: 30px;
 }
-.masonry .brick {
+.wrapper-masonry .masonry .brick {
     margin-bottom: 30px;
     border-radius: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
 }
-.masonry .brick .item {
+.wrapper-masonry .masonry .brick .item {
     text-align: center;
     border: 1px solid #dddddd;
     border-radius: 10px;
 }
-.masonry .brick img {
+.wrapper-masonry .masonry .brick img {
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -571,9 +589,14 @@ export default {
     vertical-align: bottom;
     border-radius: 10px;
 }
-.masonry .brick:hover .item{
+.wrapper-masonry .masonry .brick:hover .item{
     opacity: .75;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+.wrapper-masonry .btn-more {
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px;
 }
 
 .list {
@@ -753,21 +776,29 @@ export default {
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .wrapper-masonry {
+        width: 80%;
+    }
     .masonry {
         -moz-column-count: 2;
         -webkit-column-count: 2;
         column-count: 2;
-        width: 80%;
     }
     .top-menu {
+        width: 80%;
+    }
+    .layout-menu {
         width: 80%;
     }
 }
 @media only screen and (max-width: 767px) {
-    .masonry {
+    .wrapper-masonry {
         width: 95%;
     }
     .top-menu {
+        width: 95%;
+    }
+    .layout-menu {
         width: 95%;
     }
     .modal .modal-box {
