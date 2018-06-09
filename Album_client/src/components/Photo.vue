@@ -784,6 +784,9 @@ export default {
         -webkit-column-count: 2;
         column-count: 2;
     }
+    .list {
+        width: 80%
+    }
     .top-menu {
         width: 80%;
     }
@@ -794,6 +797,9 @@ export default {
 @media only screen and (max-width: 767px) {
     .wrapper-masonry {
         width: 95%;
+    }
+    .list {
+        width: 95%
     }
     .top-menu {
         width: 95%;
