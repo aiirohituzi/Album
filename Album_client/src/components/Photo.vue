@@ -278,8 +278,8 @@ export default {
             var image = document.getElementById('image').files
 
             var uploadResult = false
-
-            if(image == undefined){
+            
+            if(image.length == 0){
                 console.log('Not selected')
                 alert('최소 한 개의 이미지를 선택해 주세요')
                 return
@@ -298,6 +298,8 @@ export default {
                 }
             }
 
+            data.append('username', 'aaa')
+            data.append('password', 'bbb')
             data.append('title', title)
             data.append('content', content)
 
@@ -316,6 +318,9 @@ export default {
                 }
             }, (error) => {
                 console.log(error)
+                if (error.response.status === 401) {
+                    console.log('unauthorized');
+                }
             })
 
             if(uploadResult){

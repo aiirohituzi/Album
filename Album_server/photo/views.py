@@ -13,6 +13,8 @@ from django.http import QueryDict
 from photo.forms import PhotoForm
 from photo.forms import ImageForm
 
+from django.contrib.auth import authenticate
+
 def getPhoto(request):
     data = []
     
@@ -52,10 +54,15 @@ def getImage(request):
 def uploadPhoto(request):
     result = False
 
+    username = request.POST['username']
+    password = request.POST['password']
     title = request.POST['title']
     content = request.POST['content']
 
     photoForm = PhotoForm(request.POST)
+
+    if not userCheck(username, password):
+        return HttpResponse('Unauthorized', status=401)
 
     if photoForm.is_valid():
         photo_obj = photoForm.save(commit=False)
@@ -212,3 +219,13 @@ def updatePhoto(request):
         print("Post - Update Photo Request : Update error")
 
     return HttpResponse(result)
+
+
+def userCheck(username, password):
+    user = authenticate(username=username, password=password)
+
+    print(user)
+    if user is not None:
+        return True
+    else:
+        return False
