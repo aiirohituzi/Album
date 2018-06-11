@@ -1,5 +1,5 @@
 <template>
-<div class="container_main">
+<div class="container-main">
 
     <div class="top-menu">
         <div class="add" @click="modalToggle('write')"></div>
@@ -469,7 +469,7 @@ export default {
 </script>
 
 <style>
-.container_main {
+.container-main {
     margin-top: 20px;
     margin-right: 10px;
 }
