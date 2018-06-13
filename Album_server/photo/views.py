@@ -221,6 +221,19 @@ def updatePhoto(request):
     return HttpResponse(result)
 
 
+def signIn(request):
+    print('Admin Login Request...')
+    username = request.POST.get('username', False)
+    password = request.POST.get('password', False)
+    
+    result = False
+    if userCheck(username, password):
+        result = True
+        return HttpResponse(result)
+    else:
+        return HttpResponse(result)
+
+
 def userCheck(username, password):
     user = authenticate(username=username, password=password)
 

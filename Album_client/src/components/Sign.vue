@@ -6,7 +6,7 @@
             <input type="text" placeholder="ID"><br>
             <input type="text" placeholder="PW"><br>
         </div>
-        <div class="sign-in">Sign in</div>
+        <button class="sign-in">Sign in</button>
     </div>
 </div>
 </template>
@@ -26,7 +26,12 @@
     margin-top: 20vh;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid #111;
+    background-color: #faaf40;
+    -moz-box-shadow: 2px 2px 4px #333;
+    -webkit-box-shadow: 2px 2px 4px #333;
+    box-shadow: 2px 2px 4px #333;
+    border: 1px solid #faaf40;
+    border-radius: 5px;
 }
 .wrapper-sign h2{
     margin-top: 50px;
@@ -40,6 +45,7 @@
     width: 200px;
     padding-top: 5px;
     padding-bottom: 5px;
+    border-radius: 3px;
 }
 .wrapper-sign .sign-in{
     margin-top: 10px;
