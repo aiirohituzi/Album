@@ -221,6 +221,8 @@ def updatePhoto(request):
     return HttpResponse(result)
 
 
+
+@csrf_exempt
 def signIn(request):
     print('Admin Login Request...')
     username = request.POST.get('username', False)

@@ -3,15 +3,56 @@
     <div class="wrapper-sign">
         <h2>관리자 계정 로그인</h2>
         <div class="input-group">
-            <input type="text" placeholder="ID"><br>
-            <input type="text" placeholder="PW"><br>
+            <input type="text" placeholder="ID" v-model="username" /><br>
+            <input type="text" placeholder="PW" v-model="password" /><br>
         </div>
-        <button class="sign-in">Sign in</button>
+        <button class="sign-in" @click="signIn()">Sign in</button>
     </div>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+
+export default {
+    name: 'Sign',
+    data () {
+        return {
+            username: '',
+            password: '',
+        }
+    },
+    methods: {
+        signIn: function () {
+            var data = new FormData()
+
+            var username = this.username
+            var password = this.password
+            
+            data.append('username', username)
+            data.append('password', password)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            axios.post('http://localhost:8000/signIn/', data, config).then((response) => {
+                // console.log(response)
+                if(response.data == 'True'){
+                    console.log('success')
+                } else {
+                    console.log('Error')
+                    alert('Error')
+                }
+            }, (error) => {
+                console.log(error)
+                if (error.response.status === 401) {
+                    console.log('unauthorized');
+                }
+            })
+        }
+    }
+}
 </script>
 
 <style>
