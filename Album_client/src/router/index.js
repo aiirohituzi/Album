@@ -4,8 +4,10 @@ import Home from '@/components/Home'
 import Photo from '@/components/Photo'
 import Test from '@/components/UploadTest'
 import Sign from '@/components/Sign'
+import VueSession from 'vue-session'
 
 Vue.use(Router)
+Vue.use(VueSession)
 
 export default new Router({
   routes: [

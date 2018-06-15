@@ -8,6 +8,7 @@
         </div>
         <button class="sign-in" @click="signIn()">Sign in</button>
     </div>
+    <button @click="test()">Test</button>
 </div>
 </template>
 
@@ -40,6 +41,8 @@ export default {
                 // console.log(response)
                 if(response.data == 'True'){
                     console.log('success')
+                    this.$session.start()
+                    this.$session.set('sign', {'username': username, 'password': password})
                 } else {
                     console.log('Error')
                     alert('Error')
@@ -50,6 +53,11 @@ export default {
                     console.log('unauthorized');
                 }
             })
+        },
+        test: function () {
+            console.log(this.$session.get('sign'))
+            console.log(this.$session.get('sign').username)
+            console.log(this.$session.get('sign').password)
         }
     }
 }
