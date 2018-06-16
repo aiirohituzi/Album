@@ -4,7 +4,7 @@
         <h2>관리자 계정 로그인</h2>
         <div class="input-group">
             <input type="text" placeholder="ID" v-model="username" /><br>
-            <input type="text" placeholder="PW" v-model="password" /><br>
+            <input type="password" placeholder="PW" v-model="password" /><br>
         </div>
         <button class="sign-in" @click="signIn()">Sign in</button>
     </div>
@@ -21,6 +21,11 @@ export default {
         return {
             username: '',
             password: '',
+        }
+    },
+    beforeCreate: function () {
+        if (this.$session.exists()) {
+            this.$router.push('/Manage')
         }
     },
     methods: {
@@ -43,6 +48,7 @@ export default {
                     console.log('success')
                     this.$session.start()
                     this.$session.set('sign', {'username': username, 'password': password})
+                    this.$router.push('/Manage')
                 } else {
                     console.log('Error')
                     alert('Error')
