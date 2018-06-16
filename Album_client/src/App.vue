@@ -4,7 +4,7 @@
             <li><a @click="navToggle()"><div class="closeBtn"></div></a></li>
             <router-link tag="li" to="/" exact><a>Home(임시)</a></router-link>
             <router-link tag="li" to="/Photo" exact><a>Photo(임시)</a></router-link>
-            <li><a>3</a></li>
+            <router-link tag="li" to="/Sign" exact><a>관리(임시)</a></router-link>
             <li><a>4</a></li>
             <li><a>5</a></li>
         </ul>
@@ -166,5 +166,18 @@ ul#navigation li a:hover {
 }
 .main.move {
     margin-left: 300px;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+    .side.move {
+        -webkit-transform: translate(100%, 0px);
+        transform: translate(100%, 0px);
+    }
+    ul#navigation {
+        left: -100%;
+        width: 100%;
+    }
 }
 </style>
