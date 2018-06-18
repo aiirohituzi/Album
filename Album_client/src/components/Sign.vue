@@ -61,9 +61,23 @@ export default {
             })
         },
         test: function () {
-            console.log(this.$session.get('sign'))
-            console.log(this.$session.get('sign').username)
-            console.log(this.$session.get('sign').password)
+            var data = new FormData()
+
+            var username = this.username
+            var password = this.password
+            
+            data.append('username', username)
+            data.append('password', password)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+            
+            axios.post('http://localhost:8000/api-token-auth/', data, config).then((response) => {
+                console.log(response)
+            }, (error) => {
+                console.log(error)
+            })
         }
     }
 }

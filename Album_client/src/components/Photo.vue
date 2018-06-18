@@ -88,10 +88,15 @@
                 </div>
             </div>
             <div class="modal-bottom">
-                <input v-if="!updateData.state_update" type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
-                <input v-else type="button" class="btn" value="취소" @click="updateCancel()" />
-                <input type="button" class="btn" value="수정" @click="updatePhoto()" />
-                <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
+                <div v-if="manage">
+                    <input v-if="!updateData.state_update" type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
+                    <input v-else type="button" class="btn" value="취소" @click="updateCancel()" />
+                    <input type="button" class="btn" value="수정" @click="updatePhoto()" />
+                    <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
+                </div>
+                <div v-else>
+                    <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
+                </div>
             </div>
         </div>
     </div>
@@ -138,6 +143,7 @@ export default {
     name: 'Photo',
     data () {
         return {
+            manage: false,
             photos: [
                 {
                     'id': '',
@@ -460,10 +466,16 @@ export default {
         updateCancel: function () {
             this.updateData.state_update = false
             this.updateData.imageUpdate = false
-        }
+        },
+        checkSignIn: function () {
+            if (this.$session.exists()) {
+                this.manage = true
+            }
+        },
     },
     mounted: function () {
         this.fetchPhotos()
+        this.checkSignIn()
     }
 }
 </script>

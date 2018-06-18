@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    name: 'Sign',
+    name: 'Manage',
     data () {
         return {
             username: '',
