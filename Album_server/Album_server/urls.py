@@ -26,6 +26,8 @@ from photo.views import deletePhoto
 from photo.views import updatePhoto
 from photo.views import signIn
 
+from rest_framework.authtoken import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^photos/$', getPhoto, name='getPhoto'),
@@ -36,4 +38,5 @@ urlpatterns = [
     url(r'^delPhoto/$', deletePhoto, name='deletePhoto'),
     url(r'^updatePhoto/$', updatePhoto, name='updatePhoto'),
     url(r'^signIn/$', signIn, name='signIn'),
+    url(r'^api-token-auth/', views.obtain_auth_token),
 ]

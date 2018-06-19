@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'photo',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
