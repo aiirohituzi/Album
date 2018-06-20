@@ -15,6 +15,36 @@ from photo.forms import ImageForm
 
 from django.contrib.auth import authenticate
 
+from django.contrib.auth import login
+
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+
+@csrf_exempt
+class MyBasicAuthentication(BasicAuthentication):
+
+    def authenticate(self, request):
+        user, _ = super(MyBasicAuthentication, self).authenticate(request)
+        login(request, user)
+        return user, _
+
+
+@csrf_exempt
+class ExampleView(APIView):
+    authentication_classes = (SessionAuthentication, MyBasicAuthentication)
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, format=None):
+        content = {
+            'user': unicode(request.user),
+            'auth': unicode(request.auth),  # None
+        }
+        return Response(content)
+
+
 def getPhoto(request):
     data = []
     

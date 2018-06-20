@@ -25,6 +25,8 @@ from photo.views import searchPhoto
 from photo.views import deletePhoto
 from photo.views import updatePhoto
 from photo.views import signIn
+from photo.views import MyBasicAuthentication
+from photo.views import ExampleView
 
 from rest_framework.authtoken import views
 
@@ -39,4 +41,6 @@ urlpatterns = [
     url(r'^updatePhoto/$', updatePhoto, name='updatePhoto'),
     url(r'^signIn/$', signIn, name='signIn'),
     url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^test1/', MyBasicAuthentication),
+    url(r'^test2/', ExampleView),
 ]

@@ -9,6 +9,7 @@
         <button class="sign-in" @click="signIn()">Sign in</button>
     </div>
     <button @click="test()">Test</button>
+    <button @click="test2()">Test2</button>
 </div>
 </template>
 
@@ -74,6 +75,25 @@ export default {
             }
             
             axios.post('http://localhost:8000/api-token-auth/', data, config).then((response) => {
+                console.log(response)
+            }, (error) => {
+                console.log(error)
+            })
+        },
+        test2: function () {
+            var data = new FormData()
+
+            var username = this.username
+            var password = this.password
+            
+            data.append('username', username)
+            data.append('password', password)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+            
+            axios.post('http://localhost:8000/test1/', data, config).then((response) => {
                 console.log(response)
             }, (error) => {
                 console.log(error)
