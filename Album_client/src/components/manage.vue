@@ -18,6 +18,7 @@ export default {
         if (!this.$session.exists()) {
             this.$router.push('/Sign')
         }
+        console.log(this.$session.get('sign'))
     },
     methods: {
         signOut: function () {
