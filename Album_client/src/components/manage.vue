@@ -10,15 +10,13 @@ export default {
     name: 'Manage',
     data () {
         return {
-            username: '',
-            password: '',
         }
     },
     beforeCreate: function () {
         if (!this.$session.exists()) {
             this.$router.push('/Sign')
         }
-        console.log(this.$session.get('sign'))
+        console.log(this.$session.get('sign').token)
     },
     methods: {
         signOut: function () {

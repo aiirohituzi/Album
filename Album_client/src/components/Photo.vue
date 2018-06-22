@@ -304,8 +304,7 @@ export default {
                 }
             }
 
-            data.append('username', 'aaa')
-            data.append('password', 'bbb')
+            data.append('Token', this.$session.get('sign').token)
             data.append('title', title)
             data.append('content', content)
 
