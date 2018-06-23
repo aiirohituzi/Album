@@ -19,6 +19,10 @@ from django.contrib.auth import login
 
 
 
+from rest_framework.authtoken.models import Token
+
+
+
 def getPhoto(request):
     data = []
     
@@ -58,16 +62,14 @@ def getImage(request):
 def uploadPhoto(request):
     result = False
 
-    # username = request.POST['username']
-    # password = request.POST['password']
     token = request.POST['Token']
     title = request.POST['title']
     content = request.POST['content']
 
     photoForm = PhotoForm(request.POST)
 
-    # if not userCheck(username, password):
-    #     return HttpResponse('Unauthorized', status=401)
+    if not tokenCheck(token):
+        return HttpResponse('Unauthorized', status=401)
 
     if photoForm.is_valid():
         photo_obj = photoForm.save(commit=False)
@@ -249,3 +251,12 @@ def updatePhoto(request):
 #         return True
 #     else:
 #         return False
+
+
+def tokenCheck(token):
+    tokenA = str(Token.objects.get(user__username='admin'))
+    
+    if token == tokenA:
+        return True
+    else:
+        return False
