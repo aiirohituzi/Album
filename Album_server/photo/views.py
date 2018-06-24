@@ -87,8 +87,12 @@ def uploadPhoto(request):
 def uploadImage(request):
     result = False
 
+    token = request.POST['Token']
     photoId = request.POST.get('photoId', False)
     fileCheck = request.FILES.get('image', False)
+
+    if not tokenCheck(token):
+        return HttpResponse('Unauthorized', status=401)
 
     if fileCheck:
         if photoId:      # update
@@ -116,10 +120,14 @@ def uploadImage(request):
 @csrf_exempt
 def deletePhoto(request):
 
+    token = request.POST['Token']
     photoId = request.POST['photoId']
 
     result = False
     log = ''
+
+    if not tokenCheck(token):
+        return HttpResponse('Unauthorized', status=401)
 
     try:
         row = Photo.objects.get(id=photoId)
@@ -184,6 +192,7 @@ def searchPhoto(request):
 
 @csrf_exempt
 def updatePhoto(request):
+    token = request.POST['Token']
     photoId = request.POST['photoId']
     title = request.POST['title']
     content = request.POST['content']
@@ -192,6 +201,9 @@ def updatePhoto(request):
     result = False
     log = ''
 
+    if not tokenCheck(token):
+        return HttpResponse('Unauthorized', status=401)
+        
     try:
         row = Photo.objects.get(id=photoId)
     except Photo.DoesNotExist:

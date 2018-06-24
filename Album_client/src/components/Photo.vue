@@ -333,6 +333,7 @@ export default {
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 
+                    data.append('Token', this.$session.get('sign').token)
                     data.append('image', image[i])
 
                     axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
@@ -356,6 +357,7 @@ export default {
             console.log(photoId)
             var data = new FormData()
             
+            data.append('Token', this.$session.get('sign').token)
             data.append('photoId', photoId)
 
             const config = {
@@ -416,6 +418,7 @@ export default {
                 data.append('image', image[0])
             }
 
+            data.append('Token', this.$session.get('sign').token)
             data.append('photoId', photoId)
             data.append('title', title)
             data.append('content', content)
@@ -443,6 +446,7 @@ export default {
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 
+                    data.append('Token', this.$session.get('sign').token)
                     data.append('photoId', photoId)
                     data.append('image', image[i])
 
