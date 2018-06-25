@@ -2,6 +2,7 @@
 <div class="container-main">
 
     <div class="top-menu">
+        <div v-if="manage" class="signOut" @click="signOut()"></div>
         <div class="add" @click="modalToggle('write')"></div>
         <div class="search" @click="searchBarToggle()"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
@@ -466,15 +467,22 @@ export default {
                 }
             }
         },
+
         updateCancel: function () {
             this.updateData.state_update = false
             this.updateData.imageUpdate = false
         },
+
         checkSignIn: function () {
             if (this.$session.exists()) {
                 this.manage = true
             }
         },
+
+        signOut: function () {
+            this.$session.destroy()
+            window.location.reload()
+        }
     },
     mounted: function () {
         this.fetchPhotos()
@@ -537,8 +545,21 @@ export default {
     background-position:center center;
     background-image: url(../assets/add.png);
 }
+.top-menu .signOut {
+    float: right;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/signOut.png);
+}
 .top-menu div:hover {
     box-shadow: 0 0 0px 2px rgba(17, 133, 204, 0.5);
+}
+.top-menu .signOut:hover {
+    box-shadow: 0 0 0px 2px rgba(255, 67, 67, 0.5);
 }
 
 .layout-menu {
