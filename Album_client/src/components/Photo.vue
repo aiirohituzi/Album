@@ -189,9 +189,6 @@ export default {
                     this.max = this.length
                 }
                 // console.log(response)
-                for(var i=0; i<this.count_list; i++){
-
-                }
             }, (error) => {
                 console.log(error)
             })
