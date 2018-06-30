@@ -1,6 +1,13 @@
 <template>
 <div>
     <button @click="signOut()">Sign out</button>
+    
+    <div class="div-detail" v-if="detail.content != ''">
+        <div class="img-wrapper">
+            <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image)" />
+        </div>
+        {{ detail.content }}
+    </div>
     <table class="photos">
         <tr>
             <th>글번호</th>
@@ -21,11 +28,9 @@
             <td><input type="checkbox" v-model="photos[n-1].checked"></td>
         </tr>
     </table>
-    <div class="div-detail" v-if="detail.content != ''">
-        <div class="img-wrapper">
-            <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image)" />
-        </div>
-        {{ detail.content }}
+    <div class="more">
+        <button v-if="more" class="btn-more" @click="moreData()">More</button>
+        <button v-else class="btn-more" disabled="disabled">No more data...</button>
     </div>
 </div>
 </template>
@@ -90,6 +95,18 @@ export default {
             this.$session.destroy()
             this.$router.push('/Sign')
         },
+        
+        moreData: function () {
+            if(this.max+10 <= this.length) {
+                this.max+=10
+            } else {
+                this.max = this.length
+            }
+
+            if(this.photos[this.max] == undefined) {
+                this.more = false
+            }
+        },
 
         imagePath: function (path) {
             return require('../assets/image/' + path)
@@ -134,6 +151,20 @@ export default {
 }
 .photos .tbody:hover {
     background-color: #eee
+}
+
+.more {
+    width: 70%;
+    margin: auto;
+
+    -moz-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.btn-more {
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px;
 }
 
 .div-detail {
@@ -181,6 +212,9 @@ export default {
     .photos {
         width: 80%;
     }
+    .more {
+        width: 80%;
+    }
     .div-detail {
         width: 75%;
     }
@@ -194,6 +228,9 @@ export default {
     .photos {
         width: 95%;
         font-size: 9pt;
+    }
+    .more {
+        width: 95%;
     }
     .div-detail {
         width: 90%;

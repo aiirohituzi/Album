@@ -3,8 +3,8 @@
     <div class="wrapper-sign">
         <h2>관리자 계정 로그인</h2>
         <div class="input-group">
-            <input type="text" placeholder="ID" v-model="username" /><br>
-            <input type="password" placeholder="PW" v-model="password" /><br>
+            <input type="text" placeholder="ID" v-model="username" v-on:keyup.enter="signIn()"/><br>
+            <input type="password" placeholder="PW" v-model="password" v-on:keyup.enter="signIn()"/><br>
         </div>
         <button class="sign-in" @click="signIn()">Sign in</button>
     </div>
@@ -33,6 +33,11 @@ export default {
 
             var username = this.username
             var password = this.password
+
+            if(username == '' || password == ''){
+                alert('ID 혹은 PASSWORD를 입력해 주세요.')
+                return
+            }
             
             data.append('username', username)
             data.append('password', password)
