@@ -8,6 +8,11 @@
         </div>
         {{ detail.content }}
     </div>
+
+    <div class="menu">
+        <div class="delete"></div>
+    </div>
+
     <table class="photos">
         <tr>
             <th>글번호</th>
@@ -15,16 +20,16 @@
             <th>생성일</th>
             <th><input type="checkbox" v-model="allChecked" @click="allCheck()"></th>
         </tr>
-        <tr class="tbody" v-if="length==1" @click="detailPhoto(0)">
-            <td>{{ photos[0].id }}</td>
-            <td>{{ photos[0].title }}</td>
-            <td>{{ photos[0].created.split('.')[0] }}</td>
+        <tr class="tbody" v-if="length==1">
+            <td @click="detailPhoto(0)">{{ photos[0].id }}</td>
+            <td @click="detailPhoto(0)">{{ photos[0].title }}</td>
+            <td @click="detailPhoto(0)">{{ photos[0].created.split('.')[0] }}</td>
             <td><input type="checkbox" v-model="photos[0].checked"></td>
         </tr>
-        <tr class="tbody" v-else v-for="n in max" @click="detailPhoto(photos[n-1].id, n-1)">
-            <td>{{ photos[n-1].id }}</td>
-            <td>{{ photos[n-1].title }}</td>
-            <td>{{ photos[n-1].created.split('.')[0] }}</td>
+        <tr class="tbody" v-else v-for="n in max">
+            <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].id }}</td>
+            <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].title }}</td>
+            <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].created.split('.')[0] }}</td>
             <td><input type="checkbox" v-model="photos[n-1].checked"></td>
         </tr>
     </table>
@@ -135,7 +140,7 @@ export default {
 <style>
 .photos {
     border-collapse: collapse;
-    margin-top: 30px;
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     width: 70%;
@@ -165,6 +170,30 @@ export default {
     width: 100%;
     border-radius: 3px;
     padding: 10px;
+}
+
+.menu {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: 30px;
+    
+    -moz-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.menu .delete {
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/delete.png);
+}
+.menu .delete:hover {
+    box-shadow: 0 0 0px 2px rgba(255, 67, 67, 0.5);
 }
 
 .div-detail {

@@ -166,6 +166,57 @@ def deletePhoto(request):
     return HttpResponse(result)
 
 
+@csrf_exempt
+def deleteSelectedPhoto(request):
+
+    token = request.POST['Token']
+    photoIdSet = request.POST['photoIdSet']
+
+    result = False
+    log = ''
+
+    if not tokenCheck(token):
+        return HttpResponse('Unauthorized', status=401)
+
+
+    for photoId in photoIdSet:
+        try:
+            row = Photo.objects.get(id=photoId)
+        except Photo.DoesNotExist:
+            print("Post - Delete Photo " + photoId + " Request : [Failed]No Photo matches the given query.")
+            return HttpResponse(result)
+        
+        if row != None:
+            log += 'Post - Delete Photo Request : photo ' + str(row.id) + ' delete success'
+
+            isEmpty = False
+            try:
+                img_obj = Images.objects.filter(photoId=row.id)
+            except Images.DoesNotExist:
+                isEmpty = True
+
+            if(not isEmpty):        # have image
+                for img_row in img_obj:
+                    file_path = os.path.join(settings.FILES_DIR, str(img_row.image))
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                        print(str(img_row.image) + "image delete")
+                    else:
+                        print("image delete error")
+                        return HttpResponse(result)
+            else:
+                print("not image")
+
+
+            row.delete()
+            print(log)
+            result = True
+        else:
+            print("Post - Delete Photo Request : Delete error")
+
+    return HttpResponse(result)
+
+
 
 @csrf_exempt
 def searchPhoto(request):
