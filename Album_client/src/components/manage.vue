@@ -10,7 +10,7 @@
     </div>
 
     <div class="menu">
-        <div class="delete"></div>
+        <div class="delete" @click="selectDelete()"></div>
     </div>
 
     <table class="photos">
@@ -132,6 +132,38 @@ export default {
                     this.photos[i].checked = false;
                 }
             }
+        },
+
+        selectDelete: function () {
+            var data = new FormData()
+            var photoIdSet = []
+
+            for(var i=0; i<this.length; i++){
+                if(this.photos[i].checked){
+                    photoIdSet.push(this.photos[i].id)
+                }
+            }
+            console.log(photoIdSet)
+            
+            data.append('Token', this.$session.get('sign').token)
+            data.append('photoIdSet', photoIdSet)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            axios.post('http://localhost:8000/delSelectedPhoto/', data, config).then((response) => {
+                console.log(response)
+                if(response.data == 'True'){
+                    alert('Delete success')
+                    this.fetchPhotos()
+                } else {
+                    console.log('Error')
+                    alert('Error')
+                }
+            }, (error) => {
+                console.log(error)
+            })
         }
     },
 }

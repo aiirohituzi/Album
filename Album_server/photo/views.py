@@ -170,7 +170,8 @@ def deletePhoto(request):
 def deleteSelectedPhoto(request):
 
     token = request.POST['Token']
-    photoIdSet = request.POST['photoIdSet']
+    photoIdSet = request.POST['photoIdSet'].split(',')
+    print(photoIdSet)
 
     result = False
     log = ''
@@ -180,6 +181,7 @@ def deleteSelectedPhoto(request):
 
 
     for photoId in photoIdSet:
+        print(photoId)
         try:
             row = Photo.objects.get(id=photoId)
         except Photo.DoesNotExist:
