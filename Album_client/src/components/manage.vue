@@ -11,6 +11,7 @@
 
     <div class="menu">
         <div class="delete" @click="selectDelete()"></div>
+        <div class="add" @click="modalToggle('write')"></div>
     </div>
 
     <table class="photos">
@@ -36,6 +37,30 @@
     <div class="more">
         <button v-if="more" class="btn-more" @click="moreData()">More</button>
         <button v-else class="btn-more" disabled="disabled">No more data...</button>
+    </div>
+
+
+
+    <div class="modal modal-write">
+        <div class="modal-background" @click="modalToggle('write')">
+        </div>
+        <div class="modal-box">
+            <div class="close-modal" @click="modalToggle('write')"></div>
+            <div class="modal-title">
+                <input type="text" class="title" v-model="uploadData.title" />
+            </div>
+            <div class="modal-content">
+                <div class="img-select-group">
+                    <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
+                    <font size="1">최대 4개까지 업로드 가능</font>
+                </div>
+                <textarea v-model="uploadData.content" />
+            </div>
+            <div class="modal-bottom">
+                <input type="button" class="btn" value="작성" @click="uploadPhoto()" />
+                <input type="button" class="btn" value="닫기" @click="modalToggle('write')" />
+            </div>
+        </div>
     </div>
 </div>
 </template>
@@ -65,13 +90,17 @@ export default {
             max: 10,
             more: true,
             allChecked: false,
+            uploadData: {
+                title: null,
+                content: null,
+            },
         }
     },
     beforeCreate: function () {
         if (!this.$session.exists()) {
             this.$router.push('/Sign')
         }
-        console.log(this.$session.get('sign').token)
+        // console.log(this.$session.get('sign').token)
     },
     mounted: function () {
         this.fetchPhotos()
@@ -143,7 +172,12 @@ export default {
                     photoIdSet.push(this.photos[i].id)
                 }
             }
-            console.log(photoIdSet)
+            // console.log(photoIdSet)
+
+            if(photoIdSet){
+                alert("삭제할 글을 선택해주세요.")
+                return
+            }
             
             data.append('Token', this.$session.get('sign').token)
             data.append('photoIdSet', photoIdSet)
@@ -164,7 +198,113 @@ export default {
             }, (error) => {
                 console.log(error)
             })
-        }
+        },
+
+        modalToggle: function (modalName, id) {
+            var modal = document.querySelector('.modal-' + modalName)
+            modal.classList.toggle('toggle')
+
+            if(id){
+                this.modal.photoId = id
+                for(var i=0; i<this.photos.length; i++){
+                    if(this.photos[i].id == id) {
+                        this.modal.title = this.photos[i].title
+                        this.modal.content = this.photos[i].content
+                        this.modal.created = this.photos[i].created.split('.')[0]
+                        return
+                    }
+                }
+            }
+
+            this.uploadData.title = null
+            this.uploadData.content = null
+            document.getElementById('image').value = null
+            this.updateCancel()
+        },
+        
+        uploadPhoto: async function () {
+            var data = new FormData()
+            
+            var title = this.uploadData.title
+            var content = this.uploadData.content
+            var image = document.getElementById('image').files
+
+            var uploadResult = false
+            
+            if(image.length == 0){
+                console.log('Not selected')
+                alert('최소 한 개의 이미지를 선택해 주세요')
+                return
+            } else {
+                if(image.length > 4){
+                    alert("최대 4개의 이미지까지만 선택해 주세요")
+                    document.getElementById('formControlsImage').value = null
+                }
+                
+                var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
+                for(var i=0; i<image.length; i++){
+                    if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
+                        alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                        return
+                    }
+                }
+            }
+
+            data.append('Token', this.$session.get('sign').token)
+            data.append('title', title)
+            data.append('content', content)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            await axios.post('http://localhost:8000/upPhoto/', data, config).then((response) => {
+                // console.log(response)
+                if(response.data == 'True'){
+                    alert('Upload success')
+                    uploadResult = true
+                } else {
+                    console.log('Error')
+                    alert('Error')
+                }
+            }, (error) => {
+                console.log(error)
+                if (error.response.status === 401) {
+                    console.log('unauthorized');
+                }
+            })
+
+            if(uploadResult){
+                console.log(image.length)
+                for(var i=0; i<image.length; i++){
+                    data = new FormData()
+
+                    data.append('Token', this.$session.get('sign').token)
+                    data.append('image', image[i])
+
+                    axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
+                        // console.log(response.data)
+                        if(response.data == 'True'){
+                            // console.log(response.data)
+                            console.log('Image Upload success')
+                            this.fetchPhotos()
+                            this.modalToggle('write')
+                        } else {
+                            console.log('Error')
+                            alert('Error')
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+                }
+            }
+        },
+
+        updateCancel: function () {
+            this.updateData.state_update = false
+            this.updateData.imageUpdate = false
+        },
     },
 }
 </script>
@@ -224,6 +364,19 @@ export default {
     background-position:center center;
     background-image: url(../assets/delete.png);
 }
+.menu .add {
+    float: right;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/add.png);
+}
+.menu div:hover {
+    box-shadow: 0 0 0px 2px rgba(17, 133, 204, 0.5);
+}
 .menu .delete:hover {
     box-shadow: 0 0 0px 2px rgba(255, 67, 67, 0.5);
 }
@@ -269,6 +422,108 @@ export default {
     opacity: .75;
 }
 
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.modal {
+    visibility: hidden;
+}
+.modal-write.toggle {
+    visibility: visible;
+    animation: fade 300ms;
+}
+.modal-detailImage.toggle {
+    visibility: visible;
+    animation: fade 300ms;
+}
+
+.modal .modal-background {
+    position: fixed;
+    background-color: black;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+.modal .modal-box {
+    position: fixed;
+    /* padding: 10px; */
+    top: 0px;
+    left: 20vw;
+    right: 20vw;
+    width: 60vw;
+    height: 100vh;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 100;
+}
+.modal .modal-box .modal-title {
+    line-height: 5vh;
+    padding-left: 2.2vw;
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+}
+.modal .modal-box .modal-content {
+    text-align: center;
+    height: 88vh;
+    padding: 1vh;
+    overflow-y: scroll;
+    white-space: pre-line;
+}
+.modal .modal-box .close-modal {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/close_img.png);
+}
+.modal .modal-box .close-modal:hover {
+    background-image: url(../assets/close_img_hover.png);
+}
+.modal .modal-box .modal-content .img-select-group {
+    float: left;
+    padding-left: 1vh;
+    padding-bottom: 1vh;
+}
+.modal .modal-box .modal-content textarea {
+    width: 55vw;
+    height: 80vh;
+    resize: none;
+    overflow-y: scroll;
+}
+.modal .modal-box .modal-bottom {
+    bottom: 0;
+    text-align: right;
+    vertical-align: -webkit-baseline-middle;
+    line-height: 5vh;
+    border-top: 1px solid #ccc;
+}
+.modal .modal-box .modal-bottom .btn {
+    margin-right: 1vw;
+    vertical-align: middle;
+    border-radius: 3px;
+    background-color: #c5e5ee;
+    border-color: #cae6ee;
+    width: 60px;
+}
+.modal .modal-box .modal-title .title {
+    width: 53vw;
+}
+
+
+
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
     .photos {
         width: 80%;
@@ -283,6 +538,9 @@ export default {
         width: 42vh;
         min-height: 21vh;
         max-height: 42vh;
+    }
+    .menu {
+        width: 80%;
     }
 }
 @media only screen and (max-width: 767px) {
@@ -305,6 +563,9 @@ export default {
     .div-detail .img-wrapper img {
         width: 15vh;
         height: 15vh;
+    }
+    .menu {
+        width: 95%;
     }
 }
 </style>
