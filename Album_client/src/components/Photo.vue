@@ -850,7 +850,11 @@ export default {
         left: 0;
         right: 0;
     }
-    .modal .modal-box .close-modal {
+    .modal-photo .modal-box .close-modal {
+        visibility: hidden;
+        position: fixed;
+    }
+    .modal-write .modal-box .close-modal {
         visibility: hidden;
         position: fixed;
     }

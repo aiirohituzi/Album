@@ -62,6 +62,17 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-detailImage">
+        <div class="modal-background" @click="modalToggle('detailImage')">
+        </div>
+        <div class="modal-box">
+            <div class="close-modal" @click="modalToggle('detailImage')"></div>
+            <div class="detailImage">
+                <img v-if="detail.clickedImage != undefined" :src="imagePath(detail.clickedImage)">
+            </div>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -85,6 +96,7 @@ export default {
             detail: {
                 'id': '',
                 'content': '',
+                'clickedImage': undefined,
             },
             length: 1,
             max: 10,
@@ -219,7 +231,12 @@ export default {
             this.uploadData.title = null
             this.uploadData.content = null
             document.getElementById('image').value = null
-            this.updateCancel()
+            // this.updateCancel()
+        },
+
+        detailImage: function (path) {
+            this.detail.clickedImage = path
+            this.modalToggle('detailImage')
         },
         
         uploadPhoto: async function () {
@@ -301,10 +318,10 @@ export default {
             }
         },
 
-        updateCancel: function () {
-            this.updateData.state_update = false
-            this.updateData.imageUpdate = false
-        },
+        // updateCancel: function () {
+        //     this.updateData.state_update = false
+        //     this.updateData.imageUpdate = false
+        // },
     },
 }
 </script>
@@ -521,6 +538,17 @@ export default {
 .modal .modal-box .modal-title .title {
     width: 53vw;
 }
+.modal .modal-box .detailImage{
+    text-align: center;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    line-height: 90vh;
+}
+.modal .modal-box .detailImage img{
+    vertical-align: -webkit-baseline-middle;
+    max-width: 60vw;
+    max-height: 90vh;
+}
 
 
 
@@ -566,6 +594,25 @@ export default {
     }
     .menu {
         width: 95%;
+    }
+
+    .modal .modal-box {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+    .modal-write .modal-box .close-modal {
+        visibility: hidden;
+        position: fixed;
+    }
+    .modal .modal-box .modal-title .title {
+        width: 98%;
+    }
+    .modal .modal-box .modal-content textarea {
+        width: 98%;
+        height: 80vh;
+        resize: none;
+        overflow-y: scroll;
     }
 }
 </style>
