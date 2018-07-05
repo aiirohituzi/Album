@@ -1,12 +1,25 @@
 <template>
 <div>
     <button @click="signOut()">Sign out</button>
-    
+
     <div class="div-detail" v-if="detail.content != ''">
-        <div class="img-wrapper">
-            <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image)" />
+        <div v-if="!updateData.state_update">
+            <div class="img-wrapper">
+                <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image)" />
+            </div>
+            {{ detail.content }}
         </div>
-        {{ detail.content }}
+        <div v-else>
+            <div class="img-select-group">
+                <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
+                <label for="checkbox">이미지 수정</label>
+            </div>
+            <div class="img-select-group" v-if="updateData.imageUpdate">
+                <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
+                <font size="1">최대 4개까지 업로드 가능</font>
+            </div>
+            <textarea v-model="updateData.content" />
+        </div>
     </div>
 
     <div class="menu">
@@ -95,6 +108,7 @@ export default {
             images: [],
             detail: {
                 'id': '',
+                'title': '',
                 'content': '',
                 'clickedImage': undefined,
             },
@@ -103,6 +117,12 @@ export default {
             more: true,
             allChecked: false,
             uploadData: {
+                title: null,
+                content: null,
+            },
+            updateData: {
+                state_update: false,
+                imageUpdate: false,
                 title: null,
                 content: null,
             },
@@ -160,6 +180,7 @@ export default {
         
         detailPhoto: function (id, num) {
             this.detail.id = id
+            this.detail.title = this.photos[num].title
             this.detail.content = this.photos[num].content
         },
 
@@ -215,18 +236,6 @@ export default {
         modalToggle: function (modalName, id) {
             var modal = document.querySelector('.modal-' + modalName)
             modal.classList.toggle('toggle')
-
-            if(id){
-                this.modal.photoId = id
-                for(var i=0; i<this.photos.length; i++){
-                    if(this.photos[i].id == id) {
-                        this.modal.title = this.photos[i].title
-                        this.modal.content = this.photos[i].content
-                        this.modal.created = this.photos[i].created.split('.')[0]
-                        return
-                    }
-                }
-            }
 
             this.uploadData.title = null
             this.uploadData.content = null
@@ -318,10 +327,100 @@ export default {
             }
         },
 
-        // updateCancel: function () {
-        //     this.updateData.state_update = false
-        //     this.updateData.imageUpdate = false
-        // },
+        updatePhoto: async function () {
+            this.updateData.state_update = !this.updateData.state_update;
+            if(this.updateData.state_update){
+                this.updateData.title = this.detail.title
+                this.updateData.content = this.detail.content
+                return
+            }
+
+            var data = new FormData()
+            
+            var photoId = this.detail.id
+            var title = this.updateData.title
+            var content = this.updateData.content
+            var image = document.getElementById('image').files
+            var imageUpdate = this.updateData.imageUpdate
+
+            var updateResult = false
+
+            if(!imageUpdate) {
+                console.log('Not update a image')
+            }
+            else if(image.length == 0){
+                console.log('Not selected')
+                alert('최소 한 개의 이미지를 선택해 주세요')
+                return
+            } else {
+                if(image.length > 4){
+                    alert("최대 4개의 이미지까지만 선택해 주세요")
+                    document.getElementById('formControlsImage').value = null
+                }
+                
+                var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
+                for(var i=0; i<image.length; i++){
+                    if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
+                        alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                        return
+                    }
+                }
+                data.append('image', image[0])
+            }
+
+            data.append('Token', this.$session.get('sign').token)
+            data.append('photoId', photoId)
+            data.append('title', title)
+            data.append('content', content)
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            await axios.post('http://localhost:8000/updatePhoto/', data, config).then((response) => {
+                // console.log(response)
+                if(response.data == 'True'){
+                    alert('Update success')
+                    updateResult = true
+                } else {
+                    console.log('Error')
+                    alert('Error')
+                }
+            }, (error) => {
+                console.log(error)
+            })
+
+
+            if(updateResult && imageUpdate){
+                console.log(image.length)
+                for(var i=0; i<image.length; i++){
+                    data = new FormData()
+
+                    data.append('Token', this.$session.get('sign').token)
+                    data.append('photoId', photoId)
+                    data.append('image', image[i])
+
+                    axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
+                        // console.log(response.data)
+                        if(response.data == 'True'){
+                            // console.log(response.data)
+                            console.log(i + ' : Image Update success')
+                        } else {
+                            console.log('Error')
+                            alert('Error')
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+                }
+            }
+        },
+
+        updateCancel: function () {
+            this.updateData.state_update = false
+            this.updateData.imageUpdate = false
+        },
     },
 }
 </script>
