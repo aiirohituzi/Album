@@ -41,7 +41,11 @@
             <td><input type="checkbox" v-model="photos[0].checked"></td>
         </tr>
         <tr class="tbody" v-else v-for="n in max">
-            <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].id }}</td>
+            <td @click="detailPhoto(photos[n-1].id, n-1)">
+                <div class="div-flex">
+                    <div class="update" @click="updatePhoto()"></div>{{ photos[n-1].id }}
+                </div>
+            </td>
             <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].title }}</td>
             <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].created.split('.')[0] }}</td>
             <td><input type="checkbox" v-model="photos[n-1].checked"></td>
@@ -444,6 +448,27 @@ export default {
 }
 .photos .tbody:hover {
     background-color: #eee
+}
+.photos .update {
+    /* visibility: hidden; */
+    width: 30px;
+    height: 30px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/update.png);
+}
+.photos .update:hover {
+    background-image: url(../assets/update_hover.png);
+}
+
+.div-flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 
 .more {
