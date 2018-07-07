@@ -34,23 +34,26 @@
             <th>생성일</th>
             <th><input type="checkbox" v-model="allChecked" @click="allCheck()"></th>
         </tr>
+
         <tr class="tbody" v-if="length==1">
-            <td @click="detailPhoto(0)">{{ photos[0].id }}</td>
+            <td @click="detailPhoto(0)">
+                <button class="update" v-if="photos[0].id == detail.id" @click="updatePhoto()"></button>{{ photos[0].id }}
+            </td>
             <td @click="detailPhoto(0)">{{ photos[0].title }}</td>
             <td @click="detailPhoto(0)">{{ photos[0].created.split('.')[0] }}</td>
             <td><input type="checkbox" v-model="photos[0].checked"></td>
         </tr>
+
         <tr class="tbody" v-else v-for="n in max">
             <td @click="detailPhoto(photos[n-1].id, n-1)">
-                <div class="div-flex">
-                    <div class="update" @click="updatePhoto()"></div>{{ photos[n-1].id }}
-                </div>
+                <button class="update" v-if="photos[n-1].id == detail.id" @click="updatePhoto()"></button>{{ photos[n-1].id }}
             </td>
             <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].title }}</td>
             <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].created.split('.')[0] }}</td>
             <td><input type="checkbox" v-model="photos[n-1].checked"></td>
         </tr>
     </table>
+
     <div class="more">
         <button v-if="more" class="btn-more" @click="moreData()">More</button>
         <button v-else class="btn-more" disabled="disabled">No more data...</button>
@@ -451,25 +454,27 @@ export default {
 }
 .photos .update {
     /* visibility: hidden; */
-    width: 30px;
-    height: 30px;
+    width: 19px;
+    height: 19px;
     border: solid 1px #ccc;
     border-radius: 3px;
-    background-repeat:no-repeat;
-    background-position:center center;
+    background-size: 23px;
+    background-repeat: no-repeat;
+    background-position: -3px -3px;
+    /* background-position: center center; */
     background-image: url(../assets/update.png);
 }
 .photos .update:hover {
     background-image: url(../assets/update_hover.png);
 }
 
-.div-flex {
+/* .div-flex {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-}
+} */
 
 .more {
     width: 70%;
