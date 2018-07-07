@@ -10,14 +10,18 @@
             {{ detail.content }}
         </div>
         <div v-else>
+            제목
+            <input type="text" class="title" v-model="uploadData.title" />
             <div class="img-select-group">
                 <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
                 <label for="checkbox">이미지 수정</label>
+                
+                <div v-if="updateData.imageUpdate">
+                    <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
+                    <font size="1">최대 4개까지 업로드 가능</font>
+                </div>
             </div>
-            <div class="img-select-group" v-if="updateData.imageUpdate">
-                <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif" multiple />
-                <font size="1">최대 4개까지 업로드 가능</font>
-            </div>
+            내용
             <textarea v-model="updateData.content" />
         </div>
     </div>
@@ -36,17 +40,17 @@
         </tr>
 
         <tr class="tbody" v-if="length==1">
-            <td @click="detailPhoto(0)">
-                <button class="update" v-if="photos[0].id == detail.id" @click="updatePhoto()"></button>{{ photos[0].id }}
+            <td @click="detailPhoto(photos[0].id, 0)">
+                <button class="update" v-if="(photos[0].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[0].id }}
             </td>
-            <td @click="detailPhoto(0)">{{ photos[0].title }}</td>
-            <td @click="detailPhoto(0)">{{ photos[0].created.split('.')[0] }}</td>
+            <td @click="detailPhoto(photos[0].id, 0)">{{ photos[0].title }}</td>
+            <td @click="detailPhoto(photos[0].id, 0)">{{ photos[0].created.split('.')[0] }}</td>
             <td><input type="checkbox" v-model="photos[0].checked"></td>
         </tr>
 
         <tr class="tbody" v-else v-for="n in max">
             <td @click="detailPhoto(photos[n-1].id, n-1)">
-                <button class="update" v-if="photos[n-1].id == detail.id" @click="updatePhoto()"></button>{{ photos[n-1].id }}
+                <button class="update" v-if="(photos[n-1].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[n-1].id }}
             </td>
             <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].title }}</td>
             <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].created.split('.')[0] }}</td>
@@ -247,7 +251,7 @@ export default {
             this.uploadData.title = null
             this.uploadData.content = null
             document.getElementById('image').value = null
-            // this.updateCancel()
+            this.updateCancel()
         },
 
         detailImage: function (path) {
@@ -334,13 +338,16 @@ export default {
             }
         },
 
-        updatePhoto: async function () {
+        updatePhotoToggle: function () {
             this.updateData.state_update = !this.updateData.state_update;
             if(this.updateData.state_update){
                 this.updateData.title = this.detail.title
                 this.updateData.content = this.detail.content
-                return
+            } else {
+                this.updateCancel()
             }
+        },
+        updatePhoto: async function () {
 
             var data = new FormData()
             
@@ -566,6 +573,18 @@ export default {
 }
 .div-detail .img-wrapper img:hover {
     opacity: .75;
+}
+.div-detail .title {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.div-detail .img-select-group {
+    margin-bottom: 20px;
+}
+.div-detail textarea {
+    width: 100%;
+    height: 20vh;
+    resize: none;
 }
 
 
