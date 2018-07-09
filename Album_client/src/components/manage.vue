@@ -10,8 +10,12 @@
             {{ detail.content }}
         </div>
         <div v-else>
+            <div class="update-btn-group">
+                <button class="update" @click="updatePhoto()"></button>
+                <button class="cancel" @click="updatePhotoToggle()"></button>
+            </div>
             제목
-            <input type="text" class="title" v-model="uploadData.title" />
+            <input type="text" class="title" v-model="updateData.title" />
             <div class="img-select-group">
                 <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
                 <label for="checkbox">이미지 수정</label>
@@ -190,6 +194,9 @@ export default {
         },
         
         detailPhoto: function (id, num) {
+            if(this.updateData.state_update){
+                return
+            }
             this.detail.id = id
             this.detail.title = this.photos[num].title
             this.detail.content = this.photos[num].content
@@ -216,9 +223,9 @@ export default {
                     photoIdSet.push(this.photos[i].id)
                 }
             }
-            // console.log(photoIdSet)
+            // console.log(photoIdSet.length)
 
-            if(photoIdSet){
+            if(photoIdSet.length == 0){
                 alert("삭제할 글을 선택해주세요.")
                 return
             }
@@ -429,6 +436,12 @@ export default {
                     })
                 }
             }
+
+            this.detail.id = ''
+            this.detail.title = ''
+            this.detail.content = ''
+            this.updatePhotoToggle()
+            this.fetchPhotos()
         },
 
         updateCancel: function () {
@@ -473,6 +486,34 @@ export default {
 }
 .photos .update:hover {
     background-image: url(../assets/update_hover.png);
+}
+
+.update-btn-group {
+    text-align: right;
+}
+.update-btn-group .update {
+    width: 30px;
+    height: 30px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(../assets/update.png);
+}
+.update-btn-group .update:hover {
+    background-image: url(../assets/update_hover.png);
+}
+.update-btn-group .cancel {
+    width: 30px;
+    height: 30px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(../assets/cancel.png);
+}
+.update-btn-group .cancel:hover {
+    background-image: url(../assets/cancel_hover.png);
 }
 
 /* .div-flex {
