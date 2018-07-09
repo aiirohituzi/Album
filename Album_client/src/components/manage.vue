@@ -31,6 +31,7 @@
     </div>
 
     <div class="menu">
+        <div class="signOut" @click="signOut()"></div>
         <div class="delete" @click="selectDelete()"></div>
         <div class="add" @click="modalToggle('write')"></div>
     </div>
@@ -551,6 +552,7 @@ export default {
 }
 .menu .delete {
     float: right;
+    margin-right: 10px;
     width: 30px;
     height: 30px;
     border-radius: 3px;
@@ -568,10 +570,22 @@ export default {
     background-position:center center;
     background-image: url(../assets/add.png);
 }
+.menu .signOut {
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/signOut.png);
+}
 .menu div:hover {
     box-shadow: 0 0 0px 2px rgba(17, 133, 204, 0.5);
 }
 .menu .delete:hover {
+    box-shadow: 0 0 0px 2px rgba(255, 67, 67, 0.5);
+}
+.menu .signOut:hover {
     box-shadow: 0 0 0px 2px rgba(255, 67, 67, 0.5);
 }
 
@@ -593,7 +607,7 @@ export default {
 .div-detail .img-wrapper {
     margin-left: auto;
     margin-right: auto;
-    max-height: 21vh;
+    max-height: 42vh;
     overflow: hidden;
     text-align: center;
     

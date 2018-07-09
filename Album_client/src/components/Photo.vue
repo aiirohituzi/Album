@@ -3,7 +3,7 @@
 
     <div class="top-menu">
         <div v-if="manage" class="signOut" @click="signOut()"></div>
-        <div class="add" @click="modalToggle('write')"></div>
+        <!-- <div class="add" @click="modalToggle('write')"></div> -->
         <div class="search" @click="searchBarToggle()"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
     </div>
@@ -90,9 +90,9 @@
             </div>
             <div class="modal-bottom">
                 <div v-if="manage">
-                    <input v-if="!updateData.state_update" type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
+                    <!-- <input v-if="!updateData.state_update" type="button" class="btn btn-delete" value="삭제" @click="deletePhoto(modal.photoId)" />
                     <input v-else type="button" class="btn" value="취소" @click="updateCancel()" />
-                    <input type="button" class="btn" value="수정" @click="updatePhoto()" />
+                    <input type="button" class="btn" value="수정" @click="updatePhoto()" /> -->
                     <input type="button" class="btn" value="닫기" @click="modalToggle('photo')" />
                 </div>
                 <div v-else>
