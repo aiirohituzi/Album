@@ -1,7 +1,5 @@
 <template>
 <div>
-    <button @click="signOut()">Sign out</button>
-
     <div class="div-detail" v-if="detail.content != ''">
         <div v-if="!updateData.state_update">
             <div class="img-wrapper">
