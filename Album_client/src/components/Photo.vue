@@ -265,6 +265,24 @@ export default {
             axios.get('http://localhost:8000/search/?keyword=' + keyword).then((response) => {
                 this.photos = response.data
                 // console.log(response)
+                this.length = response.data.length
+                this.max = 10
+
+                if(this.length < this.max){
+                    this.max = this.length
+                }
+
+                if(this.photos != 'False'){
+                    for(var i=0; i<this.photos.length; i++){
+                        for(var j=0; j<this.images.length; j++){
+                            if(this.photos[i].id == this.images[j].photoId){
+                                this.photos[i].thumbnail = this.images[j].image
+                                // console.log(this.images[j].image)
+                                break
+                            }
+                        }
+                    }
+                }
             }, (error) => {
                 console.log(error)
             })
