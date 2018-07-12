@@ -32,6 +32,8 @@
         <div class="signOut" @click="signOut()"></div>
         <div class="delete" @click="selectDelete()"></div>
         <div class="add" @click="modalToggle('write')"></div>
+        <div class="search" @click="searchBarToggle()"></div>
+        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
     </div>
 
     <table class="photos">
@@ -140,6 +142,7 @@ export default {
                 title: null,
                 content: null,
             },
+            keyword: null,
         }
     },
     beforeCreate: function () {
@@ -447,6 +450,28 @@ export default {
             this.updateData.state_update = false
             this.updateData.imageUpdate = false
         },
+
+        searchBarToggle: function () {
+            var searchBar = document.querySelector('.searchBar')
+            var search = document.querySelector('.search')
+            searchBar.classList.toggle('toggle')
+            search.classList.toggle('toggle')
+        },
+
+        search: function (keyword) {
+            axios.get('http://localhost:8000/search/?keyword=' + keyword).then((response) => {
+                this.photos = response.data
+                // console.log(response)
+                this.length = response.data.length
+                this.max = 10
+
+                if(this.length < this.max){
+                    this.max = this.length
+                }
+            }, (error) => {
+                console.log(error)
+            })
+        },
     },
 }
 </script>
@@ -576,6 +601,39 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/signOut.png);
+}
+.menu .searchBar {
+    visibility: hidden;
+    float: right;
+    margin-right: 10px;
+    border-radius: 3px;
+    width: 200px;
+    height: 24px;
+}
+@keyframes bar {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 200px;
+    }
+}
+.menu .searchBar.toggle {
+    visibility: visible;
+    animation: bar 100ms;
+}
+.menu .search {
+    float: right;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/search.png);
+}
+.menu .search.toggle {
+    background-image: url(../assets/search_close.png);
 }
 .menu div:hover {
     box-shadow: 0 0 0px 2px rgba(17, 133, 204, 0.5);
