@@ -36,7 +36,10 @@
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
     </div>
 
-    <table class="photos">
+    <div class="empty" v-if="photos == 'False'">
+        검색결과가 없습니다.
+    </div>
+    <table class="photos" v-else>
         <tr>
             <th>글번호</th>
             <th>제목</th>
@@ -63,7 +66,7 @@
         </tr>
     </table>
 
-    <div class="more">
+    <div class="more" v-if="photos != 'False'">
         <button v-if="more" class="btn-more" @click="moreData()">More</button>
         <button v-else class="btn-more" disabled="disabled">No more data...</button>
     </div>
@@ -465,7 +468,7 @@ export default {
                 this.length = response.data.length
                 this.max = 10
 
-                if(this.length < this.max){
+                if(this.length < this.max) {
                     this.max = this.length
                 }
             }, (error) => {
@@ -477,6 +480,21 @@ export default {
 </script>
 
 <style>
+.empty {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    line-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+
+    -moz-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
 .photos {
     border-collapse: collapse;
     margin-top: 5px;
@@ -812,6 +830,9 @@ export default {
 
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .empty {
+        width: 80%;
+    }
     .photos {
         width: 80%;
     }
@@ -831,6 +852,10 @@ export default {
     }
 }
 @media only screen and (max-width: 767px) {
+    .empty {
+        width: 95%;
+        font-size: 9pt;
+    }
     .photos {
         width: 95%;
         font-size: 9pt;
