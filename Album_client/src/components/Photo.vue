@@ -13,7 +13,7 @@
         <div class="layout-list" @click="changeLayout('list')" v-if="layout != 'list'"></div>
     </div>
 
-    <div class="wrapper-masonry" v-if="layout == 'masonry'">
+    <div class="wrapper-masonry" v-if="layout == 'masonry' && photos != 'False'">
         <div class="masonry">
             <!-- <div class="brick" v-for="item in photos" :key="item.id"> -->
             <div v-if="length==1">
@@ -39,7 +39,7 @@
         <button v-else class="btn-more" disabled="disabled">No more data...</button>
     </div>
 
-    <div class="list" v-if="layout == 'list'">
+    <div class="list" v-if="layout == 'list' && photos != 'False'">
         <ul v-if="length==1">
             <!-- <li v-for="item in photos" @click="modalToggle('photo', item.id)"> -->
             <li v-for="n in max" @click="modalToggle('photo', photos[0].id)">
@@ -56,6 +56,10 @@
         </ul>
         <button v-if="more" class="btn-more" @click="moreData()">More</button>
         <button v-else class="btn-more" disabled="disabled">No more data...</button>
+    </div>
+
+    <div class="empty" v-if="photos == 'False'">
+        검색결과가 없습니다.
     </div>
 
     <div class="modal modal-photo">
@@ -604,6 +608,22 @@ export default {
 }
 .layout-list:hover {
     background-image: url(../assets/layout_list_hover.png);
+}
+
+.empty {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    line-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+
+    -moz-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 
 .wrapper-masonry {
