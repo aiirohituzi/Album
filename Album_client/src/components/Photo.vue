@@ -520,6 +520,10 @@ export default {
     width: 70%;
     height: 60px;
     margin: auto;
+    
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 .top-menu .searchBar {
     visibility: hidden;
@@ -584,6 +588,10 @@ export default {
 .layout-menu {
     width: 70%;
     margin: auto;
+    
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 .layout-masonry {
     width: 30px;
@@ -621,9 +629,9 @@ export default {
     border: 2px solid #ccc;
     border-radius: 5px;
 
-    -moz-transition: all .5s ease-in-out;
-    -webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .wrapper-masonry {
@@ -852,6 +860,9 @@ export default {
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .empty {
+        width: 80%;
+    }
     .wrapper-masonry {
         width: 80%;
     }
@@ -871,6 +882,9 @@ export default {
     }
 }
 @media only screen and (max-width: 767px) {
+    .empty {
+        width: 95%;
+    }
     .wrapper-masonry {
         width: 95%;
     }
