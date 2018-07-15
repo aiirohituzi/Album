@@ -2,9 +2,9 @@
     <div class="container">
         <ul id="navigation" class="side">
             <li><a @click="navToggle()"><div class="closeBtn"></div></a></li>
-            <router-link tag="li" to="/" exact><a>Home(임시)</a></router-link>
-            <router-link tag="li" to="/Photo" exact><a>Photo(임시)</a></router-link>
-            <router-link tag="li" to="/Sign" exact><a>관리(임시)</a></router-link>
+            <router-link tag="li" to="/" class="" exact><a><div class="homeBtn"></div></a></router-link>
+            <router-link tag="li" to="/Photo" exact><a><div class="photoBtn"></div></a></router-link>
+            <router-link tag="li" to="/Sign" exact><a><div class="manageBtn"></div></a></router-link>
             <li><a>4</a></li>
             <li><a>5</a></li>
         </ul>
@@ -153,6 +153,32 @@ ul#navigation li a:hover {
 .closeBtn:hover {
     background-color: #1165cc;
     background-image: url(assets/close_hover.png);
+}
+.homeBtn {
+    display: inline-block;
+    width: 50px;
+    height: 95%;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(assets/home.png);
+}
+.photoBtn {
+    display: inline-block;
+    width: 50px;
+    height: 95%;
+    background-size: 30px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(assets/photo.png);
+}
+.manageBtn {
+    display: inline-block;
+    width: 50px;
+    height: 95%;
+    background-size: 30px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(assets/manage.png);
 }
 
 .main {
