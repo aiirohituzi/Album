@@ -29,10 +29,10 @@
     </div>
 
     <div class="menu">
-        <div class="signOut" @click="signOut()"></div>
-        <div class="delete" @click="selectDelete()"></div>
-        <div class="add" @click="modalToggle('write')"></div>
-        <div class="search" @click="searchBarToggle()"></div>
+        <div class="signOut" @click="signOut()" title="로그아웃"></div>
+        <div class="delete" @click="selectDelete()" title="선택삭제"></div>
+        <div class="add" @click="modalToggle('write')" title="글쓰기"></div>
+        <div class="search" @click="searchBarToggle()" title="검색"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
     </div>
 
@@ -673,6 +673,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     border: 2px solid #ccc;
+    white-space: pre-line;
     
     -moz-transition: all .5s ease-in-out;
     -webkit-transition: all .5s ease-in-out;

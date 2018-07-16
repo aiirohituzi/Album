@@ -2,15 +2,15 @@
 <div class="container-main">
 
     <div class="top-menu">
-        <div v-if="manage" class="signOut" @click="signOut()"></div>
+        <div v-if="manage" class="signOut" @click="signOut()" title="로그아웃"></div>
         <!-- <div class="add" @click="modalToggle('write')"></div> -->
-        <div class="search" @click="searchBarToggle()"></div>
+        <div class="search" @click="searchBarToggle()" title="검색"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
     </div>
     
     <div class="layout-menu">
-        <div class="layout-masonry" @click="changeLayout('masonry')" v-if="layout != 'masonry'"></div>
-        <div class="layout-list" @click="changeLayout('list')" v-if="layout != 'list'"></div>
+        <div class="layout-masonry" @click="changeLayout('masonry')" v-if="layout != 'masonry'" title="사진첩보기"></div>
+        <div class="layout-list" @click="changeLayout('list')" v-if="layout != 'list'" title="목록보기"></div>
     </div>
 
     <div class="wrapper-masonry" v-if="layout == 'masonry' && photos != 'False'">

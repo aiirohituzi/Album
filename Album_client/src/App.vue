@@ -2,9 +2,9 @@
     <div class="container">
         <ul id="navigation" class="side">
             <li><a @click="navToggle()"><div class="closeBtn"></div></a></li>
-            <router-link tag="li" to="/" class="" exact><a><div class="homeBtn"></div></a></router-link>
-            <router-link tag="li" to="/Photo" exact><a><div class="photoBtn"></div></a></router-link>
-            <router-link tag="li" to="/Sign" exact><a><div class="manageBtn"></div></a></router-link>
+            <router-link tag="li" to="/" exact><a class="homeBtn"></a></router-link>
+            <router-link tag="li" to="/Photo" exact><a class="photoBtn"></a></router-link>
+            <router-link tag="li" to="/Sign" exact><a class="manageBtn"></a></router-link>
             <li><a>4</a></li>
             <li><a>5</a></li>
         </ul>
@@ -66,13 +66,10 @@ ul#navigation li a {
     text-align: center;
     width: 99%;
     height: 99%;
-    background-color:#1175cc;
+    /* background-color:#1175cc; */
     border:1px solid #1185cc;
     background-repeat:no-repeat;
     background-position:center center;
-}
-ul#navigation li a:hover {
-    background-color: #1165cc;
 }
 
 .side {
@@ -160,25 +157,32 @@ ul#navigation li a:hover {
     height: 95%;
     background-repeat:no-repeat;
     background-position:center center;
-    background-image: url(assets/home.png);
+    background-image: url(assets/side-home.png);
+}
+.homeBtn:hover {
+    background-image: url(assets/side-home_hover.png);
 }
 .photoBtn {
     display: inline-block;
     width: 50px;
     height: 95%;
-    background-size: 30px;
     background-repeat:no-repeat;
     background-position:center center;
-    background-image: url(assets/photo.png);
+    background-image: url(assets/side-photo.png);
+}
+.photoBtn:hover {
+    background-image: url(assets/side-photo_hover.png);
 }
 .manageBtn {
     display: inline-block;
     width: 50px;
     height: 95%;
-    background-size: 30px;
     background-repeat:no-repeat;
     background-position:center center;
-    background-image: url(assets/manage.png);
+    background-image: url(assets/side-manage.png);
+}
+.manageBtn:hover {
+    background-image: url(assets/side-manage_hover.png);
 }
 
 .main {
