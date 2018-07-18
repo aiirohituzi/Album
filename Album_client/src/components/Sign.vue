@@ -8,6 +8,7 @@
         </div>
         <button class="sign-in" @click="signIn()">Sign in</button>
     </div>
+    <button @click="cryptoTest()">Test</button>
 </div>
 </template>
 
@@ -59,6 +60,13 @@ export default {
                 }
             })
         },
+        cryptoTest: function () {
+            axios.get('http://localhost:8000/cryptoTest/').then((response) => {
+                console.log(response.data)
+            }, (error) => {
+                console.log(error)
+            })
+        }
     }
 }
 </script>
