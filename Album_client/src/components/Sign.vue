@@ -48,7 +48,7 @@ export default {
             }
 
             axios.post('http://localhost:8000/signIn/', data, config).then((response) => {
-                console.log(response)
+                console.log(response.data)
                 console.log('success')
                 this.$session.start()
                 this.$session.set('sign', response.data)

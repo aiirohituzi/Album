@@ -105,6 +105,7 @@
             </div>
         </div>
     </div>
+    <button @click="Test()">test</button>
 </div>
 </template>
 
@@ -152,12 +153,15 @@ export default {
         if (!this.$session.exists()) {
             this.$router.push('/Sign')
         }
-        // console.log(this.$session.get('sign').token)
+        // console.log(this.$session.get('sign'))
     },
     mounted: function () {
         this.fetchPhotos()
     },
     methods: {
+        Test: function() {
+            console.log(this.$session.get('sign'))
+        },
         fetchPhotos: function () {
             axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
@@ -235,7 +239,7 @@ export default {
                 return
             }
             
-            data.append('Token', this.$session.get('sign').token)
+            data.append('Token', this.$session.get('sign'))
             data.append('photoIdSet', photoIdSet)
 
             const config = {
@@ -299,7 +303,7 @@ export default {
                 }
             }
 
-            data.append('Token', this.$session.get('sign').token)
+            data.append('Token', this.$session.get('sign'))
             data.append('title', title)
             data.append('content', content)
 
@@ -328,7 +332,7 @@ export default {
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 
-                    data.append('Token', this.$session.get('sign').token)
+                    data.append('Token', this.$session.get('sign'))
                     data.append('image', image[i])
 
                     axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
@@ -394,7 +398,7 @@ export default {
                 data.append('image', image[0])
             }
 
-            data.append('Token', this.$session.get('sign').token)
+            data.append('Token', this.$session.get('sign'))
             data.append('photoId', photoId)
             data.append('title', title)
             data.append('content', content)
@@ -422,7 +426,7 @@ export default {
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 
-                    data.append('Token', this.$session.get('sign').token)
+                    data.append('Token', this.$session.get('sign'))
                     data.append('photoId', photoId)
                     data.append('image', image[i])
 

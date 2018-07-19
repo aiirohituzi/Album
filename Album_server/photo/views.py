@@ -294,18 +294,22 @@ def updatePhoto(request):
 
 
 
-# @csrf_exempt
-# def signIn(request):
-#     print('Admin Login Request...')
-#     username = request.POST.get('username', False)
-#     password = request.POST.get('password', False)
-    
-#     result = False
-#     if userCheck(username, password):
-#         result = True
-#         return HttpResponse(result)
-#     else:
-#         return HttpResponse(result)
+@csrf_exempt
+def signIn(request):
+    print('=================================')
+    print('Admin Login Request...')
+    username = request.POST.get('username', False)
+    password = request.POST.get('password', False)
+
+    user = authenticate(username=username, password=password)
+
+    if user is not None:
+        token = str(Token.objects.get(user__username='admin'))
+        hash = SHA256.new(data=token.encode())
+        print(hash.digest())
+        return HttpResponse(str(hash.digest()))
+    else:
+        return HttpResponse(False)
 
 
 # def userCheck(username, password):
@@ -320,8 +324,14 @@ def updatePhoto(request):
 
 def tokenCheck(token):
     tokenA = str(Token.objects.get(user__username='admin'))
+
+    hash = SHA256.new(data=tokenA.encode())
+    tokenA_hash = str(hash.digest())
+
+    print(token)
+    print(tokenA_hash)
     
-    if token == tokenA:
+    if token == tokenA_hash:
         return True
     else:
         return False
