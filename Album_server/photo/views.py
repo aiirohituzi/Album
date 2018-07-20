@@ -20,7 +20,7 @@ from django.contrib.auth import login
 from rest_framework.authtoken.models import Token
 
 from Crypto.Hash import SHA256
-
+import time
 
 
 def getPhoto(request):
@@ -304,7 +304,11 @@ def signIn(request):
     user = authenticate(username=username, password=password)
 
     if user is not None:
-        token = str(Token.objects.get(user__username='admin'))
+        token = str(Token.objects.get(user__username='admin')) + str(time.strftime("%d/%m/%Y"))
+        print(str(time.strftime("%d/%m/%Y")))
+
+        print(token)
+
         hash = SHA256.new(data=token.encode())
         print(hash.digest())
         return HttpResponse(str(hash.digest()))
@@ -323,7 +327,7 @@ def signIn(request):
 
 
 def tokenCheck(token):
-    tokenA = str(Token.objects.get(user__username='admin'))
+    tokenA = str(Token.objects.get(user__username='admin')) + str(time.strftime("%d/%m/%Y"))
 
     hash = SHA256.new(data=tokenA.encode())
     tokenA_hash = str(hash.digest())
