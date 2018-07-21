@@ -66,10 +66,13 @@ ul#navigation li a {
     text-align: center;
     width: 99%;
     height: 99%;
-    /* background-color:#1175cc; */
+    background-color:#1175cc;
     border:1px solid #1185cc;
     background-repeat:no-repeat;
     background-position:center center;
+}
+ul#navigation li a:hover {
+    background-color: #1165cc;
 }
 
 .side {
