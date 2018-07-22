@@ -30,3 +30,7 @@ class Images(models.Model):
 
     class Meta:
         ordering = ('-created', '-pk', )
+
+class Key(models.Model):
+    name = models.CharField(max_length=30)
+    key = models.CharField(max_length=10)
