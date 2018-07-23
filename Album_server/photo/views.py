@@ -21,6 +21,9 @@ from rest_framework.authtoken.models import Token
 
 from Crypto.Hash import SHA256
 import time
+import random
+from photo.models import Key
+from photo.forms import KeyForm
 
 
 def getPhoto(request):
@@ -304,10 +307,26 @@ def signIn(request):
     user = authenticate(username=username, password=password)
 
     if user is not None:
-        token = str(Token.objects.get(user__username='admin')) + str(time.strftime("%d/%m/%Y"))
-        print(str(time.strftime("%d/%m/%Y")))
+        key = str(random.randrange(1000000000, 10000000000))
+        token = str(Token.objects.get(user__username='admin')) + key + str(time.strftime("%d/%m/%Y"))
 
+        print(key)
         print(token)
+
+        try:
+            key_obj = Key.objects.get(name=username)
+        except Key.DoesNotExist:
+            dict = {'name': username, 'key': key}
+            qdict = QueryDict('', mutable=True)
+            qdict.update(dict)
+
+            keyForm = KeyForm(qdict)
+            key_obj = keyForm.save(commit=False)
+            key_obj.save()
+
+        key_obj.key = key
+        key_obj.save()
+
 
         hash = SHA256.new(data=token.encode())
         print(hash.digest())
@@ -327,7 +346,8 @@ def signIn(request):
 
 
 def tokenCheck(token):
-    tokenA = str(Token.objects.get(user__username='admin')) + str(time.strftime("%d/%m/%Y"))
+    tokenA = str(Token.objects.get(user__username='admin')) + str(random.randrange(1000000000, 10000000000)) + str(time.strftime("%d/%m/%Y"))
+    print(tokenA)
 
     hash = SHA256.new(data=tokenA.encode())
     tokenA_hash = str(hash.digest())
