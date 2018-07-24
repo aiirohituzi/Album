@@ -299,7 +299,6 @@ def updatePhoto(request):
 
 @csrf_exempt
 def signIn(request):
-    print('=================================')
     print('Admin Login Request...')
     username = request.POST.get('username', False)
     password = request.POST.get('password', False)
@@ -307,11 +306,11 @@ def signIn(request):
     user = authenticate(username=username, password=password)
 
     if user is not None:
-        key = str(random.randrange(1000000000, 10000000000))
-        token = str(Token.objects.get(user__username='admin')) + key + str(time.strftime("%d/%m/%Y"))
+        key = str(random.randrange(1000000000, 10000000000)) + str(time.strftime("%d/%m/%Y"))
+        token = str(Token.objects.get(user__username='admin')) + key
 
-        print(key)
-        print(token)
+        # print(key)
+        # print(token)
 
         try:
             key_obj = Key.objects.get(name=username)
@@ -329,7 +328,7 @@ def signIn(request):
 
 
         hash = SHA256.new(data=token.encode())
-        print(hash.digest())
+        # print(hash.digest())
         return HttpResponse(str(hash.digest()))
     else:
         return HttpResponse(False)
@@ -346,14 +345,17 @@ def signIn(request):
 
 
 def tokenCheck(token):
-    tokenA = str(Token.objects.get(user__username='admin')) + str(random.randrange(1000000000, 10000000000)) + str(time.strftime("%d/%m/%Y"))
-    print(tokenA)
+    tokenA = str(Token.objects.get(user__username='admin')) + str(Key.objects.get(name='admin').key)
+    # print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+    # print(Key.objects.get(name='admin').key)
+    # print(tokenA)
 
     hash = SHA256.new(data=tokenA.encode())
     tokenA_hash = str(hash.digest())
 
-    print(token)
-    print(tokenA_hash)
+    # print(token)
+    # print(tokenA_hash)
+    # print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
     
     if token == tokenA_hash:
         return True
