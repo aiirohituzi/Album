@@ -105,7 +105,6 @@
             </div>
         </div>
     </div>
-    <button @click="Test()">test</button>
 </div>
 </template>
 
@@ -159,9 +158,6 @@ export default {
         this.fetchPhotos()
     },
     methods: {
-        Test: function() {
-            console.log(this.$session.get('sign'))
-        },
         fetchPhotos: function () {
             axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
@@ -247,7 +243,7 @@ export default {
             }
 
             axios.post('http://localhost:8000/delSelectedPhoto/', data, config).then((response) => {
-                console.log(response)
+                // console.log(response)
                 if(response.data == 'True'){
                     alert('Delete success')
                     this.fetchPhotos()
@@ -328,7 +324,7 @@ export default {
             })
 
             if(uploadResult){
-                console.log(image.length)
+                // console.log(image.length)
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 
@@ -422,7 +418,7 @@ export default {
 
 
             if(updateResult && imageUpdate){
-                console.log(image.length)
+                // console.log(image.length)
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 

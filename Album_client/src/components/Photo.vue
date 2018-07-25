@@ -349,7 +349,7 @@ export default {
             })
 
             if(uploadResult){
-                console.log(image.length)
+                // console.log(image.length)
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 
@@ -374,7 +374,7 @@ export default {
         },
 
         deletePhoto: function (photoId) {
-            console.log(photoId)
+            // console.log(photoId)
             var data = new FormData()
             
             data.append('Token', this.$session.get('sign').token)
@@ -385,7 +385,7 @@ export default {
             }
 
             axios.post('http://localhost:8000/delPhoto/', data, config).then((response) => {
-                console.log(response)
+                // console.log(response)
                 if(response.data == 'True'){
                     alert('Delete success')
                 } else {
@@ -462,7 +462,7 @@ export default {
 
 
             if(updateResult && imageUpdate){
-                console.log(image.length)
+                // console.log(image.length)
                 for(var i=0; i<image.length; i++){
                     data = new FormData()
 

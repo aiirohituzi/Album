@@ -361,17 +361,3 @@ def tokenCheck(token):
         return True
     else:
         return False
-
-
-
-def cryptoTest(request):
-    token = str(Token.objects.get(user__username='admin'))
-
-    ################################
-    # token + key => encode => hash
-    ################################
-
-    hash = SHA256.new(data=token.encode())
-    # hash.update(b'message')
-    print(hash.digest())
-    return HttpResponse(str(hash.digest()))

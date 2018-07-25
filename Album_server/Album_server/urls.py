@@ -26,7 +26,6 @@ from photo.views import deletePhoto
 from photo.views import updatePhoto
 from photo.views import deleteSelectedPhoto
 from photo.views import signIn
-from photo.views import cryptoTest
 
 from rest_framework.authtoken import views
 
@@ -42,5 +41,4 @@ urlpatterns = [
     url(r'^signIn/$', signIn, name='signIn'),
     # url(r'^signIn/', views.obtain_auth_token),
     url(r'^delSelectedPhoto/$', deleteSelectedPhoto, name='deleteSelectedPhoto'),
-    url(r'^cryptoTest/$', cryptoTest, name='cryptoTest'),
 ]
