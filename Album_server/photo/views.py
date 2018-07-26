@@ -226,10 +226,17 @@ def deleteSelectedPhoto(request):
 @csrf_exempt
 def searchPhoto(request):
     data = []
+    
+    category = request.GET.get('category', 'title')
     keyword = request.GET.get('keyword', False)
 
     if keyword:
-        queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
+        if category == 'title':
+            queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
+        elif category == 'content':
+            queryset = Photo.objects.filter(content__icontains=keyword).order_by('-created')
+        elif category == 'all':
+            queryset = Photo.objects.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword)).order_by('-created')
     else:
         queryset = Photo.objects.all().order_by('-created')
 
