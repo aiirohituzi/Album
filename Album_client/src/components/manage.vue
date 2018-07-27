@@ -34,6 +34,12 @@
         <div class="add" @click="modalToggle('write')" title="글쓰기"></div>
         <div class="search" @click="searchBarToggle()" title="검색"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
+        <select class="searchCategory" v-model="category">
+            <option disabled value="">검색 조건</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="all">제목+내용</option>
+        </select>
     </div>
 
     <div class="empty" v-if="photos == 'False'">
@@ -145,6 +151,7 @@ export default {
                 title: null,
                 content: null,
             },
+            category: 'title',
             keyword: null,
         }
     },
@@ -457,8 +464,10 @@ export default {
         searchBarToggle: function () {
             var searchBar = document.querySelector('.searchBar')
             var search = document.querySelector('.search')
+            var searchCategory = document.querySelector('.searchCategory')
             searchBar.classList.toggle('toggle')
             search.classList.toggle('toggle')
+            searchCategory.classList.toggle('toggle')
         },
 
         search: function (keyword) {
@@ -619,6 +628,16 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/signOut.png);
+}
+.menu .searchCategory {
+    visibility: hidden;
+    float: right;
+    margin-right: 5px;
+    border-radius: 3px;
+    height: 29px;
+}
+.menu .searchCategory.toggle {
+    visibility: visible;
 }
 .menu .searchBar {
     visibility: hidden;

@@ -6,7 +6,14 @@
         <!-- <div class="add" @click="modalToggle('write')"></div> -->
         <div class="search" @click="searchBarToggle()" title="검색"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
+        <select class="searchCategory" v-model="category">
+            <option disabled value="">검색 조건</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="all">제목+내용</option>
+        </select>
     </div>
+    <button @click="test()">asdf</button>
     
     <div class="layout-menu">
         <div class="layout-masonry" @click="changeLayout('masonry')" v-if="layout != 'masonry'" title="사진첩보기"></div>
@@ -159,6 +166,7 @@ export default {
                 },
             ],
             images: [],
+            category: 'title',
             keyword: null,
             modal: {
                 'photoId': '',
@@ -184,6 +192,10 @@ export default {
         }
     },
     methods: {
+        test: function () {
+            console.log(this.category)
+        }
+        ,
         fetchPhotos: async function () {
             await axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
@@ -261,8 +273,10 @@ export default {
         searchBarToggle: function () {
             var searchBar = document.querySelector('.searchBar')
             var search = document.querySelector('.search')
+            var searchCategory = document.querySelector('.searchCategory')
             searchBar.classList.toggle('toggle')
             search.classList.toggle('toggle')
+            searchCategory.classList.toggle('toggle')
         },
 
         search: function (keyword) {
@@ -524,6 +538,16 @@ export default {
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+}
+.top-menu .searchCategory {
+    visibility: hidden;
+    float: right;
+    margin-right: 5px;
+    border-radius: 3px;
+    height: 29px;
+}
+.top-menu .searchCategory.toggle {
+    visibility: visible;
 }
 .top-menu .searchBar {
     visibility: hidden;
