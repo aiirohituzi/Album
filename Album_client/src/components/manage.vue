@@ -33,7 +33,7 @@
         <div class="delete" @click="selectDelete()" title="선택삭제"></div>
         <div class="add" @click="modalToggle('write')" title="글쓰기"></div>
         <div class="search" @click="searchBarToggle()" title="검색"></div>
-        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(keyword)"/>
+        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword)"/>
         <select class="searchCategory" v-model="category">
             <option disabled value="">검색 조건</option>
             <option value="title">제목</option>
@@ -470,8 +470,8 @@ export default {
             searchCategory.classList.toggle('toggle')
         },
 
-        search: function (keyword) {
-            axios.get('http://localhost:8000/search/?keyword=' + keyword).then((response) => {
+        search: function (category, keyword) {
+            axios.get('http://localhost:8000/search/?category=' + category + '&keyword=' + keyword).then((response) => {
                 this.photos = response.data
                 // console.log(response)
                 this.length = response.data.length
