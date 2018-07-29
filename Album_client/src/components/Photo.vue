@@ -13,7 +13,6 @@
             <option value="all">제목+내용</option>
         </select>
     </div>
-    <button @click="test()">asdf</button>
     
     <div class="layout-menu">
         <div class="layout-masonry" @click="changeLayout('masonry')" v-if="layout != 'masonry'" title="사진첩보기"></div>
@@ -192,10 +191,6 @@ export default {
         }
     },
     methods: {
-        test: function () {
-            console.log(this.category)
-        }
-        ,
         fetchPhotos: async function () {
             await axios.get('http://localhost:8000/photos/').then((response) => {
                 this.photos = response.data
@@ -246,6 +241,15 @@ export default {
         modalToggle: function (modalName, id) {
             var modal = document.querySelector('.modal-' + modalName)
             modal.classList.toggle('toggle')
+
+            var side = document.querySelector('.side')
+            var navBtn = document.querySelector('.navBtn')
+            var main = document.querySelector('.main')
+            var navBtnAni = document.querySelector('.navBtnAni')
+            side.classList.remove('move')
+            navBtn.classList.remove('hidden')
+            main.classList.remove('move')
+            navBtnAni.classList.remove('click')
 
             if(id){
                 this.modal.photoId = id

@@ -267,6 +267,15 @@ export default {
             var modal = document.querySelector('.modal-' + modalName)
             modal.classList.toggle('toggle')
 
+            var side = document.querySelector('.side')
+            var navBtn = document.querySelector('.navBtn')
+            var main = document.querySelector('.main')
+            var navBtnAni = document.querySelector('.navBtnAni')
+            side.classList.remove('move')
+            navBtn.classList.remove('hidden')
+            main.classList.remove('move')
+            navBtnAni.classList.remove('click')
+
             this.uploadData.title = null
             this.uploadData.content = null
             document.getElementById('image').value = null
