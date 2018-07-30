@@ -697,9 +697,9 @@ export default {
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 
-    max-width: 100%;
+    width: 100%;
     vertical-align: bottom;
-    border-radius: 10px;
+    border-radius: 10px 10px 5px 5px;
 }
 .wrapper-masonry .masonry .brick:hover .item{
     opacity: .75;
