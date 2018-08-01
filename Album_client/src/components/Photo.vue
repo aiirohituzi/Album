@@ -203,6 +203,7 @@ export default {
             }, (error) => {
                 console.log(error)
             })
+
             axios.get('http://localhost:8000/images/').then((response) => {
                 this.images = response.data
                 // console.log(response)
@@ -217,6 +218,14 @@ export default {
             }, (error) => {
                 console.log(error)
             })
+            
+            var regExp = /https:\/\/www.youtube.com\/watch\?v=/i;
+            // for(var i=0; i<this.photos.length; i++){
+                var content = this.photos[4].content
+                console.log(content)
+                var n = content.search(regExp)
+                console.log(n)
+            // }
         },
 
         moreData: function () {
