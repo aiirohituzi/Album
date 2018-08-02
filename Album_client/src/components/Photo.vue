@@ -83,7 +83,10 @@
                     <div class="img-wrapper">
                         <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" @click="detailImage(image.image)" />
                     </div>
-                    <br>{{ this.modal.content }}
+                    <br>
+                    <div id="text">
+                        {{ this.modal.content }}
+                    </div>
                 </div>
 
                 <div v-else>
@@ -218,14 +221,6 @@ export default {
             }, (error) => {
                 console.log(error)
             })
-            
-            var regExp = /https:\/\/www.youtube.com\/watch\?v=/i;
-            // for(var i=0; i<this.photos.length; i++){
-                var content = this.photos[4].content
-                console.log(content)
-                var n = content.search(regExp)
-                console.log(n)
-            // }
         },
 
         moreData: function () {
@@ -267,6 +262,32 @@ export default {
                         this.modal.title = this.photos[i].title
                         this.modal.content = this.photos[i].content
                         this.modal.created = this.photos[i].created.split('.')[0]
+            
+
+                        var div = document.getElementById('text')
+                        if(document.getElementById('ytb')){
+                            var ytb = document.getElementById('ytb')
+                            div.removeChild(ytb)
+                        }
+                        var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
+                        // var index = this.modal.content.search(regExp)
+                        var match = this.modal.content.match(regExp)
+                        
+                        // console.log(index)
+                        // console.log(match[2])
+
+                        // var str = "<iframe width='560' height='315'\
+                        //            frameborder='0'\
+                        //            :src='//www.youtube.com/embed/" + match[2] + "'>\
+                        //            </iframe>"
+                        if(match){
+                            var iframe = document.createElement("iframe")
+                            iframe.setAttribute("id", 'ytb')
+                            iframe.setAttribute("frameBorder", 'no')
+                            iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
+                            div.appendChild(iframe)
+                        }
+
                         return
                     }
                 }
@@ -865,6 +886,10 @@ export default {
 .modal .modal-box .modal-content .img-wrapper img:hover {
     opacity: .75;
 }
+.modal .modal-box .modal-content iframe{
+    ;
+}
+
 .modal .modal-box .modal-bottom {
     bottom: 0;
     text-align: right;

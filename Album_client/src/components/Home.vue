@@ -7,6 +7,10 @@
     :src="'//www.youtube.com/embed/' + getId('https://www.youtube.com/watch?v=4A-5GoOJ67k')">
     </iframe>
 
+    <object width="560" height="315"
+    :data="'//www.youtube.com/embed/' + getId('https://www.youtube.com/watch?v=4A-5GoOJ67k')">
+    </object>
+
 </div>
 </template>
 
