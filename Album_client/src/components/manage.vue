@@ -5,7 +5,9 @@
             <div class="img-wrapper">
                 <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image)" />
             </div>
-            {{ detail.content }}
+            <div id="text">
+                {{ detail.content }}
+            </div>
         </div>
         <div v-else>
             <div class="update-btn-group">
@@ -212,6 +214,25 @@ export default {
             this.detail.id = id
             this.detail.title = this.photos[num].title
             this.detail.content = this.photos[num].content
+
+
+            var div = document.getElementById('text')
+            if(document.getElementById('ytb')){
+                var ytb = document.getElementById('ytb')
+                div.removeChild(ytb)
+            }
+            console.log(div)
+
+            var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
+            var match = this.detail.content.match(regExp)
+            
+            if(match){
+                var iframe = document.createElement("iframe")
+                iframe.setAttribute("id", 'ytb')
+                iframe.setAttribute("frameBorder", 'no')
+                iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
+                div.appendChild(iframe)
+            }
         },
 
         allCheck: function () {
