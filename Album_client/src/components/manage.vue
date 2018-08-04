@@ -216,23 +216,25 @@ export default {
             this.detail.content = this.photos[num].content
 
 
-            var div = document.getElementById('text')
-            if(document.getElementById('ytb')){
-                var ytb = document.getElementById('ytb')
-                div.removeChild(ytb)
-            }
-            console.log(div)
-
-            var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
-            var match = this.detail.content.match(regExp)
+            this.$nextTick( function() {
+                var div = document.getElementById('text')
             
-            if(match){
-                var iframe = document.createElement("iframe")
-                iframe.setAttribute("id", 'ytb')
-                iframe.setAttribute("frameBorder", 'no')
-                iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
-                div.appendChild(iframe)
-            }
+                if(document.getElementById('ytb')){
+                    var ytb = document.getElementById('ytb')
+                    div.removeChild(ytb)
+                }
+
+                var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
+                var match = this.detail.content.match(regExp)
+
+                if(match){
+                    var iframe = document.createElement("iframe")
+                    iframe.setAttribute("id", 'ytb')
+                    iframe.setAttribute("frameBorder", 'no')
+                    iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
+                    div.appendChild(iframe)
+                }
+            })
         },
 
         allCheck: function () {

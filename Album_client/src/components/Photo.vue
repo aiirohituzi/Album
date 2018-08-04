@@ -264,29 +264,31 @@ export default {
                         this.modal.created = this.photos[i].created.split('.')[0]
             
 
-                        var div = document.getElementById('text')
-                        if(document.getElementById('ytb')){
-                            var ytb = document.getElementById('ytb')
-                            div.removeChild(ytb)
-                        }
-                        var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
-                        // var index = this.modal.content.search(regExp)
-                        var match = this.modal.content.match(regExp)
-                        
-                        // console.log(index)
-                        // console.log(match[2])
+                        this.$nextTick( function() {
+                            var div = document.getElementById('text')
+                            if(document.getElementById('ytb')){
+                                var ytb = document.getElementById('ytb')
+                                div.removeChild(ytb)
+                            }
+                            var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
+                            // var index = this.modal.content.search(regExp)
+                            var match = this.modal.content.match(regExp)
+                            
+                            // console.log(index)
+                            // console.log(match[2])
 
-                        // var str = "<iframe width='560' height='315'\
-                        //            frameborder='0'\
-                        //            :src='//www.youtube.com/embed/" + match[2] + "'>\
-                        //            </iframe>"
-                        if(match){
-                            var iframe = document.createElement("iframe")
-                            iframe.setAttribute("id", 'ytb')
-                            iframe.setAttribute("frameBorder", 'no')
-                            iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
-                            div.appendChild(iframe)
-                        }
+                            // var str = "<iframe width='560' height='315'\
+                            //            frameborder='0'\
+                            //            :src='//www.youtube.com/embed/" + match[2] + "'>\
+                            //            </iframe>"
+                            if(match){
+                                var iframe = document.createElement("iframe")
+                                iframe.setAttribute("id", 'ytb')
+                                iframe.setAttribute("frameBorder", 'no')
+                                iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
+                                div.appendChild(iframe)
+                            }
+                        })
 
                         return
                     }
