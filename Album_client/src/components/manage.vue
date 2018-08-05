@@ -725,6 +725,7 @@ export default {
     margin-right: auto;
     border: 2px solid #ccc;
     white-space: pre-line;
+    text-align: center;
     
     -moz-transition: all .5s ease-in-out;
     -webkit-transition: all .5s ease-in-out;
@@ -766,6 +767,10 @@ export default {
     width: 100%;
     height: 20vh;
     resize: none;
+}
+.div-detail iframe{
+    width: 30vw;
+    height: 16.875vw;
 }
 
 
