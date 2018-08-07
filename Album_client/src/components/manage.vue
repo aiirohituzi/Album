@@ -224,15 +224,30 @@ export default {
                     div.removeChild(ytb)
                 }
 
-                var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
-                var match = this.detail.content.match(regExp)
-
-                if(match){
-                    var iframe = document.createElement("iframe")
-                    iframe.setAttribute("id", 'ytb')
-                    iframe.setAttribute("frameBorder", 'no')
-                    iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
-                    div.appendChild(iframe)
+                var regExp = /(https?:\/\/www.youtube.com\/watch\?v=[^#\&\?\n]{11,11})/
+                var regExp2 = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}).*/
+                var split_content = this.detail.content.split(regExp)
+                
+                
+                var div_ytb = document.createElement("div")
+                div_ytb.setAttribute("id", 'ytb')
+                for(var i=0; i<split_content.length; i++){
+                    // console.log(regExp.test(split_content[i]))
+                    if(regExp.test(split_content[i])){
+                        var match = split_content[i].match(regExp2)
+                        // console.log(match)
+                        if(match){
+                            var iframe = document.createElement("iframe")
+                            // iframe.setAttribute("id", 'ytb')
+                            iframe.setAttribute("frameBorder", 'no')
+                            iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
+                            div_ytb.appendChild(iframe)
+                            // div.appendChild(iframe)
+                        }
+                    }
+                    if(i==split_content.length-1){
+                        div.appendChild(div_ytb)
+                    }
                 }
             })
         },
