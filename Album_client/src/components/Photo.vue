@@ -266,27 +266,36 @@ export default {
 
                         this.$nextTick( function() {
                             var div = document.getElementById('text')
+            
                             if(document.getElementById('ytb')){
                                 var ytb = document.getElementById('ytb')
                                 div.removeChild(ytb)
                             }
-                            var regExp = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]*).*/
-                            // var index = this.modal.content.search(regExp)
-                            var match = this.modal.content.match(regExp)
-                            
-                            // console.log(index)
-                            // console.log(match[2])
 
-                            // var str = "<iframe width='560' height='315'\
-                            //            frameborder='0'\
-                            //            :src='//www.youtube.com/embed/" + match[2] + "'>\
-                            //            </iframe>"
-                            if(match){
-                                var iframe = document.createElement("iframe")
-                                iframe.setAttribute("id", 'ytb')
-                                iframe.setAttribute("frameBorder", 'no')
-                                iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
-                                div.appendChild(iframe)
+                            var regExp = /(https?:\/\/www.youtube.com\/watch\?v=[^#\&\?\n]{11,11})/
+                            var regExp2 = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}).*/
+                            var split_content = this.modal.content.split(regExp)
+                            
+                            
+                            var div_ytb = document.createElement("div")
+                            div_ytb.setAttribute("id", 'ytb')
+                            for(var i=0; i<split_content.length; i++){
+                                // console.log(regExp.test(split_content[i]))
+                                if(regExp.test(split_content[i])){
+                                    var match = split_content[i].match(regExp2)
+                                    // console.log(match)
+                                    if(match){
+                                        var iframe = document.createElement("iframe")
+                                        // iframe.setAttribute("id", 'ytb')
+                                        iframe.setAttribute("frameBorder", 'no')
+                                        iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
+                                        div_ytb.appendChild(iframe)
+                                        // div.appendChild(iframe)
+                                    }
+                                }
+                                if(i==split_content.length-1){
+                                    div.appendChild(div_ytb)
+                                }
                             }
                         })
 
