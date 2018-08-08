@@ -783,7 +783,9 @@ export default {
     height: 20vh;
     resize: none;
 }
-.div-detail iframe{
+.div-detail iframe {
+    margin: auto;
+    display: block;
     width: 30vw;
     height: 16.875vw;
 }

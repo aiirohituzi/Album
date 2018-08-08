@@ -898,6 +898,8 @@ export default {
     opacity: .75;
 }
 .modal .modal-box .modal-content iframe{
+    margin: auto;
+    display: block;
     width: 30vw;
     height: 16.875vw;
 }
