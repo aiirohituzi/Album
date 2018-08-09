@@ -232,17 +232,16 @@ export default {
                 var div_ytb = document.createElement("div")
                 div_ytb.setAttribute("id", 'ytb')
                 for(var i=0; i<split_content.length; i++){
-                    // console.log(regExp.test(split_content[i]))
                     if(regExp.test(split_content[i])){
                         var match = split_content[i].match(regExp2)
-                        // console.log(match)
                         if(match){
                             var iframe = document.createElement("iframe")
-                            // iframe.setAttribute("id", 'ytb')
+                            
                             iframe.setAttribute("frameBorder", 'no')
                             iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
                             div_ytb.appendChild(iframe)
-                            // div.appendChild(iframe)
+
+                            div_ytb.insertAdjacentHTML('beforeend', "<font size='1' color='gray'>" + match[0] + '</font><br><br>')
                         }
                     }
                     if(i==split_content.length-1){
