@@ -899,8 +899,8 @@ export default {
 .modal .modal-box .modal-content iframe{
     margin: auto;
     display: block;
-    width: 30vw;
-    height: 16.875vw;
+    width: 40vw;
+    height: 22.5vw;
 }
 
 .modal .modal-box .modal-bottom {
@@ -955,6 +955,10 @@ export default {
     .layout-menu {
         width: 80%;
     }
+    .modal .modal-box .modal-content iframe{
+        width: 45vw;
+        height: 25.3125vw;
+    }
 }
 @media only screen and (max-width: 767px) {
     .empty {
@@ -993,6 +997,10 @@ export default {
         height: 80vh;
         resize: none;
         overflow-y: scroll;
+    }
+    .modal .modal-box .modal-content iframe{
+        width: 70vw;
+        height: 39.375vw;
     }
 }
 </style>

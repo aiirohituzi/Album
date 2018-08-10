@@ -785,8 +785,8 @@ export default {
 .div-detail iframe {
     margin: auto;
     display: block;
-    width: 30vw;
-    height: 16.875vw;
+    width: 40vw;
+    height: 22.5vw;
 }
 
 
@@ -923,6 +923,10 @@ export default {
     .menu {
         width: 80%;
     }
+    .div-detail iframe {
+        width: 45vw;
+        height: 25.3125vw;
+    }
 }
 @media only screen and (max-width: 767px) {
     .empty {
@@ -970,6 +974,10 @@ export default {
         height: 80vh;
         resize: none;
         overflow-y: scroll;
+    }
+    .div-detail iframe {
+        width: 60vw;
+        height: 33.75vw;
     }
 }
 </style>
