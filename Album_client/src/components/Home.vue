@@ -2,37 +2,53 @@
 <div>
     <h1>Home</h1>
     
-    <!-- <iframe width="560" height="315"
-    frameborder="0"
-    :src="'//www.youtube.com/embed/' + getId('https://www.youtube.com/watch?v=4A-5GoOJ67k')">
-    </iframe> -->
+    
+    <div id="delta">Scroll mouse wheel to see delta here.</div>
 
 </div>
 </template>
 
 <script>
+function handle(delta) {
+	var s = delta + ": ";
+	if (delta < 0) {
+		s += "down";
+    }
+	else {
+		s += "up";
+    }
+	document.getElementById('delta').innerHTML = s;
+}
+
+function wheel(event){
+	var delta = 0;
+	if (!event) event = window.event;
+	if (event.wheelDelta) {
+		delta = event.wheelDelta/120;
+	} else if (event.detail) {
+		delta = -event.detail/3;
+	}   
+	if (delta)
+		handle(delta);
+}
+
+/* Initialization code. */
+if (window.addEventListener)
+	window.addEventListener('DOMMouseScroll', wheel, false);
+window.onmousewheel = document.onmousewheel = wheel;
 export default {
     name: 'Home',
     data () {
         return {
-            // url: ''
         }
     },
     methods: {
-        // getId: function(url) {
-        //     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        //     var match = url.match(regExp);
-
-        //     console.log(match)
-        //     if (match && match[2].length == 11) {
-        //         return match[2];
-        //     } else {
-        //         return 'error';
-        //     }
-        // }
     }
 }
 </script>
 
 <style>
+div {
+    height: 200vh;
+}
 </style>
