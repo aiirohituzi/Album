@@ -45,19 +45,28 @@ export default {
     data () {
         return {
 			scrollPosition: 0,
-			containerId: 'container-main'
+			scrollState: -1
         }
     },
     methods: {
 		handleScroll: function (e) {
 			// console.log(e)
+			if(this.scrollState == -1){
+				return
+			}
 			var currentScrollPosition = e.srcElement.scrollingElement.scrollTop
 			if (currentScrollPosition > this.scrollPosition) {
-				console.log("Scrolling down")
-				this.scrollMove("item2");
+				if(this.scrollState == 0){
+					console.log("Scrolling down")
+					this.scrollMove("item2")
+					this.scrollState = 1
+				}
 			} else if (currentScrollPosition < this.scrollPosition) {
-				console.log("Scrolling up")
-				this.scrollMove("item1");
+				if(this.scrollState == 1){
+					console.log("Scrolling up")
+					this.scrollMove("item1")
+					this.scrollState = 0
+				}
 			}
 			this.scrollPosition = currentScrollPosition
 		},
@@ -67,7 +76,7 @@ export default {
 				do{
 					top += el.offsetTop
 				} while(el = el.offsetParent)
-				return [top-55]
+				return [top]
 			}
 		},
 		scrollMove: function (id){
@@ -77,9 +86,15 @@ export default {
 			})
 		}
 	},
-	created () {
-		window.scroll({top:0, behavior: 'instant'})
+	mounted () {
+		window.scroll({
+			top: this.getOffsetTop(document.getElementById('item1')),
+			behavior: 'smooth'
+		})
 		this.scrollPosition = window.scrollY
+		this.scrollState = 0
+	},
+	created () {
 		window.addEventListener('scroll', this.handleScroll);
 	},
 	destroyed () {
@@ -97,6 +112,8 @@ body {
     display: block;
 }
 .item {
+	padding: 0;
 	height: 100vh;
+	border: 1px solid #111
 }
 </style>
