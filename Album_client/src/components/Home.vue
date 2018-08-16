@@ -1,10 +1,10 @@
 <template>
-<div class="container-main" id="container-main" v-on:scroll.passive="handleScroll()">
-	<div class="item" id="item1">
+<div class="container-home">
+	<div class="section" id="item1">
     	<h1>Home</h1>
 	</div>
 
-	<div class="item" id="item2">
+	<div class="section" id="item2">
 		page 2
 	</div>
 </div>
@@ -44,34 +44,33 @@ export default {
     name: 'Home',
     data () {
         return {
-			scrollPosition: 0,
-			scrollState: -1
         }
     },
-    methods: {
-		handleScroll: function (e) {
-			// console.log(e)
-			if(this.scrollState == -1){
-				return
+    methods: {		
+		handle: function (delta) {
+			if (delta < 0) {		// dowm
+				// console.log('down')
+				this.scrollMove("item2")
 			}
-			var currentScrollPosition = e.srcElement.scrollingElement.scrollTop
-			if (currentScrollPosition > this.scrollPosition) {
-				if(this.scrollState == 0){
-					console.log("Scrolling down")
-					this.scrollMove("item2")
-					this.scrollState = 1
-				}
-			} else if (currentScrollPosition < this.scrollPosition) {
-				if(this.scrollState == 1){
-					console.log("Scrolling up")
-					this.scrollMove("item1")
-					this.scrollState = 0
-				}
+			else {					// up
+				// console.log('up')
+				this.scrollMove("item1")
 			}
-			this.scrollPosition = currentScrollPosition
 		},
+		wheel: function (event){
+			var delta = 0
+			if (!event) event = window.event
+			if (event.wheelDelta) {
+				delta = event.wheelDelta/120
+			} else if (event.detail) {
+				delta = -event.detail/3
+			}   
+			if (delta)
+				this.handle(delta)
+		},
+		
 		getOffsetTop: function (el) {
-			var top = 0;
+			var top = 0
 			if(el.offsetParent){
 				do{
 					top += el.offsetTop
@@ -91,14 +90,17 @@ export default {
 			top: this.getOffsetTop(document.getElementById('item1')),
 			behavior: 'smooth'
 		})
-		this.scrollPosition = window.scrollY
-		this.scrollState = 0
 	},
 	created () {
-		window.addEventListener('scroll', this.handleScroll);
+		if (window.addEventListener)
+			window.addEventListener('DOMMouseScroll', this.wheel, false)
+		window.onmousewheel = document.onmousewheel = this.wheel
+		document.body.style.overflow = "hidden"
 	},
 	destroyed () {
-		window.removeEventListener('scroll', this.handleScroll);
+		window.removeEventListener('DOMMouseScroll', this.wheel)
+		document.body.style.overflow = "scroll"
+		window.onmousewheel = document.onmousewheel = null
 	}
 }
 </script>
@@ -107,13 +109,17 @@ export default {
 body {
 	/* overflow: hidden; */
 }
-.container-main {
-    height: 200vh;
-    display: block;
+.container {
+	border: 1px solid #00ff00;
+	margin: 0px;
 }
-.item {
+.container-home {
+    display: block;
+	margin-top: 0px;
+}
+.section {
 	padding: 0;
 	height: 100vh;
-	border: 1px solid #111
+	border: 1px solid #111;
 }
 </style>

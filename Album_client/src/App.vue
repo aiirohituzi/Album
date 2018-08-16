@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-main">
         <ul id="navigation" class="side">
             <li><a @click="navToggle()"><div class="closeBtn"></div></a></li>
             <router-link tag="li" to="/" exact><a class="homeBtn"></a></router-link>
@@ -35,9 +35,10 @@ export default {
 </script>
 
 <style>
-.container {
-    margin-top: 20px;
+.container-main {
+    /* margin-top: 20px; */
     margin-left: 15px;
+    margin-right: 15px;
 }
 
 ul#navigation {
