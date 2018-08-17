@@ -1,11 +1,21 @@
 <template>
 <div class="container-home">
-	<div class="section" id="item1">
+	<div class="section" id="section1">
     	<h1>Home</h1>
+		section 1
 	</div>
 
-	<div class="section" id="item2">
-		page 2
+	<div class="section" id="section2">
+		section 2
+		<button @click="Test">asdf</button>
+	</div>
+
+	<div class="section" id="section3">
+		section 3
+	</div>
+
+	<div class="section" id="section4">
+		section 4
 	</div>
 </div>
 </template>
@@ -44,29 +54,54 @@ export default {
     name: 'Home',
     data () {
         return {
+			currentSection: 1,
+			sectionLength: 4,
+			scrollState: false,
         }
     },
-    methods: {		
+    methods: {
+		Test: function() {
+			console.log(this.scrollState)
+			// this.scrollState=false
+		},
 		handle: function (delta) {
 			if (delta < 0) {		// dowm
-				// console.log('down')
-				this.scrollMove("item2")
+				if(this.currentSection < this.sectionLength){
+					this.currentSection += 1
+					// console.log('down : ' + this.currentSection)
+					this.scrollMove("section" + this.currentSection)
+				}
 			}
 			else {					// up
-				// console.log('up')
-				this.scrollMove("item1")
+				if(this.currentSection > 1){
+					this.currentSection -= 1
+					// console.log('up : ' + this.currentSection)
+					this.scrollMove("section" + this.currentSection)
+				}
 			}
+			var self = this
+			setTimeout(function(){
+				self.scrollState = false
+			}, 500)
 		},
 		wheel: function (event){
+			// console.log('wheel : ' + this.scrollState)
+			if(this.scrollState == true){
+				return
+			}
+			this.scrollState = true
 			var delta = 0
-			if (!event) event = window.event
-			if (event.wheelDelta) {
+			if(!event){
+				event = window.event
+			}
+			if(event.wheelDelta){
 				delta = event.wheelDelta/120
-			} else if (event.detail) {
+			} else if(event.detail){
 				delta = -event.detail/3
 			}   
-			if (delta)
+			if(delta){
 				this.handle(delta)
+			}
 		},
 		
 		getOffsetTop: function (el) {
@@ -87,20 +122,23 @@ export default {
 	},
 	mounted () {
 		window.scroll({
-			top: this.getOffsetTop(document.getElementById('item1')),
+			top: this.getOffsetTop(document.getElementById('section1')),
 			behavior: 'smooth'
 		})
 	},
 	created () {
-		if (window.addEventListener)
+		if(window.addEventListener){
 			window.addEventListener('DOMMouseScroll', this.wheel, false)
+		}
 		window.onmousewheel = document.onmousewheel = this.wheel
+
 		document.body.style.overflow = "hidden"
 	},
 	destroyed () {
 		window.removeEventListener('DOMMouseScroll', this.wheel)
-		document.body.style.overflow = "scroll"
 		window.onmousewheel = document.onmousewheel = null
+
+		document.body.style.overflow = "scroll"
 	}
 }
 </script>
