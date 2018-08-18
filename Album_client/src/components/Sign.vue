@@ -1,5 +1,5 @@
 <template>
-<div class="container-main">
+<div class="container-sign">
     <div class="wrapper-sign">
         <h2>관리자 계정 로그인</h2>
         <div class="input-group">
@@ -64,9 +64,9 @@ export default {
 </script>
 
 <style>
-.container-main {
-    margin-top: 20px;
-    margin-left: 10px;
+.container-sign {
+    /* margin-top: 20px;
+    margin-left: 10px; */
 }
 .wrapper-sign {
     width: 300px;

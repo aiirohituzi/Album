@@ -1,5 +1,5 @@
 <template>
-<div class="container-main">
+<div class="container-photo">
 
     <div class="top-menu">
         <div v-if="manage" class="signOut" @click="signOut()" title="로그아웃"></div>
@@ -569,7 +569,7 @@ export default {
 </script>
 
 <style>
-.container-main {
+.container-photo {
     margin-top: 20px;
     margin-right: 10px;
 }
@@ -638,7 +638,6 @@ export default {
 }
 .top-menu .signOut {
     float: right;
-    margin-right: 10px;
     width: 30px;
     height: 30px;
     border-radius: 3px;

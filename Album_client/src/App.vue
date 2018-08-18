@@ -35,10 +35,13 @@ export default {
 </script>
 
 <style>
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
 .container-main {
-    /* margin-top: 20px; */
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 0;
 }
 
 ul#navigation {
@@ -190,13 +193,13 @@ ul#navigation li a:hover {
 }
 
 .main {
-    margin-top: 30px;
+    margin: 0px;
     position: relative;
     z-index: 97;
 
-    -moz-transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
 .main.move {
     margin-left: 300px;

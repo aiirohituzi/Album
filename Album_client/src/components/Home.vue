@@ -1,22 +1,27 @@
 <template>
 <div class="container-home">
-	<div class="section" id="section1">
+	<div class="section section1" id="section1">
     	<h1>Home</h1>
 		section 1
 	</div>
 
-	<div class="section" id="section2">
+	<div class="section section2" id="section2">
 		section 2
 		<button @click="Test">asdf</button>
 	</div>
 
-	<div class="section" id="section3">
+	<div class="section section3" id="section3">
 		section 3
 	</div>
 
-	<div class="section" id="section4">
+	<div class="section section4" id="section4">
 		section 4
 	</div>
+
+	<div class="nav-section1"></div>
+	<div class="nav-section2"></div>
+	<div class="nav-section3"></div>
+	<div class="nav-section4"></div>
 </div>
 </template>
 
@@ -144,20 +149,60 @@ export default {
 </script>
 
 <style>
-body {
-	/* overflow: hidden; */
-}
-.container {
-	border: 1px solid #00ff00;
-	margin: 0px;
-}
 .container-home {
     display: block;
-	margin-top: 0px;
 }
 .section {
 	padding: 0;
 	height: 100vh;
-	border: 1px solid #111;
+}
+.section1 {
+	background-color: #ff8888
+}
+.section2 {
+	background-color: #88ff88
+}
+.section3 {
+	background-color: #8888ff
+}
+.section4 {
+	background-color: #ffff88
+}
+
+.nav-section1 {
+	position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #15c;
+    border-radius: 5px;
+    right: 30px;
+	bottom: calc(50vh + 45px);
+}
+.nav-section2 {
+	position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #15c;
+    border-radius: 5px;
+    right: 30px;
+	bottom: calc(50vh + 15px);
+}
+.nav-section3 {
+	position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #15c;
+    border-radius: 5px;
+    right: 30px;
+	bottom: calc(50vh - 15px);
+}
+.nav-section4 {
+	position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #15c;
+    border-radius: 5px;
+    right: 30px;
+	bottom: calc(50vh - 45px);
 }
 </style>
