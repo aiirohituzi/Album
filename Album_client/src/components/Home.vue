@@ -7,7 +7,6 @@
 
 	<div class="section section2" id="section2">
 		section 2
-		<button @click="Test">asdf</button>
 	</div>
 
 	<div class="section section3" id="section3">
@@ -18,7 +17,7 @@
 		section 4
 	</div>
 
-	<div class="nav-section1"></div>
+	<div class="nav-section1 on"></div>
 	<div class="nav-section2"></div>
 	<div class="nav-section3"></div>
 	<div class="nav-section4"></div>
@@ -65,16 +64,18 @@ export default {
         }
     },
     methods: {
-		Test: function() {
-			console.log(this.scrollState)
-			// this.scrollState=false
-		},
 		handle: function (delta) {
 			if (delta < 0) {		// dowm
 				if(this.currentSection < this.sectionLength){
 					this.currentSection += 1
 					// console.log('down : ' + this.currentSection)
 					this.scrollMove("section" + this.currentSection)
+					
+            		var preNavSection = document.querySelector('.nav-section' + (this.currentSection-1))
+            		var curNavSection = document.querySelector('.nav-section' + this.currentSection)
+
+					preNavSection.classList.remove('on')
+					curNavSection.classList.add('on')
 				}
 			}
 			else {					// up
@@ -82,6 +83,12 @@ export default {
 					this.currentSection -= 1
 					// console.log('up : ' + this.currentSection)
 					this.scrollMove("section" + this.currentSection)
+
+            		var preNavSection = document.querySelector('.nav-section' + (this.currentSection+1))
+					var curNavSection = document.querySelector('.nav-section' + this.currentSection)
+					
+					preNavSection.classList.remove('on')
+					curNavSection.classList.add('on')
 				}
 			}
 			var self = this
@@ -171,38 +178,43 @@ export default {
 
 .nav-section1 {
 	position: fixed;
-    width: 10px;
-    height: 10px;
-    background: #15c;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh + 45px);
 }
 .nav-section2 {
 	position: fixed;
-    width: 10px;
-    height: 10px;
-    background: #15c;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh + 15px);
 }
 .nav-section3 {
 	position: fixed;
-    width: 10px;
-    height: 10px;
-    background: #15c;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh - 15px);
 }
 .nav-section4 {
 	position: fixed;
-    width: 10px;
-    height: 10px;
-    background: #15c;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh - 45px);
+}
+.on {
+    width: 5px;
+    height: 5px;
+    background: #888888;
 }
 </style>
