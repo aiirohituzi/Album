@@ -17,10 +17,10 @@
 		section 4
 	</div>
 
-	<div class="nav-section1 on"></div>
-	<div class="nav-section2"></div>
-	<div class="nav-section3"></div>
-	<div class="nav-section4"></div>
+	<div class="nav-section1 on" @click="sectionMove(1)"></div>
+	<div class="nav-section2" @click="sectionMove(2)"></div>
+	<div class="nav-section3" @click="sectionMove(3)"></div>
+	<div class="nav-section4" @click="sectionMove(4)"></div>
 </div>
 </template>
 
@@ -64,7 +64,7 @@ export default {
         }
     },
     methods: {
-		handle: function (delta) {
+		handle: function (delta){
 			if (delta < 0) {		// dowm
 				if(this.currentSection < this.sectionLength){
 					this.currentSection += 1
@@ -116,7 +116,7 @@ export default {
 			}
 		},
 		
-		getOffsetTop: function (el) {
+		getOffsetTop: function (el){
 			var top = 0
 			if(el.offsetParent){
 				do{
@@ -130,6 +130,19 @@ export default {
 				top: this.getOffsetTop(document.getElementById(id)),
 				behavior: 'smooth'
 			})
+		},
+
+		sectionMove: function (sectionNo) {
+			var preSection = this.currentSection
+			this.currentSection = sectionNo
+			// console.log('up : ' + this.currentSection)
+			this.scrollMove("section" + sectionNo)
+
+			var preNavSection = document.querySelector('.nav-section' + preSection)
+			var curNavSection = document.querySelector('.nav-section' + this.currentSection)
+			
+			preNavSection.classList.remove('on')
+			curNavSection.classList.add('on')
 		}
 	},
 	mounted () {
@@ -184,6 +197,7 @@ export default {
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh + 45px);
+	cursor: pointer;
 }
 .nav-section2 {
 	position: fixed;
@@ -193,6 +207,7 @@ export default {
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh + 15px);
+	cursor: pointer;
 }
 .nav-section3 {
 	position: fixed;
@@ -202,6 +217,7 @@ export default {
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh - 15px);
+	cursor: pointer;
 }
 .nav-section4 {
 	position: fixed;
@@ -211,6 +227,7 @@ export default {
     border-radius: 5px;
     right: 30px;
 	bottom: calc(50vh - 45px);
+	cursor: pointer;
 }
 .on {
     width: 5px;
