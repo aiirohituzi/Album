@@ -1,8 +1,10 @@
 <template>
 <div class="container-home">
 	<div class="section section1" id="section1">
-    	<h1>Home</h1>
-		section 1
+		<div class="middle">
+			<h1>Home</h1>
+    		Welcome, test message.
+		</div>
 	</div>
 
 	<div class="section section2" id="section2">
@@ -14,7 +16,10 @@
 	</div>
 
 	<div class="section section4" id="section4">
-		section 4
+		<div class="bottom">
+			Dev : aiirohituzi<br>
+			Github : https://github.com/aiirohituzi
+		</div>
 	</div>
 
 	<div class="nav-section1 on" @click="sectionMove(1)"></div>
@@ -177,16 +182,27 @@ export default {
 	height: 100vh;
 }
 .section1 {
-	background-color: #ff8888
+	background-color: #ff8888;
+	text-align: center;
 }
 .section2 {
-	background-color: #88ff88
+	background-color: #88ff88;
 }
 .section3 {
-	background-color: #8888ff
+	background-color: #8888ff;
 }
 .section4 {
-	background-color: #ffff88
+	background-color: #ffff88;
+	text-align: center;
+}
+.middle {
+	display: inline-block;
+	margin-top: 40vh;
+}
+.bottom {
+	display: inline-block;
+	margin-top: 90vh;
+	text-align: left;
 }
 
 .nav-section1 {
