@@ -8,7 +8,19 @@
 	</div>
 
 	<div class="section section2" id="section2">
-		section 2
+		<div class="carousel">
+			<div class="carousel-inner">
+				<div class="img-wrapper">
+					<img src="../assets/image/Test1.png">
+				</div>
+				<div class="img-wrapper">
+					<img src="../assets/image/Test2.png">
+				</div>
+				<div class="img-wrapper">
+					<img src="../assets/image/Test1.png">
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="section section3" id="section3">
@@ -249,5 +261,33 @@ export default {
     width: 5px;
     height: 5px;
     background: #888888;
+}
+
+.carousel {
+	display: inline-block;
+	margin-top: 10vh;
+	margin-left: 10vw;
+	width: 80vw;
+	height: 80vh;
+	border: 1px solid #000;
+}
+
+.carousel-inner {
+	height: 100%;
+	white-space:nowrap;
+	/* overflow-x: auto;
+	overflow-y: hidden; */
+	overflow: hidden;
+	border: 1px solid #00f;
+}
+.carousel-inner .img-wrapper{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	/* border: 1px solid #f00; */
+}
+.carousel-inner .img-wrapper img{
+	/* height: 100%; */
 }
 </style>
