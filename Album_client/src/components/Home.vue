@@ -20,6 +20,12 @@
 					<img src="../assets/image/Test1.png">
 				</div>
 			</div>
+
+			<div class="carousel-controler">
+				<div>
+
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -275,10 +281,8 @@ export default {
 .carousel-inner {
 	height: 100%;
 	white-space:nowrap;
-	/* overflow-x: auto;
-	overflow-y: hidden; */
 	overflow: hidden;
-	border: 1px solid #00f;
+	/* overflow: scroll; */
 }
 .carousel-inner .img-wrapper{
 	display: inline-block;
@@ -288,6 +292,9 @@ export default {
 	/* border: 1px solid #f00; */
 }
 .carousel-inner .img-wrapper img{
-	/* height: 100%; */
+	height:100%;
+	width:100%;
+	object-fit: contain;
+	vertical-align: top;
 }
 </style>
