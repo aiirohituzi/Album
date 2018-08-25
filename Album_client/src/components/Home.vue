@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="carousel-controler">
-				<div class="control-left"></div>
+				<div class="control-left" @click="Test()"></div>
 				<div class="control-right"></div>
 			</div>
 		</div>
@@ -165,6 +165,15 @@ export default {
 			
 			preNavSection.classList.remove('on')
 			curNavSection.classList.add('on')
+		},
+
+		Test: function () {
+			console.log('test')
+			var carousel = document.querySelectorAll('.img-wrapper')
+			console.log(carousel)
+			carousel[0].classList.toggle('left')
+			carousel[1].classList.toggle('left')
+			carousel[2].classList.toggle('left')
 		}
 	},
 	mounted () {
@@ -289,12 +298,25 @@ export default {
 	height: 100%;
 	text-align: center;
 	/* border: 1px solid #f00; */
+
+	transform:translate(0, 0);
+	-webkit-transform:translate(0, 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
 }
 .carousel-inner .img-wrapper img{
 	height:100%;
 	width:100%;
 	object-fit: contain;
 	vertical-align: top;
+}
+.carousel-inner .img-wrapper.left {
+	transform:translate(calc(-100% - 4px), 0);
+	-webkit-transform:translate(calc(-100% - 4px), 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
 }
 
 .carousel .carousel-controler {
@@ -303,7 +325,6 @@ export default {
 	width: 100%;
 	height: 100%;
 }
-
 .carousel .carousel-controler .control-left {
 	float: left;
 	height: 100%;
@@ -311,7 +332,6 @@ export default {
 	border: 1px solid #00f;
 	cursor: pointer;
 }
-
 .carousel .carousel-controler .control-right {
 	float: right;
 	height: 100%;
