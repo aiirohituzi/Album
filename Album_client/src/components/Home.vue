@@ -22,9 +22,8 @@
 			</div>
 
 			<div class="carousel-controler">
-				<div>
-
-				</div>
+				<div class="control-left"></div>
+				<div class="control-right"></div>
 			</div>
 		</div>
 	</div>
@@ -296,5 +295,28 @@ export default {
 	width:100%;
 	object-fit: contain;
 	vertical-align: top;
+}
+
+.carousel .carousel-controler {
+	position: relative;
+	top: -80vh;
+	width: 100%;
+	height: 100%;
+}
+
+.carousel .carousel-controler .control-left {
+	float: left;
+	height: 100%;
+	width: 15%;
+	border: 1px solid #00f;
+	cursor: pointer;
+}
+
+.carousel .carousel-controler .control-right {
+	float: right;
+	height: 100%;
+	width: 15%;
+	border: 1px solid #00f;
+	cursor: pointer;
 }
 </style>
