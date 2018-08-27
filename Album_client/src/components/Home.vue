@@ -22,8 +22,8 @@
 			</div>
 
 			<div class="carousel-controler">
-				<div class="control-left" @click="Test()"></div>
-				<div class="control-right"></div>
+				<div class="control-left" @click="carouselLeft()"></div>
+				<div class="control-right" @click="carouselRight()"></div>
 			</div>
 		</div>
 	</div>
@@ -83,6 +83,8 @@ export default {
 			currentSection: 1,
 			sectionLength: 4,
 			scrollState: false,
+			currentCarouselItem: 1,
+			carouselLength: 3,
         }
     },
     methods: {
@@ -167,13 +169,25 @@ export default {
 			curNavSection.classList.add('on')
 		},
 
-		Test: function () {
-			console.log('test')
+		carouselLeft: function () {
 			var carousel = document.querySelectorAll('.img-wrapper')
-			console.log(carousel)
-			carousel[0].classList.toggle('left')
-			carousel[1].classList.toggle('left')
-			carousel[2].classList.toggle('left')
+			// console.log(carousel)
+			if(this.currentCarouselItem < this.carouselLength){
+				carousel[0].classList.add('next'+this.currentCarouselItem)
+				carousel[1].classList.add('next'+this.currentCarouselItem)
+				carousel[2].classList.add('next'+this.currentCarouselItem)
+				this.currentCarouselItem += 1
+			}
+		},
+		carouselRight: function() {
+			var carousel = document.querySelectorAll('.img-wrapper')
+			// console.log(carousel)
+			if(this.currentCarouselItem > 1){
+				carousel[0].classList.remove('next'+(this.currentCarouselItem-1))
+				carousel[1].classList.remove('next'+(this.currentCarouselItem-1))
+				carousel[2].classList.remove('next'+(this.currentCarouselItem-1))
+				this.currentCarouselItem -= 1
+			}
 		}
 	},
 	mounted () {
@@ -311,9 +325,16 @@ export default {
 	object-fit: contain;
 	vertical-align: top;
 }
-.carousel-inner .img-wrapper.left {
+.carousel-inner .img-wrapper.next1 {
 	transform:translate(calc(-100% - 4px), 0);
 	-webkit-transform:translate(calc(-100% - 4px), 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
+}
+.carousel-inner .img-wrapper.next2 {
+	transform:translate(calc(-200% - 4px), 0);
+	-webkit-transform:translate(calc(-200% - 4px), 0);
 	
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
