@@ -22,8 +22,8 @@
 			</div>
 
 			<div class="carousel-controler">
-				<div class="control-left" @click="carouselLeft()"></div>
-				<div class="control-right" @click="carouselRight()"></div>
+				<div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
+				<div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
 			</div>
 		</div>
 	</div>
@@ -172,21 +172,21 @@ export default {
 		carouselLeft: function () {
 			var carousel = document.querySelectorAll('.img-wrapper')
 			// console.log(carousel)
-			if(this.currentCarouselItem < this.carouselLength){
-				carousel[0].classList.add('next'+this.currentCarouselItem)
-				carousel[1].classList.add('next'+this.currentCarouselItem)
-				carousel[2].classList.add('next'+this.currentCarouselItem)
-				this.currentCarouselItem += 1
-			}
-		},
-		carouselRight: function() {
-			var carousel = document.querySelectorAll('.img-wrapper')
-			// console.log(carousel)
 			if(this.currentCarouselItem > 1){
 				carousel[0].classList.remove('next'+(this.currentCarouselItem-1))
 				carousel[1].classList.remove('next'+(this.currentCarouselItem-1))
 				carousel[2].classList.remove('next'+(this.currentCarouselItem-1))
 				this.currentCarouselItem -= 1
+			}
+		},
+		carouselRight: function() {
+			var carousel = document.querySelectorAll('.img-wrapper')
+			// console.log(carousel)
+			if(this.currentCarouselItem < this.carouselLength){
+				carousel[0].classList.add('next'+this.currentCarouselItem)
+				carousel[1].classList.add('next'+this.currentCarouselItem)
+				carousel[2].classList.add('next'+this.currentCarouselItem)
+				this.currentCarouselItem += 1
 			}
 		}
 	},
@@ -350,14 +350,32 @@ export default {
 	float: left;
 	height: 100%;
 	width: 15%;
-	border: 1px solid #00f;
 	cursor: pointer;
+	line-height: 80vh;
+	text-align: center;
+
+	/* border: 1px solid #00f; */
+	background: linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))
+}
+.carousel .carousel-controler .control-left:hover {
+	background: linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))
 }
 .carousel .carousel-controler .control-right {
 	float: right;
 	height: 100%;
 	width: 15%;
-	border: 1px solid #00f;
 	cursor: pointer;
+	line-height: 80vh;
+	text-align: center;
+	
+	/* border: 1px solid #00f; */
+	background: linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))
+}
+.carousel .carousel-controler .control-right:hover {
+	background: linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))
 }
 </style>
