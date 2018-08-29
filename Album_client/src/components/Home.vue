@@ -173,20 +173,32 @@ export default {
 			var carousel = document.querySelectorAll('.img-wrapper')
 			// console.log(carousel)
 			if(this.currentCarouselItem > 1){
-				carousel[0].classList.remove('next'+(this.currentCarouselItem-1))
-				carousel[1].classList.remove('next'+(this.currentCarouselItem-1))
-				carousel[2].classList.remove('next'+(this.currentCarouselItem-1))
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.remove('next'+(this.currentCarouselItem-1))
+				}
 				this.currentCarouselItem -= 1
+			} else {
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.add('next1')
+					carousel[i].classList.add('next2')
+				}
+				this.currentCarouselItem = this.carouselLength
 			}
 		},
 		carouselRight: function() {
 			var carousel = document.querySelectorAll('.img-wrapper')
 			// console.log(carousel)
 			if(this.currentCarouselItem < this.carouselLength){
-				carousel[0].classList.add('next'+this.currentCarouselItem)
-				carousel[1].classList.add('next'+this.currentCarouselItem)
-				carousel[2].classList.add('next'+this.currentCarouselItem)
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.add('next'+this.currentCarouselItem)
+				}
 				this.currentCarouselItem += 1
+			} else {
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.remove('next2')
+					carousel[i].classList.remove('next1')
+				}
+				this.currentCarouselItem = 1
 			}
 		}
 	},
