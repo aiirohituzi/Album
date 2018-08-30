@@ -25,6 +25,12 @@
 				<div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
 				<div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
 			</div>
+
+			<div class="carousel-nav">
+				<div class="carousel-item1 on" @click=""></div>
+				<div class="carousel-item2" @click=""></div>
+				<div class="carousel-item3" @click=""></div>
+			</div>
 		</div>
 	</div>
 
@@ -389,5 +395,42 @@ export default {
 .carousel .carousel-controler .control-right:hover {
 	background: linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
     background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))
+}
+
+.carousel .carousel-nav {
+	position: relative;
+	top: -85vh;
+	white-space: nowrap;
+	text-align: center;
+}
+.carousel .carousel-nav .carousel-item1 {
+	display:inline-block;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
+    border-radius: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	cursor: pointer;
+}
+.carousel .carousel-nav .carousel-item2 {
+	display:inline-block;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
+    border-radius: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	cursor: pointer;
+}
+.carousel .carousel-nav .carousel-item3 {
+	display:inline-block;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
+    border-radius: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	cursor: pointer;
 }
 </style>
