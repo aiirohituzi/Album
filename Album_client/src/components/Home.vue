@@ -27,9 +27,9 @@
 			</div>
 
 			<div class="carousel-nav">
-				<div class="carousel-item1 on" @click=""></div>
-				<div class="carousel-item2" @click=""></div>
-				<div class="carousel-item3" @click=""></div>
+				<div class="carousel-item1 on" @click="carouselMove(1)"></div>
+				<div class="carousel-item2" @click="carouselMove(2)"></div>
+				<div class="carousel-item3" @click="carouselMove(3)"></div>
 			</div>
 		</div>
 	</div>
@@ -206,6 +206,24 @@ export default {
 				}
 				this.currentCarouselItem = 1
 			}
+		},
+		carouselMove: function(caroselNo) {
+			var carousel = document.querySelectorAll('.img-wrapper')
+
+			if(this.currentCarouselItem < caroselNo){
+				for(var i=0; i<this.carouselLength; i++){
+					for(var j=this.currentCarouselItem; j<caroselNo; j++){
+						carousel[i].classList.add('next'+j)
+					}
+				}
+			} else if(this.currentCarouselItem > caroselNo){
+				for(var i=0; i<this.carouselLength; i++){
+					for(var j=this.currentCarouselItem; j>caroselNo; j--){
+						carousel[i].classList.remove('next'+(j-1))
+					}
+				}
+			}
+			this.currentCarouselItem = caroselNo
 		}
 	},
 	mounted () {
