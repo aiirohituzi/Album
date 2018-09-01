@@ -411,12 +411,17 @@ export default {
 	text-align: center;
 
 	/* border: 1px solid #00f; */
-	background: linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))
+	/* background: linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); */
+	
+	background: linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+	opacity: 0.8;
 }
 .carousel .carousel-controler .control-left:hover {
-	background: linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))
+	/* background: linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)); */
+	opacity: 1;
 }
 .carousel .carousel-controler .control-right {
 	float: right;
@@ -427,12 +432,17 @@ export default {
 	text-align: center;
 	
 	/* border: 1px solid #00f; */
-	background: linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))
+	/* background: linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); */
+	
+	background: linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+	opacity: 0.8;
 }
 .carousel .carousel-controler .control-right:hover {
-	background: linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))
+	/* background: linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)); */
+	opacity: 1;
 }
 
 .carousel .carousel-nav {
