@@ -180,14 +180,22 @@ export default {
 			// console.log(carousel)
 			if(this.currentCarouselItem > 1){
 				for(var i=0; i<this.carouselLength; i++){
-					carousel[i].classList.remove('next'+(this.currentCarouselItem-1))
+					carousel[i].classList.remove('next' + (this.currentCarouselItem-1))
 				}
+				var preCarousel = document.querySelector('.carousel-item' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item' + (this.currentCarouselItem-1))
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
 				this.currentCarouselItem -= 1
 			} else {
 				for(var i=0; i<this.carouselLength; i++){
 					carousel[i].classList.add('next1')
 					carousel[i].classList.add('next2')
 				}
+				var preCarousel = document.querySelector('.carousel-item' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item' + this.carouselLength)
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
 				this.currentCarouselItem = this.carouselLength
 			}
 		},
@@ -196,14 +204,22 @@ export default {
 			// console.log(carousel)
 			if(this.currentCarouselItem < this.carouselLength){
 				for(var i=0; i<this.carouselLength; i++){
-					carousel[i].classList.add('next'+this.currentCarouselItem)
+					carousel[i].classList.add('next' + this.currentCarouselItem)
 				}
+				var preCarousel = document.querySelector('.carousel-item' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item' + (this.currentCarouselItem+1))
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
 				this.currentCarouselItem += 1
 			} else {
 				for(var i=0; i<this.carouselLength; i++){
 					carousel[i].classList.remove('next2')
 					carousel[i].classList.remove('next1')
 				}
+				var preCarousel = document.querySelector('.carousel-item' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item1')
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
 				this.currentCarouselItem = 1
 			}
 		},
@@ -223,6 +239,10 @@ export default {
 					}
 				}
 			}
+			var preCarousel = document.querySelector('.carousel-item'+this.currentCarouselItem)
+			var curCarousel = document.querySelector('.carousel-item'+caroselNo)
+			preCarousel.classList.remove('on')
+			curCarousel.classList.add('on')
 			this.currentCarouselItem = caroselNo
 		}
 	},
