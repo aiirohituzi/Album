@@ -61,6 +61,32 @@ def getImage(request):
     
     return HttpResponse(data, content_type = "application/json")
 
+def getRecentPhoto(request):
+    data = []
+
+    if (Photo.objects.all().count() > 3):
+        for item in Photo.objects.all().order_by('-created')[:3]:
+            data.append({
+                'id': item.id,
+                'title': item.title,
+                'content': item.content,
+                'created': str(item.created),
+            })
+    else:
+        for item in Photo.objects.all().order_by('-created'):
+            data.append({
+                'id': item.id,
+                'title': item.title,
+                'content': item.content,
+                'created': str(item.created),
+            })
+
+    print("Get - Recent Photo")
+    data = json.dumps(data, indent=4)
+    print(data)
+    
+    return HttpResponse(data, content_type = "application/json")
+
 @csrf_exempt
 def uploadPhoto(request):
     result = False

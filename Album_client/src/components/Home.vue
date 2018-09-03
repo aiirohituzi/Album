@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 // function handle(delta) {
 // 	if (delta < 0) {		// dowm
 // 		scrollMove("item2");
@@ -94,6 +96,15 @@ export default {
         }
     },
     methods: {
+        fetchRecentPhotos: function () {
+			axios.get('http://localhost:8000/recentPhotos/').then((response) => {
+                // this.photos = response.data
+                // this.length = response.data.length
+                console.log(response)
+            }, (error) => {
+                console.log(error)
+            })
+        },
 		handle: function (delta){
 			if (delta < 0) {		// dowm
 				if(this.currentSection < this.sectionLength){
@@ -251,6 +262,7 @@ export default {
 			top: this.getOffsetTop(document.getElementById('section1')),
 			behavior: 'smooth'
 		})
+		this.fetchRecentPhotos()
 	},
 	created () {
 		if(window.addEventListener){
@@ -410,6 +422,12 @@ export default {
 	line-height: 80vh;
 	text-align: center;
 
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+
 	/* border: 1px solid #00f; */
 	/* background: linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
     background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); */
@@ -430,6 +448,12 @@ export default {
 	cursor: pointer;
 	line-height: 80vh;
 	text-align: center;
+
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 	
 	/* border: 1px solid #00f; */
 	/* background: linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
