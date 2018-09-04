@@ -93,17 +93,42 @@ export default {
 			scrollState: false,
 			currentCarouselItem: 1,
 			carouselLength: 3,
+            photos: [
+                {
+                    'id': '',
+                    'title': '',
+                    'content': '',
+                    'created': '',
+                    'thumbnail': undefined,
+                },
+			],
         }
     },
     methods: {
-        fetchRecentPhotos: function () {
-			axios.get('http://localhost:8000/recentPhotos/').then((response) => {
-                // this.photos = response.data
-                // this.length = response.data.length
-                console.log(response)
+        fetchRecentPhotos: async function () {
+			await axios.get('http://localhost:8000/recentPhotos/').then((response) => {
+                this.photos = response.data
+                this.carouselLength = response.data.length
+                // console.log(response)
             }, (error) => {
                 console.log(error)
             })
+
+			axios.get('http://localhost:8000/images/').then((response) => {
+                // console.log(response)
+                for(var i=0; i<this.photos.length; i++){
+                    for(var j=0; j<response.data.length; j++){
+                        if(this.photos[i].id == response.data[j].photoId){
+                            this.photos[i].thumbnail = response.data[j].image
+                            break
+                        }
+                    }
+                }
+            }, (error) => {
+                console.log(error)
+            })
+
+			console.log(this.photos)
         },
 		handle: function (delta){
 			if (delta < 0) {		// dowm
@@ -255,7 +280,12 @@ export default {
 			preCarousel.classList.remove('on')
 			curCarousel.classList.add('on')
 			this.currentCarouselItem = caroselNo
-		}
+		},
+
+		imagePath: function (path) {
+			console.log(path)
+            return require('../assets/image/' + path)
+        },
 	},
 	mounted () {
 		window.scroll({

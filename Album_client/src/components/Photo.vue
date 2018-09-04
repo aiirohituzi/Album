@@ -23,7 +23,7 @@
         <div class="masonry">
             <!-- <div class="brick" v-for="item in photos" :key="item.id"> -->
             <div v-if="length==1">
-                <div class="brick" v-for="n in max">
+                <div class="brick">
                     <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
                     <div class="item" @click="modalToggle('photo', photos[0].id)">
                         <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
