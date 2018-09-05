@@ -10,15 +10,20 @@
 	<div class="section section2" id="section2">
 		<div class="carousel">
 			<div class="carousel-inner">
-				<div class="img-wrapper">
-					<img src="../assets/image/Test1.png">
+            	<div v-if="carouselLength==1">
+					<div class="img-wrapper" v-for="n in carouselLength">
+						<img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
+					</div>
 				</div>
-				<div class="img-wrapper">
+				<div v-else>
+					<div class="img-wrapper" v-for="n in carouselLength">
+						<img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
+						{{photos[n-1]}}
+					</div>
+				</div>
+				<!-- <div class="img-wrapper">
 					<img src="../assets/image/Test2.png">
-				</div>
-				<div class="img-wrapper">
-					<img src="../assets/image/Test1.png">
-				</div>
+				</div> -->
 			</div>
 
 			<div class="carousel-controler">
@@ -92,7 +97,7 @@ export default {
 			sectionLength: 4,
 			scrollState: false,
 			currentCarouselItem: 1,
-			carouselLength: 3,
+			carouselLength: 1,
             photos: [
                 {
                     'id': '',
@@ -102,6 +107,7 @@ export default {
                     'thumbnail': undefined,
                 },
 			],
+            images: [],
         }
     },
     methods: {
@@ -116,10 +122,11 @@ export default {
 
 			axios.get('http://localhost:8000/images/').then((response) => {
                 // console.log(response)
+                this.images = response.data
                 for(var i=0; i<this.photos.length; i++){
-                    for(var j=0; j<response.data.length; j++){
-                        if(this.photos[i].id == response.data[j].photoId){
-                            this.photos[i].thumbnail = response.data[j].image
+                    for(var j=0; j<this.images.length; j++){
+                        if(this.photos[i].id == this.images[j].photoId){
+                            this.photos[i].thumbnail = this.images[j].image
                             break
                         }
                     }
@@ -127,9 +134,13 @@ export default {
             }, (error) => {
                 console.log(error)
             })
-
-			console.log(this.photos)
         },
+
+		imagePath: function (path) {
+			console.log('aaaaaaaaaaaa')
+            return require('../assets/image/' + path)
+        },
+
 		handle: function (delta){
 			if (delta < 0) {		// dowm
 				if(this.currentSection < this.sectionLength){
@@ -281,11 +292,6 @@ export default {
 			curCarousel.classList.add('on')
 			this.currentCarouselItem = caroselNo
 		},
-
-		imagePath: function (path) {
-			console.log(path)
-            return require('../assets/image/' + path)
-        },
 	},
 	mounted () {
 		window.scroll({
@@ -393,8 +399,8 @@ export default {
 	display: inline-block;
 	margin-top: 10vh;
 	margin-left: 10vw;
-	width: 80vw;
-	height: 80vh;
+	width: 80%;
+	height: 80%;
 	border: 1px solid #000;
 }
 
@@ -409,7 +415,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	/* border: 1px solid #f00; */
+	border: 1px solid #f00;
 
 	transform:translate(0, 0);
 	-webkit-transform:translate(0, 0);
