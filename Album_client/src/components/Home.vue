@@ -18,7 +18,6 @@
 				<div v-else>
 					<div class="img-wrapper" v-for="n in carouselLength">
 						<img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
-						{{photos[n-1]}}
 					</div>
 				</div>
 				<!-- <div class="img-wrapper">
@@ -114,7 +113,6 @@ export default {
         fetchRecentPhotos: async function () {
 			await axios.get('http://localhost:8000/recentPhotos/').then((response) => {
                 this.photos = response.data
-                this.carouselLength = response.data.length
                 // console.log(response)
             }, (error) => {
                 console.log(error)
@@ -131,15 +129,19 @@ export default {
                         }
                     }
                 }
+				this.carouselLength = this.photos.length	// 갱신된 정보로 캐러셀을 다시 렌더링 시키기 위해 마지막에 변경
             }, (error) => {
                 console.log(error)
             })
         },
 
 		imagePath: function (path) {
-			console.log('aaaaaaaaaaaa')
             return require('../assets/image/' + path)
         },
+
+		test: function () {
+			this.photos[0].title = 'test'
+		},
 
 		handle: function (delta){
 			if (delta < 0) {		// dowm
@@ -415,7 +417,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	border: 1px solid #f00;
+	/* border: 1px solid #f00; */
 
 	transform:translate(0, 0);
 	-webkit-transform:translate(0, 0);
@@ -424,21 +426,22 @@ export default {
     -webkit-transition: -webkit-transform 500ms;
 }
 .carousel-inner .img-wrapper img{
-	height:100%;
-	width:100%;
-	object-fit: contain;
+	height:80vh;
+	width:80vw;
+	/* object-fit: contain; */
+	object-fit: cover;
 	vertical-align: top;
 }
 .carousel-inner .img-wrapper.next1 {
-	transform:translate(calc(-100% - 4px), 0);
-	-webkit-transform:translate(calc(-100% - 4px), 0);
+	transform:translate(-100%, 0);
+	-webkit-transform:translate(-100%, 0);
 	
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
 }
 .carousel-inner .img-wrapper.next2 {
-	transform:translate(calc(-200% - 4px), 0);
-	-webkit-transform:translate(calc(-200% - 4px), 0);
+	transform:translate(-200%, 0);
+	-webkit-transform:translate(-200%, 0);
 	
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
