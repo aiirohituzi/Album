@@ -31,9 +31,10 @@
 			</div>
 
 			<div class="carousel-nav">
-				<div class="carousel-item1 on" @click="carouselMove(1)"></div>
+				<div v-for="n in carouselLength" :class="'carousel-item'+n" @click="carouselMove(n)"></div>
+				<!-- <div class="carousel-item1 on" @click="carouselMove(1)"></div>
 				<div class="carousel-item2" @click="carouselMove(2)"></div>
-				<div class="carousel-item3" @click="carouselMove(3)"></div>
+				<div class="carousel-item3" @click="carouselMove(3)"></div> -->
 			</div>
 		</div>
 	</div>
@@ -133,6 +134,9 @@ export default {
             }, (error) => {
                 console.log(error)
             })
+			
+			var carousel = document.querySelector('.carousel-item' + this.currentCarouselItem)
+			carousel.classList.add('on')
         },
 
 		imagePath: function (path) {
