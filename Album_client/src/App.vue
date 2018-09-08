@@ -3,7 +3,7 @@
         <ul id="navigation" class="side">
             <li><a @click="navToggle()"><div class="closeBtn"></div></a></li>
             <router-link tag="li" to="/" exact><a class="homeBtn"></a></router-link>
-            <router-link tag="li" to="/Photo" exact><a class="photoBtn"></a></router-link>
+            <router-link tag="li" to="/Photo/0" exact><a class="photoBtn"></a></router-link>
             <router-link tag="li" to="/Sign" exact><a class="manageBtn"></a></router-link>
             <li><a>4</a></li>
             <li><a>5</a></li>

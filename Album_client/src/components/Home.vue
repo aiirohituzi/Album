@@ -27,6 +27,7 @@
 
 			<div class="carousel-controler">
 				<div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
+				<div class="clickSpace" @click="detail(photos[currentCarouselItem].id)"></div>
 				<div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
 			</div>
 
@@ -298,6 +299,9 @@ export default {
 			curCarousel.classList.add('on')
 			this.currentCarouselItem = caroselNo
 		},
+        detail: function (id) {
+            this.$router.push({name:'Photo', params:{id:id}})
+        },
 	},
 	mounted () {
 		window.scroll({
@@ -456,6 +460,17 @@ export default {
 	top: -80vh;
 	width: 100%;
 	height: 100%;
+}
+.carousel .carousel-controler .clickSpace {
+	float: left;
+	height: 100%;
+	width: 70%;
+
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 .carousel .carousel-controler .control-left {
 	float: left;

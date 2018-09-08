@@ -18,9 +18,10 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Photo',
+      path: '/Photo/:id',
       name: 'Photo',
-      component: Photo
+      component: Photo,
+      props: true
     },
     {
       path: '/Test',
