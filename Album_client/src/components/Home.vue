@@ -27,7 +27,7 @@
 
 			<div class="carousel-controler">
 				<div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
-				<div class="clickSpace" @click="detail(photos[currentCarouselItem].id)"></div>
+				<div class="clickSpace" @click="detail(photos[currentCarouselItem-1].id)"></div>
 				<div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
 			</div>
 

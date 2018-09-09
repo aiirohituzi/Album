@@ -221,6 +221,8 @@ export default {
             }, (error) => {
                 console.log(error)
             })
+            
+            this.directLink()
         },
 
         moreData: function () {
@@ -559,6 +561,12 @@ export default {
         signOut: function () {
             this.$session.destroy()
             window.location.reload()
+        },
+
+        directLink: function () {
+            if(this.$route.params.id != 0){
+                this.modalToggle('photo', this.$route.params.id)
+            }
         }
     },
     mounted: function () {
