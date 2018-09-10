@@ -309,6 +309,7 @@ export default {
 			behavior: 'smooth'
 		})
 		this.fetchRecentPhotos()
+		setInterval(this.carouselRight, 5000)
 	},
 	created () {
 		if(window.addEventListener){
