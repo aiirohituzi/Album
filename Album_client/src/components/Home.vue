@@ -109,6 +109,7 @@ export default {
                 },
 			],
             images: [],
+			intervalId: null,
         }
     },
     methods: {
@@ -309,7 +310,7 @@ export default {
 			behavior: 'smooth'
 		})
 		this.fetchRecentPhotos()
-		setInterval(this.carouselRight, 5000)
+		this.intervalId = setInterval(this.carouselRight, 5000)
 	},
 	created () {
 		if(window.addEventListener){
@@ -324,6 +325,8 @@ export default {
 		window.onmousewheel = document.onmousewheel = null
 
 		document.body.style.overflow = "scroll"
+
+		clearInterval(this.intervalId)
 	}
 }
 </script>
