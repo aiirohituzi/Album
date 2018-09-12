@@ -564,8 +564,12 @@ export default {
         },
 
         directLink: function () {
-            if(this.$route.params.id != 0){
-                this.modalToggle('photo', this.$route.params.id)
+            if(this.$route.params.id > 0){
+                for(var i=0; i<this.photos.length; i++){
+                    if(this.photos[i].id == this.$route.params.id){
+                        this.modalToggle('photo', this.$route.params.id)
+                    }
+                }
             }
         }
     },
