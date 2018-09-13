@@ -11,7 +11,7 @@
 		<div class="carousel">
 			<div class="carousel-inner">
             	<div v-if="carouselLength==1">
-					<div class="img-wrapper" v-for="n in carouselLength">
+					<div class="img-wrapper">
 						<img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
 					</div>
 				</div>
