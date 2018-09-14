@@ -9,6 +9,7 @@
                 {{ detail.content }}
             </div>
         </div>
+
         <div v-else>
             <div class="update-btn-group">
                 <button class="update" @click="updatePhoto()"></button>
@@ -404,11 +405,16 @@ export default {
         },
 
         updatePhotoToggle: function () {
+            var divDetail = document.querySelector('.div-detail')
+
             this.updateData.state_update = !this.updateData.state_update;
             if(this.updateData.state_update){
                 this.updateData.title = this.detail.title
                 this.updateData.content = this.detail.content
+
+                divDetail.style.textAlign = 'left'
             } else {
+                divDetail.style.textAlign = 'center'
                 this.updateCancel()
             }
         },
@@ -782,8 +788,9 @@ export default {
     width: 100%;
     margin-bottom: 20px;
 }
-.div-detail .img-select-group {
-    margin-bottom: 20px;
+.div-detail .img-select-group input {
+    float: left;
+    /* margin-bottom: 20px; */
 }
 .div-detail textarea {
     width: 100%;
