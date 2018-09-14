@@ -324,7 +324,7 @@ export default {
 		window.removeEventListener('DOMMouseScroll', this.wheel)
 		window.onmousewheel = document.onmousewheel = null
 
-		document.body.style.overflow = "scroll"
+		document.body.style.overflowY = "scroll"
 
 		clearInterval(this.intervalId)
 	}

@@ -634,6 +634,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/search.png);
+	cursor: pointer;
 }
 .top-menu .search.toggle {
     background-image: url(../assets/search_close.png);
@@ -656,6 +657,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/signOut.png);
+	cursor: pointer;
 }
 .top-menu div:hover {
     box-shadow: 0 0 0px 2px rgba(17, 133, 204, 0.5);
@@ -680,6 +682,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/layout_masonry.png);
+	cursor: pointer;
 }
 .layout-masonry:hover {
     background-image: url(../assets/layout_masonry_hover.png);
@@ -692,6 +695,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/layout_list.png);
+	cursor: pointer;
 }
 .layout-list:hover {
     background-image: url(../assets/layout_list_hover.png);
@@ -737,6 +741,7 @@ export default {
     border-radius: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
+	cursor: pointer;
 }
 .wrapper-masonry .masonry .brick .item {
     text-align: center;
@@ -777,6 +782,7 @@ export default {
     margin-bottom: 5px;
     padding: 10px;
     border: 1px solid #ddd;
+	cursor: pointer;
 }
 .list li font {
     float: right;
@@ -860,6 +866,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/close_img.png);
+	cursor: pointer;
 }
 .modal .modal-box .close-modal:hover {
     background-image: url(../assets/close_img_hover.png);
@@ -903,6 +910,7 @@ export default {
     height: 20vh;
     border: 1px solid #ddd;
     object-fit: cover;
+	cursor: pointer;
 }
 .modal .modal-box .modal-content .img-wrapper img:hover {
     opacity: .75;

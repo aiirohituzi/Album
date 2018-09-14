@@ -105,6 +105,7 @@ ul#navigation li a:hover {
     background-position:center center;
     background-image: url(assets/menu.png);
     z-index: 99;
+	cursor: pointer;
 }
 .navBtn.hidden {
     visibility: hidden;
@@ -153,6 +154,7 @@ ul#navigation li a:hover {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(assets/close.png);
+	cursor: pointer;
 }
 .closeBtn:hover {
     background-color: #1165cc;

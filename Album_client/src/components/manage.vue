@@ -580,6 +580,7 @@ export default {
     background-position: -3px -3px;
     /* background-position: center center; */
     background-image: url(../assets/update.png);
+	cursor: pointer;
 }
 .photos .update:hover {
     background-image: url(../assets/update_hover.png);
@@ -596,6 +597,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url(../assets/update.png);
+	cursor: pointer;
 }
 .update-btn-group .update:hover {
     background-image: url(../assets/update_hover.png);
@@ -608,6 +610,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url(../assets/cancel.png);
+	cursor: pointer;
 }
 .update-btn-group .cancel:hover {
     background-image: url(../assets/cancel_hover.png);
@@ -655,6 +658,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/delete.png);
+	cursor: pointer;
 }
 .menu .add {
     float: right;
@@ -665,6 +669,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/add.png);
+	cursor: pointer;
 }
 .menu .signOut {
     float: right;
@@ -674,6 +679,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/signOut.png);
+	cursor: pointer;
 }
 .menu .searchCategory {
     visibility: hidden;
@@ -714,6 +720,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/search.png);
+	cursor: pointer;
 }
 .menu .search.toggle {
     background-image: url(../assets/search_close.png);
@@ -766,6 +773,7 @@ export default {
     -moz-transition: all .5s ease-in-out;
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
+	cursor: pointer;
 }
 .div-detail .img-wrapper img:hover {
     opacity: .75;
@@ -855,6 +863,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center center;
     background-image: url(../assets/close_img.png);
+	cursor: pointer;
 }
 .modal .modal-box .close-modal:hover {
     background-image: url(../assets/close_img_hover.png);
