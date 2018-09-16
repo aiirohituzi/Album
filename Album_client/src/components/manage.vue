@@ -406,6 +406,7 @@ export default {
 
         updatePhotoToggle: function () {
             var divDetail = document.querySelector('.div-detail')
+            var div_ytb = document.getElementById('ytb')
 
             this.updateData.state_update = !this.updateData.state_update;
             if(this.updateData.state_update){
@@ -413,8 +414,10 @@ export default {
                 this.updateData.content = this.detail.content
 
                 divDetail.style.textAlign = 'left'
+                div_ytb.style.display = 'none'
             } else {
                 divDetail.style.textAlign = 'center'
+                div_ytb.style.removeProperty('display')
                 this.updateCancel()
             }
         },
