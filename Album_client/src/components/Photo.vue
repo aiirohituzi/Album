@@ -274,8 +274,8 @@ export default {
                                 div.removeChild(ytb)
                             }
 
-                            var regExp = /(https?:\/\/www.youtube.com\/watch\?v=[^#\&\?\n]{11,11})/
-                            var regExp2 = /(https:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}).*/
+                            var regExp = /(https?:\/\/www.youtube.com\/watch\?v=[^#\&\?\n]{11,11})|(https?:\/\/youtu.be\/[^#\&\?\n]{11,11})/
+                            var regExp2 = /((https?:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}))|((https?:\/\/youtu.be\/)([^#\&\?]{11,11}))/
                             var split_content = this.modal.content.split(regExp)
                             
                             
@@ -285,10 +285,16 @@ export default {
                                 if(regExp.test(split_content[i])){
                                     var match = split_content[i].match(regExp2)
                                     if(match){
+                                        var id
+                                        if(match[3]){
+                                            id = match[3]
+                                        } else if(match[6]){
+                                            id = match[6]
+                                        }
                                         var iframe = document.createElement("iframe")
                     
                                         iframe.setAttribute("frameBorder", 'no')
-                                        iframe.setAttribute( "src", '//www.youtube.com/embed/' + match[2]);
+                                        iframe.setAttribute( "src", '//www.youtube.com/embed/' + id);
                                         div_ytb.appendChild(iframe)
                                         
                                         div_ytb.insertAdjacentHTML('beforeend', "<font size='1' color='gray'>" + match[0] + '</font><br><br>')
