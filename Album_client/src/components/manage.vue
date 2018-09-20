@@ -231,6 +231,13 @@ export default {
                 
                 var div_ytb = document.createElement("div")
                 div_ytb.setAttribute("id", 'ytb')
+
+
+                
+
+                var test = div.innerHTML
+                console.log(div.innerHTML.replace(regExp, '###########'))
+
                 for(var i=0; i<split_content.length; i++){
                     if(regExp.test(split_content[i])){
                         var match = split_content[i].match(regExp2)
