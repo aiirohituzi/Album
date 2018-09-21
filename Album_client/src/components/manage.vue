@@ -219,6 +219,9 @@ export default {
 
             this.$nextTick( function() {
                 var div = document.getElementById('text')
+                div.innerHTML = this.detail.content
+                var temp_url = []
+                var replaceText = Math.random().toString(36).slice(2)
             
                 if(document.getElementById('ytb')){
                     var ytb = document.getElementById('ytb')
@@ -235,8 +238,10 @@ export default {
 
                 
 
-                var test = div.innerHTML
-                console.log(div.innerHTML.replace(regExp, '###########'))
+                // console.log(div.innerHTML.replace(regExp, '<a>###########</a>'))
+                // div.innerHTML = div.innerHTML.replace(regExp, "<a href=''>###########</a>")
+                // console.log(div.innerHTML)
+                // search 로 무한반복하면서 없을때까지 대체
 
                 for(var i=0; i<split_content.length; i++){
                     if(regExp.test(split_content[i])){
@@ -249,6 +254,9 @@ export default {
                             } else if(match[6]){
                                 id = match[6]
                             }
+                            temp_url.push(match[0])
+                            div.innerHTML = div.innerHTML.replace(match[0], replaceText)
+                            
                             var iframe = document.createElement("iframe")
                             
                             iframe.setAttribute("frameBorder", 'no')
@@ -261,6 +269,10 @@ export default {
                     if(i==split_content.length-1){
                         div.appendChild(div_ytb)
                     }
+                }
+                
+                for(var i=0; i<temp_url.length; i++) {
+                    div.innerHTML = div.innerHTML.replace(replaceText, "<a href='" + temp_url[i] + "'>" + temp_url[i] + "</a>")
                 }
             })
         },
