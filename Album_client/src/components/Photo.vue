@@ -268,6 +268,9 @@ export default {
 
                         this.$nextTick( function() {
                             var div = document.getElementById('text')
+                            div.innerHTML = this.modal.content
+                            var temp_url = []
+                            var replaceText = Math.random().toString(36).slice(2)
             
                             if(document.getElementById('ytb')){
                                 var ytb = document.getElementById('ytb')
@@ -278,19 +281,24 @@ export default {
                             var regExp2 = /((https?:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}))|((https?:\/\/youtu.be\/)([^#\&\?]{11,11}))/
                             var split_content = this.modal.content.split(regExp)
                             
-                            
                             var div_ytb = document.createElement("div")
                             div_ytb.setAttribute("id", 'ytb')
+
                             for(var i=0; i<split_content.length; i++){
                                 if(regExp.test(split_content[i])){
                                     var match = split_content[i].match(regExp2)
                                     if(match){
                                         var id
+
                                         if(match[3]){
                                             id = match[3]
                                         } else if(match[6]){
                                             id = match[6]
                                         }
+
+                                        temp_url.push(match[0])
+                                        div.innerHTML = div.innerHTML.replace(match[0], replaceText)
+
                                         var iframe = document.createElement("iframe")
                     
                                         iframe.setAttribute("frameBorder", 'no')
@@ -303,6 +311,10 @@ export default {
                                 if(i==split_content.length-1){
                                     div.appendChild(div_ytb)
                                 }
+                            }
+                            
+                            for(var i=0; i<temp_url.length; i++) {
+                                div.innerHTML = div.innerHTML.replace(replaceText, "<a href='" + temp_url[i] + "'>" + temp_url[i] + "</a>")
                             }
                         })
 

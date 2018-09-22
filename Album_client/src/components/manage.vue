@@ -235,25 +235,19 @@ export default {
                 var div_ytb = document.createElement("div")
                 div_ytb.setAttribute("id", 'ytb')
 
-
-                
-
-                // console.log(div.innerHTML.replace(regExp, '<a>###########</a>'))
-                // div.innerHTML = div.innerHTML.replace(regExp, "<a href=''>###########</a>")
-                // console.log(div.innerHTML)
-                // search 로 무한반복하면서 없을때까지 대체
-
                 for(var i=0; i<split_content.length; i++){
                     if(regExp.test(split_content[i])){
                         var match = split_content[i].match(regExp2)
                         // console.log(match)
                         if(match){
                             var id
+                            
                             if(match[3]){
                                 id = match[3]
                             } else if(match[6]){
                                 id = match[6]
                             }
+
                             temp_url.push(match[0])
                             div.innerHTML = div.innerHTML.replace(match[0], replaceText)
                             
