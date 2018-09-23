@@ -17,6 +17,7 @@
             </div>
             제목
             <input type="text" class="title" v-model="updateData.title" />
+            <!-- <div ref="text"></div> -->
             <div class="img-select-group">
                 <input type="checkbox" id="checkbox" v-model="updateData.imageUpdate">
                 <label for="checkbox">이미지 수정</label>
@@ -219,9 +220,10 @@ export default {
 
             this.$nextTick( function() {
                 var div = document.getElementById('text')
-                div.innerHTML = this.detail.content
-                var temp_url = []
-                var replaceText = Math.random().toString(36).slice(2)
+
+                // this.$refs.text.innerHTML = this.detail.content
+                // var temp_url = []
+                // var replaceText = Math.random().toString(36).slice(2)
             
                 if(document.getElementById('ytb')){
                     var ytb = document.getElementById('ytb')
@@ -248,8 +250,8 @@ export default {
                                 id = match[6]
                             }
 
-                            temp_url.push(match[0])
-                            div.innerHTML = div.innerHTML.replace(match[0], replaceText)
+                            // temp_url.push(match[0])
+                            // this.$refs.text.innerHTML = this.$refs.text.innerHTML.replace(match[0], replaceText)
                             
                             var iframe = document.createElement("iframe")
                             
@@ -257,7 +259,7 @@ export default {
                             iframe.setAttribute( "src", '//www.youtube.com/embed/' + id);
                             div_ytb.appendChild(iframe)
 
-                            div_ytb.insertAdjacentHTML('beforeend', "<font size='1' color='gray'>" + match[0] + '</font><br><br>')
+                            div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                         }
                     }
                     if(i==split_content.length-1){
@@ -265,9 +267,9 @@ export default {
                     }
                 }
                 
-                for(var i=0; i<temp_url.length; i++) {
-                    div.innerHTML = div.innerHTML.replace(replaceText, "<a href='" + temp_url[i] + "'>" + temp_url[i] + "</a>")
-                }
+                // for(var i=0; i<temp_url.length; i++) {
+                //     this.$refs.text.innerHTML = this.$refs.text.innerHTML.replace(replaceText, "<a href='" + temp_url[i] + "'>" + temp_url[i] + "</a>")
+                // }
             })
         },
 
@@ -434,9 +436,12 @@ export default {
 
                 divDetail.style.textAlign = 'left'
                 div_ytb.style.display = 'none'
+                // this.$refs.text.style.display = 'none'
+                
             } else {
                 divDetail.style.textAlign = 'center'
                 div_ytb.style.removeProperty('display')
+                // this.$refs.text.style.removeProperty('display')
                 this.updateCancel()
             }
         },
