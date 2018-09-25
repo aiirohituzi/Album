@@ -268,9 +268,6 @@ export default {
 
                         this.$nextTick( function() {
                             var div = document.getElementById('text')
-                            div.innerHTML = this.modal.content
-                            var temp_url = []
-                            var replaceText = Math.random().toString(36).slice(2)
             
                             if(document.getElementById('ytb')){
                                 var ytb = document.getElementById('ytb')
@@ -296,25 +293,18 @@ export default {
                                             id = match[6]
                                         }
 
-                                        temp_url.push(match[0])
-                                        div.innerHTML = div.innerHTML.replace(match[0], replaceText)
-
                                         var iframe = document.createElement("iframe")
                     
                                         iframe.setAttribute("frameBorder", 'no')
                                         iframe.setAttribute( "src", '//www.youtube.com/embed/' + id);
                                         div_ytb.appendChild(iframe)
                                         
-                                        div_ytb.insertAdjacentHTML('beforeend', "<font size='1' color='gray'>" + match[0] + '</font><br><br>')
+                                        div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                                     }
                                 }
                                 if(i==split_content.length-1){
                                     div.appendChild(div_ytb)
                                 }
-                            }
-                            
-                            for(var i=0; i<temp_url.length; i++) {
-                                div.innerHTML = div.innerHTML.replace(replaceText, "<a href='" + temp_url[i] + "'>" + temp_url[i] + "</a>")
                             }
                         })
 
