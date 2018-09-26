@@ -6,7 +6,15 @@
                 <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image)" />
             </div>
             <div id="text">
-                {{ detail.content }}
+                <div v-if="typeof detail.content === 'string'">
+                    {{ detail.content }}
+                </div>
+                <div v-else>
+                    <span v-for="n in detail.content.length">
+                        <a :href="detail.content[n-1]" v-if="n % 2 == 0">{{ detail.content[n-1] }}</a>
+                        <span v-else>{{ detail.content[n-1] }}</span>
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -224,6 +232,9 @@ export default {
                 // this.$refs.text.innerHTML = this.detail.content
                 // var temp_url = []
                 // var replaceText = Math.random().toString(36).slice(2)
+
+                var temp_content = []
+                var temp_row = ''
             
                 if(document.getElementById('ytb')){
                     var ytb = document.getElementById('ytb')
@@ -243,12 +254,17 @@ export default {
                         // console.log(match)
                         if(match){
                             var id
+
+                            temp_content.push(temp_row)
                             
                             if(match[3]){
                                 id = match[3]
                             } else if(match[6]){
                                 id = match[6]
                             }
+
+                            temp_content.push(split_content[i])
+                            temp_row = ''
 
                             // temp_url.push(match[0])
                             // this.$refs.text.innerHTML = this.$refs.text.innerHTML.replace(match[0], replaceText)
@@ -261,11 +277,22 @@ export default {
 
                             div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                         }
+                    } else {
+                        temp_row += split_content[i]
                     }
                     if(i==split_content.length-1){
+                        console.log('a')
                         div.appendChild(div_ytb)
+                        this.detail.content = temp_content
                     }
                 }
+                console.log(temp_content)
+
+
+                // *********** 링크가 없는 글의 경우 본문을 수정하지 않도록 해주어야함 ************* //
+
+
+
                 
                 // for(var i=0; i<temp_url.length; i++) {
                 //     this.$refs.text.innerHTML = this.$refs.text.innerHTML.replace(replaceText, "<a href='" + temp_url[i] + "'>" + temp_url[i] + "</a>")
