@@ -250,6 +250,7 @@ export default {
 
                 for(var i=0; i<split_content.length; i++){
                     if(regExp.test(split_content[i])){
+                        // console.log(split_content[i])
                         var match = split_content[i].match(regExp2)
                         // console.log(match)
                         if(match){
@@ -277,22 +278,18 @@ export default {
 
                             div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                         }
-                    } else {
+                    } else if(split_content[i] != undefined) {
                         temp_row += split_content[i]
                     }
                     if(i==split_content.length-1){
-                        console.log('a')
+                        if(temp_content.length != 0){
+                            this.detail.content = temp_content
+                        }
                         div.appendChild(div_ytb)
-                        this.detail.content = temp_content
                     }
                 }
-                console.log(temp_content)
-
-
-                // *********** 링크가 없는 글의 경우 본문을 수정하지 않도록 해주어야함 ************* //
-
-
-
+                // console.log(this.detail.content)
+                // console.log(temp_content)
                 
                 // for(var i=0; i<temp_url.length; i++) {
                 //     this.$refs.text.innerHTML = this.$refs.text.innerHTML.replace(replaceText, "<a href='" + temp_url[i] + "'>" + temp_url[i] + "</a>")
