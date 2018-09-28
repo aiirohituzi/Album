@@ -85,7 +85,15 @@
                     </div>
                     <br>
                     <div id="text">
-                        {{ this.modal.content }}
+                        <div v-if="typeof modal.content === 'string'">
+                            {{ modal.content }}
+                        </div>
+                        <div v-else>
+                            <span v-for="n in modal.content.length">
+                                <a :href="modal.content[n-1]" v-if="n % 2 == 0">{{ modal.content[n-1] }}</a>
+                                <span v-else>{{ modal.content[n-1] }}</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -273,6 +281,9 @@ export default {
                                 var ytb = document.getElementById('ytb')
                                 div.removeChild(ytb)
                             }
+                            
+                            var temp_content = []
+                            var temp_row = ''
 
                             var regExp = /(https?:\/\/www.youtube.com\/watch\?v=[^#\&\?\n]{11,11})|(https?:\/\/youtu.be\/[^#\&\?\n]{11,11})/
                             var regExp2 = /((https?:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}))|((https?:\/\/youtu.be\/)([^#\&\?]{11,11}))/
@@ -287,11 +298,16 @@ export default {
                                     if(match){
                                         var id
 
+                                        temp_content.push(temp_row)
+
                                         if(match[3]){
                                             id = match[3]
                                         } else if(match[6]){
                                             id = match[6]
                                         }
+
+                                        temp_content.push(split_content[i])
+                                        temp_row = ''
 
                                         var iframe = document.createElement("iframe")
                     
@@ -301,8 +317,13 @@ export default {
                                         
                                         div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                                     }
+                                } else if(split_content[i] != undefined) {
+                                    temp_row += split_content[i]
                                 }
                                 if(i==split_content.length-1){
+                                    if(temp_content.length != 0){
+                                        this.modal.content = temp_content
+                                    }
                                     div.appendChild(div_ytb)
                                 }
                             }

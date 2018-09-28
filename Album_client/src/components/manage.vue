@@ -233,13 +233,13 @@ export default {
                 // var temp_url = []
                 // var replaceText = Math.random().toString(36).slice(2)
 
-                var temp_content = []
-                var temp_row = ''
-            
                 if(document.getElementById('ytb')){
                     var ytb = document.getElementById('ytb')
                     div.removeChild(ytb)
                 }
+
+                var temp_content = []
+                var temp_row = ''
 
                 var regExp = /(https?:\/\/www.youtube.com\/watch\?v=[^#\&\?\n]{11,11})|(https?:\/\/youtu.be\/[^#\&\?\n]{11,11})/
                 var regExp2 = /((https?:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}))|((https?:\/\/youtu.be\/)([^#\&\?]{11,11}))/
