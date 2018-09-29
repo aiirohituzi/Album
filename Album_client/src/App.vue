@@ -29,6 +29,19 @@ export default {
             navBtn.classList.toggle('hidden')
             main.classList.toggle('move')
             navBtnAni.classList.toggle('click')
+            
+            var modalPhoto = document.querySelector('.modal-photo')
+            var modalWrite = document.querySelector('.modal-write')            
+            var modalDetailImage = document.querySelector('.modal-detailImage')
+            if(modalPhoto){
+                modalPhoto.classList.remove('toggle')
+            }
+            if(modalWrite){
+                modalWrite.classList.remove('toggle')
+            }
+            if(modalDetailImage){
+                modalDetailImage.classList.remove('toggle')
+            }
         },
     }
 }
