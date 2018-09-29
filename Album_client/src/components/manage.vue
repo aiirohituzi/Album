@@ -583,6 +583,8 @@ export default {
                 if(this.length < this.max) {
                     this.max = this.length
                 }
+                
+                this.more = true
             }, (error) => {
                 console.log(error)
             })

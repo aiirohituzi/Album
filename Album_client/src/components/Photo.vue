@@ -365,6 +365,8 @@ export default {
                     this.max = this.length
                 }
 
+                this.more = true
+
                 if(this.photos != 'False'){
                     for(var i=0; i<this.photos.length; i++){
                         for(var j=0; j<this.images.length; j++){
