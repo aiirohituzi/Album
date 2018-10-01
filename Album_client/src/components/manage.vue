@@ -829,9 +829,6 @@ export default {
     object-fit: cover;
     border-radius: 5px;
 
-    -moz-transition: all .5s ease-in-out;
-    -webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
 	cursor: pointer;
 }
 .div-detail .img-wrapper img:hover {

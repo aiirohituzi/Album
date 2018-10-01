@@ -941,6 +941,7 @@ export default {
     height: 20vh;
     border: 1px solid #ddd;
     object-fit: cover;
+    border-radius: 5px;
 	cursor: pointer;
 }
 .modal .modal-box .modal-content .img-wrapper img:hover {
