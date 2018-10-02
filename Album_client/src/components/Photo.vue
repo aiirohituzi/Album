@@ -614,7 +614,7 @@ export default {
 <style>
 .container-photo {
     margin-top: 20px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
 
 .top-menu {
@@ -1014,6 +1014,7 @@ export default {
 @media only screen and (max-width: 767px) {
     .empty {
         width: 95%;
+        font-size: 9pt;
     }
     .wrapper-masonry {
         width: 95%;
@@ -1042,6 +1043,9 @@ export default {
     }
     .modal .modal-box .modal-title .title {
         width: 98%;
+    }
+    .modal .modal-box .modal-content {
+        font-size: 9pt;
     }
     .modal .modal-box .modal-content textarea {
         width: 98%;
