@@ -305,7 +305,11 @@ export default {
 		},
 		
 		handleResize: function (e) {
-			this.scrollMove("section" + this.currentSection)
+			// this.scrollMove("section" + this.currentSection)
+			window.scroll({
+				top: this.getOffsetTop(document.getElementById('section' + this.currentSection)),
+				behavior: 'instant'
+			})
 		}
 	},
 	mounted () {
