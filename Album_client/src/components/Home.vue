@@ -302,7 +302,11 @@ export default {
 		},
         detail: function (id) {
             this.$router.push({name:'Photo', params:{id:id}})
-        },
+		},
+		
+		handleResize: function (e) {
+			this.scrollMove("section" + this.currentSection)
+		}
 	},
 	mounted () {
 		window.scroll({
@@ -315,6 +319,7 @@ export default {
 	created () {
 		if(window.addEventListener){
 			window.addEventListener('DOMMouseScroll', this.wheel, false)
+			window.addEventListener('resize', this.handleResize)
 		}
 		window.onmousewheel = document.onmousewheel = this.wheel
 
@@ -322,6 +327,7 @@ export default {
 	},
 	destroyed () {
 		window.removeEventListener('DOMMouseScroll', this.wheel)
+		window.removeEventListener('resize', this.handleResize)
 		window.onmousewheel = document.onmousewheel = null
 
 		document.body.style.overflowY = "scroll"
@@ -412,7 +418,8 @@ export default {
 .carousel {
 	display: inline-block;
 	margin-top: 10vh;
-	margin-left: 10vw;
+	margin-left: 10%;
+	margin-right: 10%;
 	width: 80%;
 	height: 80%;
 	border: 1px solid #000;
