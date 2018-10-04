@@ -72,6 +72,12 @@ ul#navigation {
     -moz-box-shadow: 0px 4px 6px #333;
     -webkit-box-shadow: 0px 4px 6px #333;
     box-shadow: 0px 4px 6px #333;
+    
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 ul#navigation li {
     width: 100%;

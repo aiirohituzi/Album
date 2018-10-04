@@ -870,6 +870,13 @@ export default {
     visibility: visible;
     animation: fade 300ms;
 }
+.modal-detailImage {
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
 .modal-detailImage.toggle {
     visibility: visible;
     animation: fade 300ms;

@@ -427,6 +427,12 @@ export default {
 	width: 80%;
 	height: 80%;
 	border: 1px solid #000;
+	
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .carousel-inner {

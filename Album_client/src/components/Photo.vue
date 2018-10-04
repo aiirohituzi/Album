@@ -752,6 +752,12 @@ export default {
     margin: auto;
     width: 70%;
     padding: 10px;
+
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 .wrapper-masonry .masonry {
     -moz-transition: all .2s ease-in-out;
@@ -801,6 +807,12 @@ export default {
 .list {
     width: 70%;
     margin: auto;
+
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 .list ul {
     list-style-type: none;
@@ -846,6 +858,13 @@ export default {
 .modal-write.toggle {
     visibility: visible;
     animation: fade 300ms;
+}
+.modal-detailImage {
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 .modal-detailImage.toggle {
     visibility: visible;
