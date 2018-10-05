@@ -602,12 +602,31 @@ export default {
                     }
                 }
             }
+        },
+
+        wheel: function (e) {
+            // console.log(e)
+            var scrollHeight = document.documentElement.scrollHeight
+            var scrollPosition = document.documentElement.clientHeight + window.scrollY
+            if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+                console.log('end')
+            } else {
+                console.log('not end')
+            }
+            // console.log(scrollHeight)
+            // console.log(scrollPosition)
         }
     },
     mounted: function () {
         this.fetchPhotos()
         this.checkSignIn()
-    }
+    },
+	created () {
+		window.onmousewheel = document.onmousewheel = this.wheel
+	},
+	destroyed () {
+		window.onmousewheel = document.onmousewheel = null
+	}
 }
 </script>
 
