@@ -199,6 +199,7 @@ export default {
             length: 1,
             max: 10,
             more: true,
+            scrollState: false,
         }
     },
     methods: {
@@ -605,16 +606,24 @@ export default {
         },
 
         wheel: function (e) {
-            // console.log(e)
+			if(this.scrollState == true){
+				return
+            }
+            
             var scrollHeight = document.documentElement.scrollHeight
             var scrollPosition = document.documentElement.clientHeight + window.scrollY
-            if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-                console.log('end')
-            } else {
-                console.log('not end')
-            }
             // console.log(scrollHeight)
             // console.log(scrollPosition)
+            if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+                this.scrollState = true
+                
+                this.moreData()
+                
+                var self = this
+                setTimeout(function(){
+                    self.scrollState = false
+                }, 500)
+            }
         }
     },
     mounted: function () {
