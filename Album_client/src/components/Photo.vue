@@ -41,8 +41,9 @@
                 </div>
             </div>
         </div>
-        <button v-if="more" class="btn-more" @click="moreData()">More</button>
-        <button v-else class="btn-more" disabled="disabled">No more data...</button>
+        <!-- <button v-if="more" class="btn-more" @click="moreData()">More</button>
+        <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
+        <div v-if="!more" class="end">마지막 게시글입니다.</div>
     </div>
 
     <div class="list" v-if="layout == 'list' && photos != 'False'">
@@ -60,9 +61,12 @@
                 <font size="1">{{ photos[n-1].created.split('.')[0] }}</font>
             </li>
         </ul>
-        <button v-if="more" class="btn-more" @click="moreData()">More</button>
-        <button v-else class="btn-more" disabled="disabled">No more data...</button>
+        <!-- <button v-if="more" class="btn-more" @click="moreData()">More</button>
+        <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
+        <div v-if="!more" class="end">마지막 게시글입니다.</div>
     </div>
+
+
 
     <div class="empty" v-if="photos == 'False'">
         검색결과가 없습니다.
@@ -831,6 +835,14 @@ export default {
     border-radius: 3px;
     padding: 10px;
 }
+.wrapper-masonry .end {
+    display: block;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center;
+    color: #888;
+    border: 1px solid #ccc;
+}
 
 .list {
     width: 70%;
@@ -866,6 +878,14 @@ export default {
     width: 100%;
     border-radius: 3px;
     padding: 10px;
+}
+.list .end {
+    display: block;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center;
+    color: #888;
+    border: 1px solid #ccc;
 }
 
 @keyframes fade {
