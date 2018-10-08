@@ -693,6 +693,8 @@ export default {
     -moz-transition: all .5s ease-in-out;
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
+
+    margin-bottom: 30px;
 }
 .btn-more {
     width: 100%;

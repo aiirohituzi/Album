@@ -842,6 +842,7 @@ export default {
     text-align: center;
     color: #888;
     border: 1px solid #ccc;
+    margin-bottom: 20px;
 }
 
 .list {
@@ -886,6 +887,7 @@ export default {
     text-align: center;
     color: #888;
     border: 1px solid #ccc;
+    margin-bottom: 20px;
 }
 
 @keyframes fade {
