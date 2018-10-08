@@ -590,6 +590,9 @@ export default {
             })
         },
     },
+	created () {
+		window.removeEventListener('DOMMouseScroll', this.wheel)
+    },
 }
 </script>
 

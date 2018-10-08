@@ -638,7 +638,7 @@ export default {
 		window.onmousewheel = document.onmousewheel = this.wheel
 	},
 	destroyed () {
-		window.onmousewheel = document.onmousewheel = null
+		// window.onmousewheel = document.onmousewheel = null
 	}
 }
 </script>

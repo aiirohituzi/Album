@@ -330,9 +330,9 @@ export default {
 		document.body.style.overflow = "hidden"
 	},
 	destroyed () {
-		window.removeEventListener('DOMMouseScroll', this.wheel)
+		// window.removeEventListener('DOMMouseScroll', this.wheel)
 		window.removeEventListener('resize', this.handleResize)
-		window.onmousewheel = document.onmousewheel = null
+		// window.onmousewheel = document.onmousewheel = null
 
 		document.body.style.overflowY = "scroll"
 
