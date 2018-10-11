@@ -61,8 +61,8 @@
                 <font size="1">{{ photos[n-1].created.split('.')[0] }}</font>
             </li>
         </ul>
-        <!-- <button v-if="more" class="btn-more" @click="moreData()">More</button>
-        <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
+        <button v-if="more" class="btn-more" @click="moreData()">More</button>
+        <!-- <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
         <div v-if="!more" class="end">마지막 게시글입니다.</div>
     </div>
 

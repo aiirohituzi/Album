@@ -263,6 +263,10 @@ def searchPhoto(request):
             queryset = Photo.objects.filter(content__icontains=keyword).order_by('-created')
         elif category == 'all':
             queryset = Photo.objects.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword)).order_by('-created')
+        elif category == 'date': ##################
+            start = request.GET.get('start', False)
+            end = request.GET.get('end', False) + datetime.timedelta(days=1)
+            queryset = Photo.objects.filter(created__range=[start, end]).order_by('-created')
     else:
         queryset = Photo.objects.all().order_by('-created')
 
