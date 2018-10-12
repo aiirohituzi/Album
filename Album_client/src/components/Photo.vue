@@ -6,11 +6,18 @@
         <!-- <div class="add" @click="modalToggle('write')"></div> -->
         <div class="search" @click="searchBarToggle()" title="검색"></div>
         <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword)"/>
+        <select class="searchDate" v-if="category == 'date'">
+            <option>전체기간</option>
+            <option>일주일전</option>
+            <option>한달전</option>
+            <option>1년전</option>
+        </select>
         <select class="searchCategory" v-model="category">
             <option disabled value="">검색 조건</option>
             <option value="title">제목</option>
             <option value="content">내용</option>
             <option value="all">제목+내용</option>
+            <option value="date">기간</option>
         </select>
     </div>
     
@@ -357,6 +364,8 @@ export default {
             searchBar.classList.toggle('toggle')
             search.classList.toggle('toggle')
             searchCategory.classList.toggle('toggle')
+
+            this.category = 'title'
         },
 
         search: function (category, keyword) {
@@ -667,6 +676,12 @@ export default {
 }
 .top-menu .searchCategory.toggle {
     visibility: visible;
+}
+.top-menu .searchDate {
+    float: right;
+    margin-right: 5px;
+    border-radius: 3px;
+    height: 29px;
 }
 .top-menu .searchBar {
     visibility: hidden;
