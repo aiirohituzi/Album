@@ -26,6 +26,7 @@ from photo.models import Key
 from photo.forms import KeyForm
 
 import datetime
+from django.utils import timezone
 
 
 def getPhoto(request):
@@ -259,26 +260,27 @@ def searchPhoto(request):
     keyword = request.GET.get('keyword', False)
     date = request.GET.get('date', 'all')    
 
-    td = None
+    start = None
     if date == 'week':
         td = datetime.timedelta(days=7)
+        start = timezone.now() - td
     elif date == 'month':
         td = datetime.timedelta(days=30)
+        start = timezone.now() - td
     elif date == 'year':
         td = datetime.timedelta(days=365)
-        
-    start = datetime.datetime.now() - td
-    end = datetime.datetime.now()
-    print(start)
-    print(end)
+        start = timezone.now() - td    
+    
+    end = timezone.now() + datetime.timedelta(days=1)
+    # print(start)
+    # print(end)
 
     if keyword:
         if category == 'title':
             if date == 'all':
                 queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
             else:
-                queryset = Photo.objects.filter(created__range=[start, end]).order_by('-created')
-                
+                queryset = Photo.objects.filter(Q(title__icontains=keyword) & Q(created__range=(start, end))).order_by('-created')
         elif category == 'content':
             if date == 'all':
                 queryset = Photo.objects.filter(content__icontains=keyword).order_by('-created')
