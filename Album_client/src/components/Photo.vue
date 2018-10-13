@@ -5,19 +5,18 @@
         <div v-if="manage" class="signOut" @click="signOut()" title="로그아웃"></div>
         <!-- <div class="add" @click="modalToggle('write')"></div> -->
         <div class="search" @click="searchBarToggle()" title="검색"></div>
-        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword)"/>
-        <select class="searchDate" v-if="category == 'date'">
-            <option>전체기간</option>
-            <option>일주일전</option>
-            <option>한달전</option>
-            <option>1년전</option>
-        </select>
+        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
         <select class="searchCategory" v-model="category">
             <option disabled value="">검색 조건</option>
             <option value="title">제목</option>
             <option value="content">내용</option>
             <option value="all">제목+내용</option>
-            <option value="date">기간</option>
+        </select>
+        <select class="searchDate" v-model="date">
+            <option value="all">전체기간</option>
+            <option value="week">일주일전</option>
+            <option value="month">한달전</option>
+            <option value="year">1년전</option>
         </select>
     </div>
     
@@ -188,6 +187,7 @@ export default {
             ],
             images: [],
             category: 'title',
+            date: 'all',
             keyword: null,
             modal: {
                 'photoId': '',
@@ -361,15 +361,18 @@ export default {
             var searchBar = document.querySelector('.searchBar')
             var search = document.querySelector('.search')
             var searchCategory = document.querySelector('.searchCategory')
+            var searchDate = document.querySelector('.searchDate')
             searchBar.classList.toggle('toggle')
             search.classList.toggle('toggle')
             searchCategory.classList.toggle('toggle')
+            searchDate.classList.toggle('toggle')
 
             this.category = 'title'
+            this.date = 'all'
         },
 
-        search: function (category, keyword) {
-            axios.get('http://localhost:8000/search/?category=' + category + '&keyword=' + keyword).then((response) => {
+        search: function (category, keyword, date) {
+            axios.get('http://localhost:8000/search/?category=' + category + '&keyword=' + keyword + '&date=' + date).then((response) => {
                 this.photos = response.data
                 // console.log(response)
                 this.length = response.data.length
@@ -678,10 +681,14 @@ export default {
     visibility: visible;
 }
 .top-menu .searchDate {
+    visibility: hidden;
     float: right;
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
+}
+.top-menu .searchDate.toggle {
+    visibility: visible;
 }
 .top-menu .searchBar {
     visibility: hidden;

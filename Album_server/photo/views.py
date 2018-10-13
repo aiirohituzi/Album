@@ -25,6 +25,8 @@ import random
 from photo.models import Key
 from photo.forms import KeyForm
 
+import datetime
+
 
 def getPhoto(request):
     data = []
@@ -255,18 +257,39 @@ def searchPhoto(request):
     
     category = request.GET.get('category', 'title')
     keyword = request.GET.get('keyword', False)
+    date = request.GET.get('date', 'all')    
+
+    td = None
+    if date == 'week':
+        td = datetime.timedelta(days=7)
+    elif date == 'month':
+        td = datetime.timedelta(days=30)
+    elif date == 'year':
+        td = datetime.timedelta(days=365)
+        
+    start = datetime.datetime.now() - td
+    end = datetime.datetime.now()
+    print(start)
+    print(end)
 
     if keyword:
         if category == 'title':
-            queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
+            if date == 'all':
+                queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
+            else:
+                queryset = Photo.objects.filter(created__range=[start, end]).order_by('-created')
+                
         elif category == 'content':
-            queryset = Photo.objects.filter(content__icontains=keyword).order_by('-created')
+            if date == 'all':
+                queryset = Photo.objects.filter(content__icontains=keyword).order_by('-created')
+            else:
+                queryset = Photo.objects.filter(Q(content__icontains=keyword) & Q(created__range=[start, end])).order_by('-created')
         elif category == 'all':
-            queryset = Photo.objects.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword)).order_by('-created')
-        elif category == 'date': ##################
-            start = request.GET.get('start', False)
-            end = request.GET.get('end', False) + datetime.timedelta(days=1)
-            queryset = Photo.objects.filter(created__range=[start, end]).order_by('-created')
+            if date == 'all':
+                queryset = Photo.objects.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword)).order_by('-created')
+            else:
+                queryset = Photo.objects.filter((Q(title__icontains=keyword) | Q(content__icontains=keyword)) & Q(created__range=[start, end])).order_by('-created')
+
     else:
         queryset = Photo.objects.all().order_by('-created')
 
