@@ -833,6 +833,10 @@ export default {
     padding-top: 2px;
     padding-bottom: 2px;
 	cursor: pointer;
+
+    -webkit-column-break-inside: avoid-column;
+    page-break-inside: avoid-column;
+    break-inside: avoid-column;
 }
 .wrapper-masonry .masonry .brick .item {
     text-align: center;
