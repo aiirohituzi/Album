@@ -933,15 +933,18 @@ export default {
 }
 .modal .modal-box .modal-title {
     line-height: 5vh;
-    padding-left: 2.2vw;
+    padding-left: 1.5vh;
+    padding-right: 1.5vh;
     vertical-align: middle;
     border-bottom: 1px solid #ccc;
 }
 .modal .modal-box .modal-content {
     text-align: center;
     height: 88vh;
-    padding: 1vh;
+    padding-left: 1.5vh;
+    padding-right: 2.5vh;
     overflow-y: scroll;
+    overflow-x: hidden;
     white-space: pre-line;
 }
 .modal .modal-box .close-modal {
@@ -960,12 +963,11 @@ export default {
     background-image: url(../assets/close_img_hover.png);
 }
 .modal .modal-box .modal-content .img-select-group {
-    float: left;
-    padding-left: 1vh;
     padding-bottom: 1vh;
+    /* border: 1px solid #f00; */
 }
 .modal .modal-box .modal-content textarea {
-    width: 55vw;
+    width: 100%;
     height: 80vh;
     resize: none;
     overflow-y: scroll;
@@ -986,7 +988,7 @@ export default {
     width: 60px;
 }
 .modal .modal-box .modal-title .title {
-    width: 53vw;
+    width: calc(100% - 30px - 1vh);
 }
 .modal .modal-box .detailImage{
     text-align: center;
@@ -1067,13 +1069,16 @@ export default {
         position: fixed;
     }
     .modal .modal-box .modal-title .title {
-        width: 98%;
+        width: 100%;
     }
-    .modal .modal-box .modal-content textarea {
+    /* .modal .modal-box .modal-content textarea {
         width: 98%;
         height: 80vh;
         resize: none;
         overflow-y: scroll;
+    } */
+    .modal .modal-box .modal-content {
+        padding-right: 2vh;
     }
     .div-detail iframe {
         width: 60vw;
