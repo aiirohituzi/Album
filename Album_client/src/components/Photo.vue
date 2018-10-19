@@ -971,14 +971,16 @@ export default {
 }
 .modal .modal-box .modal-title {
     line-height: 5vh;
-    padding-left: 2.2vw;
+    padding-left: 1.5vh;
+    padding-right: 1.5vh;
     vertical-align: middle;
     border-bottom: 1px solid #ccc;
 }
 .modal .modal-box .modal-content {
     text-align: center;
     height: 88vh;
-    padding: 1vh;
+    padding-left: 1.5vh;
+    padding-right: 1.5vh;
     overflow-y: scroll;
     white-space: pre-line;
 }
@@ -1070,7 +1072,7 @@ export default {
 }
 
 .modal .modal-box .modal-title .title {
-    width: 53vw;
+    width: calc(100% - 30px - 1vh);
 }
 
 @media only screen and (min-width: 1024px) {
@@ -1137,7 +1139,7 @@ export default {
         position: fixed;
     }
     .modal .modal-box .modal-title .title {
-        width: 98%;
+        width: 100%;
     }
     .modal .modal-box .modal-content {
         font-size: 9pt;
