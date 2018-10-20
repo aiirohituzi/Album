@@ -7,6 +7,9 @@ import Sign from '@/components/Sign'
 import Manage from '@/components/Manage'
 import VueSession from 'vue-session'
 
+import JHome from '@/components/jqueryPractice/JHome'
+
+
 Vue.use(Router)
 Vue.use(VueSession)
 
@@ -37,6 +40,11 @@ export default new Router({
       path: '/Manage',
       name: 'Manage',
       component: Manage
-    }
+    },
+    {
+      path: '/JHome',
+      name: 'JHome',
+      component: JHome
+    },
   ]
 })
