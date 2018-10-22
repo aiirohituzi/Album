@@ -22,6 +22,7 @@ export default {
         return {
             currentSection: 0,
             scrollState: false,
+            lastScrollTop: 0,
         }
     },
     methods: {
@@ -33,42 +34,32 @@ export default {
                 $(this).addClass('grid-item-' + i).css('background-color', color_array[i])
             })
         },
-        scrollDetector: function () {
-            if(this.scrollState){
-                return
-            }
-            var lastScrollTop = 0;
-            var st = $(this).scrollTop();
-            if (st > lastScrollTop){    // down
-                console.log('a')
-                this.scrollHandler(true)
-            } else {                    // up
-            console.log('b')
-                this.scrollHandler(false)
-            }
-            lastScrollTop = st;
-        },
         scrollHandler: function (direction) {
-            this.scrollState = true
             if(direction) {
+                if(this.currentSection+1 >= $('section').length){
+                    console.log('aa')
+				    this.scrollState = false
+                    return
+                }
                 this.currentSection++
-                var section = this.currentSection % $('section').length
-                console.log( $('.grid-item-' + section).offset().top)
                 
                 window.scroll({
-                    top: $('.grid-item-' + section).offset().top,
+                    top: $('.grid-item-' + this.currentSection).offset().top,
                     behavior: 'smooth'
                 })
             } else {
+                if(this.currentSection-1 < 0){
+                    console.log('bb')
+                    this.scrollState = false
+                    return
+                }
                 this.currentSection--
-                var section = this.currentSection % $('section').length
-                console.log(section)
-                console.log( $('.grid-item-' + section).offset().top)
                 window.scroll({
-                    top: $('.grid-item-' + section).offset().top,
+                    top: $('.grid-item-' + this.currentSection).offset().top,
                     behavior: 'smooth'
                 })
             }
+            this.lastScrollTop = $('.grid-item-' + this.currentSection).offset().top
             var self = this
 			setTimeout(function(){
 				self.scrollState = false
@@ -80,8 +71,23 @@ export default {
     },
 	created () {
         var self = this
+        // var lastScrollTop = 0
         $(window).scroll(function () {
-            self.scrollDetector()
+            if(self.scrollState){
+                console.log(self.scrollState)
+                return
+            }
+            var st = $(this).scrollTop()
+            console.log('st:' + st)
+            console.log('last:' + self.lastScrollTop)
+            if (st > self.lastScrollTop){    // down
+                self.scrollHandler(true)
+                console.log('down')
+            } else {                    // up
+                self.scrollHandler(false)
+                console.log('up')
+            }
+            self.scrollState = true
         })
 	},
 	destroyed () {
