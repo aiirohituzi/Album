@@ -21,7 +21,7 @@ export default {
     data () {
         return {
             // currentSection: 0,
-            // scrollState: false,
+            scrollState: false,
             // lastScrollTop: 0,
         }
     },
@@ -37,36 +37,42 @@ export default {
             
             $("section").each(function () {
                 $(this).on("mousewheel DOMMouseScroll", function (e) {
-                    e.preventDefault();
-                    var delta = 0;
-                    if (!event) event = window.event;
+                    if(this.scrollState) { return }
+                    e.preventDefault()
+                    var delta = 0
+                    if (!event) event = window.event
                     if (event.wheelDelta) {
-                        delta = event.wheelDelta / 120;
-                        if (window.opera) delta = -delta;
-                    } else if (event.detail) delta = -event.detail / 3;
-                    var moveTop = null;
+                        delta = event.wheelDelta / 120
+                        if (window.opera) delta = -delta
+                    } else if (event.detail) delta = -event.detail / 3
+                    var moveTop = null
                     if (delta < 0) {        // down
                         if ($(this).next().offset() != undefined) {
                             // console.log($(this).next().offset())
-                            moveTop = $(this).next().offset().top;
+                            moveTop = $(this).next().offset().top
                         }
                     } else {                // up
                         if ($(this).prev().offset() != undefined) {
                             // console.log($(this).prev().offset())
-                            moveTop = $(this).prev().offset().top;
+                            moveTop = $(this).prev().offset().top
                         }
                     }
                     
                     if(moveTop == null) { return }
 
+                    this.scrollState = true
                     $("html,body").stop().animate({
                         scrollTop: moveTop + 'px'
                     }, {
                         duration: 500, complete: function () {
                         }
-                    });
-                });
-            });
+                    })
+                    var self = this
+                    setTimeout(function(){
+                        self.scrollState = false
+                    }, 500)
+                })
+            })
         },
         // scrollHandler: function (direction) {
         //     if(direction) {
