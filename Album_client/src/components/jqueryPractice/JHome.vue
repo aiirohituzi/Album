@@ -20,9 +20,9 @@ export default {
     name: 'JHome',
     data () {
         return {
-            currentSection: 0,
-            scrollState: false,
-            lastScrollTop: 0,
+            // currentSection: 0,
+            // scrollState: false,
+            // lastScrollTop: 0,
         }
     },
     methods: {
@@ -33,64 +33,101 @@ export default {
                 i++
                 $(this).addClass('grid-item-' + i).css('background-color', color_array[i])
             })
+
+            
+            $("section").each(function () {
+                $(this).on("mousewheel DOMMouseScroll", function (e) {
+                    e.preventDefault();
+                    var delta = 0;
+                    if (!event) event = window.event;
+                    if (event.wheelDelta) {
+                        delta = event.wheelDelta / 120;
+                        if (window.opera) delta = -delta;
+                    } else if (event.detail) delta = -event.detail / 3;
+                    var moveTop = null;
+                    if (delta < 0) {        // down
+                        if ($(this).next().offset() != undefined) {
+                            // console.log($(this).next().offset())
+                            moveTop = $(this).next().offset().top;
+                        }
+                    } else {                // up
+                        if ($(this).prev().offset() != undefined) {
+                            // console.log($(this).prev().offset())
+                            moveTop = $(this).prev().offset().top;
+                        }
+                    }
+                    
+                    if(moveTop == null) { return }
+
+                    $("html,body").stop().animate({
+                        scrollTop: moveTop + 'px'
+                    }, {
+                        duration: 500, complete: function () {
+                        }
+                    });
+                });
+            });
         },
-        scrollHandler: function (direction) {
-            if(direction) {
-                if(this.currentSection+1 >= $('section').length){
-                    console.log('aa')
-				    this.scrollState = false
-                    return
-                }
-                this.currentSection++
+        // scrollHandler: function (direction) {
+        //     if(direction) {
+        //         if(this.currentSection+1 >= $('section').length){
+        //             console.log('aa')
+		// 		    this.scrollState = false
+        //             return
+        //         }
+        //         this.currentSection++
                 
-                window.scroll({
-                    top: $('.grid-item-' + this.currentSection).offset().top,
-                    behavior: 'smooth'
-                })
-            } else {
-                if(this.currentSection-1 < 0){
-                    console.log('bb')
-                    this.scrollState = false
-                    return
-                }
-                this.currentSection--
-                window.scroll({
-                    top: $('.grid-item-' + this.currentSection).offset().top,
-                    behavior: 'smooth'
-                })
-            }
-            this.lastScrollTop = $('.grid-item-' + this.currentSection).offset().top
-            var self = this
-			setTimeout(function(){
-				self.scrollState = false
-			}, 500)
-        }
+        //         window.scroll({
+        //             top: $('.grid-item-' + this.currentSection).offset().top,
+        //             behavior: 'smooth'
+        //         })
+        //     } else {
+        //         if(this.currentSection-1 < 0){
+        //             console.log('bb')
+        //             this.scrollState = false
+        //             return
+        //         }
+        //         this.currentSection--
+        //         window.scroll({
+        //             top: $('.grid-item-' + this.currentSection).offset().top,
+        //             behavior: 'smooth'
+        //         })
+        //     }
+        //     this.lastScrollTop = $('.grid-item-' + this.currentSection).offset().top
+        //     var self = this
+		// 	setTimeout(function(){
+		// 		self.scrollState = false
+		// 	}, 500)
+        // }
     },
 	mounted () {
         this.ready()
     },
 	created () {
-        var self = this
+        $('body').addClass('hiddenScrollBar')
+
+        // var self = this
         // var lastScrollTop = 0
-        $(window).scroll(function () {
-            if(self.scrollState){
-                console.log(self.scrollState)
-                return
-            }
-            var st = $(this).scrollTop()
-            console.log('st:' + st)
-            console.log('last:' + self.lastScrollTop)
-            if (st > self.lastScrollTop){    // down
-                self.scrollHandler(true)
-                console.log('down')
-            } else {                    // up
-                self.scrollHandler(false)
-                console.log('up')
-            }
-            self.scrollState = true
-        })
+        // $(window).scroll(function () {
+        //     if(self.scrollState){
+        //         console.log(self.scrollState)
+        //         return
+        //     }
+        //     var st = $(this).scrollTop()
+        //     console.log('st:' + st)
+        //     console.log('last:' + self.lastScrollTop)
+        //     if (st > self.lastScrollTop){    // down
+        //         self.scrollHandler(true)
+        //         console.log('down')
+        //     } else {                    // up
+        //         self.scrollHandler(false)
+        //         console.log('up')
+        //     }
+        //     self.scrollState = true
+        // })
 	},
 	destroyed () {
+        $('body').removeClass('hiddenScrollBar')
     }
 }
 </script>
@@ -101,5 +138,8 @@ section {
     text-align: center;
     height: 100vh;
     /* color: white; */
+}
+.hiddenScrollBar {
+    overflow: hidden;
 }
 </style>
