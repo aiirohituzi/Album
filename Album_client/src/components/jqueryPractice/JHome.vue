@@ -12,6 +12,11 @@
     <section>
         <div>4</div>
     </section>
+
+    <div class="nav-section"></div>
+    <div class="nav-section"></div>
+    <div class="nav-section"></div>
+    <div class="nav-section"></div>
 </div>
 </template>
 
@@ -73,6 +78,22 @@ export default {
                     }, 500)
                 })
             })
+
+            i = -1
+            var interval_array = ['+ 45','+ 15','- 15','- 45']
+            $(".nav-section").each(function () {
+                i++
+                $(this).addClass('item-' + i).css({
+                    'position': 'fixed',
+                    'width': '5px',
+                    'height': '5px',
+                    'border': '3px solid #888888',
+                    'border-radius': '5px',
+                    'right': '30px',
+                    'bottom': 'calc(50vh ' + interval_array[i] + 'px)',
+                    'cursor': 'pointer'
+                })
+            })
         },
         // scrollHandler: function (direction) {
         //     if(direction) {
@@ -110,7 +131,13 @@ export default {
         this.ready()
     },
 	created () {
-        $('body').addClass('hiddenScrollBar')
+        $('body').css('overflow', 'hidden')
+        $("html,body").stop().animate({
+            scrollTop: '0px'
+        }, {
+            duration: 0, complete: function () {
+            }
+        })
 
         // var self = this
         // var lastScrollTop = 0
@@ -133,7 +160,7 @@ export default {
         // })
 	},
 	destroyed () {
-        $('body').removeClass('hiddenScrollBar')
+        $('body').css('overflow', '')
     }
 }
 </script>
