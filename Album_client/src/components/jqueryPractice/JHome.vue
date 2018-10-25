@@ -1,22 +1,22 @@
 <template>
 <div>
     <section>
-        <div>1</div>
+        <div>1 {{currentSection}}</div>
     </section>
     <section>
-        <div>2</div>
+        <div>2 {{currentSection}}</div>
     </section>
     <section>
-        <div>3</div>
+        <div>3 {{currentSection}}</div>
     </section>
     <section>
-        <div>4</div>
+        <div>4 {{currentSection}}</div>
     </section>
 
-    <div class="nav-section"></div>
-    <div class="nav-section"></div>
-    <div class="nav-section"></div>
-    <div class="nav-section"></div>
+    <div class="nav-section on" @click="sectionMove(0)"></div>
+    <div class="nav-section" @click="sectionMove(1)"></div>
+    <div class="nav-section" @click="sectionMove(2)"></div>
+    <div class="nav-section" @click="sectionMove(3)"></div>
 </div>
 </template>
 
@@ -25,8 +25,8 @@ export default {
     name: 'JHome',
     data () {
         return {
-            // currentSection: 0,
-            scrollState: false,
+            currentSection: 0,
+            // scrollState: false,
             // lastScrollTop: 0,
         }
     },
@@ -38,7 +38,6 @@ export default {
                 i++
                 $(this).addClass('grid-item-' + i).css('background-color', color_array[i])
             })
-
             
             $("section").each(function () {
                 $(this).on("mousewheel DOMMouseScroll", function (e) {
@@ -55,11 +54,21 @@ export default {
                         if ($(this).next().offset() != undefined) {
                             // console.log($(this).next().offset())
                             moveTop = $(this).next().offset().top
+
+                            // var preSection = this.currentSection
+                            // this.currentSection++
+                            // $('.nav-item-' + preSection).removeClass('on')
+			                // $('.nav-item-' + this.currentSection).addClass('on')
                         }
                     } else {                // up
                         if ($(this).prev().offset() != undefined) {
                             // console.log($(this).prev().offset())
                             moveTop = $(this).prev().offset().top
+                            
+                            // var preSection = this.currentSection
+                            // this.currentSection--
+                            // $('.nav-item-' + preSection).removeClass('on')
+			                // $('.nav-item-' + this.currentSection).addClass('on')
                         }
                     }
                     
@@ -83,7 +92,7 @@ export default {
             var interval_array = ['+ 45','+ 15','- 15','- 45']
             $(".nav-section").each(function () {
                 i++
-                $(this).addClass('item-' + i).css({
+                $(this).addClass('nav-item-' + i).css({
                     'position': 'fixed',
                     'width': '5px',
                     'height': '5px',
@@ -94,7 +103,33 @@ export default {
                     'cursor': 'pointer'
                 })
             })
+
+
+            $("html,body").stop().animate({
+                scrollTop: '0px'
+            }, {
+                duration: 100, complete: function () {
+                }
+            })
         },
+
+        sectionMove: function (sectionNo) {
+			var preSection = this.currentSection
+            this.currentSection = sectionNo
+            
+            $("html,body").stop().animate({
+                scrollTop: $('.grid-item-' + sectionNo).offset().top + 'px'
+            }, {
+                duration: 500, complete: function () {
+                }
+            })
+
+			var preNavSection = $('.nav-item-' + preSection)
+			var curNavSection = $('.nav-item-' + this.currentSection)
+			
+			preNavSection.removeClass('on')
+			curNavSection.addClass('on')
+		},
         // scrollHandler: function (direction) {
         //     if(direction) {
         //         if(this.currentSection+1 >= $('section').length){
@@ -131,13 +166,7 @@ export default {
         this.ready()
     },
 	created () {
-        $('body').css('overflow', 'hidden')
-        $("html,body").stop().animate({
-            scrollTop: '0px'
-        }, {
-            duration: 0, complete: function () {
-            }
-        })
+        $('body').addClass('hiddenScrollBar')
 
         // var self = this
         // var lastScrollTop = 0
@@ -160,7 +189,7 @@ export default {
         // })
 	},
 	destroyed () {
-        $('body').css('overflow', '')
+        $('body').removeClass('hiddenScrollBar')
     }
 }
 </script>
@@ -174,5 +203,10 @@ section {
 }
 .hiddenScrollBar {
     overflow: hidden;
+}
+.on {
+    width: 5px;
+    height: 5px;
+    background: #888888;
 }
 </style>
