@@ -26,7 +26,7 @@ export default {
     data () {
         return {
             currentSection: 0,
-            // scrollState: false,
+            scrollState: false,
             // lastScrollTop: 0,
         }
     },
@@ -38,10 +38,14 @@ export default {
                 i++
                 $(this).addClass('grid-item-' + i).css('background-color', color_array[i])
             })
-            
+
+            var self = this
             $("section").each(function () {
                 $(this).on("mousewheel DOMMouseScroll", function (e) {
-                    if(this.scrollState) { return }
+                    if(self.scrollState) {
+                        return
+                    }
+
                     e.preventDefault()
                     var delta = 0
                     if (!event) event = window.event
@@ -49,39 +53,31 @@ export default {
                         delta = event.wheelDelta / 120
                         if (window.opera) delta = -delta
                     } else if (event.detail) delta = -event.detail / 3
+
                     var moveTop = null
                     if (delta < 0) {        // down
-                        if ($(this).next().offset() != undefined) {
-                            // console.log($(this).next().offset())
-                            moveTop = $(this).next().offset().top
+                        if (($(this).next().offset() != undefined) && ($(this).next().index() < $("section").length)) {
+                            // moveTop = $(this).next().offset().top
 
-                            // var preSection = this.currentSection
-                            // this.currentSection++
-                            // $('.nav-item-' + preSection).removeClass('on')
-			                // $('.nav-item-' + this.currentSection).addClass('on')
+                            self.sectionMove($(this).next().index())
                         }
                     } else {                // up
-                        if ($(this).prev().offset() != undefined) {
-                            // console.log($(this).prev().offset())
-                            moveTop = $(this).prev().offset().top
-                            
-                            // var preSection = this.currentSection
-                            // this.currentSection--
-                            // $('.nav-item-' + preSection).removeClass('on')
-			                // $('.nav-item-' + this.currentSection).addClass('on')
+                        if (($(this).prev().offset() != undefined) && ($(this).prev().index() > -1)) {
+                            // moveTop = $(this).prev().offset().top
+
+                            self.sectionMove($(this).prev().index())
                         }
                     }
                     
-                    if(moveTop == null) { return }
+                    // if(moveTop == null) { return }
 
-                    this.scrollState = true
-                    $("html,body").stop().animate({
-                        scrollTop: moveTop + 'px'
-                    }, {
-                        duration: 500, complete: function () {
-                        }
-                    })
-                    var self = this
+                    self.scrollState = true
+                    // $("html,body").stop().animate({
+                    //     scrollTop: moveTop + 'px'
+                    // }, {
+                    //     duration: 500, complete: function () {
+                    //     }
+                    // })
                     setTimeout(function(){
                         self.scrollState = false
                     }, 500)
