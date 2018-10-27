@@ -1,16 +1,44 @@
 <template>
 <div>
     <section>
-        <div>1 {{currentSection}}</div>
+        <div>1</div>
     </section>
     <section>
-        <div>2 {{currentSection}}</div>
+        <div>2</div>
     </section>
     <section>
-        <div>3 {{currentSection}}</div>
+        <div>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <!-- <div v-if="carouselLength==1">
+                        <div class="img-wrapper">
+                            <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="img-wrapper" v-for="n in carouselLength">
+                            <img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="carousel-controler">
+                    <div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
+                    <div class="clickSpace" @click="detail(photos[currentCarouselItem-1].id)"></div>
+                    <div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
+                </div>
+                
+                <div class="carousel-nav">
+                    <!-- <div v-for="n in carouselLength" :class="'carousel-item'+n" @click="carouselMove(n)"></div> -->
+                    <div class="on"></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
     </section>
     <section>
-        <div>4 {{currentSection}}</div>
+        <div>4</div>
     </section>
 
     <div class="nav-section on" @click="sectionMove(0)"></div>
@@ -96,6 +124,21 @@ export default {
                     'border-radius': '5px',
                     'right': '30px',
                     'bottom': 'calc(50vh ' + interval_array[i] + 'px)',
+                    'cursor': 'pointer'
+                })
+            })
+
+            i = -1
+            $(".carousel-nav").children().each(function () {
+                i++
+                $(this).addClass('carousel-item-' + i).css({
+                    'display': 'inline-block',
+                    'width': '5px',
+                    'height': '5px',
+                    'border': '3px solid #888888',
+                    'border-radius': '5px',
+                    'margin-left': '15px',
+                    'margin-right': '15px',
                     'cursor': 'pointer'
                 })
             })
@@ -195,7 +238,6 @@ section {
     font-size: 35px;
     text-align: center;
     height: 100vh;
-    /* color: white; */
 }
 .hiddenScrollBar {
     overflow: hidden;
@@ -204,5 +246,120 @@ section {
     width: 5px;
     height: 5px;
     background: #888888;
+}
+
+.carousel {
+	display: inline-block;
+	margin-top: 10vh;
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
+	height: 80%;
+	border: 1px solid #000;
+	
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.carousel-inner {
+	height: 100%;
+	white-space:nowrap;
+	overflow: hidden;
+}
+.carousel-inner .img-wrapper{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+
+	transform:translate(0, 0);
+	-webkit-transform:translate(0, 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
+}
+.carousel-inner .img-wrapper img{
+	height:80vh;
+	width:80vw;
+	object-fit: cover;
+	vertical-align: top;
+}
+
+.carousel .carousel-controler {
+	position: relative;
+	/* top: -80vh; */
+	width: 100%;
+	height: 100%;
+}
+.carousel .carousel-controler .clickSpace {
+	float: left;
+	height: 100%;
+	width: 70%;
+
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.carousel .carousel-controler .control-left {
+	float: left;
+	height: 100%;
+	width: 15%;
+	cursor: pointer;
+	line-height: 80vh;
+	text-align: center;
+
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	
+	background: linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+	opacity: 0.8;
+}
+.carousel .carousel-controler .control-left:hover {
+	opacity: 1;
+}
+.carousel .carousel-controler .control-right {
+	float: right;
+	height: 100%;
+	width: 15%;
+	cursor: pointer;
+	line-height: 80vh;
+	text-align: center;
+
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	background: linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+	opacity: 0.8;
+}
+.carousel .carousel-controler .control-right:hover {
+	opacity: 1;
+}
+
+.carousel .carousel-nav {
+	position: relative;
+	/* top: -85vh; */
+	white-space: nowrap;
+	text-align: center;
+}
+.carousel .carousel-nav .carousel-item1 {
+	display:inline-block;
+    width: 5px;
+    height: 5px;
+	border: 3px solid #888888;
+    border-radius: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	cursor: pointer;
 }
 </style>
