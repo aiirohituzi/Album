@@ -10,7 +10,7 @@
         <div>
             <div class="carousel">
                 <div class="carousel-inner">
-                    <!-- <div v-if="carouselLength==1">
+                    <div v-if="carouselLength==1">
                         <div class="img-wrapper">
                             <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
                         </div>
@@ -19,7 +19,7 @@
                         <div class="img-wrapper" v-for="n in carouselLength">
                             <img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
                         </div>
-                    </div> -->
+                    </div>
                 </div>
 
                 <div class="carousel-controler">
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'JHome',
     data () {
@@ -56,9 +58,49 @@ export default {
             currentSection: 0,
             scrollState: false,
             // lastScrollTop: 0,
+            
+			carouselLength: 1,
+            photos: [
+                {
+                    'id': '',
+                    'title': '',
+                    'content': '',
+                    'created': '',
+                    'thumbnail': undefined,
+                },
+			],
+            images: [],
         }
     },
     methods: {
+        fetchRecentPhotos: async function () {
+			await axios.get('http://localhost:8000/recentPhotos/').then((response) => {
+                this.photos = response.data
+                // console.log(response)
+            }, (error) => {
+                console.log(error)
+            })
+
+			axios.get('http://localhost:8000/images/').then((response) => {
+                // console.log(response)
+                this.images = response.data
+                for(var i=0; i<this.photos.length; i++){
+                    for(var j=0; j<this.images.length; j++){
+                        if(this.photos[i].id == this.images[j].photoId){
+                            this.photos[i].thumbnail = this.images[j].image
+                            break
+                        }
+                    }
+                }
+				this.carouselLength = this.photos.length	// 갱신된 정보로 캐러셀을 다시 렌더링 시키기 위해 마지막에 변경
+            }, (error) => {
+                console.log(error)
+            })
+        },
+        imagePath: function (path) {
+            return require('../../assets/image/' + path)
+        },
+
         ready: function () {
             var i = -1
             var color_array = ['#ff8888','#88ff88','#8888ff','#ffff88']
@@ -202,6 +244,7 @@ export default {
         // }
     },
 	mounted () {
+        this.fetchRecentPhotos()
         this.ready()
     },
 	created () {
@@ -251,10 +294,11 @@ section {
 .carousel {
 	display: inline-block;
 	margin-top: 10vh;
+	margin-bottom: 10vh;
 	margin-left: 10%;
 	margin-right: 10%;
-	width: 80%;
-	height: 80%;
+	width: 80vw;
+	height: 80vh;
 	border: 1px solid #000;
 	
 	-ms-user-select: none;
@@ -289,7 +333,7 @@ section {
 
 .carousel .carousel-controler {
 	position: relative;
-	/* top: -80vh; */
+	top: -80vh;
 	width: 100%;
 	height: 100%;
 }
@@ -348,18 +392,8 @@ section {
 
 .carousel .carousel-nav {
 	position: relative;
-	/* top: -85vh; */
+	top: -90vh;
 	white-space: nowrap;
 	text-align: center;
-}
-.carousel .carousel-nav .carousel-item1 {
-	display:inline-block;
-    width: 5px;
-    height: 5px;
-	border: 3px solid #888888;
-    border-radius: 5px;
-	margin-left: 15px;
-	margin-right: 15px;
-	cursor: pointer;
 }
 </style>
