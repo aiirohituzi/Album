@@ -59,7 +59,7 @@ export default {
             scrollState: false,
             // lastScrollTop: 0,
             
-			currentCarouselItem: 1,
+			currentCarouselItem: 0,
 			carouselLength: 1,
             photos: [
                 {
@@ -246,51 +246,41 @@ export default {
 
 
         carouselLeft: function () {
-			var carousel = document.querySelectorAll('.img-wrapper')
-			// console.log(carousel)
-			if(this.currentCarouselItem > 1){
-				for(var i=0; i<this.carouselLength; i++){
-					carousel[i].classList.remove('next' + (this.currentCarouselItem-1))
-				}
-				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
-				var curCarousel = document.querySelector('.carousel-item-' + (this.currentCarouselItem-1))
-				preCarousel.classList.remove('on')
-				curCarousel.classList.add('on')
-				this.currentCarouselItem -= 1
-			} else {
-				for(var i=0; i<this.carouselLength; i++){
-					carousel[i].classList.add('next1')
-					carousel[i].classList.add('next2')
-				}
-				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
-				var curCarousel = document.querySelector('.carousel-item-' + this.carouselLength)
-				preCarousel.classList.remove('on')
-				curCarousel.classList.add('on')
-				this.currentCarouselItem = this.carouselLength
+            var currentCarouselItem = this.currentCarouselItem
+			if(this.currentCarouselItem > 0){
+                $('.img-wrapper').each(function() {
+                    $(this).removeClass('next' + (currentCarouselItem-1))
+                })
+                $('.carousel-item-' + currentCarouselItem).removeClass('on')
+                $('.carousel-item-' + (currentCarouselItem-1)).addClass('on')
+				this.currentCarouselItem--
+			} else {                
+                $('.img-wrapper').each(function() {
+                    $(this).addClass('next0')
+                    $(this).addClass('next1')
+                })
+                $('.carousel-item-' + currentCarouselItem).removeClass('on')
+                $('.carousel-item-' + (this.carouselLength-1)).addClass('on')
+				this.currentCarouselItem = this.carouselLength - 1
 			}
 		},
 		carouselRight: function() {
-			var carousel = document.querySelectorAll('.img-wrapper')
-			// console.log(carousel)
-			if(this.currentCarouselItem < this.carouselLength){
-				for(var i=0; i<this.carouselLength; i++){
-					carousel[i].classList.add('next' + this.currentCarouselItem)
-				}
-				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
-				var curCarousel = document.querySelector('.carousel-item-' + (this.currentCarouselItem+1))
-				preCarousel.classList.remove('on')
-				curCarousel.classList.add('on')
-				this.currentCarouselItem += 1
+            var currentCarouselItem = this.currentCarouselItem
+			if(this.currentCarouselItem < (this.carouselLength-1)){
+                $('.img-wrapper').each(function() {
+                    $(this).addClass('next' + currentCarouselItem)
+                })
+                $('.carousel-item-' + currentCarouselItem).removeClass('on')
+                $('.carousel-item-' + (currentCarouselItem+1)).addClass('on')
+				this.currentCarouselItem++
 			} else {
-				for(var i=0; i<this.carouselLength; i++){
-					carousel[i].classList.remove('next2')
-					carousel[i].classList.remove('next1')
-				}
-				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
-				var curCarousel = document.querySelector('.carousel-item-1')
-				preCarousel.classList.remove('on')
-				curCarousel.classList.add('on')
-				this.currentCarouselItem = 1
+                $('.img-wrapper').each(function() {
+                    $(this).removeClass('next1')
+                    $(this).removeClass('next0')
+                })
+                $('.carousel-item-' + currentCarouselItem).removeClass('on')
+                $('.carousel-item-0').addClass('on')
+				this.currentCarouselItem = 0
 			}
 		},
     },
@@ -375,14 +365,14 @@ section {
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
 }
-.carousel-inner .img-wrapper.next1 {
+.carousel-inner .img-wrapper.next0 {
 	transform:translate(-100%, 0);
 	-webkit-transform:translate(-100%, 0);
 	
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
 }
-.carousel-inner .img-wrapper.next2 {
+.carousel-inner .img-wrapper.next1 {
 	transform:translate(-200%, 0);
 	-webkit-transform:translate(-200%, 0);
 	
