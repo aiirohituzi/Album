@@ -59,6 +59,7 @@ export default {
             scrollState: false,
             // lastScrollTop: 0,
             
+			currentCarouselItem: 1,
 			carouselLength: 1,
             photos: [
                 {
@@ -242,6 +243,56 @@ export default {
 		// 		self.scrollState = false
 		// 	}, 500)
         // }
+
+
+        carouselLeft: function () {
+			var carousel = document.querySelectorAll('.img-wrapper')
+			// console.log(carousel)
+			if(this.currentCarouselItem > 1){
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.remove('next' + (this.currentCarouselItem-1))
+				}
+				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item-' + (this.currentCarouselItem-1))
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
+				this.currentCarouselItem -= 1
+			} else {
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.add('next1')
+					carousel[i].classList.add('next2')
+				}
+				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item-' + this.carouselLength)
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
+				this.currentCarouselItem = this.carouselLength
+			}
+		},
+		carouselRight: function() {
+			var carousel = document.querySelectorAll('.img-wrapper')
+			// console.log(carousel)
+			if(this.currentCarouselItem < this.carouselLength){
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.add('next' + this.currentCarouselItem)
+				}
+				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item-' + (this.currentCarouselItem+1))
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
+				this.currentCarouselItem += 1
+			} else {
+				for(var i=0; i<this.carouselLength; i++){
+					carousel[i].classList.remove('next2')
+					carousel[i].classList.remove('next1')
+				}
+				var preCarousel = document.querySelector('.carousel-item-' + this.currentCarouselItem)
+				var curCarousel = document.querySelector('.carousel-item-1')
+				preCarousel.classList.remove('on')
+				curCarousel.classList.add('on')
+				this.currentCarouselItem = 1
+			}
+		},
     },
 	mounted () {
         this.fetchRecentPhotos()
@@ -324,6 +375,20 @@ section {
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
 }
+.carousel-inner .img-wrapper.next1 {
+	transform:translate(-100%, 0);
+	-webkit-transform:translate(-100%, 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
+}
+.carousel-inner .img-wrapper.next2 {
+	transform:translate(-200%, 0);
+	-webkit-transform:translate(-200%, 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
+} /* *** */
 .carousel-inner .img-wrapper img{
 	height:80vh;
 	width:80vw;
