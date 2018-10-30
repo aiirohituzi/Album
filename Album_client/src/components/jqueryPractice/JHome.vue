@@ -29,10 +29,10 @@
                 </div>
                 
                 <div class="carousel-nav">
-                    <!-- <div v-for="n in carouselLength" :class="'carousel-item'+n" @click="carouselMove(n)"></div> -->
-                    <div class="on"></div>
-                    <div></div>
-                    <div></div>
+                    <!-- <div v-for="n in carouselLength" @click="carouselMove(n)"></div> -->
+                    <div class="on" @click="carouselMove(0)"></div>
+                    <div @click="carouselMove(1)"></div>
+                    <div @click="carouselMove(2)"></div>
                 </div>
             </div>
         </div>
@@ -282,6 +282,24 @@ export default {
                 $('.carousel-item-0').addClass('on')
 				this.currentCarouselItem = 0
 			}
+		},
+		carouselMove: function(caroselNo) {
+			if(this.currentCarouselItem < caroselNo){
+				for(var i=0; i<this.carouselLength; i++){
+					for(var j=this.currentCarouselItem; j<caroselNo; j++){
+						$('.img-wrapper').eq(i).addClass('next'+j)
+					}
+				}
+			} else if(this.currentCarouselItem > caroselNo){
+				for(var i=0; i<this.carouselLength; i++){
+					for(var j=this.currentCarouselItem; j>caroselNo; j--){
+						$('.img-wrapper').eq(i).removeClass('next'+(j-1))
+					}
+				}
+			}
+            $('.carousel-item-' + this.currentCarouselItem).removeClass('on')
+            $('.carousel-item-' + caroselNo).addClass('on')
+			this.currentCarouselItem = caroselNo
 		},
     },
 	mounted () {
