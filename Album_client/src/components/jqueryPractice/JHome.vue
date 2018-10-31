@@ -187,6 +187,16 @@ export default {
             })
 
 
+            $( window ).resize(function() {
+                $("html,body").stop().animate({
+                    scrollTop: $('.grid-item-' + self.currentSection).offset().top + 'px'
+                }, {
+                    duration: 0, complete: function () {
+                    }
+                })
+            });
+
+
             $("html,body").stop().animate({
                 scrollTop: '0px'
             }, {
