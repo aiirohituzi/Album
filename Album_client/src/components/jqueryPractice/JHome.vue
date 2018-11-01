@@ -370,7 +370,7 @@ section {
 	margin-bottom: 10vh;
 	margin-left: 10%;
 	margin-right: 10%;
-	width: 80vw;
+	width: 80%;
 	height: 80vh;
 	border: 1px solid #000;
 	
