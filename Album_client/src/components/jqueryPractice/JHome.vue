@@ -71,6 +71,7 @@ export default {
                 },
 			],
             images: [],
+			intervalId: null,
         }
     },
     methods: {
@@ -315,6 +316,8 @@ export default {
 	mounted () {
         this.fetchRecentPhotos()
         this.ready()
+        
+		this.intervalId = setInterval(this.carouselRight, 5000)
     },
 	created () {
         $('body').addClass('hiddenScrollBar')
@@ -341,6 +344,7 @@ export default {
 	},
 	destroyed () {
         $('body').removeClass('hiddenScrollBar')
+		clearInterval(this.intervalId)
     }
 }
 </script>
