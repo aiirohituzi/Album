@@ -5,6 +5,7 @@
             <router-link tag="li" to="/" exact><a class="homeBtn"></a></router-link>
             <router-link tag="li" to="/Photo/0" exact><a class="photoBtn"></a></router-link>
             <router-link tag="li" to="/Sign" exact><a class="manageBtn"></a></router-link>
+            <router-link tag="li" to="/JHome" exact><a class="homeBtn"></a></router-link>
         </ul>
         <div class="navBtn" @click="navToggle()"></div>
         <div class="navBtnAni"></div>
