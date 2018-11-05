@@ -970,15 +970,15 @@ export default {
     z-index: 100;
 }
 .modal .modal-box .modal-title {
-    line-height: 5vh;
+    line-height: 40px;
     padding-left: 1.5vh;
     padding-right: 1.5vh;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     border-bottom: 1px solid #ccc;
 }
 .modal .modal-box .modal-content {
     text-align: center;
-    height: 88vh;
+    height: calc(100% - 80px);
     padding-left: 1.5vh;
     padding-right: 1.5vh;
     overflow-y: scroll;
@@ -1055,12 +1055,12 @@ export default {
     bottom: 0;
     text-align: right;
     vertical-align: -webkit-baseline-middle;
-    line-height: 5vh;
+    line-height: 40px;
     border-top: 1px solid #ccc;
 }
 .modal .modal-box .modal-bottom .btn {
     margin-right: 1vw;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     border-radius: 3px;
     background-color: #c5e5ee;
     border-color: #cae6ee;
