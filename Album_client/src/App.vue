@@ -20,27 +20,36 @@ export default {
     name: 'App',
     methods: {
         navToggle: function () {
-            var side = document.querySelector('.side')
-            var navBtn = document.querySelector('.navBtn')
-            var main = document.querySelector('.main')
-            var navBtnAni = document.querySelector('.navBtnAni')
-            side.classList.toggle('move')
-            navBtn.classList.toggle('hidden')
-            main.classList.toggle('move')
-            navBtnAni.classList.toggle('click')
+            // var side = document.querySelector('.side')
+            // var navBtn = document.querySelector('.navBtn')
+            // var main = document.querySelector('.main')
+            // var navBtnAni = document.querySelector('.navBtnAni')
+            // side.classList.toggle('move')
+            // navBtn.classList.toggle('hidden')
+            // main.classList.toggle('move')
+            // navBtnAni.classList.toggle('click')
+
+            $('.side').toggleClass('move')
+            $('.navBtn').toggleClass('hidden')
+            $('.main').toggleClass('move')
+            $('.navBtnAni').toggleClass('click')
             
-            var modalPhoto = document.querySelector('.modal-photo')
-            var modalWrite = document.querySelector('.modal-write')            
-            var modalDetailImage = document.querySelector('.modal-detailImage')
-            if(modalPhoto){
-                modalPhoto.classList.remove('toggle')
-            }
-            if(modalWrite){
-                modalWrite.classList.remove('toggle')
-            }
-            if(modalDetailImage){
-                modalDetailImage.classList.remove('toggle')
-            }
+            // var modalPhoto = document.querySelector('.modal-photo')
+            // var modalWrite = document.querySelector('.modal-write')            
+            // var modalDetailImage = document.querySelector('.modal-detailImage')
+            // if(modalPhoto){
+            //     modalPhoto.classList.remove('toggle')
+            // }
+            // if(modalWrite){
+            //     modalWrite.classList.remove('toggle')
+            // }
+            // if(modalDetailImage){
+            //     modalDetailImage.classList.remove('toggle')
+            // }
+
+            $('.modal-photo').removeClass('toggle')
+            $('.modal-write').removeClass('toggle')
+            $('.modal-detailImage').removeClass('toggle')
         },
     }
 }
