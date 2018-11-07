@@ -280,7 +280,7 @@ def searchPhoto(request):
             if date == 'all':
                 queryset = Photo.objects.filter(title__icontains=keyword).order_by('-created')
             else:
-                queryset = Photo.objects.filter(Q(title__icontains=keyword) & Q(created__range=(start, end))).order_by('-created')
+                queryset = Photo.objects.filter(Q(title__icontains=keyword) & Q(created__range=[start, end])).order_by('-created')
         elif category == 'content':
             if date == 'all':
                 queryset = Photo.objects.filter(content__icontains=keyword).order_by('-created')
@@ -293,7 +293,11 @@ def searchPhoto(request):
                 queryset = Photo.objects.filter((Q(title__icontains=keyword) | Q(content__icontains=keyword)) & Q(created__range=[start, end])).order_by('-created')
 
     else:
-        queryset = Photo.objects.all().order_by('-created')
+        if date == 'all':
+            queryset = Photo.objects.all().order_by('-created')
+        else:
+            queryset = Photo.objects.filter(created__range=[start, end]).order_by('-created')
+    
 
     if queryset.exists():
         for row in queryset:

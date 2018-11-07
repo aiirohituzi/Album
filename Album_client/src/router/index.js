@@ -15,11 +15,11 @@ Vue.use(VueSession)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home
-    },
+    // {
+    //   path: '/',
+    //   name: 'Home',
+    //   component: Home
+    // },
     {
       path: '/Photo/:id',
       name: 'Photo',
@@ -42,7 +42,7 @@ export default new Router({
       component: Manage
     },
     {
-      path: '/JHome',
+      path: '/',
       name: 'JHome',
       component: JHome
     },
