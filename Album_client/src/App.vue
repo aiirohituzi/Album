@@ -1,7 +1,7 @@
 <template>
     <div class="container-main">
         <ul id="navigation" class="side">
-            <li><a @click="navToggle()"><div class="closeBtn"></div></a></li>
+            <li><div class="closeBtn" @click="navToggle()"></div></li>
             <router-link tag="li" to="/" exact><a class="homeBtn"></a></router-link>
             <router-link tag="li" to="/Photo/0" exact><a class="photoBtn"></a></router-link>
             <router-link tag="li" to="/Sign" exact><a class="manageBtn"></a></router-link>
@@ -133,6 +133,10 @@ ul#navigation li a:hover {
     background-image: url(assets/menu.png);
     z-index: 99;
 	cursor: pointer;
+    
+    -moz-box-shadow: 2px 3px 6px #333;
+    -webkit-box-shadow: 2px 3px 6px #333;
+    box-shadow: 2px 3px 6px #333;
 }
 .navBtn.hidden {
     visibility: hidden;
@@ -172,14 +176,14 @@ ul#navigation li a:hover {
     animation: circle 500ms;
 }
 .closeBtn {
-    display: inline-block;
-    margin-right: 0px;
-    float: right;
-    text-align: center;
-    width: 50px;
-    height: 95%;
+    display: block;
+    width: 99%;
+    height: 99%;
+    background-color:#1175cc;
+    border:1px solid #1185cc;
+
     background-repeat:no-repeat;
-    background-position:center center;
+    background-position:98% center;
     background-image: url(assets/close.png);
 	cursor: pointer;
 }
@@ -192,7 +196,7 @@ ul#navigation li a:hover {
     width: 50px;
     height: 95%;
     background-repeat:no-repeat;
-    background-position:center center;
+    background-position:80% 50%;
     background-image: url(assets/side-home.png);
 }
 .homeBtn:hover {
