@@ -354,17 +354,22 @@ export default {
         },
 
         modalToggle: function (modalName, id) {
-            var modal = document.querySelector('.modal-' + modalName)
-            modal.classList.toggle('toggle')
+            // var modal = document.querySelector('.modal-' + modalName)
+            // modal.classList.toggle('toggle')
+            $('.modal-' + modalName).toggleClass('toggle')
 
-            var side = document.querySelector('.side')
-            var navBtn = document.querySelector('.navBtn')
-            var main = document.querySelector('.main')
-            var navBtnAni = document.querySelector('.navBtnAni')
-            side.classList.remove('move')
-            navBtn.classList.remove('hidden')
-            main.classList.remove('move')
-            navBtnAni.classList.remove('click')
+            // var side = document.querySelector('.side')
+            // var navBtn = document.querySelector('.navBtn')
+            // var main = document.querySelector('.main')
+            // var navBtnAni = document.querySelector('.navBtnAni')
+            // side.classList.remove('move')
+            // navBtn.classList.remove('hidden')
+            // main.classList.remove('move')
+            // navBtnAni.classList.remove('click')
+            $('.side').removeClass('move')
+            $('.navBtn').removeClass('hidden')
+            $('.main').removeClass('move')
+            $('.navBtnAni').removeClass('click')
 
             this.uploadData.title = null
             this.uploadData.content = null
@@ -457,21 +462,25 @@ export default {
         },
 
         updatePhotoToggle: function () {
-            var divDetail = document.querySelector('.div-detail')
-            var div_ytb = document.getElementById('ytb')
+            // var divDetail = document.querySelector('.div-detail')
+            // var div_ytb = document.getElementById('ytb')
 
             this.updateData.state_update = !this.updateData.state_update;
             if(this.updateData.state_update){
                 this.updateData.title = this.detail.title
                 this.updateData.content = this.detail.content
 
-                divDetail.style.textAlign = 'left'
-                div_ytb.style.display = 'none'
+                // divDetail.style.textAlign = 'left'
+                $('.div-detail').css('textAlign', 'left')
+                // div_ytb.style.display = 'none'
+                $('#ytb').css('display', 'none')
                 // this.$refs.text.style.display = 'none'
                 
             } else {
-                divDetail.style.textAlign = 'center'
-                div_ytb.style.removeProperty('display')
+                // divDetail.style.textAlign = 'center'
+                $('.div-detail').css('textAlign', 'center')
+                // div_ytb.style.removeProperty('display')
+                $('#ytb').removeProp('display')
                 // this.$refs.text.style.removeProperty('display')
                 this.updateCancel()
             }
@@ -572,14 +581,19 @@ export default {
         },
 
         searchBarToggle: function () {
-            var searchBar = document.querySelector('.searchBar')
-            var search = document.querySelector('.search')
-            var searchCategory = document.querySelector('.searchCategory')
-            var searchDate = document.querySelector('.searchDate')
-            searchBar.classList.toggle('toggle')
-            search.classList.toggle('toggle')
-            searchCategory.classList.toggle('toggle')
-            searchDate.classList.toggle('toggle')
+            // var searchBar = document.querySelector('.searchBar')
+            // var search = document.querySelector('.search')
+            // var searchCategory = document.querySelector('.searchCategory')
+            // var searchDate = document.querySelector('.searchDate')
+            // searchBar.classList.toggle('toggle')
+            // search.classList.toggle('toggle')
+            // searchCategory.classList.toggle('toggle')
+            // searchDate.classList.toggle('toggle')
+            
+            $('.searchBar').toggleClass('toggle')
+            $('.search').toggleClass('toggle')
+            $('.searchCategory').toggleClass('toggle')
+            $('.searchDate').toggleClass('toggle')
             
             this.category = 'title'
             this.date = 'all'
