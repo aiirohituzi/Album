@@ -129,6 +129,15 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-alert">
+        <div class="modal-background" @click="modalToggle('alert')">
+        </div>
+        <div class="modal-alert-content">
+            <span class="close" @click="modalToggle('alert')">&times;</span>
+            <p>Some text in the Modal..</p>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -328,7 +337,8 @@ export default {
             // console.log(photoIdSet.length)
 
             if(photoIdSet.length == 0){
-                alert("삭제할 글을 선택해주세요.")
+                // alert("삭제할 글을 선택해주세요.")
+                this.modalToggle('alert')
                 return
             }
             
@@ -353,7 +363,7 @@ export default {
             })
         },
 
-        modalToggle: function (modalName, id) {
+        modalToggle: function (modalName) {
             // var modal = document.querySelector('.modal-' + modalName)
             // modal.classList.toggle('toggle')
             $('.modal-' + modalName).toggleClass('toggle')
@@ -922,6 +932,10 @@ export default {
     visibility: visible;
     animation: fade 300ms;
 }
+.modal-alert.toggle {
+    visibility: visible;
+    animation: fade 300ms;
+}
 
 .modal .modal-background {
     position: fixed;
@@ -1014,6 +1028,31 @@ export default {
     vertical-align: -webkit-baseline-middle;
     max-width: 60vw;
     max-height: 90vh;
+}
+
+.modal .modal-alert-content {
+    position: fixed;
+    padding: 20px;
+    border: 2px solid #888;
+    top: 20vh;
+    left: 20vw;
+    width: 60vw;
+    height: 20vh;
+    border-radius: 10px;
+    background-color: #fefefe;
+    z-index: 100;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 
