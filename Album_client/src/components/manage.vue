@@ -135,7 +135,7 @@
         </div>
         <div class="modal-alert-content">
             <span class="close" @click="modalToggle('alert')">&times;</span>
-            <p>Some text in the Modal..</p>
+            <p>{{ alertMsg }}</p>
         </div>
     </div>
 </div>
@@ -181,6 +181,7 @@ export default {
             category: 'title',
             date: 'all',
             keyword: null,
+            alertMsg: '',
         }
     },
     beforeCreate: function () {
@@ -338,6 +339,7 @@ export default {
 
             if(photoIdSet.length == 0){
                 // alert("삭제할 글을 선택해주세요.")
+                this.alertMsg = '삭제할 글을 선택해주세요.'
                 this.modalToggle('alert')
                 return
             }
@@ -352,11 +354,16 @@ export default {
             axios.post('http://localhost:8000/delSelectedPhoto/', data, config).then((response) => {
                 // console.log(response)
                 if(response.data == 'True'){
-                    alert('Delete success')
+                    // alert('Delete success')
+                    
+                    this.alertMsg = 'Delete success'
+                    this.modalToggle('alert')
                     this.fetchPhotos()
                 } else {
                     console.log('Error')
-                    alert('Error')
+                    // alert('Error')
+                    this.alertMsg = 'Error'
+                    this.modalToggle('alert')
                 }
             }, (error) => {
                 console.log(error)
@@ -403,18 +410,24 @@ export default {
             
             if(image.length == 0){
                 console.log('Not selected')
-                alert('최소 한 개의 이미지를 선택해 주세요')
+                // alert('최소 한 개의 이미지를 선택해 주세요')
+                this.alertMsg = '최소 한 개의 이미지를 선택해 주세요.'
+                this.modalToggle('alert')
                 return
             } else {
                 if(image.length > 4){
-                    alert("최대 4개의 이미지까지만 선택해 주세요")
+                    // alert("최대 4개의 이미지까지만 선택해 주세요")
+                    this.alertMsg = '최대 4개의 이미지까지만 선택해 주세요.'
+                    this.modalToggle('alert')
                     document.getElementById('formControlsImage').value = null
                 }
                 
                 var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
                 for(var i=0; i<image.length; i++){
                     if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
-                        alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                        // alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                        this.alertMsg = "'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다."
+                        this.modalToggle('alert')
                         return
                     }
                 }
@@ -431,11 +444,15 @@ export default {
             await axios.post('http://localhost:8000/upPhoto/', data, config).then((response) => {
                 // console.log(response)
                 if(response.data == 'True'){
-                    alert('Upload success')
+                    // alert('Upload success')
+                    this.alertMsg = 'Upload success'
+                    this.modalToggle('alert')
                     uploadResult = true
                 } else {
                     console.log('Error')
-                    alert('Error')
+                    // alert('Error')
+                    this.alertMsg = 'Error'
+                    this.modalToggle('alert')
                 }
             }, (error) => {
                 console.log(error)
@@ -461,7 +478,9 @@ export default {
                             this.modalToggle('write')
                         } else {
                             console.log('Error')
-                            alert('Error')
+                            // alert('Error')
+                            this.alertMsg = 'Error'
+                            this.modalToggle('alert')
                         }
                     })
                     .catch(function (error) {
@@ -512,18 +531,24 @@ export default {
             }
             else if(image.length == 0){
                 console.log('Not selected')
-                alert('최소 한 개의 이미지를 선택해 주세요')
+                // alert('최소 한 개의 이미지를 선택해 주세요')
+                this.alertMsg = '최소 한 개의 이미지를 선택해 주세요'
+                this.modalToggle('alert')
                 return
             } else {
                 if(image.length > 4){
-                    alert("최대 4개의 이미지까지만 선택해 주세요")
+                    // alert("최대 4개의 이미지까지만 선택해 주세요")
+                    this.alertMsg = '최대 4개의 이미지까지만 선택해 주세요'
+                    this.modalToggle('alert')
                     document.getElementById('formControlsImage').value = null
                 }
                 
                 var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
                 for(var i=0; i<image.length; i++){
                     if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
-                        alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                        // alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                        this.alertMsg = "'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다."
+                        this.modalToggle('alert')
                         return
                     }
                 }
@@ -542,11 +567,15 @@ export default {
             await axios.post('http://localhost:8000/updatePhoto/', data, config).then((response) => {
                 // console.log(response)
                 if(response.data == 'True'){
-                    alert('Update success')
+                    // alert('Update success')
+                    this.alertMsg = 'Update success'
+                    this.modalToggle('alert')
                     updateResult = true
                 } else {
                     console.log('Error')
-                    alert('Error')
+                    // alert('Error')
+                    this.alertMsg = 'Error'
+                    this.modalToggle('alert')
                 }
             }, (error) => {
                 console.log(error)
@@ -569,7 +598,9 @@ export default {
                             console.log(i + ' : Image Update success')
                         } else {
                             console.log('Error')
-                            alert('Error')
+                            // alert('Error')
+                            this.alertMsg = 'Error'
+                            this.modalToggle('alert')
                         }
                     })
                     .catch(function (error) {
@@ -960,15 +991,15 @@ export default {
     z-index: 100;
 }
 .modal .modal-box .modal-title {
-    line-height: 5vh;
+    line-height: 40px;
     padding-left: 1.5vh;
     padding-right: 1.5vh;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     border-bottom: 1px solid #ccc;
 }
 .modal .modal-box .modal-content {
     text-align: center;
-    height: 88vh;
+    height: calc(100% - 80px);
     padding-left: 1.5vh;
     padding-right: 2.5vh;
     overflow-y: scroll;
@@ -991,6 +1022,8 @@ export default {
     background-image: url(../assets/close_img_hover.png);
 }
 .modal .modal-box .modal-content .img-select-group {
+    float: left;
+    padding-top: 1vh;
     padding-bottom: 1vh;
     /* border: 1px solid #f00; */
 }
@@ -1004,7 +1037,7 @@ export default {
     bottom: 0;
     text-align: right;
     vertical-align: -webkit-baseline-middle;
-    line-height: 5vh;
+    line-height: 40px;
     border-top: 1px solid #ccc;
 }
 .modal .modal-box .modal-bottom .btn {
@@ -1032,15 +1065,18 @@ export default {
 
 .modal .modal-alert-content {
     position: fixed;
-    padding: 20px;
-    border: 2px solid #888;
-    top: 20vh;
-    left: 20vw;
-    width: 60vw;
-    height: 20vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    top: 10vh;
+    left: 35vw;
+    width: 30vw;
+    /* height: 10vh; */
     border-radius: 10px;
     background-color: #fefefe;
     z-index: 100;
+    -moz-box-shadow: 2px 3px 6px #333;
+    -webkit-box-shadow: 2px 3px 6px #333;
+    box-shadow: 2px 3px 6px #333;
 }
 .close {
     color: #aaa;
