@@ -8,6 +8,15 @@
         </div>
         <button class="sign-in" @click="signIn()">Sign in</button>
     </div>
+
+    <div class="modal modal-alert">
+        <div class="modal-background" @click="modalToggle('alert')">
+        </div>
+        <div class="modal-alert-content">
+            <span class="close" @click="modalToggle('alert')">&times;</span>
+            <p>{{ alertMsg }}</p>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -20,6 +29,7 @@ export default {
         return {
             username: '',
             password: '',
+            alertMsg: '',
         }
     },
     beforeCreate: function () {
@@ -35,7 +45,9 @@ export default {
             var password = this.password
 
             if(username == '' || password == ''){
-                alert('ID 혹은 PASSWORD를 입력해 주세요.')
+                // alert('ID 혹은 PASSWORD를 입력해 주세요.')
+                this.alertMsg = 'ID 혹은 PASSWORD를 입력해 주세요.'
+                this.modalToggle('alert')
                 return
             }
             
@@ -58,6 +70,15 @@ export default {
                     console.log('unauthorized');
                 }
             })
+        },
+
+        modalToggle: function (modalName) {
+            $('.modal-' + modalName).toggleClass('toggle')
+            
+            $('.side').removeClass('move')
+            $('.navBtn').removeClass('hidden')
+            $('.main').removeClass('move')
+            $('.navBtnAni').removeClass('click')
         },
     }
 }
@@ -108,5 +129,50 @@ export default {
 }
 .wrapper-sign .sign-in:hover{
     background-color: #1165cc;
+}
+
+.modal {
+    visibility: hidden;
+}
+.modal .modal-background {
+    position: fixed;
+    background-color: black;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+.modal-alert.toggle {
+    visibility: visible;
+    animation: fade 300ms;
+}
+.modal .modal-alert-content {
+    position: fixed;
+    padding-left: 10px;
+    padding-right: 10px;
+    top: 10vh;
+    left: 35vw;
+    width: 30vw;
+    /* height: 10vh; */
+    border-radius: 10px;
+    background-color: #fefefe;
+    z-index: 100;
+    -moz-box-shadow: 2px 3px 6px #333;
+    -webkit-box-shadow: 2px 3px 6px #333;
+    box-shadow: 2px 3px 6px #333;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 </style>
