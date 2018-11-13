@@ -11,7 +11,7 @@
                 </div>
                 <div v-else>
                     <span v-for="n in detail.content.length">
-                        <a :href="detail.content[n-1]" v-if="n % 2 == 0">{{ detail.content[n-1] }}</a>
+                        <a :href="detail.content[n-1]" target="_blank" v-if="n % 2 == 0">{{ detail.content[n-1] }}</a>
                         <span v-else>{{ detail.content[n-1] }}</span>
                     </span>
                 </div>
@@ -293,7 +293,7 @@ export default {
                             iframe.setAttribute( "src", '//www.youtube.com/embed/' + id);
                             div_ytb.appendChild(iframe)
 
-                            div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
+                            div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "' target='_blank'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                         }
                     } else if(split_content[i] != undefined) {
                         temp_row += split_content[i]
