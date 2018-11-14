@@ -265,17 +265,22 @@ export default {
         },
 
         modalToggle: function (modalName, id) {
-            var modal = document.querySelector('.modal-' + modalName)
-            modal.classList.toggle('toggle')
+            // var modal = document.querySelector('.modal-' + modalName)
+            // modal.classList.toggle('toggle')
+            $('.modal-' + modalName).toggleClass('toggle')
 
-            var side = document.querySelector('.side')
-            var navBtn = document.querySelector('.navBtn')
-            var main = document.querySelector('.main')
-            var navBtnAni = document.querySelector('.navBtnAni')
-            side.classList.remove('move')
-            navBtn.classList.remove('hidden')
-            main.classList.remove('move')
-            navBtnAni.classList.remove('click')
+            // var side = document.querySelector('.side')
+            // var navBtn = document.querySelector('.navBtn')
+            // var main = document.querySelector('.main')
+            // var navBtnAni = document.querySelector('.navBtnAni')
+            // side.classList.remove('move')
+            // navBtn.classList.remove('hidden')
+            // main.classList.remove('move')
+            // navBtnAni.classList.remove('click')
+            $('.side').removeClass('move')
+            $('.navBtn').removeClass('hidden')
+            $('.main').removeClass('move')
+            $('.navBtnAni').removeClass('click')
 
             if(id){
                 this.modal.photoId = id
@@ -358,14 +363,19 @@ export default {
         },
 
         searchBarToggle: function () {
-            var searchBar = document.querySelector('.searchBar')
-            var search = document.querySelector('.search')
-            var searchCategory = document.querySelector('.searchCategory')
-            var searchDate = document.querySelector('.searchDate')
-            searchBar.classList.toggle('toggle')
-            search.classList.toggle('toggle')
-            searchCategory.classList.toggle('toggle')
-            searchDate.classList.toggle('toggle')
+            // var searchBar = document.querySelector('.searchBar')
+            // var search = document.querySelector('.search')
+            // var searchCategory = document.querySelector('.searchCategory')
+            // var searchDate = document.querySelector('.searchDate')
+            // searchBar.classList.toggle('toggle')
+            // search.classList.toggle('toggle')
+            // searchCategory.classList.toggle('toggle')
+            // searchDate.classList.toggle('toggle')
+
+            $('.searchBar').toggleClass('toggle')
+            $('.search').toggleClass('toggle')
+            $('.searchCategory').toggleClass('toggle')
+            $('.searchDate').toggleClass('toggle')
 
             this.category = 'title'
             this.date = 'all'
