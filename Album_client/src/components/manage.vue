@@ -501,15 +501,16 @@ export default {
 
                 // divDetail.style.textAlign = 'left'
                 $('.div-detail').css('textAlign', 'left')
+
                 // div_ytb.style.display = 'none'
                 $('#ytb').css('display', 'none')
                 // this.$refs.text.style.display = 'none'
-                
             } else {
                 // divDetail.style.textAlign = 'center'
                 $('.div-detail').css('textAlign', 'center')
+
                 // div_ytb.style.removeProperty('display')
-                $('#ytb').removeProp('display')
+                $('#ytb').css('display', '')
                 // this.$refs.text.style.removeProperty('display')
                 this.updateCancel()
             }
