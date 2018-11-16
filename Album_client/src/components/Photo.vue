@@ -72,6 +72,9 @@
         <div v-if="!more" class="end">마지막 게시글입니다.</div>
     </div>
 
+    <div class="list-preview">
+    </div>
+
 
 
     <div class="empty" v-if="photos == 'False'">
@@ -656,6 +659,20 @@ export default {
         this.fetchPhotos()
         this.checkSignIn()
     },
+    updated: function () {    
+        if(this.layout=='list'){
+            console.log($('.list > ul > li'))
+            $('.list > ul > li').hover(function(e){
+                console.log($('.list-preview'))
+                $('.list-preview').css({
+                    'left': e.clientX,
+                    'top': e.clientY,
+                    'display': 'unset'
+                })
+                
+            })
+        }
+    },
 	created () {
 		window.onmousewheel = document.onmousewheel = this.wheel
 	},
@@ -924,6 +941,15 @@ export default {
     color: #888;
     border: 1px solid #ccc;
     margin-bottom: 20px;
+}
+
+.list-preview {
+    position: fixed;
+    display: none;
+    width: 200px;
+    height: 200px;
+    background-color: #000;
+    border: solid 1px #000;
 }
 
 @keyframes fade {
