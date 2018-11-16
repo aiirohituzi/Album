@@ -73,6 +73,7 @@
     </div>
 
     <div class="list-preview">
+        <img v-if="photos[preview].thumbnail != undefined" :src="imagePath(photos[preview].thumbnail)">
     </div>
 
 
@@ -188,6 +189,7 @@ export default {
                     'thumbnail': undefined,
                 },
             ],
+            preview: 0,
             images: [],
             category: 'title',
             date: 'all',
@@ -661,15 +663,14 @@ export default {
     },
     updated: function () {    
         if(this.layout=='list'){
-            console.log($('.list > ul > li'))
+            var self = this
             $('.list > ul > li').hover(function(e){
-                console.log($('.list-preview'))
                 $('.list-preview').css({
                     'left': e.clientX,
                     'top': e.clientY,
                     'display': 'unset'
                 })
-                
+                self.preview = $(e.target).index()
             })
         }
     },
@@ -948,8 +949,13 @@ export default {
     display: none;
     width: 200px;
     height: 200px;
-    background-color: #000;
-    border: solid 1px #000;
+}
+.list-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #000;
 }
 
 @keyframes fade {
