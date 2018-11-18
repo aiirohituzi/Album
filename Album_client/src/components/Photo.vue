@@ -664,13 +664,22 @@ export default {
     updated: function () {    
         if(this.layout=='list'){
             var self = this
-            $('.list > ul > li').hover(function(e){
+            $('.list > ul > li').mouseover(function(e) {
                 $('.list-preview').css({
-                    'left': e.clientX,
-                    'top': e.clientY,
                     'display': 'unset'
                 })
                 self.preview = $(e.target).index()
+            })
+            $(document).mousemove(function(e) {
+                $('.list-preview').css({
+                    'left': e.clientX+1,
+                    'top': e.clientY+1,
+                })
+            })
+            $('.list > ul > li').mouseout(function(e) {
+                $('.list-preview').css({
+                    'display': 'none'
+                })
             })
         }
     },
