@@ -77,10 +77,16 @@
     </div>
 
 
-
     <div class="empty" v-if="photos == 'False'">
         검색결과가 없습니다.
     </div>
+
+    <div class="move-top" @click="moveTop()">
+        ▲<br>
+        TOP
+    </div>
+
+
 
     <div class="modal modal-photo">
         <div class="modal-background" @click="modalToggle('photo')">
@@ -655,6 +661,15 @@ export default {
                     self.scrollState = false
                 }, 500)
             }
+        },
+
+        moveTop: function () {
+            $("html,body").stop().animate({
+                scrollTop: '0px'
+            }, {
+                duration: 200, complete: function () {
+                }
+            })
         }
     },
     mounted: function () {
@@ -837,6 +852,18 @@ export default {
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+}
+
+.move-top {
+    text-align: center;
+    width: fit-content;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+.move-top:hover {
+    opacity: 0.7;
 }
 
 .wrapper-masonry {
