@@ -94,6 +94,11 @@
         <button v-if="more" class="btn-more" @click="moreData()">More</button>
         <button v-else class="btn-more" disabled="disabled">No more data...</button>
     </div>
+    
+    <div class="move-top" @click="moveTop()">
+        ▲<br>
+        TOP
+    </div>
 
 
 
@@ -657,6 +662,15 @@ export default {
                 console.log(error)
             })
         },
+        
+        moveTop: function () {
+            $("html,body").stop().animate({
+                scrollTop: '0px'
+            }, {
+                duration: 200, complete: function () {
+                }
+            })
+        }
     },
 	created () {
 		window.removeEventListener('DOMMouseScroll', this.wheel)
@@ -768,6 +782,18 @@ export default {
     width: 100%;
     border-radius: 3px;
     padding: 10px;
+}
+
+.move-top {
+    text-align: center;
+    width: fit-content;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+.move-top:hover {
+    opacity: 0.7;
 }
 
 .menu {
