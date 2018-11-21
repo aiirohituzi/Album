@@ -791,6 +791,12 @@ export default {
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+    
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 .move-top:hover {
     opacity: 0.7;
