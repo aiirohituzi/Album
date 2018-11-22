@@ -171,7 +171,9 @@
         <div class="modal-box">
             <div class="close-modal" @click="modalToggle('detailImage')"></div>
             <div class="detailImage">
+                <div class="detail-left"><font style="font-size: 50pt;font-family: '굴림';"><</font></div>
                 <img v-if="clickedImage != undefined" :src="imagePath(clickedImage)">
+                <div class="detail-right"><font style="font-size: 50pt;font-family: '굴림';">></font></div>
             </div>
         </div>
     </div>
@@ -1093,6 +1095,30 @@ export default {
     vertical-align: -webkit-baseline-middle;
     max-width: 60vw;
     max-height: 90vh;
+}
+.modal .modal-box .detailImage .detail-left {
+    position: fixed;
+    top: 5vh;
+    left: 20vw;
+	height: 90vh;
+    width: 5vw;
+    	
+	opacity: 0.2;
+}
+.modal .modal-box .detailImage .detail-left:hover {
+	opacity: 0.8;
+}
+.modal .modal-box .detailImage .detail-right {
+    position: fixed;
+    top: 5vh;
+    left: 75vw;
+	height: 90vh;
+    width: 5vw;
+
+	opacity: 0.2;
+}
+.modal .modal-box .detailImage .detail-right:hover {
+	opacity: 0.8;
 }
 .modal .modal-box .modal-content .img-select-group {
     float: left;
