@@ -101,7 +101,7 @@
                 <div v-if="!updateData.state_update">
                     <div class="created">{{ this.modal.created }}</div>
                     <div class="img-wrapper">
-                        <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" @click="detailImage(image.image)" />
+                        <img v-for="image in images" v-if="image.photoId == modal.photoId" :src="imagePath(image.image)" @click="detailImage(image.image, image.photoId)" />
                     </div>
                     <br>
                     <div id="text">
@@ -209,6 +209,7 @@ export default {
                 'created': '',
             },
             clickedImage: undefined,
+            clickedImageArray: [],
             uploadData: {
                 title: null,
                 content: null,
@@ -370,8 +371,21 @@ export default {
             this.updateCancel()
         },
 
-        detailImage: function (path) {
+        detailImage: function (path, photoId) {
             this.clickedImage = path
+            this.clickedImageArray = []
+            var index = 0
+            for(var i=0; i<this.images.length; i++){
+                if(this.images[i].photoId == photoId){
+                    this.clickedImageArray.push(this.images[i].image)
+                    if(this.images[i].image == path){
+                        this.clickedImageIndex = index
+                        // console.log(index)
+                    }
+                    index++
+                }
+            }
+            // console.log(this.clickedImageArray)
             this.modalToggle('detailImage')
         },
 
