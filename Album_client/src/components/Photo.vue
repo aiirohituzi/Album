@@ -171,9 +171,9 @@
         <div class="modal-box">
             <div class="close-modal" @click="modalToggle('detailImage')"></div>
             <div class="detailImage">
-                <div class="detail-left"><font style="font-size: 50pt;font-family: '굴림';"><</font></div>
+                <div class="detail-left" @click="detailLeft()"><font style="font-size: 50pt;font-family: '굴림';"><</font></div>
                 <img v-if="clickedImage != undefined" :src="imagePath(clickedImage)">
-                <div class="detail-right"><font style="font-size: 50pt;font-family: '굴림';">></font></div>
+                <div class="detail-right" @click="detailRight()"><font style="font-size: 50pt;font-family: '굴림';">></font></div>
             </div>
         </div>
     </div>
@@ -686,7 +686,26 @@ export default {
                 duration: 200, complete: function () {
                 }
             })
-        }
+        },
+
+        detailLeft: function () {
+            if(this.clickedImageIndex-1 < 0){
+                this.clickedImageIndex = this.clickedImageArray.length - 1
+            } else {
+                this.clickedImageIndex--
+            }
+            // console.log(this.clickedImageIndex)
+            this.clickedImage = this.clickedImageArray[this.clickedImageIndex]
+        },
+        detailRight: function () {
+            if(this.clickedImageIndex+1 >= this.clickedImageArray.length){
+                this.clickedImageIndex = 0
+            } else {
+                this.clickedImageIndex++
+            }
+            // console.log(this.clickedImageIndex)
+            this.clickedImage = this.clickedImageArray[this.clickedImageIndex]
+        },
     },
     mounted: function () {
         this.fetchPhotos()
