@@ -210,6 +210,7 @@ export default {
             },
             clickedImage: undefined,
             clickedImageArray: [],
+            clickedImageIndex: 0,
             uploadData: {
                 title: null,
                 content: null,

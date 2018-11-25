@@ -3,7 +3,7 @@
     <div class="div-detail" v-if="detail.content != ''">
         <div v-if="!updateData.state_update">
             <div class="img-wrapper">
-                <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image)" />
+                <img v-for="image in images" v-if="image.photoId == detail.id" :src="imagePath(image.image)" @click="detailImage(image.image, image.photoId)" />
             </div>
             <div id="text">
                 <div v-if="typeof detail.content === 'string'">
@@ -130,7 +130,9 @@
         <div class="modal-box">
             <div class="close-modal" @click="modalToggle('detailImage')"></div>
             <div class="detailImage">
+                <div class="detail-left" @click="detailLeft()"><font style="font-size: 50pt;font-family: '굴림';"><</font></div>
                 <img v-if="detail.clickedImage != undefined" :src="imagePath(detail.clickedImage)">
+                <div class="detail-right" @click="detailRight()"><font style="font-size: 50pt;font-family: '굴림';">></font></div>
             </div>
         </div>
     </div>
@@ -168,6 +170,8 @@ export default {
                 'title': '',
                 'content': '',
                 'clickedImage': undefined,
+                'clickedImageArray': [],
+                'clickedImageIndex': 0,
             },
             length: 1,
             max: 10,
@@ -399,8 +403,19 @@ export default {
             this.updateCancel()
         },
 
-        detailImage: function (path) {
+        detailImage: function (path, photoId) {
             this.detail.clickedImage = path
+            this.detail.clickedImageArray = []
+            var index = 0
+            for(var i=0; i<this.images.length; i++){
+                if(this.images[i].photoId == photoId){
+                    this.detail.clickedImageArray.push(this.images[i].image)
+                    if(this.images[i].image == path){
+                        this.detail.clickedImageIndex = index
+                    }
+                    index++
+                }
+            }
             this.modalToggle('detailImage')
         },
         
@@ -670,7 +685,26 @@ export default {
                 duration: 200, complete: function () {
                 }
             })
-        }
+        },
+        
+        detailLeft: function () {
+            if(this.detail.clickedImageIndex-1 < 0){
+                this.detail.clickedImageIndex = this.detail.clickedImageArray.length - 1
+            } else {
+                this.detail.clickedImageIndex--
+            }
+            // console.log(this.clickedImageIndex)
+            this.detail.clickedImage = this.detail.clickedImageArray[this.detail.clickedImageIndex]
+        },
+        detailRight: function () {
+            if(this.detail.clickedImageIndex+1 >= this.detail.clickedImageArray.length){
+                this.detail.clickedImageIndex = 0
+            } else {
+                this.detail.clickedImageIndex++
+            }
+            // console.log(this.clickedImageIndex)
+            this.detail.clickedImage = this.detail.clickedImageArray[this.detail.clickedImageIndex]
+        },
     },
 	created () {
 		window.removeEventListener('DOMMouseScroll', this.wheel)
@@ -1094,6 +1128,30 @@ export default {
     vertical-align: -webkit-baseline-middle;
     max-width: 60vw;
     max-height: 90vh;
+}
+.modal .modal-box .detailImage .detail-left {
+    position: fixed;
+    top: 5vh;
+    left: 20vw;
+	height: 90vh;
+    width: 5vw;
+    	
+	opacity: 0.2;
+}
+.modal .modal-box .detailImage .detail-left:hover {
+	opacity: 0.8;
+}
+.modal .modal-box .detailImage .detail-right {
+    position: fixed;
+    top: 5vh;
+    left: 75vw;
+	height: 90vh;
+    width: 5vw;
+
+	opacity: 0.2;
+}
+.modal .modal-box .detailImage .detail-right:hover {
+	opacity: 0.8;
 }
 
 .modal .modal-alert-content {
