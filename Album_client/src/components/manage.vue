@@ -130,9 +130,9 @@
         <div class="modal-box">
             <div class="close-modal" @click="modalToggle('detailImage')"></div>
             <div class="detailImage">
-                <div class="detail-left" @click="detailLeft()"><font style="font-size: 50pt;font-family: '굴림';"><</font></div>
+                <div v-if="detail.clickedImageArray.length > 1" class="detail-left" @click="detailLeft()"><font style="font-size: 50pt;font-family: '굴림';"><</font></div>
                 <img v-if="detail.clickedImage != undefined" :src="imagePath(detail.clickedImage)">
-                <div class="detail-right" @click="detailRight()"><font style="font-size: 50pt;font-family: '굴림';">></font></div>
+                <div v-if="detail.clickedImageArray.length > 1" class="detail-right" @click="detailRight()"><font style="font-size: 50pt;font-family: '굴림';">></font></div>
             </div>
         </div>
     </div>
