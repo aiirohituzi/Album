@@ -1135,6 +1135,7 @@ export default {
     left: 20vw;
 	height: 90vh;
     width: 5vw;
+    cursor: pointer;
     	
 	opacity: 0.2;
 }
@@ -1147,6 +1148,7 @@ export default {
     left: 75vw;
 	height: 90vh;
     width: 5vw;
+    cursor: pointer;
 
 	opacity: 0.2;
 }
