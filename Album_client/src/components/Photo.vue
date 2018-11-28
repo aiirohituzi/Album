@@ -719,7 +719,9 @@ export default {
                 $('.list-preview').css({
                     'display': 'unset'
                 })
-                self.preview = $(e.target).index()
+                if($(e.target).is("li")){
+                    self.preview = $(e.target).index()
+                }
             })
             $(document).mousemove(function(e) {
                 $('.list-preview').css({
