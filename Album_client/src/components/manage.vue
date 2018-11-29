@@ -250,7 +250,7 @@ export default {
             this.detail.id = id
             this.detail.title = this.photos[num].title
             this.detail.content = this.photos[num].content
-
+            
 
             this.$nextTick( function() {
                 var div = document.getElementById('text')
@@ -265,7 +265,6 @@ export default {
                 }
 
                 var temp_content = []
-                var temp_row = ''
 
                 var regExp = /(https?:\/\/www.youtube.com\/watch\?v=[^#\&\?\n]{11,11})|(https?:\/\/youtu.be\/[^#\&\?\n]{11,11})/
                 var regExp2 = /((https?:\/\/www.youtube.com\/watch\?v=)([^#\&\?]{11,11}))|((https?:\/\/youtu.be\/)([^#\&\?]{11,11}))/
@@ -281,8 +280,6 @@ export default {
                         // console.log(match)
                         if(match){
                             var id
-
-                            temp_content.push(temp_row)
                             
                             if(match[3]){
                                 id = match[3]
@@ -291,7 +288,6 @@ export default {
                             }
 
                             temp_content.push(split_content[i])
-                            temp_row = ''
 
                             // temp_url.push(match[0])
                             // this.$refs.text.innerHTML = this.$refs.text.innerHTML.replace(match[0], replaceText)
@@ -305,7 +301,7 @@ export default {
                             div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "' target='_blank'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                         }
                     } else if(split_content[i] != undefined) {
-                        temp_row += split_content[i]
+                        temp_content.push(split_content[i])
                     }
                     if(i==split_content.length-1){
                         if(temp_content.length != 0){
