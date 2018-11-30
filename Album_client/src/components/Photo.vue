@@ -330,8 +330,6 @@ export default {
                                     if(match){
                                         var id
 
-                                        temp_content.push(temp_row)
-
                                         if(match[3]){
                                             id = match[3]
                                         } else if(match[6]){
@@ -339,7 +337,6 @@ export default {
                                         }
 
                                         temp_content.push(split_content[i])
-                                        temp_row = ''
 
                                         var iframe = document.createElement("iframe")
                     
@@ -350,7 +347,7 @@ export default {
                                         div_ytb.insertAdjacentHTML('beforeend', "<a href='" + match[0] + "' target='_blank'><font size='1' color='gray'>" + match[0] + '</font></a><br><br>')
                                     }
                                 } else if(split_content[i] != undefined) {
-                                    temp_row += split_content[i]
+                                    temp_content.push(split_content[i])
                                 }
                                 if(i==split_content.length-1){
                                     if(temp_content.length != 0){
