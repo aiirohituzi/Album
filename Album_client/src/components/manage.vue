@@ -513,7 +513,16 @@ export default {
             this.updateData.state_update = !this.updateData.state_update;
             if(this.updateData.state_update){
                 this.updateData.title = this.detail.title
-                this.updateData.content = this.detail.content
+                if(typeof this.detail.content === 'string'){
+                    this.updateData.content = this.detail.content
+                } else {
+                    this.updateData.content = ''
+                    for(var i=0; i<this.detail.content.length; i++){
+                        this.updateData.content += this.detail.content[i]
+                    }
+                }
+                // console.log(this.updateData.content)
+                // console.log(this.detail.content)
 
                 // divDetail.style.textAlign = 'left'
                 $('.div-detail').css('textAlign', 'left')
