@@ -1139,8 +1139,9 @@ export default {
     top: 5vh;
     left: 20vw;
 	height: 90vh;
-    width: 5vw;
+    width: fit-content;
     cursor: pointer;
+    padding-left: 1vw;
     	
 	opacity: 0.2;
 }
@@ -1150,10 +1151,11 @@ export default {
 .modal .modal-box .detailImage .detail-right {
     position: fixed;
     top: 5vh;
-    left: 75vw;
+    right: calc(20vw - 17px);
 	height: 90vh;
-    width: 5vw;
+    width: fit-content;
     cursor: pointer;
+    padding-right: 1vw;
 
 	opacity: 0.2;
 }
@@ -1267,9 +1269,18 @@ export default {
     .modal .modal-box .modal-content {
         padding-right: 2vh;
     }
+    .modal .modal-box .detailImage img{
+        max-width: 100vw;
+    }
     .div-detail iframe {
         width: 60vw;
         height: 33.75vw;
+    }
+    .modal .modal-box .detailImage .detail-left {
+        left: 0;
+    }
+    .modal .modal-box .detailImage .detail-right {
+        right: 0;
     }
 }
 </style>
