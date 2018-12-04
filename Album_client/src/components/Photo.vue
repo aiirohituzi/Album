@@ -1307,5 +1307,16 @@ export default {
     .modal .modal-box .detailImage .detail-right {
         right: 0;
     }
+    .top-menu .searchBar {
+        width: 30vw;
+    }
+    .top-menu .searchCategory {
+        width: 17vw;
+        font-size: 0.1em;
+    }
+    .top-menu .searchDate {
+        width: 17vw;
+        font-size: 0.1em;
+    }
 }
 </style>
