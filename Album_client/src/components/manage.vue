@@ -45,19 +45,21 @@
         <div class="delete" @click="selectDelete()" title="선택삭제"></div>
         <div class="add" @click="modalToggle('write')" title="글쓰기"></div>
         <div class="search" @click="searchBarToggle()" title="검색"></div>
-        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
-        <select class="searchCategory" v-model="category">
-            <option disabled value="">검색 조건</option>
-            <option value="title">제목</option>
-            <option value="content">내용</option>
-            <option value="all">제목+내용</option>
-        </select>
-        <select class="searchDate" v-model="date">
-            <option value="all">전체기간</option>
-            <option value="week">일주일전</option>
-            <option value="month">한달전</option>
-            <option value="year">1년전</option>
-        </select>
+        <span class="searchGroup">
+            <select class="searchDate" v-model="date">
+                <option value="all">전체기간</option>
+                <option value="week">일주일전</option>
+                <option value="month">한달전</option>
+                <option value="year">1년전</option>
+            </select>
+            <select class="searchCategory" v-model="category">
+                <option disabled value="">검색 조건</option>
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="all">제목+내용</option>
+            </select>
+            <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
+        </span>
     </div>
 
     <div class="empty" v-if="photos == 'False'">
@@ -884,29 +886,33 @@ export default {
     background-image: url(../assets/signOut.png);
 	cursor: pointer;
 }
-.menu .searchCategory {
-    visibility: hidden;
+.menu .searchGroup {
+    display: block;
     float: right;
+}
+.menu .searchGroup .searchCategory {
+    visibility: hidden;
+    /* float: right; */
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
-.menu .searchCategory.toggle {
+.menu .searchGroup .searchCategory.toggle {
     visibility: visible;
 }
-.menu .searchDate {
+.menu .searchGroup .searchDate {
     visibility: hidden;
-    float: right;
+    /* float: right; */
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
-.menu .searchDate.toggle {
+.menu .searchGroup .searchDate.toggle {
     visibility: visible;
 }
-.menu .searchBar {
+.menu .searchGroup .searchBar {
     visibility: hidden;
-    float: right;
+    /* float: right; */
     margin-right: 10px;
     border-radius: 3px;
     width: 200px;
@@ -920,7 +926,7 @@ export default {
         width: 200px;
     }
 }
-.menu .searchBar.toggle {
+.menu .searchGroup .searchBar.toggle {
     visibility: visible;
     animation: bar 100ms;
 }
@@ -1281,6 +1287,21 @@ export default {
     }
     .modal .modal-box .detailImage .detail-right {
         right: 0;
+    }
+    .menu .searchGroup {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    .menu .searchGroup .searchBar {
+        width: 50vw;
+    }
+    .menu .searchGroup .searchCategory {
+        width: 17vw;
+        font-size: 0.1em;
+    }
+    .menu .searchGroup .searchDate {
+        width: 17vw;
+        font-size: 0.1em;
     }
 }
 </style>
