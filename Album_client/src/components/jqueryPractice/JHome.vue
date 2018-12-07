@@ -4,7 +4,9 @@
         <div>1</div>
     </section>
     <section>
-        <div>2</div>
+        <div class="content-slide">
+            asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfa
+        </div>
     </section>
     <section>
         <div>
@@ -168,7 +170,8 @@ export default {
                     'border-radius': '5px',
                     'right': '30px',
                     'bottom': 'calc(50vh ' + interval_array[i] + 'px)',
-                    'cursor': 'pointer'
+                    'cursor': 'pointer',
+                    'z-index': '2'
                 })
             })
 
@@ -216,6 +219,12 @@ export default {
                 duration: 500, complete: function () {
                 }
             })
+
+            if(this.currentSection == 1) {
+                $('.content-slide').addClass('move')
+            } else {
+                $('.content-slide').removeClass('move')
+            }
 
 			var preNavSection = $('.nav-item-' + preSection)
 			var curNavSection = $('.nav-item-' + this.currentSection)
@@ -362,6 +371,42 @@ section {
 .hiddenScrollBar {
     overflow: hidden;
 }
+
+.content-slide {
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
+    top: 100px;
+    right: -305px;
+    width: 300px;
+    height: 500px;
+    list-style: none;
+    z-index: 1;
+    
+    background-color:#88cc88;
+    -moz-box-shadow: 0px 4px 6px #333;
+    -webkit-box-shadow: 0px 4px 6px #333;
+    box-shadow: 0px 4px 6px #333;
+    
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+    
+    -webkit-transform: translate(0, 0);
+    -webkit-transition: -webkit-transform 500ms;
+
+    transform: translate(0, 0);
+    transition: transform 500ms;
+
+    will-change: transform;
+}
+.content-slide.move {
+    -webkit-transform: translate(-305px, 0px);
+    transform: translate(-305px, 0px);
+}
+
 .on {
     width: 5px;
     height: 5px;
