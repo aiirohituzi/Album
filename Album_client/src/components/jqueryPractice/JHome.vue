@@ -5,6 +5,9 @@
     </section>
     <section>
         <div class="content-slide">
+            ataertetaeradfga ardf gtdr gdr gsrdtgsdryt ser esrg ter ge
+        </div>
+        <div class="content-slide-right">
             asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfa
         </div>
     </section>
@@ -221,9 +224,9 @@ export default {
             })
 
             if(this.currentSection == 1) {
-                $('.content-slide').addClass('move')
+                $('.content-slide-right').addClass('move')
             } else {
-                $('.content-slide').removeClass('move')
+                $('.content-slide-right').removeClass('move')
             }
 
 			var preNavSection = $('.nav-item-' + preSection)
@@ -376,6 +379,38 @@ section {
     position: fixed;
     margin: 0px;
     padding: 0px;
+    top: 10vh;
+    left: 5vw;
+    width: 80vw;
+    height: 80vh;
+    list-style: none;
+    z-index: 1;
+    
+    background-color:#88cc88;
+    -moz-box-shadow: 0px 4px 6px #333;
+    -webkit-box-shadow: 0px 4px 6px #333;
+    box-shadow: 0px 4px 6px #333;
+    
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+    
+    -webkit-transform: translate(0, 0);
+    -webkit-transition: -webkit-transform 500ms;
+
+    transform: translate(0, 0);
+    transition: transform 500ms;
+
+    will-change: transform;
+}
+.content-slide.move {
+}
+.content-slide-right {
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
     top: 100px;
     right: -305px;
     width: 300px;
@@ -402,7 +437,7 @@ section {
 
     will-change: transform;
 }
-.content-slide.move {
+.content-slide-right.move {
     -webkit-transform: translate(-305px, 0px);
     transform: translate(-305px, 0px);
 }
