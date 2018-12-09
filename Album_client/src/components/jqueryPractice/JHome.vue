@@ -224,8 +224,13 @@ export default {
             })
 
             if(this.currentSection == 1) {
+                if(!$('.content-slide').hasClass('fadeIn'))
+                {
+                    $('.content-slide').addClass('fadeIn');
+                }
                 $('.content-slide-right').addClass('move')
             } else {
+                $('.content-slide').removeClass('fadeIn')
                 $('.content-slide-right').removeClass('move')
             }
 
@@ -375,11 +380,37 @@ section {
     overflow: hidden;
 }
 
+
+@keyframes fadeIn {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+        top: calc(10vh + 100px);
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+        top: 10vh !important;
+    }
+}
+@keyframes fade-out {
+    0% {
+        visibility: visible;
+        opacity: 1;
+        top: 10vh;
+    }
+    100% {
+        visibility: hidden;
+        opacity: 0;
+        top: calc(10vh + 100px);
+    }
+}
 .content-slide {
     position: fixed;
+    visibility: hidden;
     margin: 0px;
     padding: 0px;
-    top: 10vh;
+    top: calc(10vh + 100px);
     left: 5vw;
     width: 80vw;
     height: 80vh;
@@ -399,13 +430,25 @@ section {
     
     -webkit-transform: translate(0, 0);
     -webkit-transition: -webkit-transform 500ms;
-
     transform: translate(0, 0);
     transition: transform 500ms;
 
     will-change: transform;
 }
-.content-slide.move {
+.content-slide.fadeIn {
+    /* animation: fadeIn 500ms; */
+    visibility: visible;
+    /* top: 10vh; */
+    transform: translate(0, -100px);
+    -webkit-transition: -webkit-transform 500ms;
+    transition: transform 500ms;
+}
+.content-slide.fadeOut {
+    animation: fadeOut 500ms;
+    visibility: visible;
+    top: calc(10vh + 100px);
+    -webkit-transition: -webkit-transform 500ms;
+    transition: transform 500ms;
 }
 .content-slide-right {
     position: fixed;
@@ -438,6 +481,7 @@ section {
     will-change: transform;
 }
 .content-slide-right.move {
+    animation: open-fade 500ms;
     -webkit-transform: translate(-305px, 0px);
     transform: translate(-305px, 0px);
 }
