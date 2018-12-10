@@ -224,13 +224,16 @@ export default {
             })
 
             if(this.currentSection == 1) {
-                if(!$('.content-slide').hasClass('fadeIn'))
-                {
-                    $('.content-slide').addClass('fadeIn');
+                if(!$('.content-slide').hasClass('fadeIn')) {
+                    $('.content-slide').removeClass('fadeOut')
+                    $('.content-slide').addClass('fadeIn')
                 }
                 $('.content-slide-right').addClass('move')
             } else {
-                $('.content-slide').removeClass('fadeIn')
+                if(!$('.content-slide').hasClass('fadeOut')) {
+                    $('.content-slide').removeClass('fadeIn')
+                    $('.content-slide').addClass('fadeOut')
+                }
                 $('.content-slide-right').removeClass('move')
             }
 
@@ -385,24 +388,20 @@ section {
     0% {
         visibility: hidden;
         opacity: 0;
-        top: calc(10vh + 100px);
     }
     100% {
         visibility: visible;
         opacity: 1;
-        top: 10vh !important;
     }
 }
-@keyframes fade-out {
+@keyframes fadeOut {
     0% {
         visibility: visible;
         opacity: 1;
-        top: 10vh;
     }
     100% {
         visibility: hidden;
         opacity: 0;
-        top: calc(10vh + 100px);
     }
 }
 .content-slide {
@@ -436,28 +435,21 @@ section {
     will-change: transform;
 }
 .content-slide.fadeIn {
-    /* animation: fadeIn 500ms; */
+    animation: fadeIn 500ms;
     visibility: visible;
-    /* top: 10vh; */
     transform: translate(0, -100px);
-    -webkit-transition: -webkit-transform 500ms;
-    transition: transform 500ms;
 }
 .content-slide.fadeOut {
     animation: fadeOut 500ms;
-    visibility: visible;
-    top: calc(10vh + 100px);
-    -webkit-transition: -webkit-transform 500ms;
-    transition: transform 500ms;
 }
 .content-slide-right {
     position: fixed;
     margin: 0px;
     padding: 0px;
-    top: 100px;
+    top: 15vh;
     right: -305px;
     width: 300px;
-    height: 500px;
+    height: 70vh;
     list-style: none;
     z-index: 1;
     
