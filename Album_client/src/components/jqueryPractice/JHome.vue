@@ -5,10 +5,14 @@
     </section>
     <section>
         <div class="content-slide">
-            ataertetaeradfga ardf gtdr gdr gsrdtgsdryt ser esrg ter ge
+            <div class="innerBox">
+                ataertetaeradfga ardf gtdr gdr gsrdtgsdryt sersadfaseraesr esrg ter geweraerfawe asef rasefaes as fas fea 
+            </div>
         </div>
         <div class="content-slide-right">
-            asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfa
+            <div class="innerBox">
+                asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfa
+            </div>
         </div>
     </section>
     <section>
@@ -408,7 +412,7 @@ section {
     position: fixed;
     visibility: hidden;
     margin: 0px;
-    padding: 0px;
+    padding-right: 0px;
     top: calc(10vh + 100px);
     left: 5vw;
     width: 80vw;
@@ -442,13 +446,18 @@ section {
 .content-slide.fadeOut {
     animation: fadeOut 500ms;
 }
+.content-slide .innerBox {
+    margin-right: 10vw;
+    word-wrap: break-word;
+    font-size: 0.8em;
+}
 .content-slide-right {
     position: fixed;
     margin: 0px;
-    padding: 0px;
+    padding-right: 0px;
     top: 15vh;
-    right: -305px;
-    width: 300px;
+    right: -40vw;
+    width: 30vw;
     height: 70vh;
     list-style: none;
     z-index: 1;
@@ -474,8 +483,13 @@ section {
 }
 .content-slide-right.move {
     animation: open-fade 500ms;
-    -webkit-transform: translate(-305px, 0px);
-    transform: translate(-305px, 0px);
+    -webkit-transform: translate(-30vw, 0px);
+    transform: translate(-30vw, 0px);
+}
+.content-slide-right .innerBox {
+    margin-right: 10vw;
+    word-wrap: break-word;
+    font-size: 0.8em;
 }
 
 .on {
