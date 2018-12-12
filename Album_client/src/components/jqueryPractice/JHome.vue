@@ -617,4 +617,23 @@ section {
 	white-space: nowrap;
 	text-align: center;
 }
+
+
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .content-slide .innerBox {
+        font-size: 0.5em;   
+    }
+    .content-slide-right .innerBox {
+        font-size: 0.5em;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .content-slide .innerBox {
+        font-size: 0.4em;   
+    }
+    .content-slide-right .innerBox {
+        font-size: 0.4em;
+    }
+}
 </style>
