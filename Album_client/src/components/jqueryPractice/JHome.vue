@@ -635,5 +635,27 @@ section {
     .content-slide-right .innerBox {
         font-size: 0.4em;
     }
+
+    .carousel {
+        margin-top: 30vh;
+        height: 40vh;
+	    width: 80%;
+    }
+    .carousel-inner .img-wrapper img{
+        height: 40vh;
+	    width: 80vw;
+    }
+    .carousel .carousel-controler {
+        top: -40vh;
+    }
+    .carousel .carousel-controler .control-left {
+        line-height: 40vh;
+    }
+    .carousel .carousel-controler .control-right {
+        line-height: 40vh;
+    }
+    .carousel .carousel-nav {
+        top: -50vh;
+    }
 }
 </style>
