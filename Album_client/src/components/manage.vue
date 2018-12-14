@@ -203,6 +203,13 @@ export default {
     },
     mounted: function () {
         this.fetchPhotos()
+        
+        if($(window).width() < 768) {
+            $('.side').removeClass('move')
+            $('.navBtn').removeClass('hidden')
+            $('.main').removeClass('move')
+            $('.navBtnAni').removeClass('click')
+        }
     },
     methods: {
         fetchPhotos: function () {

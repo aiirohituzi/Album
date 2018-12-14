@@ -345,7 +345,14 @@ export default {
         this.fetchRecentPhotos()
         this.ready()
         
-		this.intervalId = setInterval(this.carouselRight, 5000)
+        this.intervalId = setInterval(this.carouselRight, 5000)
+        
+        if($(window).width() < 768) {
+            $('.side').removeClass('move')
+            $('.navBtn').removeClass('hidden')
+            $('.main').removeClass('move')
+            $('.navBtnAni').removeClass('click')
+        }
     },
 	created () {
         $('body').addClass('hiddenScrollBar')
