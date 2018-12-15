@@ -1266,13 +1266,6 @@ export default {
         left: 0;
         right: 0;
     }
-    .modal-write .modal-box .close-modal {
-        visibility: hidden;
-        position: fixed;
-    }
-    .modal .modal-box .modal-title .title {
-        width: 100%;
-    }
     /* .modal .modal-box .modal-content textarea {
         width: 98%;
         height: 80vh;

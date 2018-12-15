@@ -80,6 +80,14 @@ export default {
             $('.main').removeClass('move')
             $('.navBtnAni').removeClass('click')
         },
+    },
+    mounted: function () {
+        if($(window).width() < 768) {
+            $('.side').removeClass('move')
+            $('.navBtn').removeClass('hidden')
+            $('.main').removeClass('move')
+            $('.navBtnAni').removeClass('click')
+        }
     }
 }
 </script>

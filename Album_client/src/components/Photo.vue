@@ -1288,13 +1288,13 @@ export default {
         visibility: hidden;
         position: fixed;
     } */
-    .modal-write .modal-box .close-modal {
+    /* .modal-write .modal-box .close-modal {
         visibility: hidden;
         position: fixed;
-    }
-    .modal .modal-box .modal-title .title {
+    } */
+    /* .modal .modal-box .modal-title .title {
         width: 100%;
-    }
+    } */
     .modal .modal-box .modal-content {
         font-size: 9pt;
     }
