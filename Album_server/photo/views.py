@@ -258,7 +258,10 @@ def searchPhoto(request):
     
     category = request.GET.get('category', 'title')
     keyword = request.GET.get('keyword', False)
-    date = request.GET.get('date', 'all')    
+    date = request.GET.get('date', 'all')
+
+    if keyword == 'null':
+        keyword = False
 
     start = None
     if date == 'week':
@@ -274,7 +277,6 @@ def searchPhoto(request):
     end = timezone.now() + datetime.timedelta(days=1)
     # print(start)
     # print(end)
-
     if keyword:
         if category == 'title':
             if date == 'all':
