@@ -5,7 +5,7 @@
         <div v-if="manage" class="signOut" @click="signOut()" title="로그아웃"></div>
         <!-- <div class="add" @click="modalToggle('write')"></div> -->
         <div class="search" @click="searchBarToggle()" title="검색"></div>
-        <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
+        <input type="text" class="searchBar" placeholder="미입력 시 해당기간 전체글 검색" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
         <select class="searchCategory" v-model="category">
             <option disabled value="">검색 조건</option>
             <option value="title">제목</option>
@@ -764,6 +764,9 @@ export default {
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
+.top-menu input::placeholder {
+    font-size: 8pt;
+}
 .top-menu .searchCategory {
     visibility: hidden;
     float: right;
@@ -1324,6 +1327,9 @@ export default {
     .top-menu .searchDate {
         width: 17vw;
         font-size: 0.1em;
+    }
+    .top-menu input::placeholder {
+        font-size: 7pt;
     }
 }
 </style>

@@ -58,7 +58,7 @@
                 <option value="content">내용</option>
                 <option value="all">제목+내용</option>
             </select>
-            <input type="text" class="searchBar" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
+            <input type="text" class="searchBar" placeholder="미입력 시 해당기간 전체글 검색" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
         </span>
     </div>
 
@@ -897,6 +897,9 @@ export default {
     display: block;
     float: right;
 }
+.menu .searchGroup input::placeholder {
+    font-size: 8pt;
+}
 .menu .searchGroup .searchCategory {
     visibility: hidden;
     /* float: right; */
@@ -1302,6 +1305,9 @@ export default {
     .menu .searchGroup .searchDate {
         width: 17vw;
         font-size: 0.1em;
+    }
+    .menu .searchGroup input::placeholder {
+        font-size: 7pt;
     }
 }
 </style>
