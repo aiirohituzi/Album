@@ -433,20 +433,23 @@ export default {
 
             var uploadResult = false
             
-            if(image.length == 0){
-                console.log('Not selected')
+            if(!title){
+                this.alertMsg = '제목을 입력해 주세요.'
+                this.modalToggle('alert')
+                return
+            } else if(image.length == 0){
+                // console.log('Not selected')
                 // alert('최소 한 개의 이미지를 선택해 주세요')
                 this.alertMsg = '최소 한 개의 이미지를 선택해 주세요.'
                 this.modalToggle('alert')
                 return
-            } else {
-                if(image.length > 4){
-                    // alert("최대 4개의 이미지까지만 선택해 주세요")
-                    this.alertMsg = '최대 4개의 이미지까지만 선택해 주세요.'
-                    this.modalToggle('alert')
-                    document.getElementById('formControlsImage').value = null
-                }
-                
+            } else if(image.length > 4){
+                // alert("최대 4개의 이미지까지만 선택해 주세요")
+                this.alertMsg = '최대 4개의 이미지까지만 선택해 주세요.'
+                this.modalToggle('alert')
+                document.getElementById('formControlsImage').value = null
+                return
+            } else {                
                 var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
                 for(var i=0; i<image.length; i++){
                     if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
@@ -561,33 +564,37 @@ export default {
 
             var updateResult = false
 
-            if(!imageUpdate) {
-                console.log('Not update a image')
-            }
-            else if(image.length == 0){
-                console.log('Not selected')
-                // alert('최소 한 개의 이미지를 선택해 주세요')
-                this.alertMsg = '최소 한 개의 이미지를 선택해 주세요'
+            if(!title){
+                this.alertMsg = '제목을 입력해 주세요.'
                 this.modalToggle('alert')
                 return
             } else {
-                if(image.length > 4){
+                if(!imageUpdate) {
+                    console.log('Not update a image')
+                } else if(image.length == 0){
+                    console.log('Not selected')
+                    // alert('최소 한 개의 이미지를 선택해 주세요')
+                    this.alertMsg = '최소 한 개의 이미지를 선택해 주세요'
+                    this.modalToggle('alert')
+                    return
+                } else if(image.length > 4){
                     // alert("최대 4개의 이미지까지만 선택해 주세요")
                     this.alertMsg = '최대 4개의 이미지까지만 선택해 주세요'
                     this.modalToggle('alert')
                     document.getElementById('formControlsImage').value = null
-                }
-                
-                var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
-                for(var i=0; i<image.length; i++){
-                    if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
-                        // alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
-                        this.alertMsg = "'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다."
-                        this.modalToggle('alert')
-                        return
+                    return
+                } else {                   
+                    var fileExtension = ['jpeg', 'jpg', 'png', 'gif']
+                    for(var i=0; i<image.length; i++){
+                        if (fileExtension.indexOf(image[i]['name'].split('.').pop().toLowerCase()) == -1){
+                            // alert("'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다.")
+                            this.alertMsg = "'.jpeg', '.jpg', '.png', '.gif' 형식의 파일만 업로드 가능합니다."
+                            this.modalToggle('alert')
+                            return
+                        }
                     }
+                    data.append('image', image[0])
                 }
-                data.append('image', image[0])
             }
 
             data.append('Token', this.$session.get('sign'))
