@@ -405,7 +405,7 @@ export default {
             this.uploadData.title = null
             this.uploadData.content = null
             document.getElementById('image').value = null
-            this.updateCancel()
+            // this.updateCancel()
         },
 
         detailImage: function (path, photoId) {
