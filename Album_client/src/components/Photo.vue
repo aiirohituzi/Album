@@ -280,6 +280,9 @@ export default {
         },
 
         modalToggle: function (modalName, id) {
+            // console.log($('.modal-' + modalName + ' >  .modal-box > .modal-content'))
+            $('.modal-' + modalName + ' >  .modal-box > .modal-content').scrollTop(0)
+            
             // var modal = document.querySelector('.modal-' + modalName)
             // modal.classList.toggle('toggle')
             $('.modal-' + modalName).toggleClass('toggle')

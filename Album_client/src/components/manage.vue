@@ -258,10 +258,12 @@ export default {
             }
             this.detail.id = id
             this.detail.title = this.photos[num].title
-            this.detail.content = this.photos[num].content
-            
+            this.detail.content = this.photos[num].content            
+
 
             this.$nextTick( function() {
+                $('.div-detail').scrollTop(0)
+
                 var div = document.getElementById('text')
 
                 // this.$refs.text.innerHTML = this.detail.content
