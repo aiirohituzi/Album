@@ -634,6 +634,28 @@ section {
     .content-slide-right .innerBox {
         font-size: 0.5em;
     }
+    
+    .carousel {
+        margin-top: 20vh;
+        height: 60vh;
+	    width: 80%;
+    }
+    .carousel-inner .img-wrapper img{
+        height: 60vh;
+	    width: 80vw;
+    }
+    .carousel .carousel-controler {
+        top: -60vh;
+    }
+    .carousel .carousel-controler .control-left {
+        line-height: 60vh;
+    }
+    .carousel .carousel-controler .control-right {
+        line-height: 60vh;
+    }
+    .carousel .carousel-nav {
+        top: -70vh;
+    }
 }
 @media only screen and (max-width: 767px) {
     .content-slide .innerBox {
