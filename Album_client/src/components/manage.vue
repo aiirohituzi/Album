@@ -745,6 +745,7 @@ export default {
     vertical-align: middle;
     text-align: center;
     border: 2px solid #ccc;
+    background-color: #eee;
     border-radius: 5px;
 
     -moz-transition: all .5s ease-in-out;
@@ -767,8 +768,11 @@ export default {
     border-top: 2px solid #ccc;
     padding: 10px;
 }
+.photos .tbody, th {
+    background-color: #eee;
+}
 .photos .tbody:hover {
-    background-color: #eee
+    background-color: #ddd;
 }
 .photos .update {
     /* visibility: hidden; */
@@ -989,6 +993,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     border: 2px solid #ccc;
+    background-color: #eee;
     white-space: pre-line;
     text-align: center;
     

@@ -59,6 +59,7 @@ export default {
 body {
 	margin: 0px;
 	padding: 0px;
+    background-color: #1f4477;
 }
 
 .container-main {

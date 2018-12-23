@@ -868,7 +868,7 @@ export default {
 .layout-masonry {
     width: 30px;
     height: 30px;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     border-radius: 3px;
     background-repeat:no-repeat;
     background-position:center center;
@@ -881,7 +881,7 @@ export default {
 .layout-list {
     width: 30px;
     height: 30px;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     border-radius: 3px;
     background-repeat:no-repeat;
     background-position:center center;
@@ -902,6 +902,7 @@ export default {
     text-align: center;
     border: 2px solid #ccc;
     border-radius: 5px;
+    background-color: #fff;
 
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
@@ -964,8 +965,9 @@ export default {
 }
 .wrapper-masonry .masonry .brick .item {
     text-align: center;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     border-radius: 10px;
+    background-color: #eee;
 }
 .wrapper-masonry .masonry .brick img {
     -moz-transition: all .2s ease-in-out;
@@ -993,6 +995,7 @@ export default {
     color: #888;
     border: 1px solid #ccc;
     margin-bottom: 20px;
+    background-color: #eee;
 }
 
 .list {
@@ -1017,6 +1020,7 @@ export default {
     padding: 10px;
     border: 1px solid #ddd;
 	cursor: pointer;
+    background-color: #eee;
 }
 .list li font {
     float: right;
@@ -1038,6 +1042,7 @@ export default {
     color: #888;
     border: 1px solid #ccc;
     margin-bottom: 20px;
+    background-color: #eee;
 }
 
 .list-preview {

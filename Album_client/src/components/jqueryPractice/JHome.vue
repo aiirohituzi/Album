@@ -114,7 +114,7 @@ export default {
 
         ready: function () {
             var i = -1
-            var color_array = ['#ff8888','#88ff88','#8888ff','#ffff88']
+            var color_array = ['#1f4477','#1f4477','#1f4477','#1f4477']
             $('section').each(function () {
                 i++
                 $(this).addClass('grid-item-' + i).css('background-color', color_array[i])
@@ -427,7 +427,7 @@ section {
     list-style: none;
     z-index: 1;
     
-    background-color:#88cc88;
+    background-color:#2f578f;
     -moz-box-shadow: 0px 4px 6px #333;
     -webkit-box-shadow: 0px 4px 6px #333;
     box-shadow: 0px 4px 6px #333;
@@ -469,7 +469,7 @@ section {
     list-style: none;
     z-index: 1;
     
-    background-color:#88cc88;
+    background-color:#2f578f;
     -moz-box-shadow: 0px 4px 6px #333;
     -webkit-box-shadow: 0px 4px 6px #333;
     box-shadow: 0px 4px 6px #333;
