@@ -1027,7 +1027,8 @@ export default {
     margin-top: 6px;
 }
 .list li:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    /* box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); */
+    background-color: #ddd;
 }
 .list .btn-more {
     width: 100%;
