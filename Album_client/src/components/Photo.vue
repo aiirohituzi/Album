@@ -777,27 +777,32 @@ export default {
     font-size: 8pt;
 }
 .top-menu .searchCategory {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     float: right;
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
 .top-menu .searchCategory.toggle {
-    visibility: visible;
+    /* visibility: visible; */
+    display: unset;
 }
 .top-menu .searchDate {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     float: right;
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
 .top-menu .searchDate.toggle {
-    visibility: visible;
+    /* visibility: visible; */
+    display: unset;
 }
 .top-menu .searchBar {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     float: right;
     margin-right: 10px;
     border-radius: 3px;
@@ -813,7 +818,8 @@ export default {
     }
 }
 .top-menu .searchBar.toggle {
-    visibility: visible;
+    /* visibility: visible; */
+    display: unset;
     animation: bar 100ms;
 }
 .top-menu .search {

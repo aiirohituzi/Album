@@ -920,27 +920,32 @@ export default {
     font-size: 8pt;
 }
 .menu .searchGroup .searchCategory {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     /* float: right; */
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
 .menu .searchGroup .searchCategory.toggle {
-    visibility: visible;
+    /* visibility: visible; */
+    display: unset;
 }
 .menu .searchGroup .searchDate {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     /* float: right; */
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
 .menu .searchGroup .searchDate.toggle {
-    visibility: visible;
+    /* visibility: visible; */
+    display: unset;
 }
 .menu .searchGroup .searchBar {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     /* float: right; */
     margin-right: 10px;
     border-radius: 3px;
@@ -956,7 +961,8 @@ export default {
     }
 }
 .menu .searchGroup .searchBar.toggle {
-    visibility: visible;
+    /* visibility: visible; */
+    display: unset;
     animation: bar 100ms;
 }
 .menu .search {
