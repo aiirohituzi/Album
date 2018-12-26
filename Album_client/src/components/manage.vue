@@ -841,7 +841,7 @@ export default {
 }
 .btn-more {
     width: 100%;
-    border-radius: 3px;
+    /* border-radius: 3px; */
     padding: 10px;
 }
 
