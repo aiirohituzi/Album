@@ -665,7 +665,7 @@ export default {
             var scrollPosition = document.documentElement.clientHeight + window.scrollY
             // console.log(scrollHeight)
             // console.log(scrollPosition)
-            if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+            if((scrollHeight - scrollPosition) / scrollHeight === 0) {
                 this.scrollState = true
                 
                 this.moreData()
@@ -674,6 +674,12 @@ export default {
                 setTimeout(function(){
                     self.scrollState = false
                 }, 500)
+            }
+
+            if(window.scrollY == 0) {
+                $('.move-top').removeClass('toggle')
+            } else {
+                $('.move-top').addClass('toggle')
             }
         },
 
@@ -913,6 +919,7 @@ export default {
 }
 
 .move-top {
+    display: none;
     position: fixed;
     width: 30px;
     height: 30px;
@@ -932,6 +939,18 @@ export default {
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
+}
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+.move-top.toggle {
+    display: unset;
+    animation: fade 300ms;
 }
 .move-top:hover {
     opacity: 0.8;
