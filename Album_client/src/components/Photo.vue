@@ -673,13 +673,7 @@ export default {
                 var self = this
                 setTimeout(function(){
                     self.scrollState = false
-                }, 500)
-            }
-
-            if(window.scrollY == 0) {
-                $('.move-top').removeClass('toggle')
-            } else {
-                $('.move-top').addClass('toggle')
+                }, 100)
             }
         },
 
@@ -747,7 +741,16 @@ export default {
         }
     },
 	created () {
-		window.onmousewheel = document.onmousewheel = this.wheel
+        window.onmousewheel = document.onmousewheel = this.wheel
+        
+        $(window).scroll(function() {
+            // console.log(window.scrollY)
+            if(window.scrollY > 50) {                
+                $('.move-top').addClass('toggle')
+            } else {
+                $('.move-top').removeClass('toggle')                
+            }
+        })
 	},
 	destroyed () {
 		// window.onmousewheel = document.onmousewheel = null
@@ -940,9 +943,10 @@ export default {
 	-webkit-user-select: none;
 	user-select: none;
 }
-@keyframes fade {
+@keyframes top {
     0% {
         opacity: 0;
+        right: 0px;
     }
     100% {
         opacity: 0.5;
@@ -950,7 +954,7 @@ export default {
 }
 .move-top.toggle {
     display: unset;
-    animation: fade 300ms;
+    animation: top 500ms;
 }
 .move-top:hover {
     opacity: 0.8;
