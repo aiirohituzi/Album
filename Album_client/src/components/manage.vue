@@ -97,10 +97,7 @@
         <button v-else class="btn-more" disabled="disabled">No more data...</button>
     </div>
     
-    <div class="move-top" @click="moveTop()">
-        ▲<br>
-        TOP
-    </div>
+    <div class="move-top" @click="moveTop()"></div>
 
 
 
@@ -731,6 +728,14 @@ export default {
     },
 	created () {
 		window.removeEventListener('DOMMouseScroll', this.wheel)
+        
+        $(window).scroll(function() {
+            if(window.scrollY > 50) {                
+                $('.move-top').addClass('toggle')
+            } else {
+                $('.move-top').removeClass('toggle')                
+            }
+        })
     },
 }
 </script>
@@ -846,12 +851,20 @@ export default {
 }
 
 .move-top {
-    text-align: center;
-    width: fit-content;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    top: 50px;
+    right: 50px;
+    border-radius: 15px;
+    background: #fff;
+    background-size: 20px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../assets/top.png);
     cursor: pointer;
+    opacity: 0.5;
     
 	-ms-user-select: none;
 	-moz-user-select: -moz-none;
@@ -859,8 +872,21 @@ export default {
 	-webkit-user-select: none;
 	user-select: none;
 }
+@keyframes top {
+    0% {
+        opacity: 0;
+        right: 0px;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+.move-top.toggle {
+    display: unset;
+    animation: top 500ms;
+}
 .move-top:hover {
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .menu {
