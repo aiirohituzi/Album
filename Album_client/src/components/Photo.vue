@@ -1379,5 +1379,9 @@ export default {
     .top-menu input::placeholder {
         font-size: 7pt;
     }
+    .move-top {
+        top: 30px;
+        right: 30px;
+    }
 }
 </style>
