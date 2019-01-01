@@ -728,9 +728,18 @@ export default {
                 }
             })
             $(document).mousemove(function(e) {
+                var x = 1
+                var y = 1
+                if(e.clientX > (document.documentElement.clientWidth - 200)){
+                    x -= 202
+                }
+                if(e.clientY > document.documentElement.clientHeight - 200){
+                    y -= 202
+                }
+                
                 $('.list-preview').css({
-                    'left': e.clientX+1,
-                    'top': e.clientY+1,
+                    'left': e.clientX + x,
+                    'top': e.clientY + y,
                 })
             })
             $('.list > ul > li').mouseout(function(e) {
