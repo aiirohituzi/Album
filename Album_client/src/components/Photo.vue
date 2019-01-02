@@ -770,7 +770,6 @@ export default {
 <style>
 .container-photo {
     margin-top: 20px;
-    /* margin-right: 10px; */
 }
 
 .top-menu {
@@ -1323,6 +1322,11 @@ export default {
     }
 }
 @media only screen and (max-width: 767px) {
+    .container-photo {
+        margin-top: 20px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
     .empty {
         width: 95%;
         font-size: 9pt;
