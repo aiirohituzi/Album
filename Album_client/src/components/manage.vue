@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container-manage">
     <div class="div-detail" v-if="detail.content != ''">
         <div v-if="!updateData.state_update">
             <div class="img-wrapper">
@@ -1288,6 +1288,10 @@ export default {
     }
 }
 @media only screen and (max-width: 767px) {
+    .container-manage {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
     .empty {
         width: 95%;
         font-size: 9pt;
