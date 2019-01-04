@@ -776,6 +776,9 @@ export default {
 .photos .tbody, th {
     background-color: #eee;
 }
+.photos .tbody {
+	cursor: pointer;
+}
 .photos .tbody:hover {
     background-color: #ddd;
 }
