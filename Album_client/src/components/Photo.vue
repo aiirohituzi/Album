@@ -1337,6 +1337,9 @@ export default {
     .list {
         width: 95%
     }
+    .list li {
+        font-size: 9pt;
+    }
     .top-menu {
         width: 95%;
     }
@@ -1379,7 +1382,7 @@ export default {
         right: 0;
     }
     .top-menu .searchBar {
-        width: 30vw;
+        width: 28vw;
     }
     .top-menu .searchCategory {
         width: 17vw;

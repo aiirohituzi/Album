@@ -1355,7 +1355,7 @@ export default {
         margin-bottom: 10px;
     }
     .menu .searchGroup .searchBar {
-        width: 50vw;
+        width: 40vw;
     }
     .menu .searchGroup .searchCategory {
         width: 17vw;
