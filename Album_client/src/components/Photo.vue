@@ -1396,8 +1396,12 @@ export default {
         font-size: 7pt;
     }
     .move-top {
-        top: 30px;
-        right: 30px;
+        position: fixed;
+        width: 100%;
+        height: 30px;
+        top: 0px;
+        right: 0px;
+        border-radius: 0px;
     }
 }
 </style>

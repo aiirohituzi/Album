@@ -243,11 +243,11 @@ ul#navigation li a:hover {
 
 @media only screen and (max-width: 767px) {
     .side.move {
-        -webkit-transform: translate(100%, 0px);
-        transform: translate(100%, 0px);
+        -webkit-transform: translate(101%, 0px);
+        transform: translate(101%, 0px);
     }
     ul#navigation {
-        left: -100%;
+        left: -101%;
         width: 100%;
     }
 }
