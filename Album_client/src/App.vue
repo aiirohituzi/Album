@@ -250,5 +250,11 @@ ul#navigation li a:hover {
         left: -101%;
         width: 100%;
     }
+    .navBtn, .navBtnAni {
+        opacity: 0.2;
+    }
+    .navBtn:hover, .navBtnAni:hover {
+        opacity: 1;
+    }
 }
 </style>
