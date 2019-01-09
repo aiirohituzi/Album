@@ -231,14 +231,16 @@ export default {
                 if(!$('.content-slide').hasClass('fadeIn')) {
                     $('.content-slide').removeClass('fadeOut')
                     $('.content-slide').addClass('fadeIn')
+                    $('.content-slide-right').removeClass('fadeOut')
+                    $('.content-slide-right').addClass('fadeIn')
                 }
-                $('.content-slide-right').addClass('move')
             } else {
                 if(!$('.content-slide').hasClass('fadeOut')) {
                     $('.content-slide').removeClass('fadeIn')
                     $('.content-slide').addClass('fadeOut')
+                    $('.content-slide-right').removeClass('fadeIn')
+                    $('.content-slide-right').addClass('fadeOut')
                 }
-                $('.content-slide-right').removeClass('move')
             }
 
 			var preNavSection = $('.nav-item-' + preSection)
@@ -488,10 +490,13 @@ section {
 
     will-change: transform;
 }
-.content-slide-right.move {
-    animation: open-fade 500ms;
+.content-slide-right.fadeIn {
+    animation: fadeIn 500ms;
     -webkit-transform: translate(-30vw, 0px);
     transform: translate(-30vw, 0px);
+}
+.content-slide-right.fadeOut {
+    animation: fadeOut 500ms;
 }
 .content-slide-right .innerBox {
     margin-right: 10vw;
@@ -658,6 +663,23 @@ section {
     }
 }
 @media only screen and (max-width: 767px) {
+    .content-slide {
+        top: calc(10vh + 100px);
+        left: 5vw;
+        width: 80vw;
+        height: 60vh;
+    }
+    .content-slide-right {
+        top: 55vh;
+        right: -80vw;
+        width: 70vw;
+        height: 30vh;
+    }
+    .content-slide-right.fadeIn {
+        animation: fadeIn 500ms;
+        -webkit-transform: translate(-70vw, 0px);
+        transform: translate(-70vw, 0px);
+    }
     .content-slide .innerBox {
         font-size: 0.4em;   
     }

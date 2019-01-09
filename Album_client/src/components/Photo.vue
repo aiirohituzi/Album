@@ -1403,11 +1403,5 @@ export default {
         right: 0px;
         border-radius: 0px;
     }
-    .navBtn, .navBtnAni {
-        opacity: 0.2;
-    }
-    .navBtn:hover, .navBtnAni:hover {
-        opacity: 1;
-    }
 }
 </style>
