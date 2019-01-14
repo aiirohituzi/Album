@@ -9,6 +9,7 @@ media
 
 ### virtual env ###
 env/
+venv/
 
 ### VisualStudioCode ###
 .vscode/*
