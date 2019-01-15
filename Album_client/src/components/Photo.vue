@@ -82,8 +82,7 @@
     </div>
 
     <div class="move-top" @click="moveTop()"></div>
-
-
+    
 
     <div class="modal modal-photo">
         <div class="modal-background" @click="modalToggle('photo')">

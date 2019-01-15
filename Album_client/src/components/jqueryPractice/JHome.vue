@@ -1,7 +1,10 @@
 <template>
 <div>
     <section>
-        <div>1</div>
+        <div>
+            asdfdsaf
+            <img src="http://localhost:8000/media/add.png">
+        </div>
     </section>
     <section>
         <div class="content-slide">
