@@ -122,6 +122,7 @@ def uploadImage(request):
     token = request.POST['Token']
     photoId = request.POST.get('photoId', False)
     fileCheck = request.FILES.get('image', False)
+    print(request.FILES)
 
     if not tokenCheck(token):
         return HttpResponse('Unauthorized', status=401)

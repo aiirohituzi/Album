@@ -246,7 +246,8 @@ export default {
         },
 
         imagePath: function (path) {
-            return require('../assets/image/' + path)
+            // return require('../assets/image/' + path)
+            return 'http://localhost:8000/media/photo/' + path
         },
         
         detailPhoto: function (id, num) {
@@ -460,6 +461,7 @@ export default {
                 }
             }
 
+
             data.append('Token', this.$session.get('sign'))
             data.append('title', title)
             data.append('content', content)
@@ -472,8 +474,8 @@ export default {
                 // console.log(response)
                 if(response.data == 'True'){
                     // alert('Upload success')
-                    this.alertMsg = 'Upload success'
-                    this.modalToggle('alert')
+                    // this.alertMsg = 'Upload success'
+                    // this.modalToggle('alert')
                     uploadResult = true
                 } else {
                     console.log('Error')
@@ -501,6 +503,8 @@ export default {
                         if(response.data == 'True'){
                             // console.log(response.data)
                             console.log('Image Upload success')
+                            this.alertMsg = 'Upload success'
+                            this.modalToggle('alert')
                             this.fetchPhotos()
                             this.modalToggle('write')
                         } else {
@@ -610,7 +614,7 @@ export default {
                 if(response.data == 'True'){
                     // alert('Update success')
                     this.alertMsg = 'Update success'
-                    this.modalToggle('alert')
+                    // this.modalToggle('alert')
                     updateResult = true
                 } else {
                     console.log('Error')
@@ -637,6 +641,7 @@ export default {
                         if(response.data == 'True'){
                             // console.log(response.data)
                             console.log(i + ' : Image Update success')
+                            this.modalToggle('alert')
                         } else {
                             console.log('Error')
                             // alert('Error')
@@ -648,6 +653,8 @@ export default {
                         console.log(error)
                     })
                 }
+            } else {
+                this.modalToggle('alert')
             }
 
             this.detail.id = ''

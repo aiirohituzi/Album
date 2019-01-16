@@ -272,7 +272,8 @@ export default {
         },
     
         imagePath: function (path) {
-            return require('../assets/image/' + path)
+            // return require('../assets/image/' + path)
+            return 'http://localhost:8000/media/photo/' + path
         },
 
         modalToggle: function (modalName, id) {
