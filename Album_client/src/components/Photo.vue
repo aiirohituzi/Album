@@ -178,6 +178,7 @@
 
 <script>
 import axios from 'axios'
+var server_address = 'http://112.172.111.221:5000/'
 
 export default {
     name: 'Photo',
@@ -226,7 +227,7 @@ export default {
     },
     methods: {
         fetchPhotos: async function () {
-            await axios.get('http://localhost:8000/photos/').then((response) => {
+            await axios.get(server_address + 'photos/').then((response) => {
                 this.photos = response.data
                 this.length = response.data.length
 
@@ -238,7 +239,7 @@ export default {
                 console.log(error)
             })
 
-            axios.get('http://localhost:8000/images/').then((response) => {
+            axios.get(server_address + 'images/').then((response) => {
                 this.images = response.data
                 // console.log(response)
                 for(var i=0; i<this.photos.length; i++){
@@ -273,7 +274,7 @@ export default {
     
         imagePath: function (path) {
             // return require('../assets/image/' + path)
-            return 'http://localhost:8000/media/photo/' + path
+            return server_address + 'media/photo/' + path
         },
 
         modalToggle: function (modalName, id) {
@@ -407,7 +408,7 @@ export default {
         },
 
         search: function (category, keyword, date) {
-            axios.get('http://localhost:8000/search/?category=' + category + '&keyword=' + keyword + '&date=' + date).then((response) => {
+            axios.get(server_address + 'search/?category=' + category + '&keyword=' + keyword + '&date=' + date).then((response) => {
                 this.photos = response.data
                 // console.log(response)
                 this.length = response.data.length
@@ -475,7 +476,7 @@ export default {
                 headers: { 'content-type': 'multipart/form-data' }
             }
 
-            await axios.post('http://localhost:8000/upPhoto/', data, config).then((response) => {
+            await axios.post(server_address + 'upPhoto/', data, config).then((response) => {
                 // console.log(response)
                 if(response.data == 'True'){
                     alert('Upload success')
@@ -499,7 +500,7 @@ export default {
                     data.append('Token', this.$session.get('sign').token)
                     data.append('image', image[i])
 
-                    axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
+                    axios.post(server_address + 'upImage/', data, config).then((response) => {
                         // console.log(response.data)
                         if(response.data == 'True'){
                             // console.log(response.data)
@@ -527,7 +528,7 @@ export default {
                 headers: { 'content-type': 'multipart/form-data' }
             }
 
-            axios.post('http://localhost:8000/delPhoto/', data, config).then((response) => {
+            axios.post(server_address + 'delPhoto/', data, config).then((response) => {
                 // console.log(response)
                 if(response.data == 'True'){
                     alert('Delete success')
@@ -590,7 +591,7 @@ export default {
                 headers: { 'content-type': 'multipart/form-data' }
             }
 
-            await axios.post('http://localhost:8000/updatePhoto/', data, config).then((response) => {
+            await axios.post(server_address + 'updatePhoto/', data, config).then((response) => {
                 // console.log(response)
                 if(response.data == 'True'){
                     alert('Update success')
@@ -613,7 +614,7 @@ export default {
                     data.append('photoId', photoId)
                     data.append('image', image[i])
 
-                    axios.post('http://localhost:8000/upImage/', data, config).then((response) => {
+                    axios.post(server_address + 'upImage/', data, config).then((response) => {
                         // console.log(response.data)
                         if(response.data == 'True'){
                             // console.log(response.data)

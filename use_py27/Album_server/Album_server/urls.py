@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from photo.views import getPhoto
 from photo.views import getImage
 from photo.views import getRecentPhoto
@@ -41,4 +44,4 @@ urlpatterns = [
     url(r'^updatePhoto/$', updatePhoto, name='updatePhoto'),
     url(r'^signIn/$', signIn, name='signIn'),
     url(r'^delSelectedPhoto/$', deleteSelectedPhoto, name='deleteSelectedPhoto'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

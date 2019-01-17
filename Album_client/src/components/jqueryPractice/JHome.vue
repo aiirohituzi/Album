@@ -1,10 +1,6 @@
 <template>
 <div>
     <section>
-        <div>
-            asdfdsaf
-            <img src="http://localhost:8000/media/add.png">
-        </div>
     </section>
     <section>
         <div class="content-slide">
@@ -62,6 +58,7 @@
 
 <script>
 import axios from 'axios'
+var server_address = 'http://112.172.111.221:5000/'
 
 export default {
     name: 'JHome',
@@ -88,14 +85,14 @@ export default {
     },
     methods: {
         fetchRecentPhotos: async function () {
-			await axios.get('http://localhost:8000/recentPhotos/').then((response) => {
+			await axios.get(server_address + 'recentPhotos/').then((response) => {
                 this.photos = response.data
                 // console.log(response)
             }, (error) => {
                 console.log(error)
             })
 
-			axios.get('http://localhost:8000/images/').then((response) => {
+			axios.get(server_address + 'images/').then((response) => {
                 // console.log(response)
                 this.images = response.data
                 for(var i=0; i<this.photos.length; i++){
@@ -113,7 +110,7 @@ export default {
         },
         imagePath: function (path) {
             // return require('../../assets/image/' + path)
-            return 'http://localhost:8000/media/photo/' + path
+            return server_address + 'media/photo/' + path
         },
 
         ready: function () {

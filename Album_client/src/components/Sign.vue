@@ -22,6 +22,7 @@
 
 <script>
 import axios from 'axios'
+var server_address = 'http://112.172.111.221:5000/'
 
 export default {
     name: 'Sign',
@@ -58,7 +59,7 @@ export default {
                 headers: { 'content-type': 'multipart/form-data' }
             }
 
-            axios.post('http://localhost:8000/signIn/', data, config).then((response) => {
+            axios.post(server_address + 'signIn/', data, config).then((response) => {
                 // console.log(response.data)
                 // console.log('success')
                 this.$session.start()

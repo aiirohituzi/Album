@@ -24,6 +24,7 @@ from django.contrib.auth import login
 from rest_framework.authtoken.models import Token
 
 from Crypto.Hash import SHA256
+import hashlib
 import time
 import random
 from photo.models import Key
@@ -399,9 +400,17 @@ def signIn(request):
         key_obj.save()
 
 
-        hash = SHA256.new(data=token.encode())
-        # print(hash.digest())
-        return HttpResponse(str(hash.digest()))
+        ### python 3.x
+        # hash = SHA256.new(data=token.encode())
+        # print(type(hash.digest()))
+        # print(str(hash.digest()))
+        # return HttpResponse(str(hash.digest()))
+        
+        ### python 2.x
+        hash = hashlib.sha256(token.encode())
+        # print(type(hash.hexdigest()))
+        # print(str(hash.hexdigest()))
+        return HttpResponse(str(hash.hexdigest()))
     else:
         return HttpResponse(False)
 
@@ -422,8 +431,10 @@ def tokenCheck(token):
     # print(Key.objects.get(name='admin').key)
     # print(tokenA)
 
-    hash = SHA256.new(data=tokenA.encode())
-    tokenA_hash = str(hash.digest())
+    # hash = SHA256.new(data=tokenA.encode())
+    # tokenA_hash = str(hash.digest())
+    hash = hashlib.sha256(tokenA.encode())
+    tokenA_hash = str(hash.hexdigest())
 
     # print(token)
     # print(tokenA_hash)
