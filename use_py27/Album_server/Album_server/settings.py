@@ -26,7 +26,7 @@ SECRET_KEY = '7r$x8k*o)cot5c%d4)akoe!1qx9hgy6iom4!c1z-48p@(txe5!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['112.172.111.221']
+ALLOWED_HOSTS = ['112.172.111.221', 'aiirohituzi.iptime.org']
 
 
 # Application definition
@@ -137,3 +137,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     )
 }
+
+# secure proxy SSL header and secure cookies
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# session expire at browser close
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# wsgi scheme
+os.environ['wsgi.url_scheme'] = 'https'
