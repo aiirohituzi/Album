@@ -22,7 +22,7 @@
 
 <script>
 import axios from 'axios'
-var server_address = 'http://112.172.111.221:5000/'
+var server_address = 'http://aiirohituzi.iptime.org:5000/'
 
 export default {
     name: 'Sign',
