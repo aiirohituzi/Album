@@ -6,6 +6,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 media
+use_py27/Album_server/static
 
 ### virtual env ###
 env/

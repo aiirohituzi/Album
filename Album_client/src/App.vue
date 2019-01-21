@@ -16,7 +16,7 @@
 </template>
 
 <script>
-var server_address = 'http://aiirohituzi.iptime.org:5000/'
+var server_address = 'https://aiirohituzi.iptime.org:5000/'
 
 export default {
     name: 'App',
