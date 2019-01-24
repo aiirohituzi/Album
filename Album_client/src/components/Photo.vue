@@ -1201,7 +1201,7 @@ export default {
     top: 5vh;
     left: 20vw;
 	height: 90vh;
-    width: fit-content;
+    width: 40px;
     cursor: pointer;
     padding-left: 1vw;
     	
@@ -1213,9 +1213,10 @@ export default {
 .modal .modal-box .detailImage .detail-right {
     position: fixed;
     top: 5vh;
-    right: calc(20vw - 17px);
+    left: calc(80vw - 50px);
+    /* right: calc(20vw - 17px); */
 	height: 90vh;
-    width: fit-content;
+    width: 40px;
     cursor: pointer;
     padding-right: 1vw;
 
