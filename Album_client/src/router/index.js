@@ -8,6 +8,7 @@ import Manage from '@/components/Manage'
 import VueSession from 'vue-session'
 
 import JHome from '@/components/jqueryPractice/JHome'
+import Unconnected from '@/components/Unconnected'
 
 
 Vue.use(Router)
@@ -45,6 +46,11 @@ export default new Router({
       path: '/',
       name: 'JHome',
       component: JHome
+    },
+    {
+      path: '/Unconnected',
+      name: 'Unconnected',
+      component: Unconnected
     },
   ]
 })
