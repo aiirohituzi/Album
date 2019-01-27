@@ -90,6 +90,7 @@ export default {
                 // console.log(response)
             }, (error) => {
                 console.log(error)
+                this.$router.push({name:'Unconnected'})
             })
 
 			axios.get(server_address + 'images/').then((response) => {
@@ -106,6 +107,7 @@ export default {
 				this.carouselLength = this.photos.length	// 갱신된 정보로 캐러셀을 다시 렌더링 시키기 위해 마지막에 변경
             }, (error) => {
                 console.log(error)
+                this.$router.push({name:'Unconnected'})
             })
         },
         imagePath: function (path) {

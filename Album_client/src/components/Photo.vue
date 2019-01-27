@@ -237,6 +237,7 @@ export default {
                 // console.log(response)
             }, (error) => {
                 console.log(error)
+                this.$router.push({name:'Unconnected'})
             })
 
             axios.get(server_address + 'images/').then((response) => {
@@ -252,6 +253,7 @@ export default {
                 }
             }, (error) => {
                 console.log(error)
+                this.$router.push({name:'Unconnected'})
             })
             
             this.directLink()

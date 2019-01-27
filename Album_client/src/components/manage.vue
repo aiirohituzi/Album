@@ -221,12 +221,14 @@ export default {
                 // console.log(response)
             }, (error) => {
                 console.log(error)
+                this.$router.push({name:'Unconnected'})
             })
             axios.get(server_address + 'images/').then((response) => {
                 this.images = response.data
                 // console.log(response)
             }, (error) => {
                 console.log(error)
+                this.$router.push({name:'Unconnected'})
             })
         },
         signOut: function () {
