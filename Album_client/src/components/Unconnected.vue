@@ -19,6 +19,16 @@ export default {
     methods: {
         
     },
+    mounted: function () {
+        $('.side').removeClass('move')
+        $('.navBtn').removeClass('hidden')
+        $('.main').removeClass('move')
+        $('.navBtnAni').removeClass('click')
+
+        $('.side')
+        $('.navBtn')
+        $('.navBtnAni')
+    },
 }
 </script>
 
@@ -42,6 +52,16 @@ export default {
 }
 .notice .mobile {
     white-space: pre;
+    display: none;
+}
+
+.side {
+    display: none;
+}
+.navBtn {
+    display: none;
+}
+.navBtnAni {
     display: none;
 }
 
