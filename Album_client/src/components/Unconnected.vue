@@ -3,6 +3,7 @@
     <div class="notice">
         <div class="common">{{ notice }}</div>
         <div class="mobile">{{ notice_mobile }}</div>
+        <a href="" @click="home()">홈으로 돌아가기</a>
     </div>
 </div>
 </template>
@@ -13,11 +14,13 @@ export default {
     data () {
         return {
             notice: '서버와 연결되어 있지 않습니다.\n서버가 닫혀있거나 정상적으로 동작하지 않는 상태입니다.',
-            notice_mobile: '서버와 연결되어 있지 않습니다.\n서버가 닫혀있거나 정상적으로\n동작하지 않는 상태입니다.',
+            notice_mobile: '서버와 연결되어 있지 않습니다.\n서버가 닫혀있거나 정상적으로\n동작하지 않는 상태입니다.\n',
         }
     },
     methods: {
-        
+        home: function() {
+            this.$router.push({name:'JHome'})
+        }
     },
     mounted: function () {
         $('.side').removeClass('move')
@@ -44,7 +47,7 @@ export default {
     border-radius: 10px;
     text-align: center;
     font-size: 18pt;
-    line-height: 10vh;
+    line-height: calc(20vh / 3);
     background: #ccc;
 }
 .notice .common {
@@ -74,7 +77,7 @@ export default {
         width: 70vw;
         height: 15vh;
         font-size: 15pt;
-        line-height: 7.5vh;
+        line-height: calc(15vh / 3);
     }
 }
 @media only screen and (max-width: 767px) {
@@ -86,6 +89,7 @@ export default {
         width: 80vw;
         height: 30vh;
         font-size: 15pt;
+        line-height: calc(30vh / 4);
     }
     .notice .common {
         display: none;
