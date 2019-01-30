@@ -46,7 +46,7 @@ export default {
     border: 1px solid #000;
     border-radius: 10px;
     text-align: center;
-    font-size: 18pt;
+    font-size: 15pt;
     line-height: calc(20vh / 3);
     background: #ccc;
 }
@@ -76,7 +76,7 @@ export default {
     .notice {
         width: 70vw;
         height: 15vh;
-        font-size: 15pt;
+        font-size: 13pt;
         line-height: calc(15vh / 3);
     }
 }
@@ -88,7 +88,7 @@ export default {
     .notice {
         width: 80vw;
         height: 30vh;
-        font-size: 15pt;
+        font-size: 13pt;
         line-height: calc(30vh / 4);
     }
     .notice .common {

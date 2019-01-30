@@ -1,58 +1,61 @@
 <template>
 <div>
-    <section>
-    </section>
-    <section>
-        <div class="content-slide">
-            <div class="innerBox">
-                ataertetaeradfga ardf gtdr gdr gsrdtgsdryt sersadfaseraesr esrg ter geweraerfawe asef rasefaes as fas fea 
+    <div class="loader" v-if="!fetchResult"></div>
+    <div id="main-content">
+        <section>
+        </section>
+        <section>
+            <div class="content-slide">
+                <div class="innerBox">
+                    ataertetaeradfga ardf gtdr gdr gsrdtgsdryt sersadfaseraesr esrg ter geweraerfawe asef rasefaes as fas fea 
+                </div>
             </div>
-        </div>
-        <div class="content-slide-right">
-            <div class="innerBox">
-                asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfa
+            <div class="content-slide-right">
+                <div class="innerBox">
+                    asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfa
+                </div>
             </div>
-        </div>
-    </section>
-    <section>
-        <div>
-            <div class="carousel">
-                <div class="carousel-inner">
-                    <div v-if="carouselLength==1">
-                        <div class="img-wrapper">
-                            <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
+        </section>
+        <section>
+            <div>
+                <div class="carousel">
+                    <div class="carousel-inner">
+                        <div v-if="carouselLength==1">
+                            <div class="img-wrapper">
+                                <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="img-wrapper" v-for="n in carouselLength">
+                                <img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
+                            </div>
                         </div>
                     </div>
-                    <div v-else>
-                        <div class="img-wrapper" v-for="n in carouselLength">
-                            <img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
-                        </div>
+
+                    <div class="carousel-controler">
+                        <div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
+                        <div class="clickSpace" @click="detail(photos[currentCarouselItem].id)"></div>
+                        <div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
+                    </div>
+                    
+                    <div class="carousel-nav">
+                        <!-- <div v-for="n in carouselLength" @click="carouselMove(n)"></div> -->
+                        <div class="on" @click="carouselMove(0)"></div>
+                        <div @click="carouselMove(1)"></div>
+                        <div @click="carouselMove(2)"></div>
                     </div>
                 </div>
-
-                <div class="carousel-controler">
-                    <div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
-                    <div class="clickSpace" @click="detail(photos[currentCarouselItem].id)"></div>
-                    <div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
-                </div>
-                
-                <div class="carousel-nav">
-                    <!-- <div v-for="n in carouselLength" @click="carouselMove(n)"></div> -->
-                    <div class="on" @click="carouselMove(0)"></div>
-                    <div @click="carouselMove(1)"></div>
-                    <div @click="carouselMove(2)"></div>
-                </div>
             </div>
-        </div>
-    </section>
-    <section>
-        <div>4</div>
-    </section>
+        </section>
+        <section>
+            <div>4</div>
+        </section>
 
-    <div class="nav-section on" @click="sectionMove(0)"></div>
-    <div class="nav-section" @click="sectionMove(1)"></div>
-    <div class="nav-section" @click="sectionMove(2)"></div>
-    <div class="nav-section" @click="sectionMove(3)"></div>
+        <div class="nav-section on" @click="sectionMove(0)"></div>
+        <div class="nav-section" @click="sectionMove(1)"></div>
+        <div class="nav-section" @click="sectionMove(2)"></div>
+        <div class="nav-section" @click="sectionMove(3)"></div>
+    </div>
 </div>
 </template>
 
@@ -80,11 +83,13 @@ export default {
                 },
 			],
             images: [],
-			intervalId: null,
+            intervalId: null,
+            fetchResult: false,
         }
     },
     methods: {
         fetchRecentPhotos: async function () {
+            $('#main-content').css('visibility', 'hidden')
 			await axios.get(server_address + 'recentPhotos/').then((response) => {
                 this.photos = response.data
                 // console.log(response)
@@ -104,7 +109,9 @@ export default {
                         }
                     }
                 }
-				this.carouselLength = this.photos.length	// 갱신된 정보로 캐러셀을 다시 렌더링 시키기 위해 마지막에 변경
+                this.carouselLength = this.photos.length	// 갱신된 정보로 캐러셀을 다시 렌더링 시키기 위해 마지막에 변경
+                this.fetchResult = true
+                $('#main-content').css('visibility', 'visible')
             }, (error) => {
                 console.log(error)
                 this.$router.push({name:'Unconnected'})
@@ -390,6 +397,22 @@ export default {
 </script>
 
 <style>
+.loader {
+    position: fixed;
+    top: 15vh;
+    left: calc(50vw - 30px);
+    border: 10px solid #f5e1e1; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 section {
     font-size: 35px;
     text-align: center;
