@@ -25,60 +25,64 @@
         <div class="layout-list" @click="changeLayout('list')" v-if="layout != 'list'" title="목록보기"></div>
     </div>
 
-    <div class="wrapper-masonry" v-if="layout == 'masonry' && photos != 'False'">
-        <div class="masonry">
-            <!-- <div class="brick" v-for="item in photos" :key="item.id"> -->
-            <div v-if="length==1">
-                <div class="brick">
-                    <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
-                    <div class="item" @click="modalToggle('photo', photos[0].id)">
-                        <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
-                        <br>{{ photos[0].title }}
+
+    <div class="loader" v-if="!fetchResult"></div>
+    <div id="main-content">
+        <div class="wrapper-masonry" v-if="layout == 'masonry' && photos != 'False'">
+            <div class="masonry">
+                <!-- <div class="brick" v-for="item in photos" :key="item.id"> -->
+                <div v-if="length==1">
+                    <div class="brick">
+                        <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
+                        <div class="item" @click="modalToggle('photo', photos[0].id)">
+                            <img v-if="photos[0].thumbnail != undefined" :src="imagePath(photos[0].thumbnail)" />
+                            <br>{{ photos[0].title }}
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="brick" v-for="n in max">
+                        <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
+                        <div class="item" @click="modalToggle('photo', photos[n-1].id)">
+                            <img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
+                            <br>{{ photos[n-1].title }}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div v-else>
-                <div class="brick" v-for="n in max">
-                    <!-- <img class="item" v-for="image in images" v-if="image.photoId == item.id" :src="imagePath(image.image)" @click="modalToggle('photo', item.id)" /> -->
-                    <div class="item" @click="modalToggle('photo', photos[n-1].id)">
-                        <img v-if="photos[n-1].thumbnail != undefined" :src="imagePath(photos[n-1].thumbnail)" />
-                        <br>{{ photos[n-1].title }}
-                    </div>
-                </div>
-            </div>
+            <!-- <button v-if="more" class="btn-more" @click="moreData()">More</button>
+            <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
+            <div v-if="!more" class="end">마지막 게시글입니다.</div>
         </div>
-        <!-- <button v-if="more" class="btn-more" @click="moreData()">More</button>
-        <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
-        <div v-if="!more" class="end">마지막 게시글입니다.</div>
-    </div>
 
-    <div class="list" v-if="layout == 'list' && photos != 'False'">
-        <ul v-if="length==1">
-            <!-- <li v-for="item in photos" @click="modalToggle('photo', item.id)"> -->
-            <li v-for="n in max" @click="modalToggle('photo', photos[0].id)">
-                {{ photos[0].title }}
-                <font size="1">{{ photos[0].created.split('.')[0] }}</font>
-            </li>
-        </ul>
-        <ul v-else>
-            <!-- <li v-for="item in photos" @click="modalToggle('photo', item.id)"> -->
-            <li v-for="n in max" @click="modalToggle('photo', photos[n-1].id)">
-                {{ photos[n-1].title }}
-                <font size="1">{{ photos[n-1].created.split('.')[0] }}</font>
-            </li>
-        </ul>
-        <button v-if="more" class="btn-more" @click="moreData()">More</button>
-        <!-- <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
-        <div v-if="!more" class="end">마지막 게시글입니다.</div>
-    </div>
+        <div class="list" v-if="layout == 'list' && photos != 'False'">
+            <ul v-if="length==1">
+                <!-- <li v-for="item in photos" @click="modalToggle('photo', item.id)"> -->
+                <li v-for="n in max" @click="modalToggle('photo', photos[0].id)">
+                    {{ photos[0].title }}
+                    <font size="1">{{ photos[0].created.split('.')[0] }}</font>
+                </li>
+            </ul>
+            <ul v-else>
+                <!-- <li v-for="item in photos" @click="modalToggle('photo', item.id)"> -->
+                <li v-for="n in max" @click="modalToggle('photo', photos[n-1].id)">
+                    {{ photos[n-1].title }}
+                    <font size="1">{{ photos[n-1].created.split('.')[0] }}</font>
+                </li>
+            </ul>
+            <button v-if="more" class="btn-more" @click="moreData()">More</button>
+            <!-- <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
+            <div v-if="!more" class="end">마지막 게시글입니다.</div>
+        </div>
 
-    <div class="list-preview">
-        <img v-if="photos[preview].thumbnail != undefined" :src="imagePath(photos[preview].thumbnail)">
-    </div>
+        <div class="list-preview">
+            <img v-if="photos[preview].thumbnail != undefined" :src="imagePath(photos[preview].thumbnail)">
+        </div>
 
 
-    <div class="empty" v-if="photos == 'False'">
-        검색결과가 없습니다.
+        <div class="empty" v-if="photos == 'False'">
+            검색결과가 없습니다.
+        </div>
     </div>
 
     <div class="move-top" @click="moveTop()"></div>
@@ -223,10 +227,12 @@ export default {
             max: 10,
             more: true,
             scrollState: false,
+            fetchResult: false,
         }
     },
     methods: {
         fetchPhotos: async function () {
+            $('#main-content').css('visibility', 'hidden')
             await axios.get(server_address + 'photos/').then((response) => {
                 this.photos = response.data
                 this.length = response.data.length
@@ -251,6 +257,8 @@ export default {
                         }
                     }
                 }
+                this.fetchResult = true
+                $('#main-content').css('visibility', 'visible')
             }, (error) => {
                 console.log(error)
                 this.$router.push({name:'Unconnected'})
@@ -773,6 +781,20 @@ export default {
 <style>
 .container-photo {
     margin-top: 20px;
+}
+
+.loader {
+    margin: auto;
+    border: 10px solid #f5e1e1; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .top-menu {
