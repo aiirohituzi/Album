@@ -62,39 +62,42 @@
         </span>
     </div>
 
-    <div class="empty" v-if="photos == 'False'">
-        검색결과가 없습니다.
-    </div>
-    <table class="photos" v-else>
-        <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>생성일</th>
-            <th><input type="checkbox" v-model="allChecked" @click="allCheck()"></th>
-        </tr>
+    <div class="loader" v-if="!fetchResult"></div>
+    <div id="main-content">
+        <div class="empty" v-if="photos == 'False'">
+            검색결과가 없습니다.
+        </div>
+        <table class="photos" v-else>
+            <tr>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>생성일</th>
+                <th><input type="checkbox" v-model="allChecked" @click="allCheck()"></th>
+            </tr>
 
-        <tr class="tbody" v-if="length==1">
-            <td @click="detailPhoto(photos[0].id, 0)">
-                <button class="update" v-if="(photos[0].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[0].id }}
-            </td>
-            <td @click="detailPhoto(photos[0].id, 0)">{{ photos[0].title }}</td>
-            <td @click="detailPhoto(photos[0].id, 0)">{{ photos[0].created.split('.')[0] }}</td>
-            <td><input type="checkbox" v-model="photos[0].checked"></td>
-        </tr>
+            <tr class="tbody" v-if="length==1">
+                <td @click="detailPhoto(photos[0].id, 0)">
+                    <button class="update" v-if="(photos[0].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[0].id }}
+                </td>
+                <td @click="detailPhoto(photos[0].id, 0)">{{ photos[0].title }}</td>
+                <td @click="detailPhoto(photos[0].id, 0)">{{ photos[0].created.split('.')[0] }}</td>
+                <td><input type="checkbox" v-model="photos[0].checked"></td>
+            </tr>
 
-        <tr class="tbody" v-else v-for="n in max">
-            <td @click="detailPhoto(photos[n-1].id, n-1)">
-                <button class="update" v-if="(photos[n-1].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[n-1].id }}
-            </td>
-            <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].title }}</td>
-            <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].created.split('.')[0] }}</td>
-            <td><input type="checkbox" v-model="photos[n-1].checked"></td>
-        </tr>
-    </table>
+            <tr class="tbody" v-else v-for="n in max">
+                <td @click="detailPhoto(photos[n-1].id, n-1)">
+                    <button class="update" v-if="(photos[n-1].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[n-1].id }}
+                </td>
+                <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].title }}</td>
+                <td @click="detailPhoto(photos[n-1].id, n-1)">{{ photos[n-1].created.split('.')[0] }}</td>
+                <td><input type="checkbox" v-model="photos[n-1].checked"></td>
+            </tr>
+        </table>
 
-    <div class="more" v-if="photos != 'False'">
-        <button v-if="more" class="btn-more" @click="moreData()">More</button>
-        <button v-else class="btn-more" disabled="disabled">No more data...</button>
+        <div class="more" v-if="photos != 'False'">
+            <button v-if="more" class="btn-more" @click="moreData()">More</button>
+            <button v-else class="btn-more" disabled="disabled">No more data...</button>
+        </div>
     </div>
     
     <div class="move-top" @click="moveTop()"></div>
@@ -191,6 +194,7 @@ export default {
             date: 'all',
             keyword: null,
             alertMsg: '',
+            fetchResult: false,
         }
     },
     beforeCreate: function () {
@@ -211,6 +215,7 @@ export default {
     },
     methods: {
         fetchPhotos: function () {
+            $('#main-content').css('visibility', 'hidden')
             axios.get(server_address + 'photos/').then((response) => {
                 this.photos = response.data
                 this.length = response.data.length
@@ -226,6 +231,8 @@ export default {
             axios.get(server_address + 'images/').then((response) => {
                 this.images = response.data
                 // console.log(response)
+                this.fetchResult = true
+                $('#main-content').css('visibility', 'visible')
             }, (error) => {
                 console.log(error)
                 this.$router.push({name:'Unconnected'})
@@ -1025,6 +1032,20 @@ export default {
 }
 .menu .signOut:hover {
     box-shadow: 0 0 0px 2px rgba(255, 67, 67, 0.5);
+}
+
+.loader {
+    margin: auto;
+    border: 10px solid #f5e1e1; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .div-detail {

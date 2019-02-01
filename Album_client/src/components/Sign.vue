@@ -70,6 +70,7 @@ export default {
                 if (error.response.status === 401) {
                     console.log('unauthorized');
                 }
+                this.$router.push('/Sign')
             })
         },
 
