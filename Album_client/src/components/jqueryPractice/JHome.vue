@@ -1,6 +1,8 @@
 <template>
 <div>
-    <div class="loader" v-if="!fetchResult"></div>
+    <div class="container-loader" v-if="!fetchResult">
+        <div class="loader"></div>
+    </div>
     <div id="main-content">
         <section>
         </section>
@@ -397,10 +399,11 @@ export default {
 </script>
 
 <style>
+.container-loader {
+    margin-top: 15vh;
+}
 .loader {
-    position: fixed;
-    top: 15vh;
-    left: calc(50vw - 30px);
+    margin: auto;
     border: 10px solid #f5e1e1; /* Light grey */
     border-top: 10px solid #3498db; /* Blue */
     border-radius: 50%;

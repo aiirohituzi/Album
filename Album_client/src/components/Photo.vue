@@ -26,7 +26,9 @@
     </div>
 
 
-    <div class="loader" v-if="!fetchResult"></div>
+    <div class="container-loader" v-if="!fetchResult">
+        <div class="loader"></div>
+    </div>
     <div id="main-content">
         <div class="wrapper-masonry" v-if="layout == 'masonry' && photos != 'False'">
             <div class="masonry">
@@ -783,6 +785,9 @@ export default {
     margin-top: 20px;
 }
 
+.container-loader {
+    margin-top: 15vh;
+}
 .loader {
     margin: auto;
     border: 10px solid #f5e1e1; /* Light grey */

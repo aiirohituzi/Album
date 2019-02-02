@@ -62,7 +62,9 @@
         </span>
     </div>
 
-    <div class="loader" v-if="!fetchResult"></div>
+    <div class="container-loader" v-if="!fetchResult">
+        <div class="loader"></div>
+    </div>
     <div id="main-content">
         <div class="empty" v-if="photos == 'False'">
             검색결과가 없습니다.
@@ -1034,6 +1036,9 @@ export default {
     box-shadow: 0 0 0px 2px rgba(255, 67, 67, 0.5);
 }
 
+.container-loader {
+    margin-top: 15vh;
+}
 .loader {
     margin: auto;
     border: 10px solid #f5e1e1; /* Light grey */
