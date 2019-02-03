@@ -14,7 +14,7 @@
             </div>
             <div class="content-slide-right">
                 <div class="innerBox">
-                    asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfa
+                    asdfasdfdas asdrfgdrsagfars fgasfgas fgs fasd fasdfasdfasdfasdfq
                 </div>
             </div>
         </section>
