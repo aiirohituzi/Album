@@ -209,7 +209,7 @@ export default {
                 })
             })
 
-
+            // 창 크기 변경시 현재 섹션의 위치를 유지하도록
             $( window ).resize(function() {
                 $("html,body").stop().animate({
                     scrollTop: $('.grid-item-' + self.currentSection).offset().top + 'px'
@@ -220,6 +220,7 @@ export default {
             });
 
 
+            // 페이지 열릴 때 스크롤을 최상으로
             $("html,body").stop().animate({
                 scrollTop: '0px'
             }, {
@@ -393,7 +394,8 @@ export default {
 	},
 	destroyed () {
         $('body').removeClass('hiddenScrollBar')
-		clearInterval(this.intervalId)
+        clearInterval(this.intervalId)
+        $(window).unbind("resize");
     }
 }
 </script>
