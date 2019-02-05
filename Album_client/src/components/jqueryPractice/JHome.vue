@@ -589,8 +589,8 @@ section {
     -webkit-transition: -webkit-transform 500ms;
 } /* *** */
 .carousel-inner .img-wrapper img{
-	height:80vh;
-	width:80vw;
+	height: 80vh;
+	width: 100%;
 	object-fit: cover;
 	vertical-align: top;
 }
@@ -678,7 +678,7 @@ section {
     }
     .carousel-inner .img-wrapper img{
         height: 60vh;
-	    width: 80vw;
+	    width: 100%;
     }
     .carousel .carousel-controler {
         top: -60vh;
@@ -725,7 +725,7 @@ section {
     }
     .carousel-inner .img-wrapper img{
         height: 40vh;
-	    width: 80vw;
+	    width: 100%;
     }
     .carousel .carousel-controler {
         top: -40vh;
