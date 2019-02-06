@@ -52,8 +52,8 @@
                     </div>
                 </div>
             </div>
-            <!-- <button v-if="more" class="btn-more" @click="moreData()">More</button>
-            <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
+            <button v-if="more" class="btn-more" @click="moreData()">More</button>
+            <!-- <button v-else class="btn-more" disabled="disabled">No more data...</button> -->
             <div v-if="!more" class="end">마지막 게시글입니다.</div>
         </div>
 
