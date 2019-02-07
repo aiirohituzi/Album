@@ -77,7 +77,7 @@
                 <th><input type="checkbox" v-model="allChecked" @click="allCheck()"></th>
             </tr>
 
-            <tr class="tbody" v-if="length==1">
+            <tr class="tbody eeeBg" v-if="length==1" id="0">
                 <td @click="detailPhoto(photos[0].id, 0)">
                     <button class="update" v-if="(photos[0].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[0].id }}
                 </td>
@@ -86,7 +86,7 @@
                 <td><input type="checkbox" v-model="photos[0].checked"></td>
             </tr>
 
-            <tr class="tbody" v-else v-for="n in max">
+            <tr class="tbody eeeBg" v-else v-for="n in max" :id="n-1">
                 <td @click="detailPhoto(photos[n-1].id, n-1)">
                     <button class="update" v-if="(photos[n-1].id == detail.id) && !updateData.state_update" @click="updatePhotoToggle()"></button>{{ photos[n-1].id }}
                 </td>
@@ -268,7 +268,17 @@ export default {
             }
             this.detail.id = id
             this.detail.title = this.photos[num].title
-            this.detail.content = this.photos[num].content            
+            this.detail.content = this.photos[num].content
+
+            for(var i=0; i<this.max; i++){
+                if(i != num) {
+                    $('#'+i).removeClass('dddBg')
+                    $('#'+i).addClass('eeeBg')
+                } else {
+                    $('#'+i).removeClass('eeeBg')
+                    $('#'+i).addClass('dddBg')
+                }
+            }
 
 
             this.$nextTick( function() {
@@ -791,13 +801,19 @@ export default {
     border-top: 2px solid #ccc;
     padding: 10px;
 }
-.photos .tbody, th {
+.photos th {
     background-color: #eee;
 }
 .photos .tbody {
 	cursor: pointer;
 }
 .photos .tbody:hover {
+    background-color: #ddd;
+}
+.eeeBg {
+    background-color: #eee;
+}
+.dddBg {
     background-color: #ddd;
 }
 .photos .update {
