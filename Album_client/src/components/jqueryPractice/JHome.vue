@@ -41,7 +41,7 @@
                     </div>
                     
                     <div class="carousel-nav">
-                        <!-- <div v-for="n in carouselLength" @click="carouselMove(n)"></div> -->
+                        <!-- <div v-for="n in carouselLength" @click="carouselMove(n-1)"></div> -->
                         <div class="on" @click="carouselMove(0)"></div>
                         <div @click="carouselMove(1)"></div>
                         <div @click="carouselMove(2)"></div>
@@ -208,6 +208,8 @@ export default {
                     'cursor': 'pointer'
                 })
             })
+
+            // $(".carousel-item-0").addClass('on')
 
             // 창 크기 변경시 현재 섹션의 위치를 유지하도록
             $( window ).resize(function() {
