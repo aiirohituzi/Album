@@ -41,10 +41,10 @@
                     </div>
                     
                     <div class="carousel-nav">
-                        <!-- <div v-for="n in carouselLength" @click="carouselMove(n-1)"></div> -->
-                        <div class="on" @click="carouselMove(0)"></div>
+                        <div v-for="n in carouselLength" @click="carouselMove(n-1)"></div>
+                        <!-- <div class="on" @click="carouselMove(0)"></div>
                         <div @click="carouselMove(1)"></div>
-                        <div @click="carouselMove(2)"></div>
+                        <div @click="carouselMove(2)"></div> -->
                     </div>
                 </div>
             </div>
@@ -74,7 +74,8 @@ export default {
             // lastScrollTop: 0,
             
 			currentCarouselItem: 0,
-			carouselLength: 1,
+            carouselLength: 1,
+            carouselMaxLength: 5,
             photos: [
                 {
                     'id': '',
@@ -111,7 +112,13 @@ export default {
                         }
                     }
                 }
-                this.carouselLength = this.photos.length	// 갱신된 정보로 캐러셀을 다시 렌더링 시키기 위해 마지막에 변경
+
+                if(this.photos.length > this.carouselMaxLength) {	// 갱신된 정보로 캐러셀을 다시 렌더링 시키기 위해 마지막에 변경
+                    this.carouselLength = this.carouselMaxLength
+                } else {
+                    this.carouselLength = this.photos.length
+                }
+                
                 this.fetchResult = true
                 $('#main-content').css('visibility', 'visible')
             }, (error) => {
@@ -193,23 +200,6 @@ export default {
                     'z-index': '2'
                 })
             })
-
-            i = -1
-            $(".carousel-nav").children().each(function () {
-                i++
-                $(this).addClass('carousel-item-' + i).css({
-                    'display': 'inline-block',
-                    'width': '5px',
-                    'height': '5px',
-                    'border': '3px solid #888888',
-                    'border-radius': '5px',
-                    'margin-left': '15px',
-                    'margin-right': '15px',
-                    'cursor': 'pointer'
-                })
-            })
-
-            // $(".carousel-item-0").addClass('on')
 
             // 창 크기 변경시 현재 섹션의 위치를 유지하도록
             $( window ).resize(function() {
@@ -299,6 +289,8 @@ export default {
 
         carouselLeft: function () {
             var currentCarouselItem = this.currentCarouselItem
+            var carouselLength = this.carouselLength
+
 			if(this.currentCarouselItem > 0){
                 $('.img-wrapper').each(function() {
                     $(this).removeClass('next' + (currentCarouselItem-1))
@@ -308,8 +300,9 @@ export default {
 				this.currentCarouselItem--
 			} else {                
                 $('.img-wrapper').each(function() {
-                    $(this).addClass('next0')
-                    $(this).addClass('next1')
+                    for(var i=0; i<carouselLength-1; i++){
+                        $(this).addClass('next' + i)
+                    }
                 })
                 $('.carousel-item-' + currentCarouselItem).removeClass('on')
                 $('.carousel-item-' + (this.carouselLength-1)).addClass('on')
@@ -318,6 +311,8 @@ export default {
 		},
 		carouselRight: function() {
             var currentCarouselItem = this.currentCarouselItem
+            var carouselLength = this.carouselLength
+
 			if(this.currentCarouselItem < (this.carouselLength-1)){
                 $('.img-wrapper').each(function() {
                     $(this).addClass('next' + currentCarouselItem)
@@ -327,8 +322,9 @@ export default {
 				this.currentCarouselItem++
 			} else {
                 $('.img-wrapper').each(function() {
-                    $(this).removeClass('next1')
-                    $(this).removeClass('next0')
+                    for(var i=carouselLength-1; i>=0; i--){
+                        $(this).removeClass('next' + i)
+                    }
                 })
                 $('.carousel-item-' + currentCarouselItem).removeClass('on')
                 $('.carousel-item-0').addClass('on')
@@ -370,6 +366,24 @@ export default {
             $('.main').removeClass('move')
             $('.navBtnAni').removeClass('click')
         }
+    },
+    updated () {
+        var i = -1
+        $(".carousel-nav").children().each(function () {
+            i++
+            $(this).addClass('carousel-item-' + i).css({
+                'display': 'inline-block',
+                'width': '5px',
+                'height': '5px',
+                'border': '3px solid #888888',
+                'border-radius': '5px',
+                'margin-left': '15px',
+                'margin-right': '15px',
+                'cursor': 'pointer'
+            })
+        })
+
+        $(".carousel-item-0").addClass('on')
     },
 	created () {
         $('body').addClass('hiddenScrollBar')
@@ -589,7 +603,23 @@ section {
 	
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
-} /* *** */
+}
+.carousel-inner .img-wrapper.next2 {
+	transform:translate(-300%, 0);
+	-webkit-transform:translate(-300%, 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
+}
+.carousel-inner .img-wrapper.next3 {
+	transform:translate(-400%, 0);
+	-webkit-transform:translate(-400%, 0);
+	
+    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms;
+}
+/* 캐러셀 이동 */
+
 .carousel-inner .img-wrapper img{
 	height: 80vh;
 	width: 100%;

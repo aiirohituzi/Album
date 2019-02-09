@@ -71,9 +71,10 @@ def getImage(request):
 
 def getRecentPhoto(request):
     data = []
+    MaxCount = 5
 
-    if (Photo.objects.all().count() > 3):
-        for item in Photo.objects.all().order_by('-created')[:3]:
+    if (Photo.objects.all().count() > MaxCount):
+        for item in Photo.objects.all().order_by('-created')[:MaxCount]:
             data.append({
                 'id': item.id,
                 'title': item.title,
