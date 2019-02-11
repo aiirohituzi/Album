@@ -293,19 +293,21 @@ export default {
 
 			if(this.currentCarouselItem > 0){
                 $('.img-wrapper').each(function() {
-                    $(this).removeClass('next' + (currentCarouselItem-1))
+                    // $(this).removeClass('next' + (currentCarouselItem-1))
+                    $(this).attr('style', 'transform:translate(-'+(currentCarouselItem-1)+'00%, 0)')
                 })
                 $('.carousel-item-' + currentCarouselItem).removeClass('on')
                 $('.carousel-item-' + (currentCarouselItem-1)).addClass('on')
 				this.currentCarouselItem--
 			} else {                
                 $('.img-wrapper').each(function() {
-                    for(var i=0; i<carouselLength-1; i++){
-                        $(this).addClass('next' + i)
-                    }
+                    // for(var i=0; i<carouselLength-1; i++){
+                    //     $(this).addClass('next' + i)
+                    // }
+                    $(this).attr('style', 'transform:translate(-'+(carouselLength-1)+'00%, 0)')
                 })
                 $('.carousel-item-' + currentCarouselItem).removeClass('on')
-                $('.carousel-item-' + (this.carouselLength-1)).addClass('on')
+                $('.carousel-item-' + (carouselLength-1)).addClass('on')
 				this.currentCarouselItem = this.carouselLength - 1
 			}
 		},
@@ -315,16 +317,18 @@ export default {
 
 			if(this.currentCarouselItem < (this.carouselLength-1)){
                 $('.img-wrapper').each(function() {
-                    $(this).addClass('next' + currentCarouselItem)
+                    // $(this).addClass('next' + currentCarouselItem)
+                    $(this).attr('style', 'transform:translate(-'+(currentCarouselItem+1)+'00%, 0)')
                 })
                 $('.carousel-item-' + currentCarouselItem).removeClass('on')
                 $('.carousel-item-' + (currentCarouselItem+1)).addClass('on')
 				this.currentCarouselItem++
 			} else {
                 $('.img-wrapper').each(function() {
-                    for(var i=carouselLength-1; i>=0; i--){
-                        $(this).removeClass('next' + i)
-                    }
+                    // for(var i=carouselLength-1; i>=0; i--){
+                    //     $(this).removeClass('next' + i)
+                    // }
+                    $(this).attr('style', 'transform:translate(0, 0)')
                 })
                 $('.carousel-item-' + currentCarouselItem).removeClass('on')
                 $('.carousel-item-0').addClass('on')
@@ -335,13 +339,15 @@ export default {
 			if(this.currentCarouselItem < caroselNo){
 				for(var i=0; i<this.carouselLength; i++){
 					for(var j=this.currentCarouselItem; j<caroselNo; j++){
-						$('.img-wrapper').eq(i).addClass('next'+j)
+                        // $('.img-wrapper').eq(i).addClass('next'+j)
+                        $('.img-wrapper').eq(i).attr('style', 'transform:translate(-'+(caroselNo)+'00%, 0)')
 					}
 				}
 			} else if(this.currentCarouselItem > caroselNo){
 				for(var i=0; i<this.carouselLength; i++){
 					for(var j=this.currentCarouselItem; j>caroselNo; j--){
-						$('.img-wrapper').eq(i).removeClass('next'+(j-1))
+						// $('.img-wrapper').eq(i).removeClass('next'+(j-1))
+                        $('.img-wrapper').eq(i).attr('style', 'transform:translate(-'+(caroselNo)+'00%, 0)')
 					}
 				}
 			}
@@ -590,34 +596,24 @@ section {
     transition: transform 500ms;
     -webkit-transition: -webkit-transform 500ms;
 }
-.carousel-inner .img-wrapper.next0 {
+
+/* 사용 안함 */
+/* .carousel-inner .img-wrapper.next0 {
 	transform:translate(-100%, 0);
 	-webkit-transform:translate(-100%, 0);
-	
-    transition: transform 500ms;
-    -webkit-transition: -webkit-transform 500ms;
 }
 .carousel-inner .img-wrapper.next1 {
 	transform:translate(-200%, 0);
 	-webkit-transform:translate(-200%, 0);
-	
-    transition: transform 500ms;
-    -webkit-transition: -webkit-transform 500ms;
 }
 .carousel-inner .img-wrapper.next2 {
 	transform:translate(-300%, 0);
 	-webkit-transform:translate(-300%, 0);
-	
-    transition: transform 500ms;
-    -webkit-transition: -webkit-transform 500ms;
 }
 .carousel-inner .img-wrapper.next3 {
 	transform:translate(-400%, 0);
 	-webkit-transform:translate(-400%, 0);
-	
-    transition: transform 500ms;
-    -webkit-transition: -webkit-transform 500ms;
-}
+} */
 /* 캐러셀 이동 */
 
 .carousel-inner .img-wrapper img{
