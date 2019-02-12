@@ -375,16 +375,18 @@ export default {
     },
     updated () {
         var i = -1
+        var carouselLength = this.carouselLength
         $(".carousel-nav").children().each(function () {
             i++
+            var margin = ($(".carousel").width() * 0.3 / carouselLength) / 2
             $(this).addClass('carousel-item-' + i).css({
                 'display': 'inline-block',
                 'width': '5px',
                 'height': '5px',
                 'border': '3px solid #888888',
                 'border-radius': '5px',
-                'margin-left': '15px',
-                'margin-right': '15px',
+                'margin-left': margin + 'px',
+                'margin-right': margin + 'px',
                 'cursor': 'pointer'
             })
         })
