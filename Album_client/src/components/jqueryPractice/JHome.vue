@@ -209,7 +209,17 @@ export default {
                     duration: 0, complete: function () {
                     }
                 })
-            });
+
+                
+                // carousel-nav 간격 동적으로
+                var margin = ($(".carousel").width() * 0.3 / self.carouselLength) / 2                
+                $(".carousel-nav").children().each(function () {
+                    $(this).css({
+                        'margin-left': margin + 'px',
+                        'margin-right': margin + 'px',
+                    });
+                })
+            })
 
 
             // 페이지 열릴 때 스크롤을 최상으로
