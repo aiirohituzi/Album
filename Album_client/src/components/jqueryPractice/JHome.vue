@@ -1,5 +1,6 @@
 <template>
 <div>
+    <span class="isMobile"></span>
     <div class="container-loader" v-if="!fetchResult">
         <div class="loader"></div>
     </div>
@@ -187,18 +188,32 @@ export default {
             i = -1
             var interval_array = ['+ 45','+ 15','- 15','- 45']
             $(".nav-section").each(function () {
-                i++
-                $(this).addClass('nav-item-' + i).css({
-                    'position': 'fixed',
-                    'width': '5px',
-                    'height': '5px',
-                    'border': '3px solid #888888',
-                    'border-radius': '5px',
-                    'right': '30px',
-                    'bottom': 'calc(50vh ' + interval_array[i] + 'px)',
-                    'cursor': 'pointer',
-                    'z-index': '2'
-                })
+                i++                
+                if ($(window).width() <= 767 ) {
+                    $(this).addClass('nav-item-' + i).css({
+                        'position': 'fixed',
+                        'width': '5px',
+                        'height': '5px',
+                        'border': '3px solid #888888',
+                        'border-radius': '5px',
+                        'right': 'calc((10% - 10px) / 2)',
+                        'bottom': 'calc(50vh ' + interval_array[i] + 'px)',
+                        'cursor': 'pointer',
+                        'z-index': '2'
+                    })
+                } else {
+                    $(this).addClass('nav-item-' + i).css({
+                        'position': 'fixed',
+                        'width': '5px',
+                        'height': '5px',
+                        'border': '3px solid #888888',
+                        'border-radius': '5px',
+                        'right': '30px',
+                        'bottom': 'calc(50vh ' + interval_array[i] + 'px)',
+                        'cursor': 'pointer',
+                        'z-index': '2'
+                    })
+                }
             })
 
             // 창 크기 변경시 현재 섹션의 위치를 유지하도록
@@ -217,8 +232,23 @@ export default {
                     $(this).css({
                         'margin-left': margin + 'px',
                         'margin-right': margin + 'px',
-                    });
+                    })
                 })
+                
+                // nav-section의 모바일 사이즈에서의 간격 재조정
+                if ($('.isMobile').width() == 767 ) {
+                    $(".nav-section").each(function () {
+                        $(this).css({
+                            'right': 'calc((10% - 10px) / 2)',
+                        })
+                    })
+                } else {
+                    $(".nav-section").each(function () {
+                        $(this).css({
+                            'right': '30px',
+                        })
+                    })
+                }
             })
 
 
@@ -705,6 +735,11 @@ section {
 	text-align: center;
 }
 
+.isMobile {
+    width: 1000px;
+    display: none;
+}
+
 
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
@@ -782,6 +817,10 @@ section {
     }
     .carousel .carousel-nav {
         top: -50vh;
+    }
+    
+    .isMobile {
+        width: 767px;
     }
 }
 </style>
