@@ -35,9 +35,9 @@
                     </div>
 
                     <div class="carousel-controler">
-                        <div class="control-left" @click="carouselLeft()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;"><</font></div>
+                        <div class="control-left" @click="carouselLeft()"><font style="opacity: 0.3;"><</font></div>
                         <div class="clickSpace" @click="detail(photos[currentCarouselItem].id)"></div>
-                        <div class="control-right" @click="carouselRight()"><font style="font-size: 80pt;font-family: '굴림';opacity: 0.2;">></font></div>
+                        <div class="control-right" @click="carouselRight()"><font style="opacity: 0.3;">></font></div>
                     </div>
                     
                     <div class="carousel-nav">
@@ -659,6 +659,8 @@ section {
 	cursor: pointer;
 	line-height: 80vh;
 	text-align: center;
+    font-size: 10vw;
+    font-family: '굴림';
 
 	-ms-user-select: none;
 	-moz-user-select: -moz-none;
@@ -680,6 +682,8 @@ section {
 	cursor: pointer;
 	line-height: 80vh;
 	text-align: center;
+    font-size: 10vw;
+    font-family: '굴림';
 
 	-ms-user-select: none;
 	-moz-user-select: -moz-none;
