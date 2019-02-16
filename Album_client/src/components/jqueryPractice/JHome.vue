@@ -807,7 +807,7 @@ section {
 	    width: 100%;
     }
     .carousel .carousel-controler {
-        top: -40vh;
+        top: -39.9vh;
     }
     .carousel .carousel-controler .control-left {
         line-height: 40vh;
