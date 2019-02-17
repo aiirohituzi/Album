@@ -51,7 +51,10 @@
             </div>
         </section>
         <section>
-            <div>4</div>
+            <div class="bottom">
+                Dev : aiirohituzi<br>
+                Github : https://github.com/aiirohituzi
+            </div>
         </section>
 
         <div class="nav-section on" @click="sectionMove(0)"></div>
@@ -489,6 +492,11 @@ section {
 }
 .hiddenScrollBar {
     overflow: hidden;
+}
+.bottom {
+	display: inline-block;
+	text-align: left;
+    bottom: 0px;
 }
 
 
