@@ -51,9 +51,11 @@
             </div>
         </section>
         <section>
-            <div class="bottom">
-                Dev : aiirohituzi<br>
-                Github : https://github.com/aiirohituzi
+            <div class="relative">
+                <div class="bottom">
+                    Dev : aiirohituzi<br>
+                    Github : https://github.com/aiirohituzi
+                </div>
             </div>
         </section>
 
@@ -493,10 +495,19 @@ section {
 .hiddenScrollBar {
     overflow: hidden;
 }
+.relative {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
 .bottom {
-	display: inline-block;
+    position: absolute;
+	/* display: inline-block; */
 	text-align: left;
-    bottom: 0px;
+    width: 480px;
+    left: calc((100% - 480px) / 2);
+    bottom: 10px;
+    font-size: 20pt;
 }
 
 
