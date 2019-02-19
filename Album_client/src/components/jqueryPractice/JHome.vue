@@ -837,6 +837,11 @@ section {
     .carousel .carousel-nav {
         top: -50vh;
     }
+    .bottom {
+        width: 310px;
+        left: calc((100% - 310px) / 2);
+        font-size: 13pt;
+    }
     
     .isMobile {
         width: 767px;
