@@ -763,10 +763,10 @@ section {
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
     .content-slide .innerBox {
-        font-size: 0.5em;   
+        font-size: 0.7em;   
     }
     .content-slide-right .innerBox {
-        font-size: 0.5em;
+        font-size: 0.7em;
     }
     
     .carousel {
@@ -810,10 +810,11 @@ section {
         transform: translate(-70vw, 0px);
     }
     .content-slide .innerBox {
-        font-size: 0.4em;   
+        margin-right: 0;
+        font-size: 0.6em;   
     }
     .content-slide-right .innerBox {
-        font-size: 0.4em;
+        font-size: 0.6em;
     }
 
     .carousel {
