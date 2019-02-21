@@ -787,7 +787,6 @@ export default {
 }
 .photos {
     border-collapse: collapse;
-    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     width: 70%;
@@ -928,6 +927,7 @@ export default {
 
 .menu {
     margin-top: 30px;
+    margin-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
     width: 70%;
