@@ -5,19 +5,21 @@
         <div v-if="manage" class="signOut" @click="signOut()" title="로그아웃"></div>
         <!-- <div class="add" @click="modalToggle('write')"></div> -->
         <div class="search" @click="searchBarToggle()" title="검색"></div>
-        <input type="text" class="searchBar" placeholder="미입력 시 해당기간 전체글 검색" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
-        <select class="searchCategory" v-model="category">
-            <option disabled value="">검색 조건</option>
-            <option value="title">제목</option>
-            <option value="content">내용</option>
-            <option value="all">제목+내용</option>
-        </select>
-        <select class="searchDate" v-model="date">
-            <option value="all">전체기간</option>
-            <option value="week">일주일전</option>
-            <option value="month">한달전</option>
-            <option value="year">1년전</option>
-        </select>
+        <span class="searchGroup">
+            <select class="searchDate" v-model="date">
+                <option value="all">전체기간</option>
+                <option value="week">일주일전</option>
+                <option value="month">한달전</option>
+                <option value="year">1년전</option>
+            </select>
+            <select class="searchCategory" v-model="category">
+                <option disabled value="">검색 조건</option>
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="all">제목+내용</option>
+            </select>
+            <input type="text" class="searchBar" placeholder="미입력 시 해당기간 전체글 검색" v-model="keyword" v-on:keyup.enter="search(category, keyword, date)"/>
+        </span>
     </div>
     
     <div class="layout-menu">
@@ -803,9 +805,11 @@ export default {
 }
 
 .top-menu {
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
     width: 70%;
-    height: 60px;
-    margin: auto;
+    height: 30px;
     
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
@@ -817,37 +821,41 @@ export default {
 	-webkit-user-select: none;
 	user-select: none;
 }
-.top-menu input::placeholder {
+.top-menu .searchGroup {
+    display: block;
+    float: right;
+}
+.top-menu .searchGroup input::placeholder {
     font-size: 8pt;
 }
-.top-menu .searchCategory {
+.top-menu .searchGroup .searchCategory {
     /* visibility: hidden; */
     display: none;
-    float: right;
+    /* float: right; */
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
-.top-menu .searchCategory.toggle {
+.top-menu .searchGroup .searchCategory.toggle {
     /* visibility: visible; */
     display: unset;
 }
-.top-menu .searchDate {
+.top-menu .searchGroup .searchDate {
     /* visibility: hidden; */
     display: none;
-    float: right;
+    /* float: right; */
     margin-right: 5px;
     border-radius: 3px;
     height: 29px;
 }
-.top-menu .searchDate.toggle {
+.top-menu .searchGroup .searchDate.toggle {
     /* visibility: visible; */
     display: unset;
 }
-.top-menu .searchBar {
+.top-menu .searchGroup .searchBar {
     /* visibility: hidden; */
     display: none;
-    float: right;
+    /* float: right; */
     margin-right: 10px;
     border-radius: 3px;
     width: 200px;
@@ -861,7 +869,7 @@ export default {
         width: 200px;
     }
 }
-.top-menu .searchBar.toggle {
+.top-menu .searchGroup .searchBar.toggle {
     /* visibility: visible; */
     display: unset;
     animation: bar 100ms;
@@ -909,7 +917,8 @@ export default {
 
 .layout-menu {
     width: 70%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
@@ -1373,6 +1382,8 @@ export default {
     }
     .top-menu {
         width: 95%;
+        height: 65px;
+        padding-bottom: 5px;
     }
     .layout-menu {
         width: 95%;
@@ -1412,18 +1423,24 @@ export default {
     .modal .modal-box .detailImage .detail-right {
         right: 0;
     }
-    .top-menu .searchBar {
-        width: 28vw;
+    .top-menu .search {
+        margin-bottom: 5px;
     }
-    .top-menu .searchCategory {
+    .top-menu .signOut {
+        margin-bottom: 5px;
+    }
+    .top-menu .searchGroup .searchBar {
+        width: 37vw;
+    }
+    .top-menu .searchGroup .searchCategory {
         width: 17vw;
         font-size: 0.1em;
     }
-    .top-menu .searchDate {
+    .top-menu .searchGroup .searchDate {
         width: 17vw;
         font-size: 0.1em;
     }
-    .top-menu input::placeholder {
+    .top-menu .searchGroup input::placeholder {
         font-size: 7pt;
     }
     .move-top {
