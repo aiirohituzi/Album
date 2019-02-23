@@ -1400,6 +1400,7 @@ export default {
         left: 0;
     }
     .modal .modal-box .detailImage .detail-right {
+        left: unset;
         right: 0;
     }
     .menu .searchGroup {
