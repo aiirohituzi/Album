@@ -570,7 +570,10 @@ section {
     animation: fadeOut 500ms;
 }
 .content-slide .innerBox {
-    margin-right: 10vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    margin-right: 7vw;
     word-wrap: break-word;
     font-size: 0.8em;
 }
@@ -613,7 +616,10 @@ section {
     animation: fadeOut 500ms;
 }
 .content-slide-right .innerBox {
-    margin-right: 10vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    margin-right: 12vw;
     word-wrap: break-word;
     font-size: 0.8em;
 }
@@ -810,10 +816,17 @@ section {
         transform: translate(-70vw, 0px);
     }
     .content-slide .innerBox {
-        margin-right: 0;
-        font-size: 0.6em;   
+        margin-top: 2vh;
+        margin-bottom: calc(15vh+100px);
+        margin-left: 2vw;
+        margin-right: 2vw;
+        font-size: 0.6em;
     }
     .content-slide-right .innerBox {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
         font-size: 0.6em;
     }
 
