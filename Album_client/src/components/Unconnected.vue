@@ -28,10 +28,15 @@ export default {
         $('.main').removeClass('move')
         $('.navBtnAni').removeClass('click')
 
-        $('.side')
-        $('.navBtn')
-        $('.navBtnAni')
+        $('.side').addClass('displayNone')
+        $('.navBtn').addClass('displayNone')
+        $('.navBtnAni').addClass('displayNone')
     },
+	destroyed () {
+        $('.side').removeClass('displayNone')
+        $('.navBtn').removeClass('displayNone')
+        $('.navBtnAni').removeClass('displayNone')
+    }
 }
 </script>
 
@@ -58,13 +63,7 @@ export default {
     display: none;
 }
 
-.side {
-    display: none;
-}
-.navBtn {
-    display: none;
-}
-.navBtnAni {
+.displayNone {
     display: none;
 }
 
